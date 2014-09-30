@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="ModeloDominio" namespace="Dominio" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="ModeloDominio" backend="mssql" default-schema="dbo" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="Dominio" default="true">
+      <orm:class name="SSO_Role" uniqueId="ae3d9e01-1df9-4b63-9e95-3d8b20bf97d6">
+        <orm:table name="SSO_Roles" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="Id1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="a13fe398-21a0-40d4-b03b-8c6abb17bd51" type="System.Int32">
+          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Parent1" property="Parent" behavior="readwrite" uniqueId="15b19698-74a2-4b96-b22b-b79a69e42eb8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="c0fbf889-1ce1-4c17-93b5-848f42e2d0a5" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Enabled1" property="Enabled" behavior="readwrite" uniqueId="b6bfa9e8-ff12-4e5e-b1ae-a3fe49ea3772" type="System.Boolean">
+          <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="SSO_Role11" property="SSO_Role1" behavior="readwrite" uniqueId="ec6c1989-64d0-4cd2-a50a-f90f461c0314" type="Dominio.SSO_Role">
+          <orm:reference uniqueId="6a8bdeef-d22b-4b31-b79a-19f1f3fe6212" association-name="SSO_RoleHasSSO_Role">
+            <orm:sharedfield name="Parent1" target-class="Dominio.SSO_Role" target-field="Id1" />
+            <orm:constraint name="FK_SSO_Roles_SSO_Roles" delete-action="dbdefaultrule" destination-table="SSO_Roles" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="SSO_Roles1" property="SSO_Roles" behavior="readwrite" uniqueId="adcd2fcc-05ca-4c6a-98f5-84f231ed13f4" type="Dominio.SSO_Role">
+          <orm:collection element-class="Dominio.SSO_Role" inverse-field="SSO_Role11" order-by="" uniqueId="6a8bdeef-d22b-4b31-b79a-19f1f3fe6212" />
+        </orm:field>
+        <orm:index name="IX_SSO_Roles">
+          <orm:columnMapping>
+            <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="SSO_Roles">
+        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:index name="IX_SSO_Roles">
+          <orm:columnMapping>
+            <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_SSO_Roles_SSO_Roles" delete-action="dbdefaultrule" destination-table="SSO_Roles">
+          <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>SSOConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>Data Source=10.1.232.15;Initial Catalog=SSO;User ID=sa;Password=ssecure</AppConfigConnectionString>
+    <InitialCatalog>SSO</InitialCatalog>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <CaseMode>PascalCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules>
+        <IsPrefixSuffixEnabled>false</IsPrefixSuffixEnabled>
+      </NavigationPropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <OutputProjectName>Dominio</OutputProjectName>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MsSql</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="ae3d9e01-1df9-4b63-9e95-3d8b20bf97d6" name="SSO_Role" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="a13fe398-21a0-40d4-b03b-8c6abb17bd51" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="b6bfa9e8-ff12-4e5e-b1ae-a3fe49ea3772" name="Enabled" type="Boolean" label="Enabled : Boolean" kind="Persistent" fieldName="Enabled1" />
+      <Property Id="c0fbf889-1ce1-4c17-93b5-848f42e2d0a5" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <Property Id="15b19698-74a2-4b96-b22b-b79a69e42eb8" name="Parent" type="Int32" label="Parent : Int32" nullable="true" kind="Persistent" fieldName="Parent1" />
+      <AssociationTargets>
+        <Association Id="6a8bdeef-d22b-4b31-b79a-19f1f3fe6212" SourceMultiplicity="ZeroOne" name="SSO_RoleHasSSO_Role">
+          <DomainClassMoniker name="/ModeloDominio/SSO_Role" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="a6eb6020-decd-4ebe-842c-53306d4ae4d1">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_Roles" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="d80eca8d-26f8-4650-b63f-a7f4479453a6">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_Role1" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="b3c6b094-5928-407b-a052-a7ba5beac27a">
+          <NavigationalProperty Id="ec6c1989-64d0-4cd2-a50a-f90f461c0314" name="SSO_Role1" type="SSO_Role" label="SSO_Role1 : SSO_Role" nullable="true" kind="Persistent" fieldName="SSO_Role11" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="49f29165-0567-496e-8e88-96931e9b1f84">
+          <NavigationalProperty Id="adcd2fcc-05ca-4c6a-98f5-84f231ed13f4" name="SSO_Roles" type="IList&lt;SSO_Role&gt;" label="SSO_Roles : IList&lt;SSO_Role&gt;" nullable="true" kind="Persistent" fieldName="SSO_Roles1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="a9ba34a5-da2d-422b-9437-61570c2d64a6">
+      <domainContainer name="ModeloDominio" namespace="Dominio" showPropertiesCompartment="true">
+        <entitySetProperty name="SSO_Roles" namespace="Dominio" type="SSO_Role" label="SSO_Roles : IQueryable&lt;Dominio.SSO_Role&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
