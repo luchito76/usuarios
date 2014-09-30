@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_ConvertModelWizard_Files\UpgradeReferences.xslt"?>
+<UpgradeLog>
+  <Events>
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\AdminRoles.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\AdminRoles.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\AdminRoles.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\About.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\About.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\About.aspx" Message="About.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Confirm.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Confirm.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Confirm.aspx" Message="Confirm.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Forgot.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Forgot.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Forgot.aspx" Message="Forgot.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Login.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Login.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Login.aspx" Message="Login.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Manage.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Manage.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Manage.aspx" Message="Manage.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\OpenAuthProviders.ascx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\OpenAuthProviders.ascx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\OpenAuthProviders.ascx" Message="OpenAuthProviders.ascx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Register.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Register.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Register.aspx" Message="Register.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\RegisterExternalLogin.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\RegisterExternalLogin.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\RegisterExternalLogin.aspx" Message="RegisterExternalLogin.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\ResetPassword.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\ResetPassword.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\ResetPassword.aspx" Message="ResetPassword.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\ResetPasswordConfirmation.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\ResetPasswordConfirmation.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\ResetPasswordConfirmation.aspx" Message="ResetPasswordConfirmation.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Web.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Web.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Web.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Web.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Web.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Account\Web.config" Message="Web.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Bundle.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Bundle.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Bundle.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Bundle.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Bundle.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Bundle.config" Message="Bundle.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Contact.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Contact.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Contact.aspx" Message="Contact.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Default.aspx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Default.aspx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Default.aspx" Message="Default.aspx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\packages.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\packages.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\packages.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\packages.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\packages.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\packages.config" Message="packages.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Site.Master" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Site.Master" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Site.Master" Message="Site.Master" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Site.Mobile.Master" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Site.Mobile.Master" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Site.Mobile.Master" Message="Site.Mobile.Master" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\ViewSwitcher.ascx" Message="Register Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\ViewSwitcher.ascx" Message="Assembly Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\ViewSwitcher.ascx" Message="ViewSwitcher.ascx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.config" Message="Web.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Debug.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Debug.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Debug.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Debug.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Debug.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Debug.config" Message="Web.Debug.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Release.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Release.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Release.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Release.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Release.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\Web.Release.config" Message="Web.Release.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles\AdminRoles.csproj" Message="AdminRoles" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\Dominio.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\Dominio.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\Dominio.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\App.Config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\App.Config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\App.Config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\App.Config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\App.Config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\App.Config" Message="App.Config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Dominio\Dominio.csproj" Message="Dominio" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Repositorio\Repositorio.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Repositorio\Repositorio.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Repositorio\Repositorio.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Repositorio\Repositorio.csproj" Message="Repositorio" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Negocio\Negocio.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Negocio\Negocio.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Negocio\Negocio.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\Negocio\Negocio.csproj" Message="Negocio" />
+    <Event EventType="Success" Action="Analyze" SourceItem="C:\AdminRoles\AdminRoles\AdminRoles.sln" Message="AdminRoles" />
+  </Events>
+</UpgradeLog>
