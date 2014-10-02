@@ -47,7 +47,25 @@
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSO_Application.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_GetAppByRolResultSet0.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_Module.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_Permission.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SSO_Role.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_RoleGroup.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_RoleGroups_Member.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
   </ItemGroup>

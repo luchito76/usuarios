@@ -40,11 +40,24 @@ namespace AdminRoles
 
         }
 
+        //Devuelve el efector donde está instalada el AdminSSO. Sacar el efector de la tabla config.
+        //*******************Refactorizar*******************
+        public string devuelveEfector()
+        {
+
+            Session["efector"] = "Chos Malal";
+            Session["idEfector"] = 51; //IdEfector de Chos Malal
+
+            string efector = Session["efector"].ToString();
+            
+            return efector;
+        }
+
         public string devuelveRolesJson()
         {
             string json = string.Empty;
 
-            List<SSO_Role> listaRoles = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
+            List<SSO_Roler> listaRoles = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaRoles);
         }
@@ -53,7 +66,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_Role> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
+            List<SSO_Roler> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaAplicaciones);
         }
@@ -62,7 +75,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_Role> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
+            List<SSO_Roler> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaEfectores);
         }
@@ -71,9 +84,16 @@ namespace AdminRoles
         {
             try
             {
-                crearRol();
+                if (hdnIdRol.Value == "")
+                {
+                    crearRol();
+                }
+                else
+                {
+                    actualizarRol();
+                }
 
-                txtRolNuevo.Text = "";
+                txtRol.Text = "";
             }
             catch (Exception ex)
             {
@@ -83,13 +103,25 @@ namespace AdminRoles
 
         private void crearRol()
         {
-            SSO_Role rol = new SSO_Role();
+            SSO_Roler rol = new SSO_Roler();
 
             rol.Parent = Roles.parent;
-            rol.Name = txtRolNuevo.Text.ToUpper();
+            rol.Name = txtRol.Text.ToUpper();
             rol.Enabled = Roles.enable;
 
             rolesNego.guardarRol(rol);
+        }
+
+        private void actualizarRol()
+        {
+            SSO_Roler rol = new SSO_Roler();
+
+            rol.Id = int.Parse(hdnIdRol.Value);
+            rol.Parent = Roles.parent;
+            rol.Name = txtRol.Text.ToUpper();
+            rol.Enabled = Roles.enable;
+
+            rolesNego.actualizarRol(rol);
         }
     }
 }

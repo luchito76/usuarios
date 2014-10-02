@@ -12,6 +12,14 @@
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 }
 
 .fixed-table-header {
@@ -38,23 +46,31 @@
     padding: 0;
     margin: 0;
     border-left: 1px solid #dddddd;
+    background: #fcfff4; /* Old browsers */
+    background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
 }
 
-.fixed-table-container thead th:first-child {
-    border-left: none;
-    border-top-left-radius: 4px;
-    -webkit-border-top-left-radius: 4px;
-    -moz-border-radius-topleft: 4px;
-}
+    .fixed-table-container thead th:first-child {
+        border-left: none;
+        border-top-left-radius: 4px;
+        -webkit-border-top-left-radius: 4px;
+        -moz-border-radius-topleft: 4px;
+    }
 
-.fixed-table-container thead th .th-inner {
-    padding: 8px;
-    line-height: 24px;
-    vertical-align: top;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    .fixed-table-container thead th .th-inner {
+        padding: 8px;
+        line-height: 24px;
+        vertical-align: top;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
 .fixed-table-container tbody td {
     border-left: 1px solid #dddddd;
@@ -76,9 +92,9 @@
     text-align: center;
 }
 
-.fixed-table-container .bs-checkbox .th-inner {
-    padding: 8px 0;
-}
+    .fixed-table-container .bs-checkbox .th-inner {
+        padding: 8px 0;
+    }
 
 .fixed-table-container input[type="radio"],
 .fixed-table-container input[type="checkbox"] {
@@ -96,10 +112,10 @@
     margin-bottom: 10px;
 }
 
-.fixed-table-pagination .pagination a {
-    padding: 6px 12px;
-    line-height: 1.428571429;
-}
+    .fixed-table-pagination .pagination a {
+        padding: 6px 12px;
+        line-height: 1.428571429;
+    }
 
 .fixed-table-pagination .pagination-info {
     line-height: 34px;
@@ -112,7 +128,7 @@
     vertical-align: middle;
 }
 
-.fixed-table-pagination .dropup  .dropdown-menu {
+.fixed-table-pagination .dropup .dropdown-menu {
     margin-bottom: 0;
 }
 
@@ -124,13 +140,13 @@
     margin-left: 5px;
 }
 
-.fixed-table-toolbar .columns label {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: normal;
-    line-height: 1.428571429;
-}
+    .fixed-table-toolbar .columns label {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: 1.428571429;
+    }
 
 .fixed-table-toolbar .bars,
 .fixed-table-toolbar .search,
@@ -180,7 +196,7 @@
 }
 
 /* support bootstrap 3 */
-.table thead>tr>th {
+.table thead > tr > th {
     padding: 0;
     margin: 0;
 }

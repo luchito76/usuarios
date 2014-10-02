@@ -22,21 +22,30 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.Label lbRoles;
         
         /// <summary>
-        /// txtRolNuevo control.
+        /// txtRol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRolNuevo;
+        protected global::System.Web.UI.WebControls.TextBox txtRol;
         
         /// <summary>
-        /// crearRol control.
+        /// hdnIdRol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton crearRol;
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdRol;
+        
+        /// <summary>
+        /// crearRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton crearRoles;
     }
 }

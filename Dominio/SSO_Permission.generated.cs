@@ -18,92 +18,99 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using Dominio;
 
 namespace Dominio	
 {
-	public partial class SSO_Roler
+	public partial class SSO_Permission
 	{
-		private int Id1;
-		public virtual int Id
+		private int SourceType1;
+		public virtual int SourceType
 		{
 			get
 			{
-				return this.Id1;
+				return this.SourceType1;
 			}
 			set
 			{
-				this.Id1 = value;
+				this.SourceType1 = value;
 			}
 		}
 		
-		private int? Parent1;
-		public virtual int? Parent
+		private int Source1;
+		public virtual int Source
 		{
 			get
 			{
-				return this.Parent1;
+				return this.Source1;
 			}
 			set
 			{
-				this.Parent1 = value;
+				this.Source1 = value;
 			}
 		}
 		
-		private string Name1;
-		public virtual string Name
+		private int TargetType1;
+		public virtual int TargetType
 		{
 			get
 			{
-				return this.Name1;
+				return this.TargetType1;
 			}
 			set
 			{
-				this.Name1 = value;
+				this.TargetType1 = value;
 			}
 		}
 		
-		private bool Enabled1;
-		public virtual bool Enabled
+		private int Target1;
+		public virtual int Target
 		{
 			get
 			{
-				return this.Enabled1;
+				return this.Target1;
 			}
 			set
 			{
-				this.Enabled1 = value;
+				this.Target1 = value;
 			}
 		}
 		
-		private SSO_Roler SSO_Role11;
-		public virtual SSO_Roler SSO_Role1
+		private bool Allow1;
+		public virtual bool Allow
 		{
 			get
 			{
-				return this.SSO_Role11;
+				return this.Allow1;
 			}
 			set
 			{
-				this.SSO_Role11 = value;
+				this.Allow1 = value;
 			}
 		}
 		
-		private IList<SSO_RoleGroup> SSO_RoleGroups1 = new List<SSO_RoleGroup>();
-		public virtual IList<SSO_RoleGroup> SSO_RoleGroups
+		private bool Readonly1;
+		public virtual bool Readonly
 		{
 			get
 			{
-				return this.SSO_RoleGroups1;
+				return this.Readonly1;
+			}
+			set
+			{
+				this.Readonly1 = value;
 			}
 		}
 		
-		private IList<SSO_Roler> SSO_Roles1 = new List<SSO_Roler>();
-		public virtual IList<SSO_Roler> SSO_Roles
+		private DateTime? EndDate1;
+		public virtual DateTime? EndDate
 		{
 			get
 			{
-				return this.SSO_Roles1;
+				return this.EndDate1;
+			}
+			set
+			{
+				this.EndDate1 = value;
 			}
 		}
 		

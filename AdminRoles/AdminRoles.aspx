@@ -7,6 +7,7 @@
     <div class="container">
         <div class="page-header">
             <h1>Administración de Roles<span class="pull-right label label-default"></span></h1>
+            <h3><%= devuelveEfector() %><span class="pull-left label label-default"></span></h3>
         </div>
         <div class="row">
 
@@ -21,19 +22,15 @@
                     </div>
                     <div class="panel-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="tab1primary">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
+                            <div class="tab-pane fade in active" id="tab1primary">                                
+                                <div class="col-md-12">
+                                <input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />
                                     <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true">
-                                        <thead>
+                                        <thead class="table">
                                             <tr>
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
                                                 <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
-                                                <th data-field="operate" data-formatter="operateFormatter" class="launch-modal" data-events="operateEvents" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
                                                 <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
                                             </tr>
                                         </thead>
@@ -41,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab2primary">
-                                <div class="form-group">
+                                <div class="col-md-12">
                                     <table id="tblAplicaciones" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead>
                                             <tr>
@@ -55,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab3primary">
-                                <div class="form-group">
+                                <div class="col-md-12">
                                     <table id="tblEfectores" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead>
                                             <tr>
@@ -68,8 +65,6 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tab4primary">Primary 4</div>
-                            <div class="tab-pane fade" id="tab5primary">Primary 5</div>
                         </div>
                     </div>
                 </div>
@@ -88,14 +83,15 @@
                                 <asp:Label ID="lbRoles" runat="server" Text="Nuevo Rol" for="ddlAutorizado" class="col-sm-4 control-label">      
                                 </asp:Label></b>
                             <div class="col-sm-5">
-                                <asp:TextBox runat="server" ID="txtRolNuevo" CssClass="form-control" placeholder="Ingrese Nombre de Rol" />
+                                <asp:TextBox runat="server" ID="txtRol" CssClass="form-control" placeholder="Ingrese Nombre de Rol" />
+                                <asp:HiddenField ID="hdnIdRol" runat="server" />
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <%--<button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" onserverclick="btnGuardar_Click">Cerrar</button>--%>
+                        <button id="crearRoles" onserverclick="crearRol_Click" runat="server" type="button" class="btn btn-primary">Guardar</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                        <button id="crearRol" onserverclick="crearRol_Click" runat="server" type="button" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -114,17 +110,13 @@
             ].join('');
         }
 
-        //window.operateEvents = {
-        //    'click .editar': function (e, value, row, index) {                          
-        //        $(document).ready(function () {
-        //            $('.launch-modal').click(function () {
-        //                $('#myModal').modal({
-        //                    keyboard: true
-        //                });
-        //            });
-        //        });
-        //    }
-        //};
+        window.operateEvents = {
+            'click .editar': function (e, value, row, index) {                          
+                $('#myModal').modal('show');                 
+                document.getElementById('<%= txtRol.ClientID %>').value = row.Name;   
+                document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;   
+            }
+        };
 
         function operateFormatter1(value, row, index) {
             return [                
@@ -136,7 +128,7 @@
 
         window.operateEvents1 = {                      
             'click .app': function (e, value, row, index) {
-                window.location = 'Edit.aspx?id=' + row.IdMovimiento; 
+                window.location = 'RolPermisos.aspx?rolName=' + row.Name + "&rolId=" + row.Id; 
             }
         };
     </script>
