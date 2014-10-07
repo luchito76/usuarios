@@ -22,7 +22,7 @@ using Dominio;
 
 namespace Dominio	
 {
-	public partial class SSO_Roler
+	public partial class SSO_Role
 	{
 		private int Id1;
 		public virtual int Id
@@ -76,8 +76,8 @@ namespace Dominio
 			}
 		}
 		
-		private SSO_Roler SSO_Role11;
-		public virtual SSO_Roler SSO_Role1
+		private SSO_Role SSO_Role11;
+		public virtual SSO_Role SSO_Role1
 		{
 			get
 			{
@@ -89,21 +89,21 @@ namespace Dominio
 			}
 		}
 		
-		private IList<SSO_RoleGroup> SSO_RoleGroups1 = new List<SSO_RoleGroup>();
-		public virtual IList<SSO_RoleGroup> SSO_RoleGroups
-		{
-			get
-			{
-				return this.SSO_RoleGroups1;
-			}
-		}
-		
-		private IList<SSO_Roler> SSO_Roles1 = new List<SSO_Roler>();
-		public virtual IList<SSO_Roler> SSO_Roles
+		private IList<SSO_Role> SSO_Roles1 = new List<SSO_Role>();
+		public virtual IList<SSO_Role> SSO_Roles
 		{
 			get
 			{
 				return this.SSO_Roles1;
+			}
+		}
+		
+		private IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members1 = new List<SSO_RoleGroups_Member>();
+		public virtual IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members
+		{
+			get
+			{
+				return this.SSO_RoleGroups_Members1;
 			}
 		}
 		

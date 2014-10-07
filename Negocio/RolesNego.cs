@@ -12,17 +12,17 @@ namespace Negocio
     {
         RolesRepo rolesRepo = new RolesRepo();
 
-        public IEnumerable<SSO_Roler> listaRoles(int parent, bool enable)
+        public IEnumerable<SSO_Role> listaRoles(int parent, bool enable)
         {
-            IList<SSO_Roler> rol = rolesRepo.listaRoles().ToList();
+            IList<SSO_Role> rol = rolesRepo.listaRoles().ToList();
 
-            List<SSO_Roler> listaRoles = new List<SSO_Roler>();
+            List<SSO_Role> listaRoles = new List<SSO_Role>();
 
-            foreach (SSO_Roler data in rol)
+            foreach (SSO_Role data in rol)
             {
                 if ((data.Parent == parent) && (data.Enabled == enable))
                 {
-                    SSO_Roler ssoRol = new SSO_Roler();
+                    SSO_Role ssoRol = new SSO_Role();
 
                     ssoRol.Id = data.Id;
                     ssoRol.Name = data.Name;
@@ -33,17 +33,17 @@ namespace Negocio
             return listaRoles;
         }
 
-        public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(string rol, string efector)
+        public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(int rol, int efector)
         {
             return rolesRepo.listaRolesXAplicacion(rol, efector);
         }
 
-        public void guardarRol(SSO_Roler rol)
+        public void guardarRol(SSO_Role rol)
         {
             rolesRepo.guardarRol(rol);
         }
 
-        public void actualizarRol(SSO_Roler rol)
+        public void actualizarRol(SSO_Role rol)
         {
             rolesRepo.actualizarRol(rol);
         }

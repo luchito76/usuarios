@@ -31,7 +31,14 @@ namespace AdminRoles
             ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
-        public string devuelveRol()
+        public int devuelveNombreIdRol()
+        {
+            int rolId = int.Parse(Request["rolId"].ToString());
+
+            return rolId;
+        }
+
+        public string devuelveNombreDeRol()
         {
             string rol = Request["rolName"].ToString();
 
@@ -41,8 +48,11 @@ namespace AdminRoles
         public string devuelveAppXRolJson()
         {
             string json = string.Empty;
-            string rol = Request["rolName"].ToString();
-            List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(rol, "zapala").ToList();
+
+            int idRol = devuelveNombreIdRol();
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+
+            List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
 
             return json = JsonConvert.SerializeObject(listaAppXRol);
         }
@@ -58,7 +68,9 @@ namespace AdminRoles
 
                 guardaRolGroupMembers(IdRolGroup);
 
-                guardaSSOPermissions(int.Parse(ddlAplicaciones.SelectedItem.ToString()));
+                int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
+
+                guardaSSOPermissions(idAplicacion);
 
             }
             catch (Exception ex)
@@ -74,7 +86,7 @@ namespace AdminRoles
 
             SSO_RoleGroup rolGroup = new SSO_RoleGroup();
 
-            rolGroup.Name = rol + " " + efector;
+            rolGroup.Name = rol + " + " + efector;
             rolGroup.AutomaticName = true;
 
             roleNego.guardaRoleGroup(rolGroup);
@@ -90,20 +102,24 @@ namespace AdminRoles
 
         private void guardaRolGroupMembers(int ultimoIdRolGroup)
         {
-            SSO_RoleGroups_Member rolGroupMember = new SSO_RoleGroups_Member();
-
             string rol = Request["rolName"].ToString();
             int rolId = int.Parse(Request["rolId"].ToString());
 
             int idEfector = int.Parse(Session["idEfector"].ToString());
 
+            SSO_RoleGroups_Member rolGroupMember = new SSO_RoleGroups_Member();
+
             rolGroupMember.GroupId = ultimoIdRolGroup;
             rolGroupMember.RoleId = rolId;
 
-            rolGroupMember.GroupId = ultimoIdRolGroup;
-            rolGroupMember.RoleId = idEfector;
-
             roleNego.guardarRolGroupMember(rolGroupMember);
+
+            SSO_RoleGroups_Member rolGroupMember1 = new SSO_RoleGroups_Member();
+
+            rolGroupMember1.GroupId = ultimoIdRolGroup;
+            rolGroupMember1.RoleId = idEfector;
+
+            roleNego.guardarRolGroupMember(rolGroupMember1);
         }
 
         private void guardaSSOPermissions(int idAplicacion)

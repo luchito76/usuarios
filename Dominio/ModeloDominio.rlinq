@@ -2,49 +2,82 @@
 <DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="ModeloDominio" namespace="Dominio" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
   <orm:orm name="ModeloDominio" backend="mssql" default-schema="dbo" xmlns:orm="http://tempuri.org/ORM">
     <orm:namespace name="Dominio" default="true">
-      <orm:class name="SSO_Application" uniqueId="9c3bfef8-c279-45b9-a90d-1d389b267776">
-        <orm:table name="SSO_Applications" />
+      <orm:class name="SSO_Role" uniqueId="c409800a-d370-474f-a374-64aacc307cfe">
+        <orm:table name="SSO_Roles" />
         <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="Id1" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="d9194caa-ab9f-41af-8d47-f8381294fa11" type="System.Int32">
-          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="fac41c95-6a76-45ba-a8f5-9d4282e5a737" type="System.Int32">
+          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="d8f980f8-e438-477e-b015-290aa4d45fce" type="System.String">
-          <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:field name="Parent1" property="Parent" behavior="readwrite" uniqueId="5231b2a1-ec39-4938-93fa-dcbfa5676ae0" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Description1" property="Description" behavior="readwrite" uniqueId="4eb1f3b4-5067-4b58-bee7-ab1e0115929a" type="System.String">
-          <orm:column name="description" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="a9ccf2d1-377e-4577-b848-403c10aa1de6" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="Executable1" property="Executable" behavior="readwrite" uniqueId="6ecb283c-691f-4deb-ab38-59331b19d56f" type="System.String">
-          <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:field name="Enabled1" property="Enabled" behavior="readwrite" uniqueId="aa8ecf13-0b15-436c-b27a-9940de541c7a" type="System.Boolean">
+          <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="Url1" property="Url" behavior="readwrite" uniqueId="34604c56-411d-4ba9-a5ae-45eb79ba36e8" type="System.String">
-          <orm:column name="url" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:field name="SSO_Role11" property="SSO_Role1" behavior="readwrite" uniqueId="27f884b5-431e-46b0-967b-42d4228b6cc3" type="Dominio.SSO_Role">
+          <orm:reference uniqueId="cbe90d39-c56f-43b7-944e-23f7964107e3" association-name="SSO_RoleHasSSO_Role">
+            <orm:sharedfield name="Parent1" target-class="Dominio.SSO_Role" target-field="Id1" />
+            <orm:constraint name="FK_SSO_Roles_SSO_Roles" delete-action="dbdefaultrule" destination-table="SSO_Roles" />
+          </orm:reference>
         </orm:field>
-        <orm:field name="Intefase_visible1" property="Intefase_visible" behavior="readwrite" uniqueId="cad652dd-b075-4acd-bad7-197a0b379674" type="System.Boolean">
-          <orm:column name="intefase_visible" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:field name="SSO_Roles1" property="SSO_Roles" behavior="readwrite" uniqueId="62d55d2e-6b18-4a53-92d1-cff3f0abd533" type="Dominio.SSO_Role">
+          <orm:collection element-class="Dominio.SSO_Role" inverse-field="SSO_Role11" order-by="" uniqueId="cbe90d39-c56f-43b7-944e-23f7964107e3" />
         </orm:field>
-        <orm:field name="Version1" property="Version" behavior="readwrite" uniqueId="31f0329e-9869-435c-8b95-75fd59cacd3f" type="System.String">
-          <orm:column name="version" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:field name="SSO_RoleGroups_Members1" property="SSO_RoleGroups_Members" behavior="readwrite" uniqueId="efc5dfa8-61a2-49ef-8eb7-7432319252d9" type="Dominio.SSO_RoleGroups_Member">
+          <orm:collection element-class="Dominio.SSO_RoleGroups_Member" inverse-field="SSO_Role1" order-by="" uniqueId="6d104ab7-7b03-4d99-8038-0bb42a689ab9" />
         </orm:field>
-        <orm:field name="Hospital1" property="Hospital" behavior="readwrite" uniqueId="25fe13b4-8d39-405d-ad02-405b065ad24d" type="System.Boolean">
-          <orm:column name="hospital" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
-        </orm:field>
-        <orm:field name="Sips1" property="Sips" behavior="readwrite" uniqueId="10937c37-5c24-4ab2-a2bd-4d0f94e24640" type="System.Boolean">
-          <orm:column name="sips" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
-        </orm:field>
-        <orm:field name="SSO_Modules1" property="SSO_Modules" behavior="readwrite" uniqueId="990075c7-0e64-43eb-9a9c-c7857bf7fb6a" type="Dominio.SSO_Module">
-          <orm:collection element-class="Dominio.SSO_Module" inverse-field="SSO_Application1" order-by="" uniqueId="38ba59b0-c37c-47ba-9caa-1ea0d55deabd" />
-        </orm:field>
-        <orm:index name="IX_SSO_Applications">
+        <orm:index name="IX_SSO_Roles">
           <orm:columnMapping>
-            <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+            <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
       </orm:class>
-      <orm:class name="SSO_RoleGroup" uniqueId="c12ad962-c59d-41ef-8f96-a9e44e832cef">
+      <orm:class name="SSO_RoleGroups_Member" uniqueId="ece2abeb-915b-4364-9c0c-1fc6af9abd47">
+        <orm:table name="SSO_RoleGroups_Members" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="IdRoleGroupMember" />
+          </orm:key-generator>
+          <orm:single-field field-name="IdRoleGroupMember1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="GroupId1" property="GroupId" behavior="readwrite" uniqueId="05472b4e-7f3c-4d14-b1c0-297bb3efec78" type="System.Int32">
+          <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="RoleId1" property="RoleId" behavior="readwrite" uniqueId="6fa29a6c-dd75-450d-abc4-041c80f5531b" type="System.Int32">
+          <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="IdRoleGroupMember1" property="IdRoleGroupMember" behavior="readwrite" uniqueId="6a94fd73-2697-4179-a7d3-c92d78801af5" type="System.Int32">
+          <orm:column name="idRoleGroupMember" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="SSO_RoleGroup1" property="SSO_RoleGroup" behavior="readwrite" uniqueId="37d88eec-3a0a-43bf-ba16-ac4ffe2d41e2" type="Dominio.SSO_RoleGroup">
+          <orm:reference uniqueId="7cc017d0-d902-415d-ab0f-8e458ed6d060" association-name="SSO_RoleGroups_MemberHasSSO_RoleGroup">
+            <orm:sharedfield name="GroupId1" target-class="Dominio.SSO_RoleGroup" target-field="Id1" />
+            <orm:constraint name="FK_SSO_Permissions_RoleGroups_Members_SSO_Permissions_RoleGroups" delete-action="cascade" destination-table="SSO_RoleGroups" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="SSO_Role1" property="SSO_Role" behavior="readwrite" uniqueId="a27f5be4-43e0-4e31-8ed9-a8abf44e8f93" type="Dominio.SSO_Role">
+          <orm:reference uniqueId="6d104ab7-7b03-4d99-8038-0bb42a689ab9" association-name="SSO_RoleGroups_MemberHasSSO_Role">
+            <orm:sharedfield name="RoleId1" target-class="Dominio.SSO_Role" target-field="Id1" />
+            <orm:constraint name="FK_SSO_Permissions_RoleGroups_Members_SSO_Roles" delete-action="cascade" destination-table="SSO_Roles" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="IX_SSO_RoleGroups_Members">
+          <orm:columnMapping>
+            <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="SSO_RoleGroup" uniqueId="096f6500-0c42-4bf6-ba16-52d825e20b68">
         <orm:table name="SSO_RoleGroups" />
         <orm:identity>
           <orm:key-generator name="autoinc">
@@ -53,20 +86,20 @@
           <orm:single-field field-name="Id1" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="44c95097-c8f5-4341-b01c-1a65073b9c69" type="System.Int32">
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="bdc452b3-7e33-4485-ac6d-4d52ba2d5732" type="System.Int32">
           <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="854cce9b-a68a-45b1-b784-15477e1a0141" type="System.String">
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="75b809e2-5e50-4ef4-9c80-4b1668c2e730" type="System.String">
           <orm:column name="name" sql-type="varchar(max)" nullable="false" length="0" scale="0" ado-type="StringInfiniteLength" />
         </orm:field>
-        <orm:field name="AutomaticName1" property="AutomaticName" behavior="readwrite" uniqueId="9b9cf157-0a49-476a-b4f0-d03adca27093" type="System.Boolean">
+        <orm:field name="AutomaticName1" property="AutomaticName" behavior="readwrite" uniqueId="3f82fecb-f467-46b5-928e-a85cf0903784" type="System.Boolean">
           <orm:column name="automaticName" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="SSO_Roles1" property="SSO_Roles" behavior="readwrite" uniqueId="36022525-64bb-49ef-9dc8-0126ca278005" type="Dominio.SSO_Role">
-          <orm:collection element-class="Dominio.SSO_Role" inverse-field="SSO_RoleGroups1" order-by="" uniqueId="be0b53ee-3847-426d-9e6c-76b9976280e9" />
+        <orm:field name="SSO_RoleGroups_Members1" property="SSO_RoleGroups_Members" behavior="readwrite" uniqueId="f12b54f4-a993-4c81-871f-520c7d74b4eb" type="Dominio.SSO_RoleGroups_Member">
+          <orm:collection element-class="Dominio.SSO_RoleGroups_Member" inverse-field="SSO_RoleGroup1" order-by="" uniqueId="7cc017d0-d902-415d-ab0f-8e458ed6d060" />
         </orm:field>
       </orm:class>
-      <orm:class name="SSO_Permission" uniqueId="3edd5a00-903e-4725-abd1-cda86b432124">
+      <orm:class name="SSO_Permission" uniqueId="ac8aeb3a-4186-4a91-8d4c-681ec06e3f76">
         <orm:table name="SSO_Permissions" />
         <orm:identity>
           <orm:multiple-field>
@@ -77,32 +110,27 @@
           </orm:multiple-field>
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="SourceType1" property="SourceType" behavior="readwrite" uniqueId="5716f8d7-5e8c-4f20-a4aa-c9bdee5877ea" type="System.Int32">
+        <orm:field name="SourceType1" property="SourceType" behavior="readwrite" uniqueId="f5efff9d-55be-4367-9522-d3835965901a" type="System.Int32">
           <orm:column name="sourceType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Source1" property="Source" behavior="readwrite" uniqueId="3f8bfee4-f8c2-401b-9feb-5f13d744f701" type="System.Int32">
+        <orm:field name="Source1" property="Source" behavior="readwrite" uniqueId="6817b601-d64a-4e4e-b0ab-582d119119c9" type="System.Int32">
           <orm:column name="source" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="TargetType1" property="TargetType" behavior="readwrite" uniqueId="42221a88-6313-42e9-8c61-7da0625ccad1" type="System.Int32">
+        <orm:field name="TargetType1" property="TargetType" behavior="readwrite" uniqueId="ce45470d-33d6-4f2f-82b4-745ec774b375" type="System.Int32">
           <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Target1" property="Target" behavior="readwrite" uniqueId="0ead6b9a-2a48-44fe-a496-ef5a39402e31" type="System.Int32">
+        <orm:field name="Target1" property="Target" behavior="readwrite" uniqueId="a2ebe85b-888c-46ba-8d9f-556bf7c4573a" type="System.Int32">
           <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Allow1" property="Allow" behavior="readwrite" uniqueId="dda38472-0e9e-46f7-a22d-8b8991a224d2" type="System.Boolean">
+        <orm:field name="Allow1" property="Allow" behavior="readwrite" uniqueId="c08e0e71-8832-4257-b993-9f4e57304a87" type="System.Boolean">
           <orm:column name="allow" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="Readonly1" property="Readonly" behavior="readwrite" uniqueId="985b0aa7-c25c-4ca2-86bb-0e54b40945e7" type="System.Boolean">
+        <orm:field name="Readonly1" property="Readonly" behavior="readwrite" uniqueId="6a237781-2aa6-4c61-b9df-4ec5b2f69688" type="System.Boolean">
           <orm:column name="readonly" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="EndDate1" property="EndDate" behavior="readwrite" uniqueId="7ed6bb98-0dd6-4326-8606-d181e97f090e" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+        <orm:field name="EndDate1" property="EndDate" behavior="readwrite" uniqueId="59a24cc5-6bf1-44c5-a42c-be83f360feda" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="endDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
         </orm:field>
-        <orm:index name="IX_SSO_Permissions">
-          <orm:columnMapping>
-            <orm:column name="endDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
-          </orm:columnMapping>
-        </orm:index>
         <orm:index name="&lt;Name of Missing Index, sysname,&gt;">
           <orm:columnMapping>
             <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
@@ -111,59 +139,13 @@
             <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
-      </orm:class>
-      <orm:class name="SSO_Role" uniqueId="dd9a33c3-5261-4d93-988a-ca8ba138c1a9">
-        <orm:table name="SSO_Roles" />
-        <orm:identity>
-          <orm:key-generator name="autoinc">
-            <orm:key-generator-member property-name="Id" />
-          </orm:key-generator>
-          <orm:single-field field-name="Id1" />
-        </orm:identity>
-        <orm:concurrency strategy="changed" />
-        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="672c32ca-ba03-4656-9775-60d6e0306738" type="System.Int32">
-          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
-        </orm:field>
-        <orm:field name="Parent1" property="Parent" behavior="readwrite" uniqueId="6b7058af-c22b-4708-8fef-0eba76f33aec" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
-        </orm:field>
-        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="bb35e6e0-a360-47a6-8988-b98ae7524056" type="System.String">
-          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
-        </orm:field>
-        <orm:field name="Enabled1" property="Enabled" behavior="readwrite" uniqueId="2e9633d1-ef95-4d72-8a78-6713bb50c09a" type="System.Boolean">
-          <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
-        </orm:field>
-        <orm:field name="SSO_Role11" property="SSO_Role1" behavior="readwrite" uniqueId="cfb2afa2-4627-4fab-9173-c202006554c0" type="Dominio.SSO_Role">
-          <orm:reference uniqueId="54967890-84f3-4725-93fe-ce0aa314454f" association-name="SSO_RoleHasSSO_Role">
-            <orm:sharedfield name="Parent1" target-class="Dominio.SSO_Role" target-field="Id1" />
-            <orm:constraint name="FK_SSO_Roles_SSO_Roles" delete-action="dbdefaultrule" destination-table="SSO_Roles" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="SSO_RoleGroups1" property="SSO_RoleGroups" behavior="readwrite" uniqueId="c875a134-0d83-4865-a2ae-35ca3c0d5a2a" type="Dominio.SSO_RoleGroup">
-          <orm:join-table uniqueId="be0b53ee-3847-426d-9e6c-76b9976280e9" association-name="SSO_RolesHaveSSO_RoleGroups">
-            <orm:table name="SSO_RoleGroups_Members" join-table="true" />
-            <orm:owner>
-              <orm:constraint name="FK_SSO_Permissions_RoleGroups_Members_SSO_Roles" delete-action="cascade" destination-table="SSO_Roles">
-                <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="Dominio.SSO_Role" target-field="Id1" />
-              </orm:constraint>
-            </orm:owner>
-            <orm:value>
-              <orm:constraint name="FK_SSO_Permissions_RoleGroups_Members_SSO_Permissions_RoleGroups" delete-action="cascade" destination-table="SSO_RoleGroups">
-                <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="Dominio.SSO_RoleGroup" target-field="Id1" />
-              </orm:constraint>
-            </orm:value>
-          </orm:join-table>
-        </orm:field>
-        <orm:field name="SSO_Roles1" property="SSO_Roles" behavior="readwrite" uniqueId="3f9f2560-8172-47eb-b270-029d59b624d2" type="Dominio.SSO_Role">
-          <orm:collection element-class="Dominio.SSO_Role" inverse-field="SSO_Role11" order-by="" uniqueId="54967890-84f3-4725-93fe-ce0aa314454f" />
-        </orm:field>
-        <orm:index name="IX_SSO_Roles">
+        <orm:index name="IX_SSO_Permissions">
           <orm:columnMapping>
-            <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+            <orm:column name="endDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
           </orm:columnMapping>
         </orm:index>
       </orm:class>
-      <orm:class name="SSO_Module" uniqueId="5ce6579d-7d3a-4731-a322-052625cae68b">
+      <orm:class name="SSO_Module" uniqueId="1f476723-e085-4179-a40e-2897901daae4">
         <orm:table name="SSO_Modules" />
         <orm:identity>
           <orm:key-generator name="autoinc">
@@ -172,65 +154,60 @@
           <orm:single-field field-name="Id1" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="2f7b4462-f492-4724-86fc-33323ec82317" type="System.Int32">
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="cf753f73-a3e0-4e0b-ad19-b0750451140e" type="System.Int32">
           <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="ApplicationId1" property="ApplicationId" behavior="readwrite" uniqueId="385f745d-9c25-42b2-aa65-4afe0e12b7b8" type="System.Int32">
+        <orm:field name="ApplicationId1" property="ApplicationId" behavior="readwrite" uniqueId="aa12361a-ac7b-4c53-8bf4-9cfc1ce09165" type="System.Int32">
           <orm:column name="applicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Module1" property="Module" behavior="readwrite" uniqueId="fa407505-3578-4fb7-8965-3d63e1e11333" type="System.Int32">
+        <orm:field name="Module1" property="Module" behavior="readwrite" uniqueId="bd7a1dbe-bdb2-42bf-a23d-7fbb2e0f7a7a" type="System.Int32">
           <orm:column name="module" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="1f47d640-247a-4e8f-aa11-e41708d9aaf6" type="System.String">
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="f21903b5-4f25-4bfc-a4c3-9b1f57a6bfdb" type="System.String">
           <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="Description1" property="Description" behavior="readwrite" uniqueId="43e6cf3c-5680-4960-9e43-8f430cfc68b6" type="System.String">
+        <orm:field name="Description1" property="Description" behavior="readwrite" uniqueId="fcfdcc63-f0fa-490d-887a-ea565591a41b" type="System.String">
           <orm:column name="description" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="Readonly1" property="Readonly" behavior="readwrite" uniqueId="03eac186-d4e2-4ed2-950b-d7e35834b1c9" type="System.Boolean">
+        <orm:field name="Readonly1" property="Readonly" behavior="readwrite" uniqueId="5d66acff-18a6-4b80-9177-081908ff27cf" type="System.Boolean">
           <orm:column name="readonly" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="Protected1" property="Protected" behavior="readwrite" uniqueId="3db1f474-c9ab-4648-ba60-dc35677ed36f" type="System.Boolean">
+        <orm:field name="Protected1" property="Protected" behavior="readwrite" uniqueId="63363141-57e4-4fa7-bf36-cb67c5926363" type="System.Boolean">
           <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
         </orm:field>
-        <orm:field name="NeedsView1" property="NeedsView" behavior="readwrite" uniqueId="83ef6054-b659-40ad-89f4-dc8b0c8b9f1f" type="System.Boolean">
+        <orm:field name="NeedsView1" property="NeedsView" behavior="readwrite" uniqueId="6cf99ab6-a48f-4777-a143-02ce0c03c636" type="System.Boolean">
           <orm:column name="needsView" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="GroupId1" property="GroupId" behavior="readwrite" uniqueId="34f0705f-a99f-490d-8487-59773dfea028" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+        <orm:field name="GroupId1" property="GroupId" behavior="readwrite" uniqueId="82aa97a8-8fa9-46fc-ac52-556ce10b6111" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="groupId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Interfase_priority1" property="Interfase_priority" behavior="readwrite" uniqueId="0879c96f-7ede-460c-9c6a-6b3ae062bbb4" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+        <orm:field name="Interfase_priority1" property="Interfase_priority" behavior="readwrite" uniqueId="2b0d957d-d7c6-4f1d-9d87-19347e8b6e68" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="interfase_priority" sql-type="int" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Interfase_visible1" property="Interfase_visible" behavior="readwrite" uniqueId="535983e8-dc95-4c4c-a44a-2a4d112c8f57" type="System.Boolean">
+        <orm:field name="Interfase_visible1" property="Interfase_visible" behavior="readwrite" uniqueId="9405aa5e-ca3a-449d-89d5-28d2b5ba8744" type="System.Boolean">
           <orm:column name="interfase_visible" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
         </orm:field>
-        <orm:field name="Interfase_image1" property="Interfase_image" behavior="readwrite" uniqueId="374f1911-344c-4b4e-946d-774b38606280" type="System.String">
+        <orm:field name="Interfase_image1" property="Interfase_image" behavior="readwrite" uniqueId="e5fe3fbe-e5ff-4035-bf4e-629f6fc7438d" type="System.String">
           <orm:column name="interfase_image" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-        <orm:field name="Log_Group1" property="Log_Group" behavior="readwrite" uniqueId="51ae4fb8-2775-425b-9ead-b7a7e7a7e6d8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+        <orm:field name="Log_Group1" property="Log_Group" behavior="readwrite" uniqueId="656b7359-b7b2-48b2-b073-842c5b0170fa" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="Log_Group" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="Log_Key1" property="Log_Key" behavior="readwrite" uniqueId="7761c8e8-6c95-4992-8f88-614d6e2c8487" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+        <orm:field name="Log_Key1" property="Log_Key" behavior="readwrite" uniqueId="03efcebe-24c7-4347-b7a4-1dc279437622" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="Log_Key" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="SSO_Application1" property="SSO_Application" behavior="readwrite" uniqueId="bdc0a1d8-7246-4246-aa02-d2130d45a732" type="Dominio.SSO_Application">
-          <orm:reference uniqueId="38ba59b0-c37c-47ba-9caa-1ea0d55deabd" association-name="SSO_ModuleHasSSO_Application">
+        <orm:field name="SSO_Application1" property="SSO_Application" behavior="readwrite" uniqueId="2f6a0f0b-9e91-470d-89dc-8c7be7368015" type="Dominio.SSO_Application">
+          <orm:reference uniqueId="254c2ce0-80c7-4551-9e74-749838e75687" association-name="SSO_ModuleHasSSO_Application">
             <orm:sharedfield name="ApplicationId1" target-class="Dominio.SSO_Application" target-field="Id1" />
             <orm:constraint name="FK_SSO_Modules_SSO_Application" delete-action="cascade" destination-table="SSO_Applications" />
           </orm:reference>
         </orm:field>
-        <orm:index name="IX_SSO_Modules_3">
+        <orm:index name="IX_SSO_Modules" unique="true">
           <orm:columnMapping>
             <orm:column name="applicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
           <orm:columnMapping>
-            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
-          </orm:columnMapping>
-        </orm:index>
-        <orm:index name="IX_SSO_Modules_2">
-          <orm:columnMapping>
-            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+            <orm:column name="module" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
         <orm:index name="IX_SSO_Modules_1">
@@ -241,48 +218,93 @@
             <orm:column name="interfase_priority" sql-type="int" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
-        <orm:index name="IX_SSO_Modules" unique="true">
+        <orm:index name="IX_SSO_Modules_2">
+          <orm:columnMapping>
+            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_SSO_Modules_3">
           <orm:columnMapping>
             <orm:column name="applicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
           <orm:columnMapping>
-            <orm:column name="module" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
           </orm:columnMapping>
         </orm:index>
       </orm:class>
-      <orm:class name="SSO_RoleGroups_Member" uniqueId="89b5d4e1-750b-423d-b712-a425aa76518a">
-        <orm:table name="SSO_RoleGroups_Members" />
+      <orm:class name="SSO_Application" uniqueId="c74a2c2a-7ac8-4f89-8bfd-cbdd79947e4b">
+        <orm:table name="SSO_Applications" />
         <orm:identity>
-          <orm:multiple-field>
-            <orm:single-field field-name="GroupId1" />
-            <orm:single-field field-name="RoleId1" />
-          </orm:multiple-field>
+          <orm:single-field field-name="Id1" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="GroupId1" property="GroupId" behavior="readwrite" uniqueId="3aad41cf-e0ad-48da-b9ec-3f838bad35d4" type="System.Int32">
-          <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="e2e7813e-fe1b-4b57-a28e-8cb70e44d3b2" type="System.Int32">
+          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="RoleId1" property="RoleId" behavior="readwrite" uniqueId="a86281d8-a300-49ff-82fa-4ec49fe1d15a" type="System.Int32">
-          <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="e421d414-b874-4c7b-8d12-e19d441392d4" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
         </orm:field>
-      </orm:class>
-    </orm:namespace>
-    <orm:schema schema="">
-      <orm:table name="SSO_Applications">
-        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
-        <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="description" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="url" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="intefase_visible" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
-        <orm:column name="version" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="hospital" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
-        <orm:column name="sips" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:field name="Description1" property="Description" behavior="readwrite" uniqueId="e3f1b160-4e09-41b7-8000-ce26b1b636c1" type="System.String">
+          <orm:column name="description" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Executable1" property="Executable" behavior="readwrite" uniqueId="4f90188d-1688-4550-af26-9b80e24e001d" type="System.String">
+          <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Url1" property="Url" behavior="readwrite" uniqueId="50b56038-f88e-41d5-996f-87c0c3726e23" type="System.String">
+          <orm:column name="url" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Intefase_visible1" property="Intefase_visible" behavior="readwrite" uniqueId="b0898e94-f30d-46fa-a97f-428f4ffe8fd9" type="System.Boolean">
+          <orm:column name="intefase_visible" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="Version1" property="Version" behavior="readwrite" uniqueId="bf94b957-313a-4edd-9167-80fd1ed650ad" type="System.String">
+          <orm:column name="version" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Hospital1" property="Hospital" behavior="readwrite" uniqueId="6e260611-5469-4ead-ba37-414da603448d" type="System.Boolean">
+          <orm:column name="hospital" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="Sips1" property="Sips" behavior="readwrite" uniqueId="bb52d3de-60db-4618-bb29-ec1a31309b83" type="System.Boolean">
+          <orm:column name="sips" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="SSO_Modules1" property="SSO_Modules" behavior="readwrite" uniqueId="a8552739-d156-423b-8460-bda852121c9c" type="Dominio.SSO_Module">
+          <orm:collection element-class="Dominio.SSO_Module" inverse-field="SSO_Application1" order-by="" uniqueId="254c2ce0-80c7-4551-9e74-749838e75687" />
+        </orm:field>
         <orm:index name="IX_SSO_Applications">
           <orm:columnMapping>
             <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
           </orm:columnMapping>
         </orm:index>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="SSO_Roles">
+        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:index name="IX_SSO_Roles">
+          <orm:columnMapping>
+            <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_SSO_Roles_SSO_Roles" delete-action="dbdefaultrule" destination-table="SSO_Roles">
+          <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="SSO_RoleGroups_Members">
+        <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="idRoleGroupMember" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:index name="IX_SSO_RoleGroups_Members">
+          <orm:columnMapping>
+            <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_SSO_Permissions_RoleGroups_Members_SSO_Permissions_RoleGroups" delete-action="cascade" destination-table="SSO_RoleGroups">
+          <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_SSO_Permissions_RoleGroups_Members_SSO_Roles" delete-action="cascade" destination-table="SSO_Roles">
+          <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
       </orm:table>
       <orm:table name="SSO_RoleGroups">
         <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
@@ -297,11 +319,6 @@
         <orm:column name="allow" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         <orm:column name="readonly" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         <orm:column name="endDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
-        <orm:index name="IX_SSO_Permissions">
-          <orm:columnMapping>
-            <orm:column name="endDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
-          </orm:columnMapping>
-        </orm:index>
         <orm:index name="&lt;Name of Missing Index, sysname,&gt;">
           <orm:columnMapping>
             <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
@@ -310,20 +327,11 @@
             <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
-      </orm:table>
-      <orm:table name="SSO_Roles">
-        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
-        <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
-        <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
-        <orm:index name="IX_SSO_Roles">
+        <orm:index name="IX_SSO_Permissions">
           <orm:columnMapping>
-            <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+            <orm:column name="endDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
           </orm:columnMapping>
         </orm:index>
-        <orm:constraint name="FK_SSO_Roles_SSO_Roles" delete-action="dbdefaultrule" destination-table="SSO_Roles">
-          <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
-        </orm:constraint>
       </orm:table>
       <orm:table name="SSO_Modules">
         <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
@@ -340,17 +348,12 @@
         <orm:column name="interfase_image" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
         <orm:column name="Log_Group" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         <orm:column name="Log_Key" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:index name="IX_SSO_Modules_3">
+        <orm:index name="IX_SSO_Modules" unique="true">
           <orm:columnMapping>
             <orm:column name="applicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
           <orm:columnMapping>
-            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
-          </orm:columnMapping>
-        </orm:index>
-        <orm:index name="IX_SSO_Modules_2">
-          <orm:columnMapping>
-            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+            <orm:column name="module" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
         <orm:index name="IX_SSO_Modules_1">
@@ -361,25 +364,42 @@
             <orm:column name="interfase_priority" sql-type="int" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
-        <orm:index name="IX_SSO_Modules" unique="true">
+        <orm:index name="IX_SSO_Modules_2">
+          <orm:columnMapping>
+            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_SSO_Modules_3">
           <orm:columnMapping>
             <orm:column name="applicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
           <orm:columnMapping>
-            <orm:column name="module" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+            <orm:column name="protected" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
           </orm:columnMapping>
         </orm:index>
         <orm:constraint name="FK_SSO_Modules_SSO_Application" delete-action="cascade" destination-table="SSO_Applications">
           <orm:column name="applicationId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
         </orm:constraint>
       </orm:table>
-      <orm:table name="SSO_RoleGroups_Members">
-        <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+      <orm:table name="SSO_Applications">
+        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="description" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="url" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="intefase_visible" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="version" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="hospital" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="sips" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:index name="IX_SSO_Applications">
+          <orm:columnMapping>
+            <orm:column name="executable" sql-type="varchar" nullable="true" length="255" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
       </orm:table>
       <orm:procedure name="SSO_GetAppByRol">
-        <orm:procedure-parameter name="perfil" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" mode="in" type="System.String" />
-        <orm:procedure-parameter name="efector" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" mode="in" type="System.String" />
+        <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -389,9 +409,9 @@
     </orm:relational-naming-settings>
   </orm:orm>
   <ModelSettings xmlns="">
-    <AppConfigConnectionPropertyName>SSOConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
     <AppConfigConnectionString>data source=10.1.232.15;initial catalog=SSO_HOSPITAL;user id=sa;password=ssecure</AppConfigConnectionString>
-    <InitialCatalog>SSO</InitialCatalog>
+    <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
         <CaseMode>PascalCase</CaseMode>
@@ -403,9 +423,7 @@
       <PropertyRules>
         <CaseMode>PascalCase</CaseMode>
       </PropertyRules>
-      <NavigationPropertyRules>
-        <IsPrefixSuffixEnabled>false</IsPrefixSuffixEnabled>
-      </NavigationPropertyRules>
+      <NavigationPropertyRules />
     </NamingSettings>
     <CodeGenerationSettings>
       <OutputProjectName>Dominio</OutputProjectName>
@@ -418,147 +436,170 @@
         <ProviderName>System.Data.SqlClient</ProviderName>
       </BackendConfiguration>
     </BackendConfigurationSettings>
-    <UseSchemaAsNamespace>true</UseSchemaAsNamespace>
   </ModelSettings>
   <Types>
-    <DomainClass Id="9c3bfef8-c279-45b9-a90d-1d389b267776" name="SSO_Application" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="d9194caa-ab9f-41af-8d47-f8381294fa11" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
-      <Property Id="4eb1f3b4-5067-4b58-bee7-ab1e0115929a" name="Description" label="Description : String" kind="Persistent" fieldName="Description1" />
-      <Property Id="6ecb283c-691f-4deb-ab38-59331b19d56f" name="Executable" label="Executable : String" kind="Persistent" fieldName="Executable1" />
-      <Property Id="25fe13b4-8d39-405d-ad02-405b065ad24d" name="Hospital" type="Boolean" label="Hospital : Boolean" kind="Persistent" fieldName="Hospital1" />
-      <Property Id="cad652dd-b075-4acd-bad7-197a0b379674" name="Intefase_visible" type="Boolean" label="Intefase_visible : Boolean" kind="Persistent" fieldName="Intefase_visible1" />
-      <Property Id="d8f980f8-e438-477e-b015-290aa4d45fce" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
-      <Property Id="10937c37-5c24-4ab2-a2bd-4d0f94e24640" name="Sips" type="Boolean" label="Sips : Boolean" kind="Persistent" fieldName="Sips1" />
-      <Property Id="34604c56-411d-4ba9-a5ae-45eb79ba36e8" name="Url" label="Url : String" kind="Persistent" fieldName="Url1" />
-      <Property Id="31f0329e-9869-435c-8b95-75fd59cacd3f" name="Version" label="Version : String" kind="Persistent" fieldName="Version1" />
-      <navigationalProperties>
-        <classHasNavigationalProperties Id="14bf53cf-f0ec-45b2-876c-474134ff6f32">
-          <NavigationalProperty Id="990075c7-0e64-43eb-9a9c-c7857bf7fb6a" name="SSO_Modules" type="IList&lt;SSO_Module&gt;" label="SSO_Modules : IList&lt;SSO_Module&gt;" nullable="true" kind="Persistent" fieldName="SSO_Modules1" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-      </navigationalProperties>
-    </DomainClass>
-    <DomainClass Id="c12ad962-c59d-41ef-8f96-a9e44e832cef" name="SSO_RoleGroup" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
-      <Property Id="44c95097-c8f5-4341-b01c-1a65073b9c69" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
-      <Property Id="9b9cf157-0a49-476a-b4f0-d03adca27093" name="AutomaticName" type="Boolean" label="AutomaticName : Boolean" kind="Persistent" fieldName="AutomaticName1" />
-      <Property Id="854cce9b-a68a-45b1-b784-15477e1a0141" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
-      <navigationalProperties>
-        <classHasNavigationalProperties Id="4770cc6c-351b-48aa-8969-d76b21ed44f0">
-          <NavigationalProperty Id="36022525-64bb-49ef-9dc8-0126ca278005" name="SSO_Roles" type="IList&lt;SSO_Role&gt;" label="SSO_Roles : IList&lt;SSO_Role&gt;" nullable="true" kind="Persistent" fieldName="SSO_Roles1" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-      </navigationalProperties>
-    </DomainClass>
-    <DomainClass Id="3edd5a00-903e-4725-abd1-cda86b432124" name="SSO_Permission" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="3f8bfee4-f8c2-401b-9feb-5f13d744f701" name="Source" type="Int32" label="Source : Int32" kind="Persistent" identity="true" fieldName="Source1" />
-      <Property Id="5716f8d7-5e8c-4f20-a4aa-c9bdee5877ea" name="SourceType" type="Int32" label="SourceType : Int32" kind="Persistent" identity="true" fieldName="SourceType1" />
-      <Property Id="0ead6b9a-2a48-44fe-a496-ef5a39402e31" name="Target" type="Int32" label="Target : Int32" kind="Persistent" identity="true" fieldName="Target1" />
-      <Property Id="42221a88-6313-42e9-8c61-7da0625ccad1" name="TargetType" type="Int32" label="TargetType : Int32" kind="Persistent" identity="true" fieldName="TargetType1" />
-      <Property Id="dda38472-0e9e-46f7-a22d-8b8991a224d2" name="Allow" type="Boolean" label="Allow : Boolean" kind="Persistent" fieldName="Allow1" />
-      <Property Id="7ed6bb98-0dd6-4326-8606-d181e97f090e" name="EndDate" type="DateTime" label="EndDate : DateTime" nullable="true" kind="Persistent" fieldName="EndDate1" />
-      <Property Id="985b0aa7-c25c-4ca2-86bb-0e54b40945e7" name="Readonly" type="Boolean" label="Readonly : Boolean" kind="Persistent" fieldName="Readonly1" />
-    </DomainClass>
-    <DomainClass Id="dd9a33c3-5261-4d93-988a-ca8ba138c1a9" name="SSO_Role" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
-      <Property Id="672c32ca-ba03-4656-9775-60d6e0306738" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
-      <Property Id="2e9633d1-ef95-4d72-8a78-6713bb50c09a" name="Enabled" type="Boolean" label="Enabled : Boolean" kind="Persistent" fieldName="Enabled1" />
-      <Property Id="bb35e6e0-a360-47a6-8988-b98ae7524056" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
-      <Property Id="6b7058af-c22b-4708-8fef-0eba76f33aec" name="Parent" type="Int32" label="Parent : Int32" nullable="true" kind="Persistent" fieldName="Parent1" />
+    <DomainClass Id="c409800a-d370-474f-a374-64aacc307cfe" name="SSO_Role" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="fac41c95-6a76-45ba-a8f5-9d4282e5a737" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="aa8ecf13-0b15-436c-b27a-9940de541c7a" name="Enabled" type="Boolean" label="Enabled : Boolean" kind="Persistent" fieldName="Enabled1" />
+      <Property Id="a9ccf2d1-377e-4577-b848-403c10aa1de6" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <Property Id="5231b2a1-ec39-4938-93fa-dcbfa5676ae0" name="Parent" type="Int32" label="Parent : Int32" nullable="true" kind="Persistent" fieldName="Parent1" />
       <AssociationTargets>
-        <Association Id="54967890-84f3-4725-93fe-ce0aa314454f" SourceMultiplicity="ZeroOne" name="SSO_RoleHasSSO_Role">
+        <Association Id="cbe90d39-c56f-43b7-944e-23f7964107e3" SourceMultiplicity="ZeroOne" name="SSO_RoleHasSSO_Role">
           <DomainClassMoniker name="/ModeloDominio/SSO_Role" />
           <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="ebd4d943-b705-45d8-8d96-00ad2b350fd6">
+            <associationDefinesTargetProperty Id="d7186795-2d4c-49bf-86db-9430522aa1f4">
               <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_Roles" />
             </associationDefinesTargetProperty>
           </targetNavigationalProperty>
           <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="149b970a-52c9-4272-bc24-b9833f9d9d67">
+            <associationDefinesSourceProperty Id="0c31186b-c16c-40b2-9546-8655cf82f81b">
               <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_Role1" />
-            </associationDefinesSourceProperty>
-          </sourceNavigationalProperty>
-        </Association>
-        <Association Id="be0b53ee-3847-426d-9e6c-76b9976280e9" name="SSO_RolesHaveSSO_RoleGroups">
-          <DomainClassMoniker name="/ModeloDominio/SSO_RoleGroup" />
-          <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="bfb71c7f-d12b-4eea-ba10-119671461b2b">
-              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_RoleGroup/SSO_Roles" />
-            </associationDefinesTargetProperty>
-          </targetNavigationalProperty>
-          <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="7109cbaf-25e2-4194-ba81-0424cab9b753">
-              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_RoleGroups" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
       </AssociationTargets>
       <navigationalProperties>
-        <classHasNavigationalProperties Id="39b1b9e0-267c-4226-a604-f53825d8219e">
-          <NavigationalProperty Id="cfb2afa2-4627-4fab-9173-c202006554c0" name="SSO_Role1" type="SSO_Role" label="SSO_Role1 : SSO_Role" nullable="true" kind="Persistent" fieldName="SSO_Role11" isDependent="false" isManaged="false" />
+        <classHasNavigationalProperties Id="5eff1377-4f6b-40f3-a9c7-bc80e45275ea">
+          <NavigationalProperty Id="27f884b5-431e-46b0-967b-42d4228b6cc3" name="SSO_Role1" type="SSO_Role" label="SSO_Role1 : SSO_Role" nullable="true" kind="Persistent" fieldName="SSO_Role11" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="91672a61-278b-4b07-ae2d-69c6010b3b7d">
-          <NavigationalProperty Id="3f9f2560-8172-47eb-b270-029d59b624d2" name="SSO_Roles" type="IList&lt;SSO_Role&gt;" label="SSO_Roles : IList&lt;SSO_Role&gt;" nullable="true" kind="Persistent" fieldName="SSO_Roles1" isDependent="false" isManaged="false" />
+        <classHasNavigationalProperties Id="ba24f9d9-1fa5-4b5b-80db-8e97bb6ebd43">
+          <NavigationalProperty Id="62d55d2e-6b18-4a53-92d1-cff3f0abd533" name="SSO_Roles" type="IList&lt;SSO_Role&gt;" label="SSO_Roles : IList&lt;SSO_Role&gt;" nullable="true" kind="Persistent" fieldName="SSO_Roles1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="5bb6496f-75eb-4af8-a6c0-f8997d1db7a3">
-          <NavigationalProperty Id="c875a134-0d83-4865-a2ae-35ca3c0d5a2a" name="SSO_RoleGroups" type="IList&lt;SSO_RoleGroup&gt;" label="SSO_RoleGroups : IList&lt;SSO_RoleGroup&gt;" nullable="true" kind="Persistent" fieldName="SSO_RoleGroups1" isDependent="false" isManaged="false" />
+        <classHasNavigationalProperties Id="b13941ea-1f99-439b-9c75-750c63b26aa3">
+          <NavigationalProperty Id="efc5dfa8-61a2-49ef-8eb7-7432319252d9" name="SSO_RoleGroups_Members" type="IList&lt;SSO_RoleGroups_Member&gt;" label="SSO_RoleGroups_Members : IList&lt;SSO_RoleGroups_Member&gt;" nullable="true" kind="Persistent" fieldName="SSO_RoleGroups_Members1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="5ce6579d-7d3a-4731-a322-052625cae68b" name="SSO_Module" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
-      <Property Id="2f7b4462-f492-4724-86fc-33323ec82317" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
-      <Property Id="385f745d-9c25-42b2-aa65-4afe0e12b7b8" name="ApplicationId" type="Int32" label="ApplicationId : Int32" kind="Persistent" fieldName="ApplicationId1" />
-      <Property Id="43e6cf3c-5680-4960-9e43-8f430cfc68b6" name="Description" label="Description : String" kind="Persistent" fieldName="Description1" />
-      <Property Id="34f0705f-a99f-490d-8487-59773dfea028" name="GroupId" type="Int32" label="GroupId : Int32" nullable="true" kind="Persistent" fieldName="GroupId1" />
-      <Property Id="374f1911-344c-4b4e-946d-774b38606280" name="Interfase_image" label="Interfase_image : String" kind="Persistent" fieldName="Interfase_image1" />
-      <Property Id="0879c96f-7ede-460c-9c6a-6b3ae062bbb4" name="Interfase_priority" type="Int32" label="Interfase_priority : Int32" nullable="true" kind="Persistent" fieldName="Interfase_priority1" />
-      <Property Id="535983e8-dc95-4c4c-a44a-2a4d112c8f57" name="Interfase_visible" type="Boolean" label="Interfase_visible : Boolean" kind="Persistent" fieldName="Interfase_visible1" />
-      <Property Id="51ae4fb8-2775-425b-9ead-b7a7e7a7e6d8" name="Log_Group" type="Int32" label="Log_Group : Int32" nullable="true" kind="Persistent" fieldName="Log_Group1" />
-      <Property Id="7761c8e8-6c95-4992-8f88-614d6e2c8487" name="Log_Key" type="Int32" label="Log_Key : Int32" nullable="true" kind="Persistent" fieldName="Log_Key1" />
-      <Property Id="fa407505-3578-4fb7-8965-3d63e1e11333" name="Module" type="Int32" label="Module : Int32" kind="Persistent" fieldName="Module1" />
-      <Property Id="1f47d640-247a-4e8f-aa11-e41708d9aaf6" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
-      <Property Id="83ef6054-b659-40ad-89f4-dc8b0c8b9f1f" name="NeedsView" type="Boolean" label="NeedsView : Boolean" kind="Persistent" fieldName="NeedsView1" />
-      <Property Id="3db1f474-c9ab-4648-ba60-dc35677ed36f" name="Protected" type="Boolean" label="Protected : Boolean" kind="Persistent" fieldName="Protected1" />
-      <Property Id="03eac186-d4e2-4ed2-950b-d7e35834b1c9" name="Readonly" type="Boolean" label="Readonly : Boolean" kind="Persistent" fieldName="Readonly1" />
+    <DomainClass Id="ece2abeb-915b-4364-9c0c-1fc6af9abd47" name="SSO_RoleGroups_Member" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="IdRoleGroupMember">
+      <Property Id="6a94fd73-2697-4179-a7d3-c92d78801af5" name="IdRoleGroupMember" type="Int32" label="IdRoleGroupMember : Int32" kind="Persistent" identity="true" fieldName="IdRoleGroupMember1" />
+      <Property Id="05472b4e-7f3c-4d14-b1c0-297bb3efec78" name="GroupId" type="Int32" label="GroupId : Int32" kind="Persistent" fieldName="GroupId1" />
+      <Property Id="6fa29a6c-dd75-450d-abc4-041c80f5531b" name="RoleId" type="Int32" label="RoleId : Int32" kind="Persistent" fieldName="RoleId1" />
       <AssociationTargets>
-        <Association Id="38ba59b0-c37c-47ba-9caa-1ea0d55deabd" SourceMultiplicity="One" name="SSO_ModuleHasSSO_Application">
+        <Association Id="7cc017d0-d902-415d-ab0f-8e458ed6d060" SourceMultiplicity="One" name="SSO_RoleGroups_MemberHasSSO_RoleGroup">
+          <DomainClassMoniker name="/ModeloDominio/SSO_RoleGroup" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="ace39cd3-5252-46a0-8d62-bb29df722dd4">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_RoleGroup/SSO_RoleGroups_Members" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="8a73673f-2782-4288-92c3-5816725e7a5f">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_RoleGroups_Member/SSO_RoleGroup" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="6d104ab7-7b03-4d99-8038-0bb42a689ab9" SourceMultiplicity="One" name="SSO_RoleGroups_MemberHasSSO_Role">
+          <DomainClassMoniker name="/ModeloDominio/SSO_Role" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="25ebddcd-2f29-4f20-8bf0-9d8a83156634">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_RoleGroups_Members" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="8ef02873-b5f9-4871-a225-9ccfe77de6fa">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_RoleGroups_Member/SSO_Role" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="9066752e-0bac-48e9-8409-930c21cea2f2">
+          <NavigationalProperty Id="37d88eec-3a0a-43bf-ba16-ac4ffe2d41e2" name="SSO_RoleGroup" type="SSO_RoleGroup" label="SSO_RoleGroup : SSO_RoleGroup" nullable="true" kind="Persistent" fieldName="SSO_RoleGroup1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="ef368e7c-f42e-43ed-83f5-3eb3b6537d22">
+          <NavigationalProperty Id="a27f5be4-43e0-4e31-8ed9-a8abf44e8f93" name="SSO_Role" type="SSO_Role" label="SSO_Role : SSO_Role" nullable="true" kind="Persistent" fieldName="SSO_Role1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="096f6500-0c42-4bf6-ba16-52d825e20b68" name="SSO_RoleGroup" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="bdc452b3-7e33-4485-ac6d-4d52ba2d5732" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="3f82fecb-f467-46b5-928e-a85cf0903784" name="AutomaticName" type="Boolean" label="AutomaticName : Boolean" kind="Persistent" fieldName="AutomaticName1" />
+      <Property Id="75b809e2-5e50-4ef4-9c80-4b1668c2e730" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="7053e2fd-29ca-4373-99f4-5ea157f4d6f1">
+          <NavigationalProperty Id="f12b54f4-a993-4c81-871f-520c7d74b4eb" name="SSO_RoleGroups_Members" type="IList&lt;SSO_RoleGroups_Member&gt;" label="SSO_RoleGroups_Members : IList&lt;SSO_RoleGroups_Member&gt;" nullable="true" kind="Persistent" fieldName="SSO_RoleGroups_Members1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="ac8aeb3a-4186-4a91-8d4c-681ec06e3f76" name="SSO_Permission" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="6817b601-d64a-4e4e-b0ab-582d119119c9" name="Source" type="Int32" label="Source : Int32" kind="Persistent" identity="true" fieldName="Source1" />
+      <Property Id="f5efff9d-55be-4367-9522-d3835965901a" name="SourceType" type="Int32" label="SourceType : Int32" kind="Persistent" identity="true" fieldName="SourceType1" />
+      <Property Id="a2ebe85b-888c-46ba-8d9f-556bf7c4573a" name="Target" type="Int32" label="Target : Int32" kind="Persistent" identity="true" fieldName="Target1" />
+      <Property Id="ce45470d-33d6-4f2f-82b4-745ec774b375" name="TargetType" type="Int32" label="TargetType : Int32" kind="Persistent" identity="true" fieldName="TargetType1" />
+      <Property Id="c08e0e71-8832-4257-b993-9f4e57304a87" name="Allow" type="Boolean" label="Allow : Boolean" kind="Persistent" fieldName="Allow1" />
+      <Property Id="59a24cc5-6bf1-44c5-a42c-be83f360feda" name="EndDate" type="DateTime" label="EndDate : DateTime" nullable="true" kind="Persistent" fieldName="EndDate1" />
+      <Property Id="6a237781-2aa6-4c61-b9df-4ec5b2f69688" name="Readonly" type="Boolean" label="Readonly : Boolean" kind="Persistent" fieldName="Readonly1" />
+    </DomainClass>
+    <DomainClass Id="1f476723-e085-4179-a40e-2897901daae4" name="SSO_Module" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="cf753f73-a3e0-4e0b-ad19-b0750451140e" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="aa12361a-ac7b-4c53-8bf4-9cfc1ce09165" name="ApplicationId" type="Int32" label="ApplicationId : Int32" kind="Persistent" fieldName="ApplicationId1" />
+      <Property Id="fcfdcc63-f0fa-490d-887a-ea565591a41b" name="Description" label="Description : String" kind="Persistent" fieldName="Description1" />
+      <Property Id="82aa97a8-8fa9-46fc-ac52-556ce10b6111" name="GroupId" type="Int32" label="GroupId : Int32" nullable="true" kind="Persistent" fieldName="GroupId1" />
+      <Property Id="e5fe3fbe-e5ff-4035-bf4e-629f6fc7438d" name="Interfase_image" label="Interfase_image : String" kind="Persistent" fieldName="Interfase_image1" />
+      <Property Id="2b0d957d-d7c6-4f1d-9d87-19347e8b6e68" name="Interfase_priority" type="Int32" label="Interfase_priority : Int32" nullable="true" kind="Persistent" fieldName="Interfase_priority1" />
+      <Property Id="9405aa5e-ca3a-449d-89d5-28d2b5ba8744" name="Interfase_visible" type="Boolean" label="Interfase_visible : Boolean" kind="Persistent" fieldName="Interfase_visible1" />
+      <Property Id="656b7359-b7b2-48b2-b073-842c5b0170fa" name="Log_Group" type="Int32" label="Log_Group : Int32" nullable="true" kind="Persistent" fieldName="Log_Group1" />
+      <Property Id="03efcebe-24c7-4347-b7a4-1dc279437622" name="Log_Key" type="Int32" label="Log_Key : Int32" nullable="true" kind="Persistent" fieldName="Log_Key1" />
+      <Property Id="bd7a1dbe-bdb2-42bf-a23d-7fbb2e0f7a7a" name="Module" type="Int32" label="Module : Int32" kind="Persistent" fieldName="Module1" />
+      <Property Id="f21903b5-4f25-4bfc-a4c3-9b1f57a6bfdb" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <Property Id="6cf99ab6-a48f-4777-a143-02ce0c03c636" name="NeedsView" type="Boolean" label="NeedsView : Boolean" kind="Persistent" fieldName="NeedsView1" />
+      <Property Id="63363141-57e4-4fa7-bf36-cb67c5926363" name="Protected" type="Boolean" label="Protected : Boolean" kind="Persistent" fieldName="Protected1" />
+      <Property Id="5d66acff-18a6-4b80-9177-081908ff27cf" name="Readonly" type="Boolean" label="Readonly : Boolean" kind="Persistent" fieldName="Readonly1" />
+      <AssociationTargets>
+        <Association Id="254c2ce0-80c7-4551-9e74-749838e75687" SourceMultiplicity="One" name="SSO_ModuleHasSSO_Application">
           <DomainClassMoniker name="/ModeloDominio/SSO_Application" />
           <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="c8464a7d-44ae-404b-9b29-95ae0382a5ed">
+            <associationDefinesTargetProperty Id="0da0ef20-67b5-4d09-848e-9b08135e80aa">
               <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Application/SSO_Modules" />
             </associationDefinesTargetProperty>
           </targetNavigationalProperty>
           <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="8dcfaabb-8acd-4a09-b395-97210d6720af">
+            <associationDefinesSourceProperty Id="3834e566-cdb2-483f-acf6-66bbec456e31">
               <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Module/SSO_Application" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
       </AssociationTargets>
       <navigationalProperties>
-        <classHasNavigationalProperties Id="1d7e8066-1918-4fc8-98b3-8611ecc41920">
-          <NavigationalProperty Id="bdc0a1d8-7246-4246-aa02-d2130d45a732" name="SSO_Application" type="SSO_Application" label="SSO_Application : SSO_Application" nullable="true" kind="Persistent" fieldName="SSO_Application1" isDependent="false" isManaged="false" />
+        <classHasNavigationalProperties Id="0b9800db-cd8b-4e63-a733-c1cd5e0a05b4">
+          <NavigationalProperty Id="2f6a0f0b-9e91-470d-89dc-8c7be7368015" name="SSO_Application" type="SSO_Application" label="SSO_Application : SSO_Application" nullable="true" kind="Persistent" fieldName="SSO_Application1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="89b5d4e1-750b-423d-b712-a425aa76518a" name="SSO_RoleGroups_Member" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="3aad41cf-e0ad-48da-b9ec-3f838bad35d4" name="GroupId" type="Int32" label="GroupId : Int32" kind="Persistent" identity="true" fieldName="GroupId1" />
-      <Property Id="a86281d8-a300-49ff-82fa-4ec49fe1d15a" name="RoleId" type="Int32" label="RoleId : Int32" kind="Persistent" identity="true" fieldName="RoleId1" />
+    <DomainClass Id="c74a2c2a-7ac8-4f89-8bfd-cbdd79947e4b" name="SSO_Application" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="e2e7813e-fe1b-4b57-a28e-8cb70e44d3b2" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="e3f1b160-4e09-41b7-8000-ce26b1b636c1" name="Description" label="Description : String" kind="Persistent" fieldName="Description1" />
+      <Property Id="4f90188d-1688-4550-af26-9b80e24e001d" name="Executable" label="Executable : String" kind="Persistent" fieldName="Executable1" />
+      <Property Id="6e260611-5469-4ead-ba37-414da603448d" name="Hospital" type="Boolean" label="Hospital : Boolean" kind="Persistent" fieldName="Hospital1" />
+      <Property Id="b0898e94-f30d-46fa-a97f-428f4ffe8fd9" name="Intefase_visible" type="Boolean" label="Intefase_visible : Boolean" kind="Persistent" fieldName="Intefase_visible1" />
+      <Property Id="e421d414-b874-4c7b-8d12-e19d441392d4" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <Property Id="bb52d3de-60db-4618-bb29-ec1a31309b83" name="Sips" type="Boolean" label="Sips : Boolean" kind="Persistent" fieldName="Sips1" />
+      <Property Id="50b56038-f88e-41d5-996f-87c0c3726e23" name="Url" label="Url : String" kind="Persistent" fieldName="Url1" />
+      <Property Id="bf94b957-313a-4edd-9167-80fd1ed650ad" name="Version" label="Version : String" kind="Persistent" fieldName="Version1" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="d0a517d6-3075-4aa6-b57a-f8839c00b655">
+          <NavigationalProperty Id="a8552739-d156-423b-8460-bda852121c9c" name="SSO_Modules" type="IList&lt;SSO_Module&gt;" label="SSO_Modules : IList&lt;SSO_Module&gt;" nullable="true" kind="Persistent" fieldName="SSO_Modules1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
     </DomainClass>
   </Types>
   <domainContext>
-    <domainModelHasDomainContext Id="a9ba34a5-da2d-422b-9437-61570c2d64a6">
+    <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
       <domainContainer name="ModeloDominio" namespace="Dominio" showPropertiesCompartment="true">
-        <entitySetProperty name="SSO_Applications" namespace="Dominio" type="SSO_Application" label="SSO_Applications : IQueryable&lt;Dominio.SSO_Application&gt;" />
+        <entitySetProperty name="SSO_Roles" namespace="Dominio" type="SSO_Role" label="SSO_Roles : IQueryable&lt;Dominio.SSO_Role&gt;" />
+        <entitySetProperty name="SSO_RoleGroups_Members" namespace="Dominio" type="SSO_RoleGroups_Member" label="SSO_RoleGroups_Members : IQueryable&lt;Dominio.SSO_RoleGroups_Member&gt;" />
         <entitySetProperty name="SSO_RoleGroups" namespace="Dominio" type="SSO_RoleGroup" label="SSO_RoleGroups : IQueryable&lt;Dominio.SSO_RoleGroup&gt;" />
         <entitySetProperty name="SSO_Permissions" namespace="Dominio" type="SSO_Permission" label="SSO_Permissions : IQueryable&lt;Dominio.SSO_Permission&gt;" />
-        <entitySetProperty name="SSO_Roles" namespace="Dominio" type="SSO_Role" label="SSO_Roles : IQueryable&lt;Dominio.SSO_Role&gt;" />
         <entitySetProperty name="SSO_Modules" namespace="Dominio" type="SSO_Module" label="SSO_Modules : IQueryable&lt;Dominio.SSO_Module&gt;" />
-        <entitySetProperty name="SSO_RoleGroups_Members" namespace="Dominio" type="SSO_RoleGroups_Member" label="SSO_RoleGroups_Members : IQueryable&lt;Dominio.SSO_RoleGroups_Member&gt;" />
+        <entitySetProperty name="SSO_Applications" namespace="Dominio" type="SSO_Application" label="SSO_Applications : IQueryable&lt;Dominio.SSO_Application&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
   <domainMethods>
-    <domainModelHasDomainMethods Id="43c6c519-2821-4267-a81c-441a3aff04fa">
+    <domainModelHasDomainMethods Id="313abb08-7d57-4bd7-91a5-b133a5b8ea8b">
       <domainMethod name="SSO_GetAppByRol" storedProcedureName="'SSO_GetAppByRol'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="ea4ffaf0-9b14-4dd8-a666-b4cce89929b3">
+          <domainMethodReferencesDomainMethodReturnShape Id="d5629ab0-b966-40f8-a967-42fbefdd8b42">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetAppByRolResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -566,10 +607,10 @@
     </domainModelHasDomainMethods>
   </domainMethods>
   <domainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="fffe26b7-c893-49d6-8199-95259b285deb">
+    <domainModelHasDomainMethodReturnShapes Id="169427e9-011b-4513-8351-c56d7f77db8e">
       <domainMethodReturnShape name="SSO_GetAppByRolResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="aa9a8bcc-3d1c-4797-b7d5-64a21afaf08b" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
-        <Property Id="805749fa-353e-4406-9757-dc7092ee4fbf" name="name" type="System.String" label="name : System.String" fieldName="_name" />
+        <Property Id="7a0f2332-e539-484e-ab26-e389f8e0a4c3" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="c3005b8a-9e6e-49d0-9b0a-30c4e8dd9e93" name="name" type="System.String" label="name : System.String" fieldName="_name" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

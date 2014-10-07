@@ -24,7 +24,7 @@ namespace Dominio
 {
 	public partial class ModeloDominio : OpenAccessContext, IModeloDominioUnitOfWork
 	{
-		private static string connectionStringName = @"SSOConnection";
+		private static string connectionStringName = @"SSO_HOSPITALConnection";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
@@ -50,11 +50,19 @@ namespace Dominio
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<SSO_Application> SSO_Applications 
+		public IQueryable<SSO_Role> SSO_Roles 
 		{
 			get
 			{
-				return this.GetAll<SSO_Application>();
+				return this.GetAll<SSO_Role>();
+			}
+		}
+		
+		public IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members 
+		{
+			get
+			{
+				return this.GetAll<SSO_RoleGroups_Member>();
 			}
 		}
 		
@@ -74,14 +82,6 @@ namespace Dominio
 			}
 		}
 		
-		public IQueryable<SSO_Roler> SSO_Roles 
-		{
-			get
-			{
-				return this.GetAll<SSO_Roler>();
-			}
-		}
-		
 		public IQueryable<SSO_Module> SSO_Modules 
 		{
 			get
@@ -90,53 +90,51 @@ namespace Dominio
 			}
 		}
 		
-		public IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members 
+		public IQueryable<SSO_Application> SSO_Applications 
 		{
 			get
 			{
-				return this.GetAll<SSO_RoleGroups_Member>();
+				return this.GetAll<SSO_Application>();
 			}
 		}
 		
-		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(string perfil, string efector)
+		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
 		{
 			int returnValue;
-			return SSO_GetAppByRol(perfil, efector, out returnValue);
+			return SSO_GetAppByRol(idPerfil, idEfector, out returnValue);
 		}
 		
-		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(string perfil, string efector, out int returnValue)
+		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
 		    parameterReturnValue.ParameterName = "parameterReturnValue";
 		
-			OAParameter parameterPerfil = new OAParameter();
-			parameterPerfil.ParameterName = "perfil";
-			parameterPerfil.Size = 100;
-			if(perfil != null)
+			OAParameter parameterIdPerfil = new OAParameter();
+			parameterIdPerfil.ParameterName = "idPerfil";
+			if(idPerfil.HasValue)
 			{
-				parameterPerfil.Value = perfil;
-			}	
+				parameterIdPerfil.Value = idPerfil.Value;
+			}
 			else
 			{
-				parameterPerfil.DbType = DbType.String;
-				parameterPerfil.Value = DBNull.Value;
+				parameterIdPerfil.DbType = DbType.Int32;
+				parameterIdPerfil.Value = DBNull.Value;
 			}
 
-			OAParameter parameterEfector = new OAParameter();
-			parameterEfector.ParameterName = "efector";
-			parameterEfector.Size = 100;
-			if(efector != null)
+			OAParameter parameterIdEfector = new OAParameter();
+			parameterIdEfector.ParameterName = "idEfector";
+			if(idEfector.HasValue)
 			{
-				parameterEfector.Value = efector;
-			}	
+				parameterIdEfector.Value = idEfector.Value;
+			}
 			else
 			{
-				parameterEfector.DbType = DbType.String;
-				parameterEfector.Value = DBNull.Value;
+				parameterIdEfector.DbType = DbType.Int32;
+				parameterIdEfector.Value = DBNull.Value;
 			}
 
-			IEnumerable<SSO_GetAppByRolResultSet0> queryResult = this.ExecuteQuery<SSO_GetAppByRolResultSet0>("[dbo].[SSO_GetAppByRol]", CommandType.StoredProcedure, parameterPerfil, parameterEfector, parameterReturnValue);
+			IEnumerable<SSO_GetAppByRolResultSet0> queryResult = this.ExecuteQuery<SSO_GetAppByRolResultSet0>("[dbo].[SSO_GetAppByRol]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdEfector, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -166,7 +164,11 @@ namespace Dominio
 	
 	public interface IModeloDominioUnitOfWork : IUnitOfWork
 	{
-		IQueryable<SSO_Application> SSO_Applications
+		IQueryable<SSO_Role> SSO_Roles
+		{
+			get;
+		}
+		IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members
 		{
 			get;
 		}
@@ -178,20 +180,16 @@ namespace Dominio
 		{
 			get;
 		}
-		IQueryable<SSO_Roler> SSO_Roles
-		{
-			get;
-		}
 		IQueryable<SSO_Module> SSO_Modules
 		{
 			get;
 		}
-		IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members
+		IQueryable<SSO_Application> SSO_Applications
 		{
 			get;
 		}
-		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(string perfil, string efector);
-		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(string perfil, string efector, out int returnValue);
+		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
+		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 	}
 }
 #pragma warning restore 1591

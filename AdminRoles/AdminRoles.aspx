@@ -22,9 +22,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="tab1primary">                                
+                            <div class="tab-pane fade in active" id="tab1primary">
                                 <div class="col-md-12">
-                                <input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />
+                                    <input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />
                                     <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead class="table">
                                             <tr>
@@ -89,7 +89,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <%--<button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" onserverclick="btnGuardar_Click">Cerrar</button>--%>
                         <button id="crearRoles" onserverclick="crearRol_Click" runat="server" type="button" class="btn btn-primary">Guardar</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                     </div>

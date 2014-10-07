@@ -37,7 +37,9 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack) return;
 
+            devuelveEfector();
         }
 
         //Devuelve el efector donde está instalada el AdminSSO. Sacar el efector de la tabla config.
@@ -46,10 +48,10 @@ namespace AdminRoles
         {
 
             Session["efector"] = "Chos Malal";
-            Session["idEfector"] = 51; //IdEfector de Chos Malal
+            Session["idEfector"] = 693; //IdEfector de Chos Malal
 
             string efector = Session["efector"].ToString();
-            
+
             return efector;
         }
 
@@ -57,7 +59,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_Roler> listaRoles = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
+            List<SSO_Role> listaRoles = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaRoles);
         }
@@ -66,7 +68,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_Roler> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
+            List<SSO_Role> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaAplicaciones);
         }
@@ -75,7 +77,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_Roler> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
+            List<SSO_Role> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaEfectores);
         }
@@ -103,7 +105,7 @@ namespace AdminRoles
 
         private void crearRol()
         {
-            SSO_Roler rol = new SSO_Roler();
+            SSO_Role rol = new SSO_Role();
 
             rol.Parent = Roles.parent;
             rol.Name = txtRol.Text.ToUpper();
@@ -114,7 +116,7 @@ namespace AdminRoles
 
         private void actualizarRol()
         {
-            SSO_Roler rol = new SSO_Roler();
+            SSO_Role rol = new SSO_Role();
 
             rol.Id = int.Parse(hdnIdRol.Value);
             rol.Parent = Roles.parent;
