@@ -17,5 +17,12 @@ namespace Repositorio
 
             return result;
         }
+
+        public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> listaUsuariosXAplicacion(int idAplicacion)
+        {
+            IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> result = dominio.SSO_GetUsuariosXAplicacion(idAplicacion).ToList();
+
+            return result;
+        }
     }
 }

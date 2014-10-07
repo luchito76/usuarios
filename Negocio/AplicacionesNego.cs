@@ -16,5 +16,10 @@ namespace Negocio
         {
             return aplicacionesRepo.listaAplicaciones();
         }
+
+        public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> listaUsuariosXAplicacion(int idAplicacion)
+        {
+            return aplicacionesRepo.listaUsuariosXAplicacion(idAplicacion);
+        }
     }
 }

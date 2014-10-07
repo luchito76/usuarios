@@ -143,6 +143,39 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion)
+		{
+			int returnValue;
+			return SSO_GetUsuariosXAplicacion(idAplicacion, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdAplicacion = new OAParameter();
+			parameterIdAplicacion.ParameterName = "idAplicacion";
+			if(idAplicacion.HasValue)
+			{
+				parameterIdAplicacion.Value = idAplicacion.Value;
+			}
+			else
+			{
+				parameterIdAplicacion.DbType = DbType.Int32;
+				parameterIdAplicacion.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> queryResult = this.ExecuteQuery<SSO_GetUsuariosXAplicacionResultSet0>("[dbo].[SSO_GetUsuariosXAplicacion]", CommandType.StoredProcedure, parameterIdAplicacion, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -190,6 +223,8 @@ namespace Dominio
 		}
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
+		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
+		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue);
 	}
 }
 #pragma warning restore 1591

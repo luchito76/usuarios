@@ -402,6 +402,10 @@
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_GetUsuariosXAplicacion">
+        <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:source-strategy>Property</orm:source-strategy>
@@ -605,12 +609,32 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="97427198-3dd0-4379-8855-1237f90680ef">
+      <domainMethod name="SSO_GetUsuariosXAplicacion" storedProcedureName="'SSO_GetUsuariosXAplicacion'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="ed08fc1a-d2e6-4156-b6bd-483b488ec5a7">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetUsuariosXAplicacionResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
   </domainMethods>
   <domainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="169427e9-011b-4513-8351-c56d7f77db8e">
       <domainMethodReturnShape name="SSO_GetAppByRolResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
         <Property Id="7a0f2332-e539-484e-ab26-e389f8e0a4c3" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
         <Property Id="c3005b8a-9e6e-49d0-9b0a-30c4e8dd9e93" name="name" type="System.String" label="name : System.String" fieldName="_name" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="9e64974a-ff27-4a95-afda-cc96d5214a11">
+      <domainMethodReturnShape name="Void" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="Void" />
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="5dda324e-6884-4c14-9448-b15da83a6ae3">
+      <domainMethodReturnShape name="SSO_GetUsuariosXAplicacionResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="e39f9788-5902-4679-8631-341d03386261" name="idUsuario" type="System.Int32" label="idUsuario : System.Int32" fieldName="_idUsuario" />
+        <Property Id="c6e424f3-838b-4a38-af45-8f419c4ab87d" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="dbb9e625-4224-41cd-857f-fd5ae5e5731a" name="Apellido" type="System.String" label="Apellido : System.String" fieldName="_apellido" />
+        <Property Id="889f93f5-f9e7-489e-ad36-aa3d5a7a7d3f" name="Usuario" type="System.String" label="Usuario : System.String" fieldName="_usuario" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>
