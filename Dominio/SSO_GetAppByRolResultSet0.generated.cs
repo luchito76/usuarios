@@ -23,29 +23,29 @@ namespace Dominio
 {
 	public partial class SSO_GetAppByRolResultSet0
 	{
-		private int _id;
-		public virtual int id
+		private int _idAplicacion;
+		public virtual int idAplicacion
 		{
 			get
 			{
-				return this._id;
+				return this._idAplicacion;
 			}
 			set
 			{
-				this._id = value;
+				this._idAplicacion = value;
 			}
 		}
 		
-		private string _name;
-		public virtual string name
+		private string _nombreAplicacion;
+		public virtual string nombreAplicacion
 		{
 			get
 			{
-				return this._name;
+				return this._nombreAplicacion;
 			}
 			set
 			{
-				this._name = value;
+				this._nombreAplicacion = value;
 			}
 		}
 		

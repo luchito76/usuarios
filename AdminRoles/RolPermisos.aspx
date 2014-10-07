@@ -2,6 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <asp:HiddenField ID="hdnIdEfector" runat="server" />
+    <asp:HiddenField ID="hdIdAplicacion" runat="server" />
+    <asp:HiddenField ID="hdnIdPerfil" runat="server" />
+
     <h2><%= devuelveNombreDeRol() %></h2>
 
     <div class="panel panel-primary" id="form">
@@ -19,8 +23,8 @@
             <table id="tblAppXRoles" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
                 <thead>
                     <tr>
-                        <th data-field="id" data-align="center" data-sortable="true">ID</th>
-                        <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
+                        <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
+                        <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
                         <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Usuarios</th>
                         <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents" data-align="center">Eliminar</th>
                         <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Regenerar</th>
@@ -41,7 +45,7 @@
 
         function operateFormatter1(value, row, index) {
             return [
-                '<a class="usuarios" href="javascript:void(0)" title="Borrar">',
+                '<a class="eliminar" href="javascript:void(0)" title="Borrar">',
                     '<i class="fa fa-trash"></i>',                    
                 '</a>'
             ].join('');
@@ -55,7 +59,18 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
 
-                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.id, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+            }
+        };  
+
+        window.operateEvents1 = {
+            'click .usuarios': function (e, value, row, index) { 
+                var idAplicacion = row.idAplicacion;
+                
+                document.getElementById('<%= hdIdAplicacion.ClientID %>').value = row.idAplicacion;
+                document.getElementById('<%= hdnIdPerfil.ClientID %>').value = '<%= devuelveNombreIdRol() %>';
+
+                <%= eliminarAplicacionXRol(hdnIdEfector, hdnIdPerfil, hdIdAplicacion) %>;
             }
         };  
         

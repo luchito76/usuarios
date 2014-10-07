@@ -45,17 +45,15 @@ namespace Repositorio
 
         public SSO_RoleGroup obtieneUltimoIdRolGroup()
         {
-
             IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups;
             SSO_RoleGroup rolGroup = result.Last();
 
             return rolGroup;
         }
 
-        public void guardarRolGroupMember(SSO_RoleGroups_Member rolGroupmember)
+        public void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-            dominio.Add(rolGroupmember);
-            dominio.SaveChanges();
+            dominio.SSO_DeleteAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
     }
 }

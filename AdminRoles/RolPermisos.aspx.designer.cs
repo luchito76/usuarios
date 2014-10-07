@@ -13,6 +13,33 @@ namespace AdminRoles {
     public partial class RolPermisos {
         
         /// <summary>
+        /// hdnIdEfector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdEfector;
+        
+        /// <summary>
+        /// hdIdAplicacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdIdAplicacion;
+        
+        /// <summary>
+        /// hdnIdPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdPerfil;
+        
+        /// <summary>
         /// ddlAplicaciones control.
         /// </summary>
         /// <remarks>

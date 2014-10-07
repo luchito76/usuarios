@@ -107,6 +107,24 @@ namespace Dominio
 			}
 		}
 		
+		private IList<SSO_RoleGroup> SSO_RoleGroups1 = new List<SSO_RoleGroup>();
+		public virtual IList<SSO_RoleGroup> SSO_RoleGroups
+		{
+			get
+			{
+				return this.SSO_RoleGroups1;
+			}
+		}
+		
+		private IList<SSO_RoleGroup> SSO_RoleGroups21 = new List<SSO_RoleGroup>();
+		public virtual IList<SSO_RoleGroup> SSO_RoleGroups2
+		{
+			get
+			{
+				return this.SSO_RoleGroups21;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

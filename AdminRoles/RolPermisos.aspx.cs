@@ -61,14 +61,14 @@ namespace AdminRoles
         {
             try
             {
-                guardaRoleGroups();
+                int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
+
+                guardaRoleGroups(idAplicacion);
 
                 //Trae el último idRolGroup insertado.
-                int IdRolGroup = ultimoIdRolGroup();
+                //int IdRolGroup = ultimoIdRolGroup();
 
-                guardaRolGroupMembers(IdRolGroup);
-
-                int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
+                // guardaRolGroupMembers(IdRolGroup);
 
                 guardaSSOPermissions(idAplicacion);
 
@@ -79,14 +79,16 @@ namespace AdminRoles
             }
         }
 
-        private void guardaRoleGroups()
+        private void guardaRoleGroups(int idAplicacion)
         {
-            string rol = Request["rolName"].ToString();
-            string efector = Session["efector"].ToString();
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+            int idRol = int.Parse(Request["rolId"].ToString());
 
             SSO_RoleGroup rolGroup = new SSO_RoleGroup();
 
-            rolGroup.Name = rol + " + " + efector;
+            rolGroup.IdAplicacion = idAplicacion;
+            rolGroup.IdEfector = idEfector;
+            rolGroup.IdPerfil = idRol;
             rolGroup.AutomaticName = true;
 
             roleNego.guardaRoleGroup(rolGroup);
@@ -100,38 +102,18 @@ namespace AdminRoles
             return idRolGroup;
         }
 
-        private void guardaRolGroupMembers(int ultimoIdRolGroup)
-        {
-            string rol = Request["rolName"].ToString();
-            int rolId = int.Parse(Request["rolId"].ToString());
-
-            int idEfector = int.Parse(Session["idEfector"].ToString());
-
-            SSO_RoleGroups_Member rolGroupMember = new SSO_RoleGroups_Member();
-
-            rolGroupMember.GroupId = ultimoIdRolGroup;
-            rolGroupMember.RoleId = rolId;
-
-            roleNego.guardarRolGroupMember(rolGroupMember);
-
-            SSO_RoleGroups_Member rolGroupMember1 = new SSO_RoleGroups_Member();
-
-            rolGroupMember1.GroupId = ultimoIdRolGroup;
-            rolGroupMember1.RoleId = idEfector;
-
-            roleNego.guardarRolGroupMember(rolGroupMember1);
-        }
-
         private void guardaSSOPermissions(int idAplicacion)
         {
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
+
+            int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
 
             foreach (SSO_Module data in listaModulosXAplicacion)
             {
                 SSO_Permission ssoPermission = new SSO_Permission();
 
                 ssoPermission.SourceType = 3;
-                ssoPermission.Source = ultimoIdRolGroup();
+                ssoPermission.Source = ultimoIdRolGroupInsertado;
                 ssoPermission.TargetType = 2;
                 ssoPermission.Target = data.Id;
                 ssoPermission.Allow = true;
@@ -139,6 +121,11 @@ namespace AdminRoles
 
                 permisoNego.guardarPermisos(ssoPermission);
             }
+        }
+
+        public void eliminarAplicacionXRol(int idEfector, int idAplicacion, int idPerfil)
+        {
+            roleNego.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
     }
 }

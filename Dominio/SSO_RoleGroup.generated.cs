@@ -63,6 +63,84 @@ namespace Dominio
 			}
 		}
 		
+		private int? IdPerfil1;
+		public virtual int? IdPerfil
+		{
+			get
+			{
+				return this.IdPerfil1;
+			}
+			set
+			{
+				this.IdPerfil1 = value;
+			}
+		}
+		
+		private int? IdEfector1;
+		public virtual int? IdEfector
+		{
+			get
+			{
+				return this.IdEfector1;
+			}
+			set
+			{
+				this.IdEfector1 = value;
+			}
+		}
+		
+		private int? IdAplicacion1;
+		public virtual int? IdAplicacion
+		{
+			get
+			{
+				return this.IdAplicacion1;
+			}
+			set
+			{
+				this.IdAplicacion1 = value;
+			}
+		}
+		
+		private SSO_Role SSO_Role1;
+		public virtual SSO_Role SSO_Role
+		{
+			get
+			{
+				return this.SSO_Role1;
+			}
+			set
+			{
+				this.SSO_Role1 = value;
+			}
+		}
+		
+		private SSO_Role SSO_Role21;
+		public virtual SSO_Role SSO_Role2
+		{
+			get
+			{
+				return this.SSO_Role21;
+			}
+			set
+			{
+				this.SSO_Role21 = value;
+			}
+		}
+		
+		private SSO_Application SSO_Application1;
+		public virtual SSO_Application SSO_Application
+		{
+			get
+			{
+				return this.SSO_Application1;
+			}
+			set
+			{
+				this.SSO_Application1 = value;
+			}
+		}
+		
 		private IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members1 = new List<SSO_RoleGroups_Member>();
 		public virtual IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members
 		{

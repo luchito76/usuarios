@@ -57,9 +57,9 @@ namespace Negocio
         {
             return rolesRepo.obtieneUltimoIdRolGroup();
         }
-        public void guardarRolGroupMember(SSO_RoleGroups_Member rolGroupmember)
+        public void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-            rolesRepo.guardarRolGroupMember(rolGroupmember);
+            rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
 
     }
