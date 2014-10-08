@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 using Newtonsoft.Json;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace AdminRoles
 {
@@ -123,9 +125,19 @@ namespace AdminRoles
             }
         }
 
-        public void eliminarAplicacionXRol(int idEfector, int idAplicacion, int idPerfil)
+        [ScriptMethod(), WebMethod()]
+        public static void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-            roleNego.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+            RolesNego rol = new RolesNego();
+            rol.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+            //    roleNego.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+        }
+
+        [ScriptMethod(), WebMethod()]
+        public static void borrar()
+        {
+            RolesNego rol = new RolesNego();
+            rol.borrar();
         }
     }
 }

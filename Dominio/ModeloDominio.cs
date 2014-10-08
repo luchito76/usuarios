@@ -176,13 +176,13 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public int SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion)
+		public Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion)
 		{
 			int returnValue;
 			return SSO_DeleteAplicacionXRol(idEfector, idPerfil, idAplicacion, out returnValue);
 		}
 		
-		public int SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue)
+		public Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
@@ -224,7 +224,7 @@ namespace Dominio
 				parameterIdAplicacion.Value = DBNull.Value;
 			}
 
-			int queryResult = this.ExecuteNonQuery("[dbo].[SSO_DeleteAplicacionXRol]", CommandType.StoredProcedure, parameterIdEfector, parameterIdPerfil, parameterIdAplicacion, parameterReturnValue);
+			Int32 queryResult = this.ExecuteScalar<Int32>("[dbo].[SSO_DeleteAplicacionXRol]", CommandType.StoredProcedure, parameterIdEfector, parameterIdPerfil, parameterIdAplicacion, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -282,8 +282,8 @@ namespace Dominio
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue);
-		int SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion);
-		int SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
+		Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion);
+		Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
 	}
 }
 #pragma warning restore 1591

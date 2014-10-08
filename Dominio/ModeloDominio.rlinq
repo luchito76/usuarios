@@ -734,11 +734,11 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
-    <domainModelHasDomainMethods Id="256a4245-7d78-4f94-b2a6-0ddecc88cb46">
+    <domainModelHasDomainMethods Id="0c0caa95-e367-4cea-ada8-a710f942c4f9">
       <domainMethod name="SSO_DeleteAplicacionXRol" storedProcedureName="'SSO_DeleteAplicacionXRol'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="6ac7ed32-add4-4c3b-9cdb-59ff92c990fd">
-            <domainMethodReturnShapeMoniker name="/ModeloDominio/Void" />
+          <domainMethodReferencesDomainMethodReturnShape Id="d6d552e9-5db7-4fae-af45-03035cf20519">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/Int32" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>
@@ -761,6 +761,9 @@
         <Property Id="f217d783-cea8-42d1-85c7-f374affb7217" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" fieldName="_idAplicacion" />
         <Property Id="40ac3c5f-3dfd-48da-9395-dbacd4044fa6" name="nombreAplicacion" type="System.String" label="nombreAplicacion : System.String" fieldName="_nombreAplicacion" />
       </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="2bf7bed7-d982-442b-a39d-c55f9fd31c99">
+      <domainMethodReturnShape name="Int32" namespace="System" showPropertiesCompartment="true" domainMethodType="PrimitiveType" />
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>
 </DomainModel>

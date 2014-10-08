@@ -38,6 +38,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FM">
+      <HintPath>..\packages\FM.2.5.0\lib\net45\FM.dll</HintPath>
+    </Reference>
+    <Reference Include="FM.JsonNet">
+      <HintPath>..\packages\FM.JsonNet.2.5.0\lib\net45\FM.JsonNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />

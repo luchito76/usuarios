@@ -53,7 +53,14 @@ namespace Repositorio
 
         public void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
+        
             dominio.SSO_DeleteAplicacionXRol(idEfector, idPerfil, idAplicacion);
+        }
+
+        public void borrar() {
+            SSO_RoleGroup customerToDelete = dominio.SSO_RoleGroups.Where(c => c.Id == 217598).FirstOrDefault();
+            dominio.Delete(customerToDelete);
+            dominio.SaveChanges();
         }
     }
 }

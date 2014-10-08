@@ -62,5 +62,10 @@ namespace Negocio
             rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
 
+        public void borrar()
+        {
+            rolesRepo.borrar();
+        }
+
     }
 }
