@@ -57,14 +57,15 @@ namespace Negocio
         {
             return rolesRepo.obtieneUltimoIdRolGroup();
         }
-        public void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
+        public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-            rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+            return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+            //rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
 
-        public void borrar()
+        public void borrarRoleGroups(int idRoleGroup)
         {
-            rolesRepo.borrar();
+            rolesRepo.borrarRoleGroups(idRoleGroup);
         }
 
     }

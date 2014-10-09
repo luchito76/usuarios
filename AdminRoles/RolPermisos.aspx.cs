@@ -22,7 +22,7 @@ namespace AdminRoles
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-
+            
             llenarListas();
         }
 
@@ -129,15 +129,34 @@ namespace AdminRoles
         public static void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
             RolesNego rol = new RolesNego();
-            rol.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
-            //    roleNego.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+
+            IList<SSO_RoleGroup> lista = rol.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion).ToList();
+
+            int idRoleGroup = 0;
+
+            foreach (SSO_RoleGroup data in lista)
+            {
+                idRoleGroup = data.Id;
+            }
+
+            borrarPermisos(idRoleGroup);
+            borrarRoleGroups(idRoleGroup);            
         }
 
-        [ScriptMethod(), WebMethod()]
-        public static void borrar()
+        private static void borrarPermisos(int idPermiso)
         {
-            RolesNego rol = new RolesNego();
-            rol.borrar();
+            PermisosNego permisoNego = new PermisosNego();
+
+            permisoNego.borrarPermisos(idPermiso);
         }
+
+        private static void borrarRoleGroups(int idRoleGroup)
+        {
+            RolesNego roleNego = new RolesNego();
+
+            roleNego.borrarRoleGroups(idRoleGroup);
+        }
+
+
     }
 }

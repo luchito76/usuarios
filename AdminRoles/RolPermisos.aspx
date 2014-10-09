@@ -71,14 +71,13 @@
                 $(document).ready(function () {
                     $.ajax({
                         type: "POST",
-                        url: '<%= ResolveUrl("RolPermisos.aspx/borrar")%>' ,
-                        //data: "{'idEfector':693, 'idPerfil':830, 'idAplicacion':208}",
-                        data: "",
+                        url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
+                        data: "{'idEfector':693, 'idPerfil':831, 'idAplicacion':205}",
+                        //data: "",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (msg) {
-                            alert("Bien");
-                            //$("#divResult").html("success");
+                            window.location.reload(true);
                         },
                         error: function (e) {
                             alert("Mal");

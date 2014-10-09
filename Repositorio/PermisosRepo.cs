@@ -16,5 +16,12 @@ namespace Repositorio
             dominio.Add(permisos);
             dominio.SaveChanges();
         }
+
+        public void borrarPermisos(int idPermiso)
+        {
+            SSO_Permission ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idPermiso).FirstOrDefault();
+            dominio.Delete(ssoPermiso);
+            dominio.SaveChanges();
+        }
     }
 }

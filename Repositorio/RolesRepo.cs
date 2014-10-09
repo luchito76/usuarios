@@ -51,14 +51,16 @@ namespace Repositorio
             return rolGroup;
         }
 
-        public void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
+        public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-        
-            dominio.SSO_DeleteAplicacionXRol(idEfector, idPerfil, idAplicacion);
+            IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion);
+
+            return result;
         }
 
-        public void borrar() {
-            SSO_RoleGroup customerToDelete = dominio.SSO_RoleGroups.Where(c => c.Id == 217598).FirstOrDefault();
+        public void borrarRoleGroups(int idRoleGroup)
+        {
+            SSO_RoleGroup customerToDelete = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).FirstOrDefault();
             dominio.Delete(customerToDelete);
             dominio.SaveChanges();
         }

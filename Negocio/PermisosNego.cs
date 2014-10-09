@@ -16,5 +16,10 @@ namespace Negocio
         {
             permisosRepo.guardarPermisos(permisos);
         }
+
+        public void borrarPermisos(int idPermiso)
+        {
+            permisosRepo.borrarPermisos(idPermiso);
+        }
     }
 }
