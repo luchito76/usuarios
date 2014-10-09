@@ -22,8 +22,10 @@ namespace AdminRoles
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
-            
+
             llenarListas();
+
+            hdnIdEfector.Value = Session["idEfector"].ToString();
         }
 
         private void llenarListas()
@@ -33,7 +35,7 @@ namespace AdminRoles
             ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
-        public int devuelveNombreIdRol()
+        public int devuelveIdRol()
         {
             int rolId = int.Parse(Request["rolId"].ToString());
 
@@ -51,7 +53,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            int idRol = devuelveNombreIdRol();
+            int idRol = devuelveIdRol();
             int idEfector = int.Parse(Session["idEfector"].ToString());
 
             List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
@@ -73,6 +75,10 @@ namespace AdminRoles
                 // guardaRolGroupMembers(IdRolGroup);
 
                 guardaSSOPermissions(idAplicacion);
+
+                ddlAplicaciones.ClearSelection();
+
+                
 
             }
             catch (Exception ex)
@@ -140,7 +146,7 @@ namespace AdminRoles
             }
 
             borrarPermisos(idRoleGroup);
-            borrarRoleGroups(idRoleGroup);            
+            borrarRoleGroups(idRoleGroup);
         }
 
         private static void borrarPermisos(int idPermiso)
