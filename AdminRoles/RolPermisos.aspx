@@ -85,7 +85,6 @@
                         success: function (msg) {                            
                             window.location = window.location.href;
                         },
-
                         error: function (e) {
                             alert("Mal");
                             //$("#divResult").html("Something Wrong.");

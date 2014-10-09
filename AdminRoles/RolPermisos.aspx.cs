@@ -30,9 +30,27 @@ namespace AdminRoles
 
         private void llenarListas()
         {
-            ddlAplicaciones.DataSource = aplicacionesNego.listaAplicaciones();
-            ddlAplicaciones.DataBind();
-            ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+            int idRol = devuelveIdRol();
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+
+            List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
+
+            List<SSO_Application> listaAplicaciones = aplicacionesNego.listaAplicaciones().ToList();
+
+            List<SSO_Application> lista = new List<SSO_Application>();
+
+            foreach (SSO_Application data in listaAplicaciones) {
+                foreach (SSO_GetAppByRolResultSet0 data1 in listaAppXRol) { 
+                    if (data)
+                }
+            }
+
+
+
+
+            //ddlAplicaciones.DataSource = aplicacionesNego.listaAplicaciones();
+            //ddlAplicaciones.DataBind();
+            //ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
         public int devuelveIdRol()

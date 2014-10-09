@@ -454,12 +454,6 @@
         <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
-      <orm:procedure name="SSO_DeleteAplicacionXRol">
-        <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
-        <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
-        <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
-        <orm:result-sets />
-      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:source-strategy>Property</orm:source-strategy>
@@ -730,15 +724,6 @@
         <domainMethodReturnShape>
           <domainMethodReferencesDomainMethodReturnShape Id="ed08fc1a-d2e6-4156-b6bd-483b488ec5a7">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetUsuariosXAplicacionResultSet0" />
-          </domainMethodReferencesDomainMethodReturnShape>
-        </domainMethodReturnShape>
-      </domainMethod>
-    </domainModelHasDomainMethods>
-    <domainModelHasDomainMethods Id="0c0caa95-e367-4cea-ada8-a710f942c4f9">
-      <domainMethod name="SSO_DeleteAplicacionXRol" storedProcedureName="'SSO_DeleteAplicacionXRol'" generateReturnValueOverload="true">
-        <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="d6d552e9-5db7-4fae-af45-03035cf20519">
-            <domainMethodReturnShapeMoniker name="/ModeloDominio/Int32" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>

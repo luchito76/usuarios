@@ -176,63 +176,6 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion)
-		{
-			int returnValue;
-			return SSO_DeleteAplicacionXRol(idEfector, idPerfil, idAplicacion, out returnValue);
-		}
-		
-		public Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue)
-		{
-			OAParameter parameterReturnValue = new OAParameter();
-		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
-		    parameterReturnValue.ParameterName = "parameterReturnValue";
-		
-			OAParameter parameterIdEfector = new OAParameter();
-			parameterIdEfector.ParameterName = "idEfector";
-			if(idEfector.HasValue)
-			{
-				parameterIdEfector.Value = idEfector.Value;
-			}
-			else
-			{
-				parameterIdEfector.DbType = DbType.Int32;
-				parameterIdEfector.Value = DBNull.Value;
-			}
-
-			OAParameter parameterIdPerfil = new OAParameter();
-			parameterIdPerfil.ParameterName = "idPerfil";
-			if(idPerfil.HasValue)
-			{
-				parameterIdPerfil.Value = idPerfil.Value;
-			}
-			else
-			{
-				parameterIdPerfil.DbType = DbType.Int32;
-				parameterIdPerfil.Value = DBNull.Value;
-			}
-
-			OAParameter parameterIdAplicacion = new OAParameter();
-			parameterIdAplicacion.ParameterName = "idAplicacion";
-			if(idAplicacion.HasValue)
-			{
-				parameterIdAplicacion.Value = idAplicacion.Value;
-			}
-			else
-			{
-				parameterIdAplicacion.DbType = DbType.Int32;
-				parameterIdAplicacion.Value = DBNull.Value;
-			}
-
-			Int32 queryResult = this.ExecuteScalar<Int32>("[dbo].[SSO_DeleteAplicacionXRol]", CommandType.StoredProcedure, parameterIdEfector, parameterIdPerfil, parameterIdAplicacion, parameterReturnValue);
-		
-			returnValue = parameterReturnValue.Value == DBNull.Value 
-				? -1
-				: (int)parameterReturnValue.Value;
-		
-			return queryResult;
-		}
-		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -282,8 +225,6 @@ namespace Dominio
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue);
-		Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion);
-		Int32 SSO_DeleteAplicacionXRol(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
 	}
 }
 #pragma warning restore 1591
