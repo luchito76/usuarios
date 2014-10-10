@@ -21,21 +21,17 @@
                     <asp:Button ID="btnGuardar" runat="server" Text="Agregar" CausesValidation="true" class="btn btn-primary" OnClick="btnGuardar_Click" />
                 </div>
             </div>
-            <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">                
-                <ContentTemplate>
-                    <table id="tblAppXRoles" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
-                        <thead>
-                            <tr>
-                                <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
-                                <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
-                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Usuarios</th>
-                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
-                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Regenerar</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+            <table id="tblAppXRoles" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
+                <thead>
+                    <tr>
+                        <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
+                        <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
+                        <th data-field="operate" data-formatter="operateFormatter" data-events="eventoUsuario" data-align="center">Usuarios</th>
+                        <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
+                        <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
     </div>
@@ -58,7 +54,15 @@
             ].join('');
         }
 
-        window.operateEvents = {
+        function formatoModulos(value, row, index) {
+            return [
+                '<a class="usuarios" href="javascript:void(0)" title="Usuarios">',
+                    '<i class="fa fa-puzzle-piece"></i>',                    
+                '</a>'
+            ].join('');
+        }
+
+        window.eventoUsuario = {
             'click .usuarios': function (e, value, row, index) { 
                
                 var w = 700;
@@ -94,7 +98,17 @@
             }
         }
         
-        
+        window.eventoModulos = {
+            'click .usuarios': function (e, value, row, index) { 
+               
+                var w = 800;
+                var h = 700;
+                var left = Number((screen.width/2)-(w/2));
+                var tops = Number((screen.height/2)-(h/2));
+                
+                window.open("Modulo.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+            }
+        }; 
     </script>
 
     <script>

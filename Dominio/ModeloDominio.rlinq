@@ -298,9 +298,6 @@
         <orm:field name="Sips1" property="Sips" behavior="readwrite" uniqueId="bb52d3de-60db-4618-bb29-ec1a31309b83" type="System.Boolean">
           <orm:column name="sips" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
         </orm:field>
-        <orm:field name="SSO_Modules1" property="SSO_Modules" behavior="readwrite" uniqueId="a8552739-d156-423b-8460-bda852121c9c" type="Dominio.SSO_Module">
-          <orm:collection element-class="Dominio.SSO_Module" inverse-field="SSO_Application1" order-by="" uniqueId="254c2ce0-80c7-4551-9e74-749838e75687" />
-        </orm:field>
         <orm:field name="SSO_RoleGroups1" property="SSO_RoleGroups" behavior="readwrite" uniqueId="5da9fba7-0a38-4c35-9034-0401743c6ad5" type="Dominio.SSO_RoleGroup">
           <orm:collection element-class="Dominio.SSO_RoleGroup" inverse-field="SSO_Application1" order-by="" uniqueId="34c59525-3550-4190-85c0-5de01bcec986" />
         </orm:field>
@@ -777,11 +774,6 @@
       <AssociationTargets>
         <Association Id="254c2ce0-80c7-4551-9e74-749838e75687" SourceMultiplicity="One" name="SSO_ModuleHasSSO_Application">
           <DomainClassMoniker name="/ModeloDominio/SSO_Application" />
-          <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="0da0ef20-67b5-4d09-848e-9b08135e80aa">
-              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Application/SSO_Modules" />
-            </associationDefinesTargetProperty>
-          </targetNavigationalProperty>
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="3834e566-cdb2-483f-acf6-66bbec456e31">
               <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Module/SSO_Application" />
@@ -806,9 +798,6 @@
       <Property Id="50b56038-f88e-41d5-996f-87c0c3726e23" name="Url" label="Url : String" kind="Persistent" fieldName="Url1" />
       <Property Id="bf94b957-313a-4edd-9167-80fd1ed650ad" name="Version" label="Version : String" kind="Persistent" fieldName="Version1" />
       <navigationalProperties>
-        <classHasNavigationalProperties Id="d0a517d6-3075-4aa6-b57a-f8839c00b655">
-          <NavigationalProperty Id="a8552739-d156-423b-8460-bda852121c9c" name="SSO_Modules" type="IList&lt;SSO_Module&gt;" label="SSO_Modules : IList&lt;SSO_Module&gt;" nullable="true" kind="Persistent" fieldName="SSO_Modules1" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="c1bf5573-59b1-478d-85ca-c74d92229aab">
           <NavigationalProperty Id="5da9fba7-0a38-4c35-9034-0401743c6ad5" name="SSO_RoleGroups" type="IList&lt;SSO_RoleGroup&gt;" label="SSO_RoleGroups : IList&lt;SSO_RoleGroup&gt;" nullable="true" kind="Persistent" fieldName="SSO_RoleGroups1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>

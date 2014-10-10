@@ -72,6 +72,7 @@
                                         <thead>
                                             <tr>
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
+                                                <th data-field="" data-align="center" data-sortable="true">DNI</th>
                                                 <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="Surname" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Username" data-align="left" data-sortable="true">Usuario</th>
