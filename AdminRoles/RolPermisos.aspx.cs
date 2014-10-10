@@ -30,6 +30,20 @@ namespace AdminRoles
 
         private void llenarListas()
         {
+            var results = quitarAplicacionesDuplicadas();
+
+            ddlAplicaciones.DataSource = results.ToList();
+            ddlAplicaciones.DataBind();
+            ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+        }
+
+        /// <summary>
+        /// Verifica que las aplicaciones que se encuentran en la grilla no se muestren en el combo para que el usuario
+        /// no agregue a la grilla aplicaciones duplicadas.
+        /// </summary>
+        /// <returns></returns>
+        private List<SSO_Application> quitarAplicacionesDuplicadas()
+        {
             int idRol = devuelveIdRol();
             int idEfector = int.Parse(Session["idEfector"].ToString());
 
@@ -37,21 +51,13 @@ namespace AdminRoles
 
             List<SSO_Application> listaAplicaciones = aplicacionesNego.listaAplicaciones().ToList();
 
-            List<SSO_Application> lista = new List<SSO_Application>();
+            HashSet<int> listaResultado = new HashSet<int>(listaAppXRol.Select(s => s.idAplicacion));
 
-            foreach (SSO_Application data in listaAplicaciones) {
-                foreach (SSO_GetAppByRolResultSet0 data1 in listaAppXRol) { 
-                    if (data)
-                }
-            }
+            var results = listaAplicaciones.Where(m => !listaResultado.Contains(m.Id)).ToList();
 
-
-
-
-            //ddlAplicaciones.DataSource = aplicacionesNego.listaAplicaciones();
-            //ddlAplicaciones.DataBind();
-            //ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+            return results;
         }
+
 
         public int devuelveIdRol()
         {
@@ -87,16 +93,12 @@ namespace AdminRoles
 
                 guardaRoleGroups(idAplicacion);
 
-                //Trae el último idRolGroup insertado.
-                //int IdRolGroup = ultimoIdRolGroup();
-
-                // guardaRolGroupMembers(IdRolGroup);
-
                 guardaSSOPermissions(idAplicacion);
 
                 ddlAplicaciones.ClearSelection();
 
-                
+                //Se llama éste método para recargar la lista y no lenar el combo con aplicaciones que ya estan en la grilla.
+                llenarListas();
 
             }
             catch (Exception ex)
