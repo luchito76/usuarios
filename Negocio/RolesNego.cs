@@ -60,7 +60,6 @@ namespace Negocio
         public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
             return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
-            //rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
 
         public void borrarRoleGroups(int idRoleGroup)

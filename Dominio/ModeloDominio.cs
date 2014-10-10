@@ -98,6 +98,14 @@ namespace Dominio
 			}
 		}
 		
+		public IQueryable<SSO_User> SSO_Users 
+		{
+			get
+			{
+				return this.GetAll<SSO_User>();
+			}
+		}
+		
 		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
 		{
 			int returnValue;
@@ -218,6 +226,10 @@ namespace Dominio
 			get;
 		}
 		IQueryable<SSO_Application> SSO_Applications
+		{
+			get;
+		}
+		IQueryable<SSO_User> SSO_Users
 		{
 			get;
 		}

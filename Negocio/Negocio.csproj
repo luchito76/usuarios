@@ -52,6 +52,7 @@
     <Compile Include="PermisosNego.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesNego.cs" />
+    <Compile Include="UsuariosNego.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj">

@@ -71,6 +71,9 @@
     <Compile Include="SSO_RoleGroups_Member.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="SSO_User.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <OpenAccessDeploy Include="ModeloDominio.rlinq">

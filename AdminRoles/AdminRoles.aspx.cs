@@ -13,6 +13,7 @@ namespace AdminRoles
     public partial class AdminRoles : System.Web.UI.Page
     {
         RolesNego rolesNego = new RolesNego();
+        UsuariosNego usuarioNego = new UsuariosNego();
 
         #region
         public static class Roles
@@ -80,6 +81,15 @@ namespace AdminRoles
             List<SSO_Role> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaEfectores);
+        }
+
+        public string devuelveUsuariosJson()
+        {
+            string json = string.Empty;
+
+            List<SSO_User> listaUsuario = usuarioNego.listaUsuarios().ToList();
+
+            return json = JsonConvert.SerializeObject(listaUsuario);
         }
 
         protected void crearRol_Click(object sender, EventArgs e)

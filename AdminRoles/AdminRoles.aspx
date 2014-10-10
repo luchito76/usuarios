@@ -18,6 +18,7 @@
                             <li class="active"><a href="#tab1primary" data-toggle="tab">Roles</a></li>
                             <li><a href="#tab2primary" data-toggle="tab">Sistemas</a></li>
                             <li><a href="#tab3primary" data-toggle="tab">Efectores</a></li>
+                            <li><a href="#tab4primary" data-toggle="tab">Usuarios</a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
@@ -58,6 +59,22 @@
                                             <tr>
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
                                                 <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
+                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab4primary">
+                                <div class="col-md-12">
+                                    <table id="tblUsuarios" data-toggle="table" data-pagination="true" data-search="true">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
+                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
+                                                <th data-field="Surname" data-align="left" data-sortable="true">Apellido</th>
+                                                <th data-field="Username" data-align="left" data-sortable="true">Usuario</th>
                                                 <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
                                                 <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
                                             </tr>
@@ -142,6 +159,9 @@
             });
         $table = $('#tblEfectores').bootstrapTable({            
             data: <%= devuelveEfectoresJson() %>
+            });
+        $table = $('#tblUsuarios').bootstrapTable({            
+            data: <%= devuelveUsuariosJson() %>
             });
     </script>
 

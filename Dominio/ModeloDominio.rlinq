@@ -310,6 +310,89 @@
           </orm:columnMapping>
         </orm:index>
       </orm:class>
+      <orm:class name="SSO_User" uniqueId="bb124182-a881-4e9d-8bb0-82576e436953">
+        <orm:table name="SSO_Users" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="Id1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="49eb8ff9-a85d-4d30-b230-683d605e7c07" type="System.Int32">
+          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Username1" property="Username" behavior="readwrite" uniqueId="904196b2-72d3-4607-8576-ed7056454039" type="System.String">
+          <orm:column name="username" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Password1" property="Password" behavior="readwrite" uniqueId="d87b5473-1204-4294-b9bb-c3dbba1812aa" type="System.String">
+          <orm:column name="password" sql-type="varchar" nullable="false" length="512" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="ad45da9b-7e49-472a-b90d-0346d042a873" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Surname1" property="Surname" behavior="readwrite" uniqueId="9ac23fd3-2835-4770-aa4e-433ce8132468" type="System.String">
+          <orm:column name="surname" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Enabled1" property="Enabled" behavior="readwrite" uniqueId="776b5846-9d33-40ba-803d-b083c7ab26b5" type="System.Boolean">
+          <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="Description1" property="Description" behavior="readwrite" uniqueId="9e2f2ae6-5e29-414b-bc6b-b59ff5424c98" type="System.String">
+          <orm:column name="description" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="Email1" property="Email" behavior="readwrite" uniqueId="1c3d4f05-2059-4a69-951d-81558e2ddcb7" type="System.String">
+          <orm:column name="email" sql-type="varchar" nullable="true" length="200" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Mobile1" property="Mobile" behavior="readwrite" uniqueId="ed5be4a1-c161-44cd-8439-e4fb87daedaa" type="System.String">
+          <orm:column name="mobile" sql-type="varchar" nullable="true" length="200" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="MobileCarrier1" property="MobileCarrier" behavior="readwrite" uniqueId="39ec1d3b-3d36-47e8-b6c2-5e4bbd0505e3" type="System.String">
+          <orm:column name="mobileCarrier" sql-type="varchar" nullable="true" length="200" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="IdCarrier1" property="IdCarrier" behavior="readwrite" uniqueId="ebb2af92-8182-4045-beed-737fe51a2287" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="idCarrier" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="External_id1" property="External_id" behavior="readwrite" uniqueId="9be65ea3-64b6-4c41-94bc-df21d80f22a2" type="System.Object">
+          <orm:column name="external_id" sql-type="sql_variant" nullable="true" length="0" scale="0" ado-type="Variant" />
+        </orm:field>
+        <orm:field name="Locked1" property="Locked" behavior="readwrite" uniqueId="c4b63f51-cc23-43cd-ae2b-26aa8ba0201a" type="System.Boolean">
+          <orm:column name="locked" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="Locked_since1" property="Locked_since" behavior="readwrite" uniqueId="5a6f568d-4e85-4dc1-8330-394fa9885fb8" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="locked_since" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="Password_retry1" property="Password_retry" behavior="readwrite" uniqueId="df0ca447-a105-4f55-a082-f841f8d22593" type="System.Int32">
+          <orm:column name="password_retry" sql-type="int" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Must_change_password1" property="Must_change_password" behavior="readwrite" uniqueId="207ce333-f50e-406c-84f0-ba9fb8143ca4" type="System.Boolean">
+          <orm:column name="must_change_password" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="Permissions_updatedOn1" property="Permissions_updatedOn" behavior="readwrite" uniqueId="6f914686-4a80-4b69-9d04-3433d12daec7" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="permissions_updatedOn" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="Documento1" property="Documento" behavior="readwrite" uniqueId="7ac378df-9b5b-4e5a-8599-f8f2340c5bb8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="documento" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Legajo1" property="Legajo" behavior="readwrite" uniqueId="094fc62e-138c-40bf-8e41-32a5e8d994d4" type="System.String">
+          <orm:column name="legajo" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Observacion1" property="Observacion" behavior="readwrite" uniqueId="ac729b4f-e1a3-47a0-beae-b7a87a8d7a2d" type="System.String">
+          <orm:column name="observacion" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:index name="IX_SSO_Users_Locked">
+          <orm:columnMapping>
+            <orm:column name="locked" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+          </orm:columnMapping>
+          <orm:columnMapping>
+            <orm:column name="locked_since" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_SSO_Users" unique="true">
+          <orm:columnMapping>
+            <orm:column name="username" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="SSO_Roles">
@@ -445,6 +528,41 @@
           </orm:columnMapping>
         </orm:index>
       </orm:table>
+      <orm:table name="SSO_Users">
+        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="username" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="password" sql-type="varchar" nullable="false" length="512" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="surname" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="enabled" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="description" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="email" sql-type="varchar" nullable="true" length="200" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="mobile" sql-type="varchar" nullable="true" length="200" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="mobileCarrier" sql-type="varchar" nullable="true" length="200" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="idCarrier" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="external_id" sql-type="sql_variant" nullable="true" length="0" scale="0" ado-type="Variant" />
+        <orm:column name="locked" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="locked_since" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="password_retry" sql-type="int" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Int32" />
+        <orm:column name="must_change_password" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="permissions_updatedOn" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="documento" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="legajo" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="observacion" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:index name="IX_SSO_Users_Locked">
+          <orm:columnMapping>
+            <orm:column name="locked" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+          </orm:columnMapping>
+          <orm:columnMapping>
+            <orm:column name="locked_since" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="IX_SSO_Users" unique="true">
+          <orm:columnMapping>
+            <orm:column name="username" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
       <orm:procedure name="SSO_GetAppByRol">
         <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
@@ -462,7 +580,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.15;initial catalog=SSO_HOSPITAL;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=.\recupero;initial catalog=SSO_HOSPITAL;user id=sa;password=zapala76</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -696,6 +814,28 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="bb124182-a881-4e9d-8bb0-82576e436953" name="SSO_User" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="49eb8ff9-a85d-4d30-b230-683d605e7c07" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="9e2f2ae6-5e29-414b-bc6b-b59ff5424c98" name="Description" label="Description : String" kind="Persistent" fieldName="Description1" />
+      <Property Id="7ac378df-9b5b-4e5a-8599-f8f2340c5bb8" name="Documento" type="Int32" label="Documento : Int32" nullable="true" kind="Persistent" fieldName="Documento1" />
+      <Property Id="1c3d4f05-2059-4a69-951d-81558e2ddcb7" name="Email" label="Email : String" kind="Persistent" fieldName="Email1" />
+      <Property Id="776b5846-9d33-40ba-803d-b083c7ab26b5" name="Enabled" type="Boolean" label="Enabled : Boolean" kind="Persistent" fieldName="Enabled1" />
+      <Property Id="9be65ea3-64b6-4c41-94bc-df21d80f22a2" name="External_id" type="Object" label="External_id : Object" kind="Persistent" fieldName="External_id1" />
+      <Property Id="ebb2af92-8182-4045-beed-737fe51a2287" name="IdCarrier" type="Int32" label="IdCarrier : Int32" nullable="true" kind="Persistent" fieldName="IdCarrier1" />
+      <Property Id="094fc62e-138c-40bf-8e41-32a5e8d994d4" name="Legajo" label="Legajo : String" kind="Persistent" fieldName="Legajo1" />
+      <Property Id="c4b63f51-cc23-43cd-ae2b-26aa8ba0201a" name="Locked" type="Boolean" label="Locked : Boolean" kind="Persistent" fieldName="Locked1" />
+      <Property Id="5a6f568d-4e85-4dc1-8330-394fa9885fb8" name="Locked_since" type="DateTime" label="Locked_since : DateTime" nullable="true" kind="Persistent" fieldName="Locked_since1" />
+      <Property Id="ed5be4a1-c161-44cd-8439-e4fb87daedaa" name="Mobile" label="Mobile : String" kind="Persistent" fieldName="Mobile1" />
+      <Property Id="39ec1d3b-3d36-47e8-b6c2-5e4bbd0505e3" name="MobileCarrier" label="MobileCarrier : String" kind="Persistent" fieldName="MobileCarrier1" />
+      <Property Id="207ce333-f50e-406c-84f0-ba9fb8143ca4" name="Must_change_password" type="Boolean" label="Must_change_password : Boolean" kind="Persistent" fieldName="Must_change_password1" />
+      <Property Id="ad45da9b-7e49-472a-b90d-0346d042a873" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <Property Id="ac729b4f-e1a3-47a0-beae-b7a87a8d7a2d" name="Observacion" label="Observacion : String" kind="Persistent" fieldName="Observacion1" />
+      <Property Id="d87b5473-1204-4294-b9bb-c3dbba1812aa" name="Password" label="Password : String" kind="Persistent" fieldName="Password1" />
+      <Property Id="df0ca447-a105-4f55-a082-f841f8d22593" name="Password_retry" type="Int32" label="Password_retry : Int32" kind="Persistent" fieldName="Password_retry1" />
+      <Property Id="6f914686-4a80-4b69-9d04-3433d12daec7" name="Permissions_updatedOn" type="DateTime" label="Permissions_updatedOn : DateTime" nullable="true" kind="Persistent" fieldName="Permissions_updatedOn1" />
+      <Property Id="9ac23fd3-2835-4770-aa4e-433ce8132468" name="Surname" label="Surname : String" kind="Persistent" fieldName="Surname1" />
+      <Property Id="904196b2-72d3-4607-8576-ed7056454039" name="Username" label="Username : String" kind="Persistent" fieldName="Username1" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
@@ -706,6 +846,7 @@
         <entitySetProperty name="SSO_Permissions" namespace="Dominio" type="SSO_Permission" label="SSO_Permissions : IQueryable&lt;Dominio.SSO_Permission&gt;" />
         <entitySetProperty name="SSO_Modules" namespace="Dominio" type="SSO_Module" label="SSO_Modules : IQueryable&lt;Dominio.SSO_Module&gt;" />
         <entitySetProperty name="SSO_Applications" namespace="Dominio" type="SSO_Application" label="SSO_Applications : IQueryable&lt;Dominio.SSO_Application&gt;" />
+        <entitySetProperty name="SSO_Users" namespace="Dominio" type="SSO_User" label="SSO_Users : IQueryable&lt;Dominio.SSO_User&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

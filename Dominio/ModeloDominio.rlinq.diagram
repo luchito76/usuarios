@@ -107,6 +107,14 @@
           <classShapeMoniker Id="1729ff6b-a9c4-4696-8fc4-2fbfd452d182" />
         </nodes>
       </associationConnector>
+      <classShape Id="35f7c97a-5bc9-40ff-9126-d9ca83d3d017" absoluteBounds="0.5, 1.5, 1.5, 5.224197591145832">
+        <DomainClassMoniker name="/ModeloDominio/SSO_User" />
+        <nestedChildShapes>
+          <elementListCompartment Id="8c60cf11-95fd-404c-93f0-a0ec776fd96b" absoluteBounds="0.515, 2.01, 1.4700000000000002, 4.095418294270833" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="4f56b7f1-253f-4055-8dd6-d229c4d64d25" absoluteBounds="0.515, 6.1154182942708326, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="999e4a12-f24c-4738-b3db-d35c7d96bc17" absoluteBounds="0.515, 6.3748079427083324, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
     </nestedChildShapes>
   </entityDiagramsDiagram>
 </EntityDiagrams>
