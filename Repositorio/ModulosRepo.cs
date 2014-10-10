@@ -17,5 +17,14 @@ namespace Repositorio
 
             return result;
         }
+
+        /// <summary>
+        /// Devuelve todo los módulos que están habilitados en la tabla SSO_Permissions de acuerdo a una aplicación (idAPlicacion) seleccionada.
+        /// </summary>
+        /// <param name="idAplicacion"></param>
+        /// <returns></returns>
+        public IEnumerable<SSO_Permission> listaModulosXPermisos(int idAplicacion) { 
+            IEnumerable<SSO_Permission> result = dominio.SSO_Permissions.Where(c => c.Target)
+        }
     }
 }
