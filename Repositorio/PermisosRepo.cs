@@ -23,5 +23,21 @@ namespace Repositorio
             dominio.Delete(ssoPermiso);
             dominio.SaveChanges();
         }
+
+        /// <summary>
+        /// Deshabilita el módulo seleccionado del perfil correspondiente.
+        /// </summary>
+        public void permisoModulo(SSO_Permission permisoModulo)
+        {
+            dominio.AttachCopy(permisoModulo);
+            dominio.SaveChanges();
+        }
+
+        public IEnumerable<SSO_Permission> listaPermisosXId(int idPermiso)
+        {
+            IEnumerable<SSO_Permission> result = dominio.SSO_Permissions.Where(c => c.Target == idPermiso).ToList();
+
+            return result;
+        }
     }
 }

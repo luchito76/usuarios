@@ -16,5 +16,10 @@ namespace Negocio
         {
             return moduloRepo.listaModulosXIdAplicacion(idAplicacion);
         }
+
+        public IEnumerable<SSO_GetModulosXAplicacionResultSet0> listaModulosXPermisos(int idEfector, int idPerfil, int idAplicacion)
+        {
+            return moduloRepo.listaModulosXPermisos(idEfector, idPerfil, idAplicacion);
+        }
     }
 }

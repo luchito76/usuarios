@@ -87,6 +87,7 @@ namespace AdminRoles
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+
             try
             {
                 int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
@@ -100,6 +101,7 @@ namespace AdminRoles
                 //Se llama éste método para recargar la lista y no lenar el combo con aplicaciones que ya estan en la grilla.
                 llenarListas();
 
+                ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + devuelveIdRol() + "');</script>", false);
             }
             catch (Exception ex)
             {
@@ -182,7 +184,5 @@ namespace AdminRoles
 
             roleNego.borrarRoleGroups(idRoleGroup);
         }
-
-
     }
 }

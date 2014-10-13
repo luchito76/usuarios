@@ -23,8 +23,11 @@ namespace Repositorio
         /// </summary>
         /// <param name="idAplicacion"></param>
         /// <returns></returns>
-        public IEnumerable<SSO_Permission> listaModulosXPermisos(int idAplicacion) { 
-            IEnumerable<SSO_Permission> result = dominio.SSO_Permissions.Where(c => c.Target)
+        public IEnumerable<SSO_GetModulosXAplicacionResultSet0> listaModulosXPermisos(int idEfector, int idPerfil, int idAplicacion)
+        {
+            IEnumerable<SSO_GetModulosXAplicacionResultSet0> result = dominio.SSO_GetModulosXAplicacion(idEfector, idPerfil, idAplicacion).ToList();
+
+            return result;
         }
     }
 }

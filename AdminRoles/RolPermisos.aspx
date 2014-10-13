@@ -36,6 +36,17 @@
 
     </div>
 
+    <script>
+        function MostrarModulos(idAplicacion, idRol)
+        {
+            var w = 800;
+            var h = 700;
+            var left = Number((screen.width/2)-(w/2));
+            var tops = Number((screen.height/2)-(h/2));          
+                
+            window.open("Modulos.aspx?idAplicacion=" + idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+        }
+    </script>
 
     <script>
         function operateFormatter(value, row, index) {
@@ -70,7 +81,7 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
                 
-                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         };  
 
@@ -105,11 +116,15 @@
                 var h = 700;
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
+
+                var idRol = '<%= devuelveIdRol() %>';
                 
-                window.open("Modulo.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("Modulos.aspx?llamada=editarModulo&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         }; 
     </script>
+
+
 
     <script>
         $table = $('#tblAppXRoles').bootstrapTable({            

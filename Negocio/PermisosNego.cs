@@ -21,5 +21,14 @@ namespace Negocio
         {
             permisosRepo.borrarPermisos(idPermiso);
         }
+        public void permisoModulo(SSO_Permission permisoModulo)
+        {
+            permisosRepo.permisoModulo(permisoModulo);
+        }
+
+        public IEnumerable<SSO_Permission> listaPermisosXId(int idPermiso)
+        {
+            return permisosRepo.listaPermisosXId(idPermiso);
+        }
     }
 }

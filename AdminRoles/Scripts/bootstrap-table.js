@@ -95,7 +95,7 @@
             return 'Cargando, espere por favor...';
         },
         formatRecordsPerPage: function (pageNumber) {
-            return sprintf('%s refistros por pagina', pageNumber);
+            return sprintf('%s registros por pagina', pageNumber);
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
             return sprintf('Mostrando %s a %s de %s filas', pageFrom, pageTo, totalRows);
