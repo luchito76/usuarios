@@ -26,9 +26,9 @@ namespace Negocio
             permisosRepo.permisoModulo(permisoModulo);
         }
 
-        public IEnumerable<SSO_Permission> listaPermisosXId(int idPermiso)
+        public IEnumerable<SSO_Permission> listaPermisosXId(int source, int idPermiso)
         {
-            return permisosRepo.listaPermisosXId(idPermiso);
+            return permisosRepo.listaPermisosXId(source, idPermiso);
         }
     }
 }

@@ -56,16 +56,27 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-        if (IsPostBack) return;
+            if (IsPostBack) return;
 
-            if (Request["llamada"] == "editarModulo") {
+            if (Request["llamada"] == "editarModulo")
+            {
                 cargarModulos();
             }
         }
 
         private void cargarModulos()
         {
+            bool habilitar = false;
 
+            if (habilitar == false)
+            {
+                //string script = @"<script> jQuery(document).ready(function() { $('0[name='my-checkbox']').bootstrapSwitch('state', false, false); }); </script>";
+                ////ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "myfunction", "$(document).ready(function(){
+                ////showDialog('#editCustomer','نحديث معلومات عميل');});", true);
+
+                //ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
+
+            }
         }
 
         public string devuelveModulosXAplicacionJson()
@@ -121,7 +132,7 @@ namespace AdminRoles
             }
 
             SSO_Permission permisos = new SSO_Permission();
-            permisos = permisoNego.listaPermisosXId(habilitados).FirstOrDefault();
+            permisos = permisoNego.listaPermisosXId(idRolGroup, habilitados).FirstOrDefault();
 
             bool allow = true;
 
@@ -129,10 +140,10 @@ namespace AdminRoles
                 allow = false;
 
 
-            permisos.SourceType = 3;
-            permisos.Source = idRolGroup;
-            permisos.TargetType = 2;
-            permisos.Target = habilitados;
+            //permisos.SourceType = 3;
+            //permisos.Source = idRolGroup;
+            //permisos.TargetType = 2;
+            //permisos.Target = habilitados;
             permisos.Allow = allow;
             permisos.Readonly = false;
 

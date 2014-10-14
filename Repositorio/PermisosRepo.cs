@@ -33,9 +33,9 @@ namespace Repositorio
             dominio.SaveChanges();
         }
 
-        public IEnumerable<SSO_Permission> listaPermisosXId(int idPermiso)
+        public IEnumerable<SSO_Permission> listaPermisosXId(int source, int idPermiso)
         {
-            IEnumerable<SSO_Permission> result = dominio.SSO_Permissions.Where(c => c.Target == idPermiso).ToList();
+            IEnumerable<SSO_Permission> result = dominio.SSO_Permissions.Where(c => c.Target == idPermiso && c.Source == source).ToList();
 
             return result;
         }

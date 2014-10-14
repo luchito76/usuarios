@@ -52,25 +52,39 @@
     <script src="Scripts/bootstrap-table.js"></script>
     <script src="Scripts/bootstrap-switch.js"></script>
 
-    <script>  
+    <script>
+        
+
         function cerrarVentana() {
             window.close();
         }
 
         function formatoCheck(value, row, index) {
+
+            jQuery(document).ready(function() {             
+                var pepe = row.Habilitado;
+                //alert("Capos" + pepe);
+                
+
+                if (pepe == false) {
+                    //alert("Rojo " + pepe);
+                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', false, false);  
+                } else if (pepe == true) {
+                    //alert("Verde " + pepe);
+                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', true, true);  
+                } 
+            });  
             return [
-            '<div id="toggle-state-switch" >',
+            
                 '<a class="habilitar" href="javascript:void(0)" title="Habilitar">',
-                    "<input setState='false' type='checkbox' checked data-on-color='info' data-off-color='danger' name='my-checkbox' checked data-size='mini' checked data-on-text='SI' data-off-text='NO' ",
-                '</a>',
-                '</div>'                
+                    '<input name="' + row.IdModulo + '" checked="' + row.Habilitado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO" ',
+                '</a>'               
             ].join('');
         }
 
         window.eventosCheck = {
             
-            'click .habilitar': function (e, value, row, index) {         
-
+            'click .habilitar': function (e, value, row, index) {                   
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
@@ -86,44 +100,39 @@
                         alert("Mal");
                         //$("#divResult").html("Something Wrong.");
                     }
-                });  
-                <%--$('#get-selections').click(function() {
-                    //alert('Selected values: ' + JSON.stringify(row.IdModulo));
-                    var habilitados = JSON.stringify(row.IdModulo);
-
-                    $.ajax({
-                        type: "POST",
-                        url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                        data: "{'habilitados':'100'}",
-                        //data: "",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (msg) {                            
-                            //window.location = window.location.href;
-                            alert("Biennnn");
-                        },
-                        error: function (e) {
-                            alert("Mal");
-                            //$("#divResult").html("Something Wrong.");
-                        }
-                    });  
-                });--%>
+                });                  
             }
         };       
     </script>
 
-
-
     <script>
+        //function capo(habilitado) {
+        //    if (habilitado == false) {
+        //        alert("falsosss");
+        //        $("[name='my-checkbox']").bootstrapSwitch('state', false, false);  
+        //    } else {
+        //        alert("verdadero");
+        //        $("[name='my-checkbox']").bootstrapSwitch('state', true, true);  
+        //    }
+        //}
+
         $table = $('#tblModulos').bootstrapTable({            
             data: <%= devuelveModulosXAplicacionJson() %>           
-            });
+            });       
+        
     </script>
 
+    <script>       
+        //$("[name='my-checkbox']").bootstrapSwitch('state', false, false);  
+        //jQuery(document).ready(function() {             
 
+        //    if (pepe == false) {
+        //        $("[name='my-checkbox']").bootstrapSwitch('state', false, false);  
+        //    } else {
+        //        $("[name='my-checkbox']").bootstrapSwitch('state', true, true);  
+        //    }
+        //});  
 
-    <script>
-        $("[name='my-checkbox']").bootstrapSwitch();
     </script>
 
 </body>
