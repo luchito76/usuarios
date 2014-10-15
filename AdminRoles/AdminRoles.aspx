@@ -76,6 +76,7 @@
                                                 <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="Surname" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Username" data-align="left" data-sortable="true">Usuario</th>
+                                                <th data-field="operate" data-formatter="formatoPerfil" data-events="eventoPerfil" data-align="center">Perfil</th>
                                                 <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
                                                 <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
                                             </tr>
@@ -119,6 +120,24 @@
     </div>
 
     <script>        
+        function formatoPerfil(value, row, index) {
+            
+            var check = "fa fa-check";
+
+
+            return [               
+                '<div id="perfil" class="btn btn-danger btn-xs disabled">',
+                    '<i class="' + check + '"></i></a>',
+                '</div>'
+            ].join('');
+        }
+
+        window.eventoPerfil = {
+            'click .editar': function (e, value, row, index) {                          
+               
+            }
+        };
+
         function operateFormatter(value, row, index) {
             return [
                 '<a class="editar" href="javascript:void(0)" title="Editar">',
@@ -134,6 +153,7 @@
                 document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;   
             }
         };
+        
 
         function operateFormatter1(value, row, index) {
             return [                
@@ -148,6 +168,8 @@
                 window.location = 'RolPermisos.aspx?rolName=' + row.Name + "&rolId=" + row.Id; 
             }
         };
+
+        
     </script>
 
     <script>

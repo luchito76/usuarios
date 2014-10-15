@@ -58,14 +58,6 @@ namespace Dominio
 			}
 		}
 		
-		public IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members 
-		{
-			get
-			{
-				return this.GetAll<SSO_RoleGroups_Member>();
-			}
-		}
-		
 		public IQueryable<SSO_RoleGroup> SSO_RoleGroups 
 		{
 			get
@@ -263,10 +255,6 @@ namespace Dominio
 	public interface IModeloDominioUnitOfWork : IUnitOfWork
 	{
 		IQueryable<SSO_Role> SSO_Roles
-		{
-			get;
-		}
-		IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members
 		{
 			get;
 		}

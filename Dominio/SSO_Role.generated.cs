@@ -18,7 +18,6 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using Dominio;
 
 namespace Dominio	
 {
@@ -73,55 +72,6 @@ namespace Dominio
 			set
 			{
 				this.Enabled1 = value;
-			}
-		}
-		
-		private SSO_Role SSO_Role11;
-		public virtual SSO_Role SSO_Role1
-		{
-			get
-			{
-				return this.SSO_Role11;
-			}
-			set
-			{
-				this.SSO_Role11 = value;
-			}
-		}
-		
-		private IList<SSO_Role> SSO_Roles1 = new List<SSO_Role>();
-		public virtual IList<SSO_Role> SSO_Roles
-		{
-			get
-			{
-				return this.SSO_Roles1;
-			}
-		}
-		
-		private IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members1 = new List<SSO_RoleGroups_Member>();
-		public virtual IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members
-		{
-			get
-			{
-				return this.SSO_RoleGroups_Members1;
-			}
-		}
-		
-		private IList<SSO_RoleGroup> SSO_RoleGroups1 = new List<SSO_RoleGroup>();
-		public virtual IList<SSO_RoleGroup> SSO_RoleGroups
-		{
-			get
-			{
-				return this.SSO_RoleGroups1;
-			}
-		}
-		
-		private IList<SSO_RoleGroup> SSO_RoleGroups21 = new List<SSO_RoleGroup>();
-		public virtual IList<SSO_RoleGroup> SSO_RoleGroups2
-		{
-			get
-			{
-				return this.SSO_RoleGroups21;
 			}
 		}
 		

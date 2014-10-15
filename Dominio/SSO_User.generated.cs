@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using Dominio;
 
 namespace Dominio	
 {
@@ -280,6 +281,15 @@ namespace Dominio
 			set
 			{
 				this.Observacion1 = value;
+			}
+		}
+		
+		private IList<SSO_Role> SSO_Roles1 = new List<SSO_Role>();
+		public virtual IList<SSO_Role> SSO_Roles
+		{
+			get
+			{
+				return this.SSO_Roles1;
 			}
 		}
 		

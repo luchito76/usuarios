@@ -56,28 +56,15 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
 
-            if (Request["llamada"] == "editarModulo")
-            {
-                cargarModulos();
-            }
         }
 
-        private void cargarModulos()
-        {
-            bool habilitar = false;
+        //public string devuelveNombreAplicacion()
+        //{
+        //    string nombreAplicacion = Request["nombreAplicacion"].ToString();
 
-            if (habilitar == false)
-            {
-                //string script = @"<script> jQuery(document).ready(function() { $('0[name='my-checkbox']').bootstrapSwitch('state', false, false); }); </script>";
-                ////ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "myfunction", "$(document).ready(function(){
-                ////showDialog('#editCustomer','نحديث معلومات عميل');});", true);
-
-                //ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", script, false);
-
-            }
-        }
+        //    return nombreAplicacion;
+        //}
 
         public string devuelveModulosXAplicacionJson()
         {

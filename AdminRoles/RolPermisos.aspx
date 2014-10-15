@@ -93,8 +93,7 @@
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
-                        data: "{'idEfector':'" + idEfector + "', 'idPerfil':'" + idRol + "', 'idAplicacion':'" + row.idAplicacion + "'}",
-                        //data: "",
+                        data: "{'idEfector':'" + idEfector + "', 'idPerfil':'" + idRol + "', 'idAplicacion':'" + row.idAplicacion + "'}",                        
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (msg) {                            
@@ -102,7 +101,7 @@
                         },
                         error: function (e) {
                             alert("Mal");
-                            //$("#divResult").html("Something Wrong.");
+                            
                         }
                     });  
                 })                
@@ -119,7 +118,7 @@
 
                 var idRol = '<%= devuelveIdRol() %>';
                 
-                window.open("Modulos.aspx?llamada=editarModulo&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
     </script>

@@ -90,7 +90,7 @@ namespace AdminRoles
             List<SSO_User> listaUsuario = usuarioNego.listaUsuarios().ToList();
 
             return json = JsonConvert.SerializeObject(listaUsuario);
-        }
+        }        
 
         protected void crearRol_Click(object sender, EventArgs e)
         {
