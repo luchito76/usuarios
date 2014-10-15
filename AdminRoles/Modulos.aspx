@@ -39,12 +39,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-        <%--<button class="btn btn-default" id="get-selections">
-            Get Selections
-        </button>--%>
     </form>
 
     <script src="Scripts/jquery-1.10.2.js"></script>
@@ -53,8 +48,6 @@
     <script src="Scripts/bootstrap-switch.js"></script>
 
     <script>
-        
-
         function cerrarVentana() {
             window.close();
         }
@@ -62,22 +55,21 @@
         function formatoCheck(value, row, index) {
 
             jQuery(document).ready(function() {             
-                var pepe = row.Habilitado;
-                //alert("Capos" + pepe);
-                
+                var habilitado = row.Habilitado;                    
 
-                if (pepe == false) {
-                    //alert("Rojo " + pepe);
-                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', false, false);  
-                } else if (pepe == true) {
-                    //alert("Verde " + pepe);
-                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', true, true);  
-                } 
+                $("[name='" + row.IdModulo + "']").bootstrapSwitch('onText', '<i class="fa fa-power-off"></i>');  
+                $("[name='" + row.IdModulo + "']").bootstrapSwitch('offText', '<i class="fa fa-power-off"></i>'); 
+
+                if (habilitado == false) {                    
+                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', false, false);                      
+                } else if (habilitado == true) {                    
+                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', true, true);                       
+                }                
             });  
             return [
             
                 '<a class="habilitar" href="javascript:void(0)" title="Habilitar">',
-                    '<input name="' + row.IdModulo + '" checked="' + row.Habilitado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO" ',
+                    '<input name="' + row.IdModulo + '" checked="' + row.Habilitado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini"  > ',
                 '</a>'               
             ].join('');
         }
@@ -88,17 +80,14 @@
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                    data: "{'habilitados':'" + row.IdModulo + "'}",
-                    //data: "",
+                    data: "{'habilitados':'" + row.IdModulo + "'}",                    
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {                            
-                        //window.location = window.location.href;
-                        //alert("Vientos");
+                        //window.location = window.location.href;                        
                     },
-                    error: function (e) {
-                        alert("Mal");
-                        //$("#divResult").html("Something Wrong.");
+                    error: function (e) {                        
+                        
                     }
                 });                  
             }
@@ -106,33 +95,9 @@
     </script>
 
     <script>
-        //function capo(habilitado) {
-        //    if (habilitado == false) {
-        //        alert("falsosss");
-        //        $("[name='my-checkbox']").bootstrapSwitch('state', false, false);  
-        //    } else {
-        //        alert("verdadero");
-        //        $("[name='my-checkbox']").bootstrapSwitch('state', true, true);  
-        //    }
-        //}
-
-        $table = $('#tblModulos').bootstrapTable({            
+            $table = $('#tblModulos').bootstrapTable({            
             data: <%= devuelveModulosXAplicacionJson() %>           
-            });       
-        
-    </script>
-
-    <script>       
-        //$("[name='my-checkbox']").bootstrapSwitch('state', false, false);  
-        //jQuery(document).ready(function() {             
-
-        //    if (pepe == false) {
-        //        $("[name='my-checkbox']").bootstrapSwitch('state', false, false);  
-        //    } else {
-        //        $("[name='my-checkbox']").bootstrapSwitch('state', true, true);  
-        //    }
-        //});  
-
+                });               
     </script>
 
 </body>
