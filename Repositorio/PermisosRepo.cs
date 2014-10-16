@@ -39,5 +39,29 @@ namespace Repositorio
 
             return result;
         }
+
+        public void borrarPermisosCache(int idusuario)
+        {
+            SSO_Permissions_Cache ssoPermisosCache = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idusuario).FirstOrDefault();
+
+            if (ssoPermisosCache != null)
+            {
+                dominio.Delete(ssoPermisosCache);
+                dominio.SaveChanges();
+            }
+        }
+
+        public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario(int idPerfil, int idEfector)
+        {
+            IEnumerable<SSO_GetPermisosXUsuarioResultSet0> result = dominio.SSO_GetPermisosXUsuario(idPerfil, idEfector).ToList();
+
+            return result;
+        }
+
+        public void guardaPermisosCache(SSO_Permissions_Cache permisosCache)
+        {
+            dominio.Add(permisosCache);
+            dominio.SaveChanges();
+        }
     }
 }

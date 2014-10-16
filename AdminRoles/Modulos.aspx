@@ -18,7 +18,7 @@
         </asp:ScriptManager>
         <div class="panel panel-primary" id="form">
             <div class="panel-heading">
-                <h2 class="panel-title">Módulos de <%--<%= devuelveNombreAplicacion() %>--%> </h2>
+                <h2 class="panel-title">Módulos de <%= devuelveNombreAplicacion() %> </h2>
             </div>
             <br />
             <div class="col-md-12">

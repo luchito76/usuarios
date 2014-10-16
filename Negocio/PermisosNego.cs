@@ -30,5 +30,20 @@ namespace Negocio
         {
             return permisosRepo.listaPermisosXId(source, idPermiso);
         }
+
+        public void borrarPermisosCache(int idusuario)
+        {
+            permisosRepo.borrarPermisosCache(idusuario);
+        }
+
+        public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario(int idPerfil, int idEfector)
+        {
+            return permisosRepo.listaPermisosXUsuario(idPerfil, idEfector);
+        }
+
+        public void guardaPermisosCache(SSO_Permissions_Cache permisosCache)
+        {
+            permisosRepo.guardaPermisosCache(permisosCache);
+        }
     }
 }

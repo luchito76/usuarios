@@ -21,5 +21,10 @@ namespace Negocio
         {
             return usuarioRepo.listaUserRol();
         }
+
+        public void guardaSSOUserRol(SSO_Users_Role userRol)
+        {
+            usuarioRepo.guardaSSOUserRol(userRol);
+        }
     }
 }

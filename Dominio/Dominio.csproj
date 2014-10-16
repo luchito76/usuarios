@@ -56,6 +56,9 @@
     <Compile Include="SSO_GetModulosXAplicacionResultSet0.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="SSO_GetPermisosXUsuarioResultSet0.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SSO_GetUsuariosXAplicacionResultSet0.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>

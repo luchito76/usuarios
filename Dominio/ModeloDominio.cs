@@ -249,6 +249,51 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector)
+		{
+			int returnValue;
+			return SSO_GetPermisosXUsuario(idPerfil, idEfector, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdPerfil = new OAParameter();
+			parameterIdPerfil.ParameterName = "idPerfil";
+			if(idPerfil.HasValue)
+			{
+				parameterIdPerfil.Value = idPerfil.Value;
+			}
+			else
+			{
+				parameterIdPerfil.DbType = DbType.Int32;
+				parameterIdPerfil.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdEfector = new OAParameter();
+			parameterIdEfector.ParameterName = "idEfector";
+			if(idEfector.HasValue)
+			{
+				parameterIdEfector.Value = idEfector.Value;
+			}
+			else
+			{
+				parameterIdEfector.DbType = DbType.Int32;
+				parameterIdEfector.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetPermisosXUsuarioResultSet0> queryResult = this.ExecuteQuery<SSO_GetPermisosXUsuarioResultSet0>("[dbo].[SSO_GetPermisosXUsuario]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdEfector, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -308,6 +353,8 @@ namespace Dominio
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion);
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
+		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector);
+		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue);
 	}
 }
 #pragma warning restore 1591

@@ -14,17 +14,18 @@ namespace AdminRoles
     {
         RolesNego rolesNego = new RolesNego();
         UsuariosNego usuarioNego = new UsuariosNego();
+        PermisosNego permisoNego = new PermisosNego();
 
         #region helperUsuario
 
         public class helperUsuario
         {
-            private int id;
+            private int idUsuario;
 
-            public int Id
+            public int IdUsuario
             {
-                get { return id; }
-                set { id = value; }
+                get { return idUsuario; }
+                set { idUsuario = value; }
             }
 
             private string documento;
@@ -70,7 +71,7 @@ namespace AdminRoles
         }
         #endregion
 
-        #region
+        #region Roles
         public static class Roles
         {
             public const int parent = 12;
@@ -96,6 +97,14 @@ namespace AdminRoles
             if (IsPostBack) return;
 
             devuelveEfector();
+            llenarListas();
+        }
+
+        private void llenarListas()
+        {
+            ddlAsignarPerfil.DataSource = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
+            ddlAsignarPerfil.DataBind();
+            ddlAsignarPerfil.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
         //Devuelve el efector donde está instalada el AdminSSO. Sacar el efector de la tabla config.
@@ -151,13 +160,13 @@ namespace AdminRoles
             {
                 helperUsuario helper = new helperUsuario();
 
-                helper.Id = data.Id;
+                helper.IdUsuario = data.Id;
                 helper.Documento = data.Documento.ToString();
                 helper.Nombre = data.Name;
                 helper.Apellido = data.Surname;
                 helper.Usuario = data.Username;
 
-                if (listaUserRol.Any(c => c.UserId == helper.Id))
+                if (listaUserRol.Any(c => c.UserId == helper.IdUsuario))
                 {
                     helper.Perfil = true;
                 }
@@ -214,6 +223,74 @@ namespace AdminRoles
             rol.Enabled = Roles.enable;
 
             rolesNego.actualizarRol(rol);
+        }
+
+        //****************Métodos de Pestaña Usuario*************************
+
+        protected void btnAsignarPerfil_ServerClick(object sender, EventArgs e)
+        {
+            asignarPerfilAUsuario();
+        }
+
+        private void asignarPerfilAUsuario()
+        {
+            guardaSSOUserRol();
+
+            borrarPermisosCache();
+
+            guardarPermisosCache();
+        }
+
+        private void guardaSSOUserRol()
+        {
+            SSO_Users_Role userRol = new SSO_Users_Role();
+
+            userRol.UserId = int.Parse(hdfIdUsuario.Value);
+            userRol.RoleId = int.Parse(ddlAsignarPerfil.SelectedValue);
+
+            usuarioNego.guardaSSOUserRol(userRol);
+
+            SSO_Users_Role userRol1 = new SSO_Users_Role();
+
+            userRol1.UserId = int.Parse(hdfIdUsuario.Value);
+            userRol1.RoleId = int.Parse(Session["idEfector"].ToString());
+
+            usuarioNego.guardaSSOUserRol(userRol1);
+        }
+
+        private void borrarPermisosCache()
+        {
+            int idUsuario = int.Parse(hdfIdUsuario.Value);
+
+            permisoNego.borrarPermisosCache(idUsuario);
+        }
+
+        private void guardarPermisosCache()
+        {
+            int idUsuario = int.Parse(hdfIdUsuario.Value);
+            int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+
+            IList<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario = permisoNego.listaPermisosXUsuario(idPerfil, idEfector).ToList();
+
+            foreach (SSO_GetPermisosXUsuarioResultSet0 data in listaPermisosXUsuario)
+            {
+                SSO_Permissions_Cache permisosCache = new SSO_Permissions_Cache();
+
+                permisosCache.UserId = idUsuario;
+                permisosCache.ApplicationId = int.Parse(data.idAplicacion.ToString());
+                permisosCache.TargetType = 2;
+                permisosCache.Target = data.target;
+                permisosCache.Inherited = true;
+                permisosCache.RoleId = 0;
+                permisosCache.GroupId = data.source;
+                permisosCache.RoleDepthFromUser = 0;
+                permisosCache.Allow = data.allow;
+                permisosCache.Readonly = false;
+
+                permisoNego.guardaPermisosCache(permisosCache);
+            }
+
         }
     }
 }

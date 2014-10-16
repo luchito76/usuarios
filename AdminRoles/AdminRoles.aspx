@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
+    <asp:HiddenField ID="hdfIdUsuario" runat="server" />
 
     <div class="container">
         <div class="page-header">
@@ -71,14 +71,14 @@
                                     <table id="tblUsuarios" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead>
                                             <tr>
-                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
+                                                <th data-field="IdUsuario" data-align="center" data-sortable="true">ID</th>
                                                 <th data-field="Documento" data-align="center" data-sortable="true">DNI</th>
                                                 <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
                                                 <th data-field="Perfil" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoPerfil" data-events="eventoPerfil" data-align="center">Perfil</th>
-                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
                                             </tr>
                                         </thead>
@@ -90,6 +90,8 @@
                 </div>
             </div>
         </div>
+
+        <!--Modal para crear el rol o modificarlo  -->
         <div id="myModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -120,6 +122,37 @@
         <!-- /.modal -->
     </div>
 
+
+    <!--Modal para asignar perfiles a un usuario  -->
+    <div id="asignarPerfilModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Asignar Perfil</h4>
+                </div>
+                <div class="modal-body center-block">
+                    <div class="form-group">
+                        <b>
+                            <asp:Label ID="lblAsignarPerfil" runat="server" Text="Asignar Perfil" for="ddlAsignarPerfil" class="col-sm-4 control-label">      
+                            </asp:Label></b>
+                        <div class="col-sm-5">
+                            <asp:DropDownList ID="ddlAsignarPerfil" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAsignarPerfil" onserverclick="btnAsignarPerfil_ServerClick" runat="server" type="button" class="btn btn-primary">Agregar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
     <script>        
         function formatoPerfil(value, row, index) {
             
@@ -127,10 +160,10 @@
             var btn = "";
 
             if (row.Perfil == true) {                
-                btn = "btn btn-info btn-xs disabled";
+                btn = "btn  btn-info btn-circle btn-xs disabled";
                 check = "fa fa-check";
             } else if (row.Perfil == false){
-                btn = "btn btn-danger btn-xs disabled";
+                btn = "btn btn-danger btn-circle btn-xs disabled";
                 check = "fa fa-times";
             }
 
@@ -146,6 +179,26 @@
                
             }
         };
+
+        function formatoAsignarPerfil(value, row, index) {
+            return [               
+                '<a class="asignarPerfil launch-modal1" href="javascript:void(0)" title="Editar">',
+                    '<i class="fa fa-user"></i>',
+                '</a>'
+
+                //'<input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />'
+            ].join('');
+        }
+
+        window.eventoAsignarPerfil = {
+            'click .asignarPerfil': function (e, value, row, index) {  
+                
+                $('#asignarPerfilModal').modal('show');                                    
+                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;
+               
+            }
+            
+        }
 
         function operateFormatter(value, row, index) {
             return [

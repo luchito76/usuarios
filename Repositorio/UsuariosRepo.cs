@@ -24,5 +24,11 @@ namespace Repositorio
 
             return result;
         }
+
+        public void guardaSSOUserRol(SSO_Users_Role userRol)
+        {
+            dominio.Add(userRol);
+            dominio.SaveChanges();
+        }
     }
 }

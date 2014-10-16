@@ -59,12 +59,12 @@ namespace AdminRoles
 
         }
 
-        //public string devuelveNombreAplicacion()
-        //{
-        //    string nombreAplicacion = Request["nombreAplicacion"].ToString();
+        public string devuelveNombreAplicacion()
+        {
+            string nombreAplicacion = Request["nombreAplicacion"].ToString();
 
-        //    return nombreAplicacion;
-        //}
+            return nombreAplicacion;
+        }
 
         public string devuelveModulosXAplicacionJson()
         {

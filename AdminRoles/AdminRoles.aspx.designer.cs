@@ -13,6 +13,15 @@ namespace AdminRoles {
     public partial class AdminRoles {
         
         /// <summary>
+        /// hdfIdUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfIdUsuario;
+        
+        /// <summary>
         /// lbRoles control.
         /// </summary>
         /// <remarks>
@@ -47,5 +56,32 @@ namespace AdminRoles {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton crearRoles;
+        
+        /// <summary>
+        /// lblAsignarPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAsignarPerfil;
+        
+        /// <summary>
+        /// ddlAsignarPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAsignarPerfil;
+        
+        /// <summary>
+        /// btnAsignarPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAsignarPerfil;
     }
 }
