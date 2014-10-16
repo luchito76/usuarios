@@ -65,6 +65,9 @@
     <Compile Include="SSO_Permission.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="SSO_Permissions_Cache.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SSO_Role.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
@@ -72,6 +75,9 @@
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
     <Compile Include="SSO_User.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_Users_Role.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
   </ItemGroup>

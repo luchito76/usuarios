@@ -141,12 +141,12 @@ namespace Dominio
 			}
 		}
 		
-		private IList<SSO_RoleGroup> SSO_RoleGroups1 = new List<SSO_RoleGroup>();
-		public virtual IList<SSO_RoleGroup> SSO_RoleGroups
+		private IList<SSO_Module> SSO_Modules1 = new List<SSO_Module>();
+		public virtual IList<SSO_Module> SSO_Modules
 		{
 			get
 			{
-				return this.SSO_RoleGroups1;
+				return this.SSO_Modules1;
 			}
 		}
 		

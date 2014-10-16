@@ -16,5 +16,10 @@ namespace Negocio
         {
             return usuarioRepo.listaUsuarios();
         }
+
+        public IEnumerable<SSO_Users_Role> listaUserRol()
+        {
+            return usuarioRepo.listaUserRol();
+        }
     }
 }

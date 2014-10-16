@@ -22,88 +22,70 @@ using Dominio;
 
 namespace Dominio	
 {
-	public partial class SSO_Role
+	public partial class SSO_Users_Role
 	{
-		private int Id1;
-		public virtual int Id
+		private int UserId1;
+		public virtual int UserId
 		{
 			get
 			{
-				return this.Id1;
+				return this.UserId1;
 			}
 			set
 			{
-				this.Id1 = value;
+				this.UserId1 = value;
 			}
 		}
 		
-		private int? Parent1;
-		public virtual int? Parent
+		private int RoleId1;
+		public virtual int RoleId
 		{
 			get
 			{
-				return this.Parent1;
+				return this.RoleId1;
 			}
 			set
 			{
-				this.Parent1 = value;
+				this.RoleId1 = value;
 			}
 		}
 		
-		private string Name1;
-		public virtual string Name
+		private int IdUserRol1;
+		public virtual int IdUserRol
 		{
 			get
 			{
-				return this.Name1;
+				return this.IdUserRol1;
 			}
 			set
 			{
-				this.Name1 = value;
+				this.IdUserRol1 = value;
 			}
 		}
 		
-		private bool Enabled1;
-		public virtual bool Enabled
+		private SSO_Role SSO_Role1;
+		public virtual SSO_Role SSO_Role
 		{
 			get
 			{
-				return this.Enabled1;
+				return this.SSO_Role1;
 			}
 			set
 			{
-				this.Enabled1 = value;
+				this.SSO_Role1 = value;
 			}
 		}
 		
-		private SSO_Role SSO_Role11;
-		public virtual SSO_Role SSO_Role1
+		private SSO_User SSO_User1;
+		public virtual SSO_User SSO_User
 		{
 			get
 			{
-				return this.SSO_Role11;
+				return this.SSO_User1;
 			}
 			set
 			{
-				this.SSO_Role11 = value;
-			}
-		}
-		
-		private IList<SSO_Users_Role> SSO_Users_Roles1 = new List<SSO_Users_Role>();
-		public virtual IList<SSO_Users_Role> SSO_Users_Roles
-		{
-			get
-			{
-				return this.SSO_Users_Roles1;
-			}
-		}
-		
-		private IList<SSO_Role> SSO_Roles1 = new List<SSO_Role>();
-		public virtual IList<SSO_Role> SSO_Roles
-		{
-			get
-			{
-				return this.SSO_Roles1;
+				this.SSO_User1 = value;
 			}
 		}
 		

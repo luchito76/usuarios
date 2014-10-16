@@ -284,12 +284,12 @@ namespace Dominio
 			}
 		}
 		
-		private IList<SSO_Role> SSO_Roles1 = new List<SSO_Role>();
-		public virtual IList<SSO_Role> SSO_Roles
+		private IList<SSO_Users_Role> SSO_Users_Roles1 = new List<SSO_Users_Role>();
+		public virtual IList<SSO_Users_Role> SSO_Users_Roles
 		{
 			get
 			{
-				return this.SSO_Roles1;
+				return this.SSO_Users_Roles1;
 			}
 		}
 		

@@ -73,9 +73,10 @@
                                             <tr>
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
                                                 <th data-field="Documento" data-align="center" data-sortable="true">DNI</th>
-                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
-                                                <th data-field="Surname" data-align="left" data-sortable="true">Apellido</th>
-                                                <th data-field="Username" data-align="left" data-sortable="true">Usuario</th>
+                                                <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
+                                                <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
+                                                <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
+                                                <th data-field="Perfil" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoPerfil" data-events="eventoPerfil" data-align="center">Perfil</th>
                                                 <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
                                                 <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
@@ -122,11 +123,19 @@
     <script>        
         function formatoPerfil(value, row, index) {
             
-            var check = "fa fa-check";
+            var check = "";
+            var btn = "";
 
+            if (row.Perfil == 'SI') {                
+                btn = "btn btn-info btn-xs disabled";
+                check = "fa fa-check";
+            } else {
+                btn = "btn btn-danger btn-xs disabled";
+                check = "fa fa-times";
+            }
 
             return [               
-                '<div id="perfil" class="btn btn-danger btn-xs disabled">',
+                '<div id="perfil" class="' + btn + '">',
                     '<i class="' + check + '"></i></a>',
                 '</div>'
             ].join('');

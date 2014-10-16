@@ -18,7 +18,6 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using Dominio;
 
 namespace Dominio	
 {
@@ -63,19 +62,6 @@ namespace Dominio
 			}
 		}
 		
-		private int? IdPerfil1;
-		public virtual int? IdPerfil
-		{
-			get
-			{
-				return this.IdPerfil1;
-			}
-			set
-			{
-				this.IdPerfil1 = value;
-			}
-		}
-		
 		private int? IdEfector1;
 		public virtual int? IdEfector
 		{
@@ -89,6 +75,19 @@ namespace Dominio
 			}
 		}
 		
+		private int? IdPerfil1;
+		public virtual int? IdPerfil
+		{
+			get
+			{
+				return this.IdPerfil1;
+			}
+			set
+			{
+				this.IdPerfil1 = value;
+			}
+		}
+		
 		private int? IdAplicacion1;
 		public virtual int? IdAplicacion
 		{
@@ -99,19 +98,6 @@ namespace Dominio
 			set
 			{
 				this.IdAplicacion1 = value;
-			}
-		}
-		
-		private SSO_Application SSO_Application1;
-		public virtual SSO_Application SSO_Application
-		{
-			get
-			{
-				return this.SSO_Application1;
-			}
-			set
-			{
-				this.SSO_Application1 = value;
 			}
 		}
 		

@@ -15,6 +15,61 @@ namespace AdminRoles
         RolesNego rolesNego = new RolesNego();
         UsuariosNego usuarioNego = new UsuariosNego();
 
+        #region helperUsuario
+
+        public class helperUsuario
+        {
+            private int id;
+
+            public int Id
+            {
+                get { return id; }
+                set { id = value; }
+            }
+
+            private string documento;
+
+            public string Documento
+            {
+                get { return documento; }
+                set { documento = value; }
+            }
+
+            private string nombre;
+
+            public string Nombre
+            {
+                get { return nombre; }
+                set { nombre = value; }
+            }
+
+            private string apellido;
+
+            public string Apellido
+            {
+                get { return apellido; }
+                set { apellido = value; }
+            }
+
+            private string usuario;
+
+            public string Usuario
+            {
+                get { return usuario; }
+                set { usuario = value; }
+            }
+
+            private string perfil;
+
+            public string Perfil
+            {
+                get { return perfil; }
+                set { perfil = value; }
+            }
+
+        }
+        #endregion
+
         #region
         public static class Roles
         {
@@ -88,9 +143,34 @@ namespace AdminRoles
             string json = string.Empty;
 
             List<SSO_User> listaUsuario = usuarioNego.listaUsuarios().ToList();
+            List<SSO_Users_Role> listaUserRol = usuarioNego.listaUserRol().ToList();
 
-            return json = JsonConvert.SerializeObject(listaUsuario);
-        }        
+            List<helperUsuario> lista = new List<helperUsuario>();
+
+            foreach (SSO_User data in listaUsuario)
+            {
+                helperUsuario helper = new helperUsuario();
+
+                helper.Id = data.Id;
+                helper.Documento = data.Documento.ToString();
+                helper.Nombre = data.Name;
+                helper.Apellido = data.Surname;
+                helper.Usuario = data.Username;
+
+                if (listaUserRol.Any(c => c.UserId == helper.Id))
+                {
+                    helper.Perfil = "SI";
+                }
+                else
+                {
+                    helper.Perfil = "NO";
+                }
+
+                lista.Add(helper);
+            }
+
+            return json = JsonConvert.SerializeObject(lista, Formatting.Indented);
+        }
 
         protected void crearRol_Click(object sender, EventArgs e)
         {

@@ -17,5 +17,12 @@ namespace Repositorio
 
             return result;
         }
+
+        public IEnumerable<SSO_Users_Role> listaUserRol()
+        {
+            IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.ToList();
+
+            return result;
+        }
     }
 }

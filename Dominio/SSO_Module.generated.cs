@@ -219,6 +219,15 @@ namespace Dominio
 			}
 		}
 		
+		private IList<SSO_Permission> SSO_Permissions1 = new List<SSO_Permission>();
+		public virtual IList<SSO_Permission> SSO_Permissions
+		{
+			get
+			{
+				return this.SSO_Permissions1;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

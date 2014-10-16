@@ -18,35 +18,47 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using Dominio;
 
 namespace Dominio	
 {
-	public partial class SSO_Permission
+	public partial class SSO_Permissions_Cache
 	{
-		private int SourceType1;
-		public virtual int SourceType
+		private int AutoId1;
+		public virtual int AutoId
 		{
 			get
 			{
-				return this.SourceType1;
+				return this.AutoId1;
 			}
 			set
 			{
-				this.SourceType1 = value;
+				this.AutoId1 = value;
 			}
 		}
 		
-		private int Source1;
-		public virtual int Source
+		private int UserId1;
+		public virtual int UserId
 		{
 			get
 			{
-				return this.Source1;
+				return this.UserId1;
 			}
 			set
 			{
-				this.Source1 = value;
+				this.UserId1 = value;
+			}
+		}
+		
+		private int ApplicationId1;
+		public virtual int ApplicationId
+		{
+			get
+			{
+				return this.ApplicationId1;
+			}
+			set
+			{
+				this.ApplicationId1 = value;
 			}
 		}
 		
@@ -73,6 +85,58 @@ namespace Dominio
 			set
 			{
 				this.Target1 = value;
+			}
+		}
+		
+		private bool Inherited1;
+		public virtual bool Inherited
+		{
+			get
+			{
+				return this.Inherited1;
+			}
+			set
+			{
+				this.Inherited1 = value;
+			}
+		}
+		
+		private int RoleId1;
+		public virtual int RoleId
+		{
+			get
+			{
+				return this.RoleId1;
+			}
+			set
+			{
+				this.RoleId1 = value;
+			}
+		}
+		
+		private int GroupId1;
+		public virtual int GroupId
+		{
+			get
+			{
+				return this.GroupId1;
+			}
+			set
+			{
+				this.GroupId1 = value;
+			}
+		}
+		
+		private int RoleDepthFromUser1;
+		public virtual int RoleDepthFromUser
+		{
+			get
+			{
+				return this.RoleDepthFromUser1;
+			}
+			set
+			{
+				this.RoleDepthFromUser1 = value;
 			}
 		}
 		
@@ -112,19 +176,6 @@ namespace Dominio
 			set
 			{
 				this.EndDate1 = value;
-			}
-		}
-		
-		private SSO_Module SSO_Module1;
-		public virtual SSO_Module SSO_Module
-		{
-			get
-			{
-				return this.SSO_Module1;
-			}
-			set
-			{
-				this.SSO_Module1 = value;
 			}
 		}
 		

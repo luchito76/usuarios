@@ -50,6 +50,22 @@ namespace Dominio
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
+		public IQueryable<SSO_Users_Role> SSO_Users_Roles 
+		{
+			get
+			{
+				return this.GetAll<SSO_Users_Role>();
+			}
+		}
+		
+		public IQueryable<SSO_User> SSO_Users 
+		{
+			get
+			{
+				return this.GetAll<SSO_User>();
+			}
+		}
+		
 		public IQueryable<SSO_Role> SSO_Roles 
 		{
 			get
@@ -63,6 +79,14 @@ namespace Dominio
 			get
 			{
 				return this.GetAll<SSO_RoleGroup>();
+			}
+		}
+		
+		public IQueryable<SSO_Permissions_Cache> SSO_Permissions_Caches 
+		{
+			get
+			{
+				return this.GetAll<SSO_Permissions_Cache>();
 			}
 		}
 		
@@ -87,14 +111,6 @@ namespace Dominio
 			get
 			{
 				return this.GetAll<SSO_Application>();
-			}
-		}
-		
-		public IQueryable<SSO_User> SSO_Users 
-		{
-			get
-			{
-				return this.GetAll<SSO_User>();
 			}
 		}
 		
@@ -254,11 +270,23 @@ namespace Dominio
 	
 	public interface IModeloDominioUnitOfWork : IUnitOfWork
 	{
+		IQueryable<SSO_Users_Role> SSO_Users_Roles
+		{
+			get;
+		}
+		IQueryable<SSO_User> SSO_Users
+		{
+			get;
+		}
 		IQueryable<SSO_Role> SSO_Roles
 		{
 			get;
 		}
 		IQueryable<SSO_RoleGroup> SSO_RoleGroups
+		{
+			get;
+		}
+		IQueryable<SSO_Permissions_Cache> SSO_Permissions_Caches
 		{
 			get;
 		}
@@ -271,10 +299,6 @@ namespace Dominio
 			get;
 		}
 		IQueryable<SSO_Application> SSO_Applications
-		{
-			get;
-		}
-		IQueryable<SSO_User> SSO_Users
 		{
 			get;
 		}
