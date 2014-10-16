@@ -59,9 +59,9 @@ namespace AdminRoles
                 set { usuario = value; }
             }
 
-            private string perfil;
+            private bool perfil;
 
-            public string Perfil
+            public bool Perfil
             {
                 get { return perfil; }
                 set { perfil = value; }
@@ -159,11 +159,11 @@ namespace AdminRoles
 
                 if (listaUserRol.Any(c => c.UserId == helper.Id))
                 {
-                    helper.Perfil = "SI";
+                    helper.Perfil = true;
                 }
                 else
                 {
-                    helper.Perfil = "NO";
+                    helper.Perfil = false;
                 }
 
                 lista.Add(helper);

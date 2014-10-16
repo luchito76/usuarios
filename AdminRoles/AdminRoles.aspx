@@ -126,10 +126,10 @@
             var check = "";
             var btn = "";
 
-            if (row.Perfil == 'SI') {                
+            if (row.Perfil == true) {                
                 btn = "btn btn-info btn-xs disabled";
                 check = "fa fa-check";
-            } else {
+            } else if (row.Perfil == false){
                 btn = "btn btn-danger btn-xs disabled";
                 check = "fa fa-times";
             }
