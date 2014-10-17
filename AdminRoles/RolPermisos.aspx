@@ -44,7 +44,9 @@
             var left = Number((screen.width/2)-(w/2));
             var tops = Number((screen.height/2)-(h/2));          
                 
-            window.open("Modulos.aspx?idAplicacion=" + idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+            var nombreAplicacion = '<%= nomApp %>';
+
+            window.open("Modulos.aspx?nombreAplicacion=" + nombreAplicacion +  "&idAplicacion=" + idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
         }
     </script>
 

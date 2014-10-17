@@ -19,6 +19,8 @@ namespace AdminRoles
         ModulosNego moduloNego = new ModulosNego();
         PermisosNego permisoNego = new PermisosNego();
 
+        public string nomApp = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -73,6 +75,7 @@ namespace AdminRoles
             return rol;
         }
 
+               
         public string devuelveAppXRolJson()
         {
             string json = string.Empty;
@@ -91,10 +94,11 @@ namespace AdminRoles
             try
             {
                 int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
+                nomApp = ddlAplicaciones.SelectedItem.ToString();
 
                 guardaRoleGroups(idAplicacion);
 
-                guardaSSOPermissions(idAplicacion);
+                guardaSSOPermissions(idAplicacion);                
 
                 ddlAplicaciones.ClearSelection();
 
