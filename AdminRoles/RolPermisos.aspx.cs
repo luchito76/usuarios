@@ -19,6 +19,7 @@ namespace AdminRoles
         ModulosNego moduloNego = new ModulosNego();
         PermisosNego permisoNego = new PermisosNego();
 
+        public static string flag = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -62,14 +63,14 @@ namespace AdminRoles
         public int devuelveIdRol()
         {
             int rolId = int.Parse(Request["rolId"].ToString());
-
+            hdnIdPerfil.Value = rolId.ToString();
             return rolId;
         }
 
         public string devuelveNombreDeRol()
         {
             string rol = Request["rolName"].ToString();
-
+            hdnNombreRol.Value = rol;
             return rol;
         }
 
@@ -83,6 +84,33 @@ namespace AdminRoles
             List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
 
             return json = JsonConvert.SerializeObject(listaAppXRol);
+        }
+
+        [ScriptMethod(), WebMethod()]
+        public static void user()
+        {
+            System.Web.UI.Page session = new Page();
+
+
+
+        }
+
+        public string devuelveUsuariosXAplicacionJson()
+        {
+            AplicacionesNego aplicacionesNego = new AplicacionesNego();
+
+
+
+            string json = string.Empty;
+
+            int idAplicacion = 0;
+
+            if (Request["idAplicacion"] != null)
+                idAplicacion = int.Parse(Request["idAplicacion"].ToString());
+
+            IList<SSO_GetUsuariosXAplicacionResultSet0> lista = aplicacionesNego.listaUsuariosXAplicacion(205).ToList();
+
+            return json = JsonConvert.SerializeObject(lista, Formatting.Indented);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
