@@ -184,9 +184,7 @@
             return [               
                 '<a class="asignarPerfil launch-modal1" href="javascript:void(0)" title="Editar">',
                     '<i class="fa fa-user"></i>',
-                '</a>'
-
-                //'<input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />'
+                '</a>'                
             ].join('');
         }
 

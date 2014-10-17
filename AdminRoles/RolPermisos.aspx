@@ -34,39 +34,7 @@
                 </thead>
             </table>
         </div>
-    </div>
-
-
-    <!--Modal para ver que usuarios tienen acceso a la aplicación seleccionada  -->
-    <div id="usuarioModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Usuarios X Aplicación</h4>
-                </div>
-                <div class="modal-body center-block">
-                    <!-- /.modal-content -->
-                    <table id="tblUsuariosXAplicacion" data-toggle="table" data-pagination="true" data-search="true" data-page-size="10" data-page-list="[10, 10, 20, 50, 100, 200]">
-                        <thead>
-                            <tr>
-                                <th data-field="idUsuario" data-align="center" data-sortable="true">ID</th>
-                                <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
-                                <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
-                                <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+    </div>    
 
     <script>
         function MostrarModulos(idAplicacion, idRol)
@@ -94,23 +62,13 @@
 
         window.eventoUsuario = {
             'click .usuarios': function (e, value, row, index) {            
+                             
+                var w = 700;
+                var h = 640;
+                var left = Number((screen.width/2)-(w/2));
+                var tops = Number((screen.height/2)-(h/2));
                 
-                $('#usuarioModal').modal('show');
-                
-                var id = row.idAplicacion;
-                $.ajax({
-                    type: "POST",
-                    url: '<%= ResolveUrl("RolPermisos.aspx")%>' ,
-                    data: "idAplicacion=" + id + "rolName=" + hdnNombreRol.value + "&rolId=" + hdnIdPerfil.value,
-                    success : function(data){},
-                    dataType: "html"
-                });
-                //var w = 700;
-                //var h = 640;
-                //var left = Number((screen.width/2)-(w/2));
-                //var tops = Number((screen.height/2)-(h/2));
-                
-                //window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         };  
 
@@ -170,16 +128,10 @@
         }; 
     </script>
 
-
-
     <script>
         $table = $('#tblAppXRoles').bootstrapTable({            
             data: <%= devuelveAppXRolJson() %>
-            });
-        
-        $table = $('#tblUsuariosXAplicacion').bootstrapTable({                        
-            data: <%= devuelveUsuariosXAplicacionJson() %>
-            });
+            });          
     </script>
 
 

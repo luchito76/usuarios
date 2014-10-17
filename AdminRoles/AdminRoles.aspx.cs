@@ -94,10 +94,11 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            llenarListas();
+
             if (IsPostBack) return;
 
-            devuelveEfector();
-            llenarListas();
+            devuelveEfector();            
         }
 
         private void llenarListas()
@@ -195,6 +196,8 @@ namespace AdminRoles
                 }
 
                 txtRol.Text = "";
+
+                Response.Redirect("AdminRoles.aspx");
             }
             catch (Exception ex)
             {

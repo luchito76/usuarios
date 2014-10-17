@@ -74,7 +74,6 @@ namespace AdminRoles
 
             return rol;
         }
-
                
         public string devuelveAppXRolJson()
         {
@@ -90,7 +89,6 @@ namespace AdminRoles
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
