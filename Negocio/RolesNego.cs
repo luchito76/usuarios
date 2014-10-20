@@ -33,9 +33,19 @@ namespace Negocio
             return listaRoles;
         }
 
+        //public int listaRolXId(int idRoles)
+        //{
+        //    return rolesRepo.listaRolXId(idRoles);
+        //}
+
         public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(int rol, int efector)
         {
             return rolesRepo.listaRolesXAplicacion(rol, efector);
+        }
+
+        public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
+        {
+            return rolesRepo.listaUserRolXIdUsuario(idUsuario);
         }
 
         public void guardarRol(SSO_Role rol)
@@ -67,5 +77,9 @@ namespace Negocio
             rolesRepo.borrarRoleGroups(idRoleGroup);
         }
 
+        public void borrarUserRol(int idUsuario)
+        {
+            rolesRepo.borrarUserRol(idUsuario);
+        }
     }
 }

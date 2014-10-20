@@ -60,6 +60,14 @@ namespace AdminRoles
                 set { usuario = value; }
             }
 
+            private string nombreRol;
+
+            public string NombreRol
+            {
+                get { return nombreRol; }
+                set { nombreRol = value; }
+            }
+
             private bool perfil;
 
             public bool Perfil
@@ -92,13 +100,13 @@ namespace AdminRoles
 
         #endregion
 
+        public string nombreDeRol = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            llenarListas();
-
             if (IsPostBack) return;
 
-            devuelveEfector();            
+            llenarListas();
+            devuelveEfector();
         }
 
         private void llenarListas()
@@ -130,23 +138,23 @@ namespace AdminRoles
             return json = JsonConvert.SerializeObject(listaRoles);
         }
 
-        public string devuelveAplicacionesJson()
-        {
-            string json = string.Empty;
+        //public string devuelveAplicacionesJson()
+        //{
+        //    string json = string.Empty;
 
-            List<SSO_Role> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
+        //    List<SSO_Role> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
 
-            return json = JsonConvert.SerializeObject(listaAplicaciones);
-        }
+        //    return json = JsonConvert.SerializeObject(listaAplicaciones);
+        //}
 
-        public string devuelveEfectoresJson()
-        {
-            string json = string.Empty;
+        //public string devuelveEfectoresJson()
+        //{
+        //    string json = string.Empty;
 
-            List<SSO_Role> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
+        //    List<SSO_Role> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
 
-            return json = JsonConvert.SerializeObject(listaEfectores);
-        }
+        //    return json = JsonConvert.SerializeObject(listaEfectores);
+        //}
 
         public string devuelveUsuariosJson()
         {
@@ -170,16 +178,40 @@ namespace AdminRoles
                 if (listaUserRol.Any(c => c.UserId == helper.IdUsuario))
                 {
                     helper.Perfil = true;
+                    helper.NombreRol = devuelveNombreRol(data.Id);
                 }
                 else
                 {
                     helper.Perfil = false;
+                    helper.NombreRol = "Sin Perfil";
                 }
 
                 lista.Add(helper);
             }
 
             return json = JsonConvert.SerializeObject(lista, Formatting.Indented);
+        }
+
+        /// <summary>
+        /// Devuelve el nombre del rol de cada usuario listado en la grilla.
+        /// </summary>
+        /// <returns></returns>
+        public string devuelveNombreRol(int idUsuario)
+        {
+            string nombreRol = string.Empty;
+
+            List<SSO_Users_Role> listaUserRol = rolesNego.listaUserRolXIdUsuario(idUsuario).ToList();
+            List<SSO_Role> listaRoles = rolesNego.listaRoles(12, true).ToList();
+
+            foreach (SSO_Users_Role data in listaUserRol)
+            {
+                if (data.SSO_Role.Parent == 12)
+                {
+                    nombreRol = data.SSO_Role.Name;
+                }
+            }
+
+            return nombreRol;
         }
 
         protected void crearRol_Click(object sender, EventArgs e)
@@ -237,6 +269,8 @@ namespace AdminRoles
 
         private void asignarPerfilAUsuario()
         {
+            borrarUserRol();
+
             guardaSSOUserRol();
 
             borrarPermisosCache();
@@ -293,7 +327,13 @@ namespace AdminRoles
 
                 permisoNego.guardaPermisosCache(permisosCache);
             }
+        }
 
+        private void borrarUserRol()
+        {
+            int idUsuario = int.Parse(hdfIdUsuario.Value);
+
+            rolesNego.borrarUserRol(idUsuario);
         }
     }
 }

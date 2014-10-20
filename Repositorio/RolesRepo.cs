@@ -18,6 +18,20 @@ namespace Repositorio
             return result;
         }
 
+        //public int listaRolXId(int idRoles)
+        //{
+        //    int idRol = dominio.SSO_Roles.Where(c => c.Id == idRoles && c.Parent == 12).FirstOrDefault().Id;
+
+        //    return idRol;
+        //}
+
+        public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
+        {
+            IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
+
+            return result;
+        }
+
         public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(int rol, int efector)
         {
             IEnumerable<SSO_GetAppByRolResultSet0> result = dominio.SSO_GetAppByRol(rol, efector).ToList();
@@ -62,6 +76,13 @@ namespace Repositorio
         {
             SSO_RoleGroup customerToDelete = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).FirstOrDefault();
             dominio.Delete(customerToDelete);
+            dominio.SaveChanges();
+        }
+
+        public void borrarUserRol(int idUsuario)
+        {
+            SSO_Users_Role borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).FirstOrDefault();
+            dominio.Delete(borrarUserRole);
             dominio.SaveChanges();
         }
     }

@@ -148,6 +148,7 @@
             </div>
             <!-- /.modal-content -->
         </div>
+
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
@@ -158,7 +159,7 @@
             
             var check = "";
             var btn = "";
-
+                        
             if (row.Perfil == true) {                
                 btn = "btn  btn-info btn-circle btn-xs disabled";
                 check = "fa fa-check";
@@ -169,7 +170,7 @@
 
             return [               
                 '<div id="perfil" class="' + btn + '">',
-                    '<i class="' + check + '"></i></a>',
+                    '<i class="' + check + '"></i><asp:Label ID="lblNombreRol" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',
                 '</div>'
             ].join('');
         }
@@ -237,12 +238,12 @@
             data: <%= devuelveRolesJson() %>
             });
 
-        $table = $('#tblAplicaciones').bootstrapTable({            
+        <%--$table = $('#tblAplicaciones').bootstrapTable({            
             data: <%= devuelveAplicacionesJson() %>
             });
         $table = $('#tblEfectores').bootstrapTable({            
             data: <%= devuelveEfectoresJson() %>
-            });
+            });--%>
         $table = $('#tblUsuarios').bootstrapTable({            
             data: <%= devuelveUsuariosJson() %>
             });

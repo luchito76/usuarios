@@ -299,6 +299,9 @@ namespace Dominio
 			BackendConfiguration backend = new BackendConfiguration();
 			backend.Backend = "MsSql";
 			backend.ProviderName = "System.Data.SqlClient";
+			backend.Logging.MetricStoreSnapshotInterval = 0;
+			backend.ConnectionPool.MaxActive = 50;
+			backend.ConnectionPool.Integrated.MaxIdle = 50;
 		
 			CustomizeBackendConfiguration(ref backend);
 		
