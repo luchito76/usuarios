@@ -706,6 +706,9 @@
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_GetUsuariosXPerfil">
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -741,10 +744,6 @@
       <BackendConfiguration>
         <Backend>MsSql</Backend>
         <ProviderName>System.Data.SqlClient</ProviderName>
-        <ConnectionPool>
-          <MaxActiveConnections>50</MaxActiveConnections>
-          <MaxIdleConnections>50</MaxIdleConnections>
-        </ConnectionPool>
         <Logging>
           <MetricStoreSnapshotInterval>0</MetricStoreSnapshotInterval>
         </Logging>
@@ -1010,6 +1009,15 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="d739d543-df36-4231-abf0-0fce5b328284">
+      <domainMethod name="SSO_GetUsuariosXPerfil" storedProcedureName="'SSO_GetUsuariosXPerfil'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="9f887df5-04a4-4e21-9c76-e02db2dab566">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetUsuariosXPerfilResultSet01" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
   </domainMethods>
   <domainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="9e64974a-ff27-4a95-afda-cc96d5214a11">
@@ -1058,6 +1066,32 @@
         <Property Id="7342a5c7-5995-4c7f-b67e-a60f6261a771" name="idEfector" type="System.Int32" label="idEfector : System.Int32" nullable="true" fieldName="_idEfector" />
         <Property Id="cef59add-c076-40f0-ab02-ee3a7b21a5dd" name="idPerfil" type="System.Int32" label="idPerfil : System.Int32" nullable="true" fieldName="_idPerfil" />
         <Property Id="1648df53-8245-4275-bb7e-e4fe2ff759b0" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" nullable="true" fieldName="_idAplicacion" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="3963d8e2-c175-4441-ae33-2d0a7185f837">
+      <domainMethodReturnShape name="SSO_GetUsuariosXPerfilResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="e9fc6025-8529-4b65-9fff-eeb94efe3bb1" name="ID" type="System.Int32" label="ID : System.Int32" fieldName="_iD" />
+        <Property Id="b653c9d5-7f20-4c27-8b85-3b5e34b1c151" name="DNI" type="System.Int32" label="DNI : System.Int32" nullable="true" fieldName="_dNI" />
+        <Property Id="80ca0e83-cb9c-4894-926c-0dc7b26a3405" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="531c6255-45ab-47f8-9ae2-b18bb0cb21a6" name="Apellido" type="System.String" label="Apellido : System.String" fieldName="_apellido" />
+        <Property Id="c4cec92f-c3da-4f93-9b89-a0bc104c6b23" name="Usuario" type="System.String" label="Usuario : System.String" fieldName="_usuario" />
+        <Property Id="d0615427-d51e-42fa-ab2b-984a4c1c5a8c" name="RolId" type="System.Int32" label="RolId : System.Int32" nullable="true" fieldName="_rolId" />
+        <Property Id="e23ad345-a372-4f46-91fa-1cee60089db0" name="UserId" type="System.Int32" label="UserId : System.Int32" nullable="true" fieldName="_userId" />
+        <Property Id="df364c13-57db-4bbd-af82-50e4deae4d0a" name="NombreRol" type="System.String" label="NombreRol : System.String" nullable="true" fieldName="_nombreRol" />
+        <Property Id="175c7001-961b-49e6-89b1-b69da45629e0" name="Parent" type="System.Int32" label="Parent : System.Int32" nullable="true" fieldName="_parent" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="27093bef-f2f9-4c29-ad56-0889b0c4779b">
+      <domainMethodReturnShape name="SSO_GetUsuariosXPerfilResultSet01" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="e314d7d4-3a6d-4384-bb76-e7fde7add36b" name="IdUsuario" type="System.Int32" label="IdUsuario : System.Int32" fieldName="_idUsuario" />
+        <Property Id="39af0af1-0a97-4c42-a9d2-0292cda8d097" name="DNI" type="System.Int32" label="DNI : System.Int32" nullable="true" fieldName="_dNI" />
+        <Property Id="eec97662-f163-4fa5-af71-76547e09675c" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="8d3dc929-62fd-4abf-9b8f-6bd518eb2ed7" name="Apellido" type="System.String" label="Apellido : System.String" fieldName="_apellido" />
+        <Property Id="f723944c-d299-49ab-a0fb-4acb8d37bf0e" name="Usuario" type="System.String" label="Usuario : System.String" fieldName="_usuario" />
+        <Property Id="e1f135d0-633a-48a4-a544-2cdee96b0c36" name="RolId" type="System.Int32" label="RolId : System.Int32" nullable="true" fieldName="_rolId" />
+        <Property Id="38a80084-70aa-4a11-8865-cdc26b7c8b15" name="UserId" type="System.Int32" label="UserId : System.Int32" nullable="true" fieldName="_userId" />
+        <Property Id="ad2998ec-9168-4829-9d0b-59cb0bf44b59" name="NombreRol" type="System.String" label="NombreRol : System.String" nullable="true" fieldName="_nombreRol" />
+        <Property Id="c26923c2-229d-4615-877e-d42da62f3fef" name="Parent" type="System.Int32" label="Parent : System.Int32" nullable="true" fieldName="_parent" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

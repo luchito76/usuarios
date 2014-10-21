@@ -294,14 +294,33 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil()
+		{
+			int returnValue;
+			return SSO_GetUsuariosXPerfil(out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			IEnumerable<SSO_GetUsuariosXPerfilResultSet01> queryResult = this.ExecuteQuery<SSO_GetUsuariosXPerfilResultSet01>("[dbo].[SSO_GetUsuariosXPerfil]", CommandType.StoredProcedure, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
 			backend.Backend = "MsSql";
 			backend.ProviderName = "System.Data.SqlClient";
 			backend.Logging.MetricStoreSnapshotInterval = 0;
-			backend.ConnectionPool.MaxActive = 50;
-			backend.ConnectionPool.Integrated.MaxIdle = 50;
 		
 			CustomizeBackendConfiguration(ref backend);
 		
@@ -358,6 +377,8 @@ namespace Dominio
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue);
+		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil();
+		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue);
 	}
 }
 #pragma warning restore 1591

@@ -42,13 +42,15 @@ namespace Repositorio
 
         public void borrarPermisosCache(int idusuario)
         {
-            SSO_Permissions_Cache ssoPermisosCache = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idusuario).FirstOrDefault();
+            IList<SSO_Permissions_Cache> ssoPermisosCache = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idusuario).ToList();
 
             if (ssoPermisosCache != null)
             {
-                dominio.Delete(ssoPermisosCache);
-                dominio.SaveChanges();
+                foreach (SSO_Permissions_Cache data in ssoPermisosCache)
+                    dominio.Delete(ssoPermisosCache);
+
             }
+            dominio.SaveChanges();
         }
 
         public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario(int idPerfil, int idEfector)

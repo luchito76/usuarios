@@ -11,15 +11,10 @@ namespace Negocio
     public class UsuariosNego
     {
         UsuariosRepo usuarioRepo = new UsuariosRepo();
-
-        public IEnumerable<SSO_User> listaUsuarios()
+        
+        public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> listaUsuariosXPerfil()
         {
-            return usuarioRepo.listaUsuarios();
-        }
-
-        public IEnumerable<SSO_Users_Role> listaUserRol()
-        {
-            return usuarioRepo.listaUserRol();
+            return usuarioRepo.listaUsuariosXPerfil();
         }
 
         public void guardaSSOUserRol(SSO_Users_Role userRol)

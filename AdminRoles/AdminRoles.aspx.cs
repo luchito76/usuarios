@@ -160,36 +160,9 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_User> listaUsuario = usuarioNego.listaUsuarios().ToList();
-            List<SSO_Users_Role> listaUserRol = usuarioNego.listaUserRol().ToList();
+            List<SSO_GetUsuariosXPerfilResultSet01> listaUsuario = usuarioNego.listaUsuariosXPerfil().ToList();
 
-            List<helperUsuario> lista = new List<helperUsuario>();
-
-            foreach (SSO_User data in listaUsuario)
-            {
-                helperUsuario helper = new helperUsuario();
-
-                helper.IdUsuario = data.Id;
-                helper.Documento = data.Documento.ToString();
-                helper.Nombre = data.Name;
-                helper.Apellido = data.Surname;
-                helper.Usuario = data.Username;
-
-                if (listaUserRol.Any(c => c.UserId == helper.IdUsuario))
-                {
-                    helper.Perfil = true;
-                    helper.NombreRol = devuelveNombreRol(data.Id);
-                }
-                else
-                {
-                    helper.Perfil = false;
-                    helper.NombreRol = "Sin Perfil";
-                }
-
-                lista.Add(helper);
-            }
-
-            return json = JsonConvert.SerializeObject(lista, Formatting.Indented);
+            return json = JsonConvert.SerializeObject(listaUsuario, Formatting.Indented);
         }
 
         /// <summary>
@@ -278,6 +251,13 @@ namespace AdminRoles
             guardarPermisosCache();
         }
 
+        private void borrarUserRol()
+        {
+            int idUsuario = int.Parse(hdfIdUsuario.Value);
+
+            rolesNego.borrarUserRol(idUsuario);
+        }
+
         private void guardaSSOUserRol()
         {
             SSO_Users_Role userRol = new SSO_Users_Role();
@@ -327,13 +307,6 @@ namespace AdminRoles
 
                 permisoNego.guardaPermisosCache(permisosCache);
             }
-        }
-
-        private void borrarUserRol()
-        {
-            int idUsuario = int.Parse(hdfIdUsuario.Value);
-
-            rolesNego.borrarUserRol(idUsuario);
         }
     }
 }

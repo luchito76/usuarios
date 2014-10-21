@@ -72,11 +72,11 @@
                                         <thead>
                                             <tr>
                                                 <th data-field="IdUsuario" data-align="center" data-sortable="true">ID</th>
-                                                <th data-field="Documento" data-align="center" data-sortable="true">DNI</th>
+                                                <th data-field="DNI" data-align="center" data-sortable="true">DNI</th>
                                                 <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
-                                                <th data-field="Perfil" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
+                                                <th data-field="RolId" data-align="left" data-sortable="true" data-visible="true">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoPerfil" data-events="eventoPerfil" data-align="center">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
@@ -160,10 +160,10 @@
             var check = "";
             var btn = "";
                         
-            if (row.Perfil == true) {                
+            if (row.RolId != null) {                
                 btn = "btn  btn-info btn-circle btn-xs disabled";
                 check = "fa fa-check";
-            } else if (row.Perfil == false){
+            } else if (row.RolId == null){
                 btn = "btn btn-danger btn-circle btn-xs disabled";
                 check = "fa fa-times";
             }

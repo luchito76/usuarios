@@ -81,8 +81,14 @@ namespace Repositorio
 
         public void borrarUserRol(int idUsuario)
         {
-            SSO_Users_Role borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).FirstOrDefault();
-            dominio.Delete(borrarUserRole);
+            IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
+
+            //if (borrarUserRole != null)
+            {
+                foreach (SSO_Users_Role data in borrarUserRole)
+                    dominio.Delete(data);
+            }
+
             dominio.SaveChanges();
         }
     }
