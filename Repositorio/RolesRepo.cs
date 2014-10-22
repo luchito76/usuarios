@@ -18,13 +18,6 @@ namespace Repositorio
             return result;
         }
 
-        //public int listaRolXId(int idRoles)
-        //{
-        //    int idRol = dominio.SSO_Roles.Where(c => c.Id == idRoles && c.Parent == 12).FirstOrDefault().Id;
-
-        //    return idRol;
-        //}
-
         public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
         {
             IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
@@ -83,7 +76,6 @@ namespace Repositorio
         {
             IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
 
-            //if (borrarUserRole != null)
             {
                 foreach (SSO_Users_Role data in borrarUserRole)
                     dominio.Delete(data);

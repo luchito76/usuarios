@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="myScriptManager" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
+
     <asp:HiddenField ID="hdnIdEfector" runat="server" />
     <asp:HiddenField ID="hdIdAplicacion" runat="server" />
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />

@@ -32,7 +32,7 @@
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
                                                 <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
-                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
+                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Aplicaciones</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -79,7 +79,7 @@
                                                 <th data-field="RolId" data-align="left" data-sortable="true" data-visible="true">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoPerfil" data-events="eventoPerfil" data-align="center">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
-                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
+                                                <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">Aplicaciones</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -213,8 +213,7 @@
                 document.getElementById('<%= txtRol.ClientID %>').value = row.Name;   
                 document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;   
             }
-        };
-        
+        };        
 
         function operateFormatter1(value, row, index) {
             return [                
@@ -230,6 +229,19 @@
             }
         };
 
+        function formatoAplicaciones(value, row, index) {
+            return [                
+                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones">',
+                    '<i class="fa fa-desktop"></i>',
+                '</a>'
+            ].join('');
+        }       
+
+        window.eventosAplicaciones = {                      
+            'click .app': function (e, value, row, index) {
+                window.location = 'RolPermisos.aspx?rolName=' + row.Name + "&rolId=" + row.Id; 
+            }
+        };
         
     </script>
 

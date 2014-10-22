@@ -50,6 +50,7 @@ namespace Repositorio
                     dominio.Delete(ssoPermisosCache);
 
             }
+
             dominio.SaveChanges();
         }
 

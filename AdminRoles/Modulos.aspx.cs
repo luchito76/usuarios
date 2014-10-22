@@ -69,6 +69,7 @@ namespace AdminRoles
         public string devuelveModulosXAplicacionJson()
         {
             string json = string.Empty;
+
             moduloHelper mod = new moduloHelper();
 
             int idEfector = int.Parse(Session["idEfector"].ToString());
@@ -126,11 +127,6 @@ namespace AdminRoles
             if (permisos.Allow == true)
                 allow = false;
 
-
-            //permisos.SourceType = 3;
-            //permisos.Source = idRolGroup;
-            //permisos.TargetType = 2;
-            //permisos.Target = habilitados;
             permisos.Allow = allow;
             permisos.Readonly = false;
 

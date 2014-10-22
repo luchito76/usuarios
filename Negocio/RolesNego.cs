@@ -33,11 +33,6 @@ namespace Negocio
             return listaRoles;
         }
 
-        //public int listaRolXId(int idRoles)
-        //{
-        //    return rolesRepo.listaRolXId(idRoles);
-        //}
-
         public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(int rol, int efector)
         {
             return rolesRepo.listaRolesXAplicacion(rol, efector);

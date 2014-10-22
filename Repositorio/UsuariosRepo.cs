@@ -9,8 +9,7 @@ namespace Repositorio
 {
     public class UsuariosRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-               
+        ModeloDominio dominio = new ModeloDominio();               
 
         public void guardaSSOUserRol(SSO_Users_Role userRol)
         {

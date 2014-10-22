@@ -14,70 +14,7 @@ namespace AdminRoles
     {
         RolesNego rolesNego = new RolesNego();
         UsuariosNego usuarioNego = new UsuariosNego();
-        PermisosNego permisoNego = new PermisosNego();
-
-        #region helperUsuario
-
-        public class helperUsuario
-        {
-            private int idUsuario;
-
-            public int IdUsuario
-            {
-                get { return idUsuario; }
-                set { idUsuario = value; }
-            }
-
-            private string documento;
-
-            public string Documento
-            {
-                get { return documento; }
-                set { documento = value; }
-            }
-
-            private string nombre;
-
-            public string Nombre
-            {
-                get { return nombre; }
-                set { nombre = value; }
-            }
-
-            private string apellido;
-
-            public string Apellido
-            {
-                get { return apellido; }
-                set { apellido = value; }
-            }
-
-            private string usuario;
-
-            public string Usuario
-            {
-                get { return usuario; }
-                set { usuario = value; }
-            }
-
-            private string nombreRol;
-
-            public string NombreRol
-            {
-                get { return nombreRol; }
-                set { nombreRol = value; }
-            }
-
-            private bool perfil;
-
-            public bool Perfil
-            {
-                get { return perfil; }
-                set { perfil = value; }
-            }
-
-        }
-        #endregion
+        PermisosNego permisoNego = new PermisosNego();           
 
         #region Roles
         public static class Roles
@@ -120,7 +57,6 @@ namespace AdminRoles
         //*******************Refactorizar*******************
         public string devuelveEfector()
         {
-
             Session["efector"] = "Chos Malal";
             Session["idEfector"] = 693; //IdEfector de Chos Malal
 

@@ -126,7 +126,7 @@ namespace AdminRoles
             roleNego.guardaRoleGroup(rolGroup);
         }
 
-        //devuelve el último idRolGroup insertado en la tabla SSO_RoleGroups.
+        //Devuelve el último idRolGroup insertado en la tabla SSO_RoleGroups.
         private int ultimoIdRolGroup()
         {
             int idRolGroup = roleNego.obtieneUltimoIdRolGroup().Id;
