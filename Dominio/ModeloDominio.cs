@@ -315,12 +315,59 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId)
+		{
+			int returnValue;
+			return Sp_SSO_AllowedAppsByEfector(userId, roleId, out returnValue);
+		}
+		
+		public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterUserId = new OAParameter();
+			parameterUserId.ParameterName = "userId";
+			if(userId.HasValue)
+			{
+				parameterUserId.Value = userId.Value;
+			}
+			else
+			{
+				parameterUserId.DbType = DbType.Int32;
+				parameterUserId.Value = DBNull.Value;
+			}
+
+			OAParameter parameterRoleId = new OAParameter();
+			parameterRoleId.ParameterName = "roleId";
+			if(roleId.HasValue)
+			{
+				parameterRoleId.Value = roleId.Value;
+			}
+			else
+			{
+				parameterRoleId.DbType = DbType.Int32;
+				parameterRoleId.Value = DBNull.Value;
+			}
+
+			IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> queryResult = this.ExecuteQuery<sp_SSO_AllowedAppsByEfectorResultSet0>("[dbo].[sp_SSO_AllowedAppsByEfector]", CommandType.StoredProcedure, parameterUserId, parameterRoleId, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
 			backend.Backend = "MsSql";
 			backend.ProviderName = "System.Data.SqlClient";
 			backend.Logging.MetricStoreSnapshotInterval = 0;
+			backend.ConnectionPool.MaxActive = 50;
+			backend.Runtime.CommandTimeout = 120;
 		
 			CustomizeBackendConfiguration(ref backend);
 		
@@ -379,6 +426,8 @@ namespace Dominio
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil();
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue);
+		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId);
+		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
 	}
 }
 #pragma warning restore 1591

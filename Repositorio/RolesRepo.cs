@@ -78,10 +78,11 @@ namespace Repositorio
 
             {
                 foreach (SSO_Users_Role data in borrarUserRole)
+                {
                     dominio.Delete(data);
+                    dominio.SaveChanges();
+                }
             }
-
-            dominio.SaveChanges();
         }
     }
 }

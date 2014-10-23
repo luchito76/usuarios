@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 using Newtonsoft.Json;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace AdminRoles
 {
@@ -14,7 +16,7 @@ namespace AdminRoles
     {
         RolesNego rolesNego = new RolesNego();
         UsuariosNego usuarioNego = new UsuariosNego();
-        PermisosNego permisoNego = new PermisosNego();           
+        PermisosNego permisoNego = new PermisosNego();
 
         #region Roles
         public static class Roles
@@ -178,49 +180,47 @@ namespace AdminRoles
 
         private void asignarPerfilAUsuario()
         {
-            borrarUserRol();
-
-            guardaSSOUserRol();
-
-            borrarPermisosCache();
-
-            guardarPermisosCache();
-        }
-
-        private void borrarUserRol()
-        {
             int idUsuario = int.Parse(hdfIdUsuario.Value);
 
+            borrarUserRol(idUsuario);
+
+            guardaSSOUserRol(idUsuario);
+
+            borrarPermisosCache(idUsuario);
+
+            guardarPermisosCache(idUsuario);
+        }
+
+        private void borrarUserRol(int idUsuario)
+        {
             rolesNego.borrarUserRol(idUsuario);
         }
 
-        private void guardaSSOUserRol()
+        private void guardaSSOUserRol(int idusuario)
         {
             SSO_Users_Role userRol = new SSO_Users_Role();
 
-            userRol.UserId = int.Parse(hdfIdUsuario.Value);
+            userRol.UserId = idusuario; //int.Parse(hdfIdUsuario.Value);
             userRol.RoleId = int.Parse(ddlAsignarPerfil.SelectedValue);
 
             usuarioNego.guardaSSOUserRol(userRol);
 
             SSO_Users_Role userRol1 = new SSO_Users_Role();
 
-            userRol1.UserId = int.Parse(hdfIdUsuario.Value);
+            userRol1.UserId = idusuario; //int.Parse(hdfIdUsuario.Value);
             userRol1.RoleId = int.Parse(Session["idEfector"].ToString());
 
             usuarioNego.guardaSSOUserRol(userRol1);
         }
 
-        private void borrarPermisosCache()
+        private void borrarPermisosCache(int idUsuario)
         {
-            int idUsuario = int.Parse(hdfIdUsuario.Value);
-
             permisoNego.borrarPermisosCache(idUsuario);
         }
 
-        private void guardarPermisosCache()
+        private void guardarPermisosCache(int idUsuario)
         {
-            int idUsuario = int.Parse(hdfIdUsuario.Value);
+            //int idUsuario = int.Parse(hdfIdUsuario.Value);
             int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);
             int idEfector = int.Parse(Session["idEfector"].ToString());
 
@@ -243,6 +243,22 @@ namespace AdminRoles
 
                 permisoNego.guardaPermisosCache(permisosCache);
             }
+        }
+
+        [WebMethod(), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static void eliminarPerfil(int idUsuario)
+        {
+            System.Threading.Thread.Sleep(5000);
+            AdminRoles ad = new AdminRoles();
+            
+            ad.borrarPerfil(idUsuario);
+        }
+
+        private void borrarPerfil(int idUsuario)
+        {
+            borrarUserRol(idUsuario);
+
+            borrarPermisosCache(idUsuario);
         }
     }
 }

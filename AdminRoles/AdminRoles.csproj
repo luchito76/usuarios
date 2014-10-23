@@ -166,6 +166,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="AdminRoles.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap-progressbar-3.2.0.css" />
     <Content Include="Content\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap.css" />
@@ -185,6 +186,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RolPermisos.aspx" />
+    <Content Include="Scripts\bootstrap-progressbar.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-table.js" />
     <Content Include="Scripts\bootstrap.js" />

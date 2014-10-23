@@ -709,6 +709,11 @@
       <orm:procedure name="SSO_GetUsuariosXPerfil">
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="sp_SSO_AllowedAppsByEfector">
+        <orm:procedure-parameter name="userId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="roleId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -744,6 +749,12 @@
       <BackendConfiguration>
         <Backend>MsSql</Backend>
         <ProviderName>System.Data.SqlClient</ProviderName>
+        <Runtime>
+          <CommandTimeout>120</CommandTimeout>
+        </Runtime>
+        <ConnectionPool>
+          <MaxActiveConnections>50</MaxActiveConnections>
+        </ConnectionPool>
         <Logging>
           <MetricStoreSnapshotInterval>0</MetricStoreSnapshotInterval>
         </Logging>
@@ -1018,6 +1029,15 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="a3cf268c-bb59-4fc0-95f3-f5cf4cd59262">
+      <domainMethod name="sp_SSO_AllowedAppsByEfector" storedProcedureName="'sp_SSO_AllowedAppsByEfector'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="0c3e6dc5-ebc1-4a24-9c09-425d559d03d3">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/sp_SSO_AllowedAppsByEfectorResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
   </domainMethods>
   <domainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="9e64974a-ff27-4a95-afda-cc96d5214a11">
@@ -1092,6 +1112,38 @@
         <Property Id="38a80084-70aa-4a11-8865-cdc26b7c8b15" name="UserId" type="System.Int32" label="UserId : System.Int32" nullable="true" fieldName="_userId" />
         <Property Id="ad2998ec-9168-4829-9d0b-59cb0bf44b59" name="NombreRol" type="System.String" label="NombreRol : System.String" nullable="true" fieldName="_nombreRol" />
         <Property Id="c26923c2-229d-4615-877e-d42da62f3fef" name="Parent" type="System.Int32" label="Parent : System.Int32" nullable="true" fieldName="_parent" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="cf80694c-a02a-4a2e-9203-2f7ff9e4be73">
+      <domainMethodReturnShape name="sp_SSO_AllowedAppsResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="36272ed8-f894-4a2b-b7be-3e8434ba5def" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="077e100a-2b47-4c9a-bbb5-97e90b47861b" name="name" type="System.String" label="name : System.String" fieldName="_name" />
+        <Property Id="13d039a3-6ce9-4818-9569-a00723dd3ace" name="description" type="System.String" label="description : System.String" nullable="true" fieldName="_description" />
+        <Property Id="628f89ed-8e09-4587-ae74-0d52fde054ee" name="executable" type="System.String" label="executable : System.String" nullable="true" fieldName="_executable" />
+        <Property Id="912472e6-8221-4dbc-a2dd-d07850db82d8" name="url" type="System.String" label="url : System.String" nullable="true" fieldName="_url" />
+        <Property Id="a050449b-4782-4344-a7d1-80d6b5d865fc" name="image" type="System.String" label="image : System.String" nullable="true" fieldName="_image" />
+        <Property Id="edb1dbce-0c7e-48e3-bc7c-853008334ae2" name="urlPage" type="System.String" label="urlPage : System.String" nullable="true" fieldName="_urlPage" />
+        <Property Id="b48d6393-18a5-4aa1-91b0-374ca4e3fd27" name="hasViews" type="System.Boolean" label="hasViews : System.Boolean" nullable="true" fieldName="_hasViews" />
+        <Property Id="20cc6f17-ee57-4685-ba7a-7803070dbf3a" name="hasAlarms" type="System.Boolean" label="hasAlarms : System.Boolean" nullable="true" fieldName="_hasAlarms" />
+        <Property Id="3bf99f00-80bc-45a1-825d-3f915aee447e" name="hasProtectedModules" type="System.Boolean" label="hasProtectedModules : System.Boolean" nullable="true" fieldName="_hasProtectedModules" />
+        <Property Id="25fadb0a-ef9e-4012-991d-4dc32a44dcb6" name="intefase_visible" type="System.Boolean" label="intefase_visible : System.Boolean" fieldName="_intefase_Visible" />
+        <Property Id="dd559c60-b13a-4fa9-b08b-a35f4311a241" name="version" type="System.String" label="version : System.String" nullable="true" fieldName="_version" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="83807114-3b8f-4b2b-baee-012eed3ef900">
+      <domainMethodReturnShape name="sp_SSO_AllowedAppsByEfectorResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="d6f7b31e-a35f-4895-957e-66df5305fd51" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="0cf16bba-93e6-4145-a62a-3fd2cfb9c1a9" name="name" type="System.String" label="name : System.String" fieldName="_name" />
+        <Property Id="8a279407-9b8d-4622-b044-5f640507c91e" name="description" type="System.String" label="description : System.String" nullable="true" fieldName="_description" />
+        <Property Id="afef4b97-5bba-4119-bee0-126fce3559fe" name="executable" type="System.String" label="executable : System.String" nullable="true" fieldName="_executable" />
+        <Property Id="ae00d5cc-9b3c-4fa7-94f8-d06ca21ad4c1" name="url" type="System.String" label="url : System.String" nullable="true" fieldName="_url" />
+        <Property Id="513538bc-3b5d-4b54-959e-0e7ff600e2df" name="image" type="System.String" label="image : System.String" nullable="true" fieldName="_image" />
+        <Property Id="b653d4a5-0283-46b9-af74-f15ab48189d8" name="urlPage" type="System.String" label="urlPage : System.String" nullable="true" fieldName="_urlPage" />
+        <Property Id="3d581322-efa3-4804-ba4b-20507134dd26" name="hasViews" type="System.Boolean" label="hasViews : System.Boolean" nullable="true" fieldName="_hasViews" />
+        <Property Id="a883aad4-1167-4451-a1b7-e26be3969256" name="hasAlarms" type="System.Boolean" label="hasAlarms : System.Boolean" nullable="true" fieldName="_hasAlarms" />
+        <Property Id="09e59a8d-6b13-4313-8fa6-4fab0854e3ad" name="hasProtectedModules" type="System.Boolean" label="hasProtectedModules : System.Boolean" nullable="true" fieldName="_hasProtectedModules" />
+        <Property Id="bf834316-5db4-48e1-b37f-5e2b753d62ce" name="intefase_visible" type="System.Boolean" label="intefase_visible : System.Boolean" fieldName="_intefase_Visible" />
+        <Property Id="8d1e0276-1895-4f8e-9c7d-ea11b32d5e49" name="version" type="System.String" label="version : System.String" nullable="true" fieldName="_version" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

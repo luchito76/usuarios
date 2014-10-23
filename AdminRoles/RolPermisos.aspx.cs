@@ -18,6 +18,7 @@ namespace AdminRoles
         AplicacionesNego aplicacionesNego = new AplicacionesNego();
         ModulosNego moduloNego = new ModulosNego();
         PermisosNego permisoNego = new PermisosNego();
+        UsuariosNego usuarioNego = new UsuariosNego();
 
         public string nomApp = string.Empty;
 
@@ -26,6 +27,8 @@ namespace AdminRoles
             if (IsPostBack) return;
 
             llenarListas();
+
+            mostrarTablas();
 
             hdnIdEfector.Value = Session["idEfector"].ToString();
         }
@@ -37,6 +40,19 @@ namespace AdminRoles
             ddlAplicaciones.DataSource = results.ToList();
             ddlAplicaciones.DataBind();
             ddlAplicaciones.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+        }
+
+        /// <summary>
+        /// Muestra la tablas de aplicacions por Rol o de aplicaciones por Usuario dependiendo si el parámetro recibido es rolId o Idusuario.
+        /// - Si recibe rolId muestra las aplicaciones habilitadas para el perfil seleccionado.
+        /// - Si recibe Idusuario muestra las aplicaciones habilitadas para el usuario seleccionado.
+        /// </summary>
+        private void mostrarTablas()
+        {
+            if (Request["rolId"] != null)
+                divAppXRoles.Visible = true;
+            else if (Request["idUsuario"] != null)
+                divAppXUsuarios.Visible = true;
         }
 
         /// <summary>
@@ -63,7 +79,10 @@ namespace AdminRoles
 
         public int devuelveIdRol()
         {
-            int rolId = int.Parse(Request["rolId"].ToString());
+            int rolId = 0;
+
+            if (Request["rolId"] != null)
+                rolId = int.Parse(Request["rolId"].ToString());
 
             return rolId;
         }
@@ -74,7 +93,7 @@ namespace AdminRoles
 
             return rol;
         }
-               
+
         public string devuelveAppXRolJson()
         {
             string json = string.Empty;
@@ -87,6 +106,21 @@ namespace AdminRoles
             return json = JsonConvert.SerializeObject(listaAppXRol);
         }
 
+        public string devuelveAppXUsuario()
+        {
+            string json = string.Empty;
+
+            int idUsuario = 0;
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+
+            if (Request["idUsuario"] != null)
+                idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+            List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(idUsuario, idEfector).ToList();
+
+            return json = JsonConvert.SerializeObject(listaAppXUsuario, Formatting.Indented);
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -96,11 +130,11 @@ namespace AdminRoles
 
                 guardaRoleGroups(idAplicacion);
 
-                guardaSSOPermissions(idAplicacion);                
+                guardaSSOPermissions(idAplicacion);
 
                 ddlAplicaciones.ClearSelection();
 
-                //Se llama éste método para recargar la lista y no lenar el combo con aplicaciones que ya estan en la grilla.
+                //Se llama éste método para recargar la lista y no llenar el combo con aplicaciones que ya estan en la grilla.
                 llenarListas();
 
                 ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + devuelveIdRol() + "');</script>", false);
@@ -169,8 +203,10 @@ namespace AdminRoles
                 idRoleGroup = data.Id;
             }
 
-            borrarPermisos(idRoleGroup);
+            //borrarPermisosCache(idRoleGroup);
             borrarRoleGroups(idRoleGroup);
+            borrarPermisos(idRoleGroup);
+
         }
 
         private static void borrarPermisos(int idPermiso)

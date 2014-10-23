@@ -23,19 +23,34 @@
                     <asp:Button ID="btnGuardar" runat="server" Text="Agregar" CausesValidation="true" class="btn btn-primary" OnClick="btnGuardar_Click" />
                 </div>
             </div>
-            <table id="tblAppXRoles" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
-                <thead>
-                    <tr>
-                        <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
-                        <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
-                        <th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
-                        <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
-                        <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>
-                    </tr>
-                </thead>
-            </table>
+            <div id="divAppXRoles" runat="server" visible="false">
+                <table id="tblAppXRoles" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
+                    <thead>
+                        <tr>
+                            <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
+                            <th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
+                            <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
+                            <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div id="divAppXUsuarios" runat="server" visible="false">
+                <table id="tblAppXUsuarios" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
+                            <%--<th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
+                            <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
+                            <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>--%>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
-    </div>    
+    </div>
 
     <script>
         function MostrarModulos(idAplicacion, idRol)
@@ -132,7 +147,11 @@
     <script>
         $table = $('#tblAppXRoles').bootstrapTable({            
             data: <%= devuelveAppXRolJson() %>
-            });          
+            });  
+            
+        $table = $('#tblAppXUsuarios').bootstrapTable({            
+            data: <%= devuelveAppXUsuario() %>
+            }); 
     </script>
 
 
