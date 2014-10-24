@@ -110,14 +110,14 @@ namespace AdminRoles
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
 
-            IList<SSO_RoleGroup> lista = rolNego.eliminarAplicacionXRol(idEfector, idRol, idAplicacion).ToList();
+            //IList<SSO_RoleGroup> lista = rolNego.eliminarAplicacionXRol(idEfector, idRol, idAplicacion).ToList();
 
-            int idRolGroup = 0;
+            int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
 
-            foreach (SSO_RoleGroup data in lista)
-            {
-                idRolGroup = data.Id;
-            }
+            //foreach (SSO_RoleGroup data in lista)
+            //{
+            //    idRolGroup = data.Id;
+            //}
 
             
             SSO_Permission permisos = new SSO_Permission();

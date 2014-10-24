@@ -65,6 +65,14 @@ namespace Repositorio
             return result;
         }
 
+        public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
+        {
+            int idRolGroup = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion).FirstOrDefault().Id;
+
+            return idRolGroup;
+        }
+
+
         public void borrarRoleGroups(int idRoleGroup)
         {
             IList<SSO_RoleGroup> listaRolGroup = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).ToList();

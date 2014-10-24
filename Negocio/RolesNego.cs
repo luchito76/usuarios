@@ -67,6 +67,11 @@ namespace Negocio
             return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
 
+        public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
+        {
+            return rolesRepo.devuelveIdRolGroup(idEfector, idPerfil, idAplicacion);
+        }
+
         public void borrarRoleGroups(int idRoleGroup)
         {
             rolesRepo.borrarRoleGroups(idRoleGroup);
