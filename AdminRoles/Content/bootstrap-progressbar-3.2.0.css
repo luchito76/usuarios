@@ -194,9 +194,9 @@
 }
 
 .six-sec-ease-in-out {
-    -webkit-transition: width 40s ease-in-out;
-    -moz-transition: width 40s ease-in-out;
-    -ms-transition: width 40s ease-in-out;
-    -o-transition: width 40s ease-in-out;
-    transition: width 40s ease-in-out;
+    -webkit-transition: width 30s ease-in-out;
+    -moz-transition: width 30s ease-in-out;
+    -ms-transition: width 30s ease-in-out;
+    -o-transition: width 30s ease-in-out;
+    transition: width 30s ease-in-out;
 }

@@ -250,7 +250,7 @@ namespace AdminRoles
         {
             System.Threading.Thread.Sleep(5000);
             AdminRoles ad = new AdminRoles();
-            
+
             ad.borrarPerfil(idUsuario);
         }
 

@@ -17,13 +17,6 @@ namespace Repositorio
             dominio.SaveChanges();
         }
 
-        public void borrarPermisos(int idPermiso)
-        {
-            SSO_Permission ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idPermiso).FirstOrDefault();
-            dominio.Delete(ssoPermiso);
-            dominio.SaveChanges();
-        }
-
         /// <summary>
         /// Deshabilita el módulo seleccionado del perfil correspondiente.
         /// </summary>
@@ -40,6 +33,19 @@ namespace Repositorio
             return result;
         }
 
+        public void borrarPermisos(int idPermiso)
+        {
+            IList<SSO_Permission> ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idPermiso).ToList();
+
+            if (ssoPermiso != null)
+            {
+                foreach (SSO_Permission data in ssoPermiso)
+                    dominio.Delete(data);
+            }
+
+            dominio.SaveChanges();
+        }
+
         public void borrarPermisosCache(int idusuario)
         {
             IList<SSO_Permissions_Cache> ssoPermisosCache = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idusuario).ToList();
@@ -47,7 +53,7 @@ namespace Repositorio
             if (ssoPermisosCache != null)
             {
                 foreach (SSO_Permissions_Cache data in ssoPermisosCache)
-                    dominio.Delete(ssoPermisosCache);
+                    dominio.Delete(data);
 
             }
 

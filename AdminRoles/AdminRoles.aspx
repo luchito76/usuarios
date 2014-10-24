@@ -79,7 +79,7 @@
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
                                                 <th data-field="RolId" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
-                                                <th data-field="operate" data-formatter="formatoPerfil" data-events="eventoPerfil" data-align="center">Perfil</th>
+                                                <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">Aplicaciones</th>
                                             </tr>
@@ -142,9 +142,12 @@
                             <asp:DropDownList ID="ddlAsignarPerfil" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
+                    <div id="progressBarAsignarPerfil" class="progress progress-striped active" >
+                        <div id="progressAsignarPerfil" class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btnAsignarPerfil" onserverclick="btnAsignarPerfil_ServerClick" runat="server" type="button" class="btn btn-primary">Agregar</button>
+                    <button id="btnAsignarPerfil" onserverclick="btnAsignarPerfil_ServerClick" onclick="barraProgresoAsignarPerfil();" runat="server" type="button" class="btn btn-primary">Agregar</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -161,11 +164,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Asignar Perfil</h4>
+                    <h4 class="modal-title">Eliminando Perfil...</h4>
                 </div>
                 <div class="modal-body center-block">
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
+                    <div id="progressBarEliminarPerfil" class="progress progress-striped active">
+                        <div id="progressEliminarPerfil" class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
                     </div>
                 </div>
             </div>
@@ -176,7 +179,19 @@
     <!-- /.modal -->
 
     <script>        
-        function formatoPerfil(value, row, index) {
+        function barraProgresoAsignarPerfil() {
+            $(document).ready(function() {                
+                $('#progressBarAsignarPerfil #progressAsignarPerfil').progressbar({
+                    display_text: 'fill', 
+                    use_percentage: true,
+                    refresh_speed: 500
+                });
+            });
+        }        
+    </script>
+
+    <script>
+        function formatoAsignarPerfil(value, row, index) {
             
             var check = "";
             var btn = "";
@@ -190,16 +205,17 @@
             }
 
             return [                               
-                '<a class="asignarPerfil launch-modal1 ' + btn + '" href="javascript:void(0)" title="Editar">',
+                '<a class="asignarPerfil launch-modal1 ' + btn + '" href="javascript:void(0)" title="Asignar Perfil">',
                     '<i class="' + check + '"></i><asp:Label ID="lblNombreRol" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',
                 '</a>' ,                
             ].join('');
         }
 
-        window.eventoPerfil = {
-            'click .asignarPerfil': function (e, value, row, index) {                          
+        window.eventoAsignarPerfil = {
+            'click .asignarPerfil': function (e, value, row, index) {                 
                 $('#asignarPerfilModal').modal('show');                                    
-                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;
+                
+                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;               
             }
         };
 
@@ -227,8 +243,8 @@
                         dataType: "json",
                         beforeSend:function(x){
                             $(document).ready(function() {
-                                $('.progress .progress-bar').progressbar({
-                                    display_text: 'center', 
+                                $('#progressBarEliminarPerfil #progressEliminarPerfil').progressbar({
+                                    display_text: 'fill', 
                                     use_percentage: true,
                                     refresh_speed: 500});
                             });
@@ -238,7 +254,7 @@
                             window.location = window.location.href;                            
                         },
                         complete:function(){
-                            $('#progressBarModal').modal('hide');
+                            $('.progressBarModal').modal('hide');
                             $('.progress .progress-bar').progressbar().hide();
                         },
                         error: function (e) {
@@ -292,8 +308,7 @@
             'click .app': function (e, value, row, index) {
                 window.location = 'RolPermisos.aspx?rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario; 
             }
-        };
-        
+        };       
 
     </script>
 

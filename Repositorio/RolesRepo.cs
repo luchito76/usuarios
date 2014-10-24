@@ -67,8 +67,14 @@ namespace Repositorio
 
         public void borrarRoleGroups(int idRoleGroup)
         {
-            SSO_RoleGroup customerToDelete = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).FirstOrDefault();
-            dominio.Delete(customerToDelete);
+            IList<SSO_RoleGroup> listaRolGroup = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).ToList();
+
+            if (listaRolGroup != null)
+            {
+                foreach (SSO_RoleGroup data in listaRolGroup)
+                    dominio.Delete(data);
+            }
+
             dominio.SaveChanges();
         }
 
