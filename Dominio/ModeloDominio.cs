@@ -360,6 +360,63 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion)
+		{
+			int returnValue;
+			return SSO_GetModulosXUsuario(idEfector, idUsuario, idAplicacion, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdEfector = new OAParameter();
+			parameterIdEfector.ParameterName = "idEfector";
+			if(idEfector.HasValue)
+			{
+				parameterIdEfector.Value = idEfector.Value;
+			}
+			else
+			{
+				parameterIdEfector.DbType = DbType.Int32;
+				parameterIdEfector.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdUsuario = new OAParameter();
+			parameterIdUsuario.ParameterName = "idUsuario";
+			if(idUsuario.HasValue)
+			{
+				parameterIdUsuario.Value = idUsuario.Value;
+			}
+			else
+			{
+				parameterIdUsuario.DbType = DbType.Int32;
+				parameterIdUsuario.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdAplicacion = new OAParameter();
+			parameterIdAplicacion.ParameterName = "idAplicacion";
+			if(idAplicacion.HasValue)
+			{
+				parameterIdAplicacion.Value = idAplicacion.Value;
+			}
+			else
+			{
+				parameterIdAplicacion.DbType = DbType.Int32;
+				parameterIdAplicacion.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetModulosXUsuarioResultSet0> queryResult = this.ExecuteQuery<SSO_GetModulosXUsuarioResultSet0>("[dbo].[SSO_GetModulosXUsuario]", CommandType.StoredProcedure, parameterIdEfector, parameterIdUsuario, parameterIdAplicacion, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -428,6 +485,8 @@ namespace Dominio
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue);
 		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId);
 		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
+		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion);
+		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
 	}
 }
 #pragma warning restore 1591

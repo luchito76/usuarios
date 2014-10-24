@@ -66,7 +66,7 @@ namespace AdminRoles
             return nombreAplicacion;
         }
 
-        public string devuelveModulosXAplicacionJson()
+        private IList<moduloHelper> devuelveModulosXAplicacionJson()
         {
             string json = string.Empty;
 
@@ -95,7 +95,7 @@ namespace AdminRoles
                 lista.Add(helper);
             }
 
-            return json = JsonConvert.SerializeObject(lista);
+            return lista; //json = JsonConvert.SerializeObject(lista);
         }
 
         [ScriptMethod(), WebMethod()]
@@ -119,6 +119,7 @@ namespace AdminRoles
                 idRolGroup = data.Id;
             }
 
+            
             SSO_Permission permisos = new SSO_Permission();
             permisos = permisoNego.listaPermisosXId(idRolGroup, habilitados).FirstOrDefault();
 
@@ -132,5 +133,56 @@ namespace AdminRoles
 
             permisoNego.permisoModulo(permisos);
         }
+
+
+        //*********************************Módulos x Usuario****************************
+        private IList<moduloHelper> devuelveModulosXUsuario()
+        {
+            string json = string.Empty;
+
+            moduloHelper mod = new moduloHelper();
+
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+            Session["idAplicacion"] = int.Parse(Request["idAplicacion"].ToString());
+            Session["idUsuario"] = int.Parse(Request["idusuario"].ToString());
+
+            int idAplicacion = int.Parse(Session["idAplicacion"].ToString());
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());
+
+            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(idEfector, idUsuario, idAplicacion).ToList();
+
+            List<moduloHelper> lista = new List<moduloHelper>();
+
+            foreach (SSO_GetModulosXUsuarioResultSet0 data in listaModulosXAplicacion)
+            {
+                moduloHelper helper = new moduloHelper();
+
+                helper.IdModulo = data.idModulo;
+                helper.Nombre = data.Nombre;
+                helper.Descripcion = data.Descripcion;
+                helper.Habilitado = data.Habilitado;
+
+                lista.Add(helper);
+            }
+
+            return lista; //json = JsonConvert.SerializeObject(lista);
+        }
+
+        public string devuelveModulos()
+        {
+            string json = string.Empty;
+
+            if (Request["idUsuario"] != null)
+            {
+                json = JsonConvert.SerializeObject(devuelveModulosXUsuario());
+            }
+            else
+            {
+                json = JsonConvert.SerializeObject(devuelveModulosXAplicacionJson());
+            }
+
+            return json;
+        }
+
     }
 }

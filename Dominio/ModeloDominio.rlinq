@@ -714,6 +714,12 @@
         <orm:procedure-parameter name="roleId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_GetModulosXUsuario">
+        <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idUsuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -1038,6 +1044,15 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="dff0050b-aec8-4150-bd0a-0507fb63916a">
+      <domainMethod name="SSO_GetModulosXUsuario" storedProcedureName="'SSO_GetModulosXUsuario'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="a79eef75-525b-4839-8663-42516888e438">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetModulosXUsuarioResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
   </domainMethods>
   <domainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="9e64974a-ff27-4a95-afda-cc96d5214a11">
@@ -1144,6 +1159,15 @@
         <Property Id="09e59a8d-6b13-4313-8fa6-4fab0854e3ad" name="hasProtectedModules" type="System.Boolean" label="hasProtectedModules : System.Boolean" nullable="true" fieldName="_hasProtectedModules" />
         <Property Id="bf834316-5db4-48e1-b37f-5e2b753d62ce" name="intefase_visible" type="System.Boolean" label="intefase_visible : System.Boolean" fieldName="_intefase_Visible" />
         <Property Id="8d1e0276-1895-4f8e-9c7d-ea11b32d5e49" name="version" type="System.String" label="version : System.String" nullable="true" fieldName="_version" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="1d00d8fa-2bb7-4df7-8b33-c5527eb15163">
+      <domainMethodReturnShape name="SSO_GetModulosXUsuarioResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="4becdf51-8edc-4b05-9711-2b76e7e487b2" name="idModulo" type="System.Int32" label="idModulo : System.Int32" fieldName="_idModulo" />
+        <Property Id="fe79e932-2eb6-4409-98bb-e098bc14b6b8" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="2141fce0-3446-4b3d-8a2a-86f491d4179d" name="Descripcion" type="System.String" label="Descripcion : System.String" nullable="true" fieldName="_descripcion" />
+        <Property Id="10ae1f78-9be8-404a-9bdf-5c23460ecc57" name="Habilitado" type="System.Boolean" label="Habilitado : System.Boolean" fieldName="_habilitado" />
+        <Property Id="25c8d3aa-f2d2-482a-89f1-e8276e954bbe" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

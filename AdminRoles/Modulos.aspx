@@ -95,7 +95,7 @@
 
     <script>
             $table = $('#tblModulos').bootstrapTable({            
-            data: <%= devuelveModulosXAplicacionJson() %>           
+            data: <%= devuelveModulos() %>           
                 });               
     </script>
 

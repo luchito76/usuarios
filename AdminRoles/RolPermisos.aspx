@@ -42,6 +42,7 @@
                         <tr>
                             <th data-field="id" data-align="center" data-sortable="true">ID</th>
                             <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
+                            <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
                             <%--<th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
                             <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
                             <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>--%>
@@ -140,6 +141,31 @@
                 var idRol = '<%= devuelveIdRol() %>';
                 
                 window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+            }
+        }; 
+
+
+
+        function formatoModulosXUsuario(value, row, index) {           
+
+            return [
+                '<a class="usuarios" href="javascript:void(0)" title="Módulos">',
+                    '<i class="fa fa-puzzle-piece"></i>',                    
+                '</a>'
+            ].join('');
+        }
+
+        window.eventoModulosXUsuario = {
+            'click .usuarios': function (e, value, row, index) {            
+                
+                var w = 800;
+                var h = 700;
+                var left = Number((screen.width/2)-(w/2));
+                var tops = Number((screen.height/2)-(h/2));
+
+                var idUsuario = '<%= devuelveIdUsuario() %>'
+                
+                window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
     </script>

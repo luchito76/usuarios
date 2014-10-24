@@ -94,6 +94,16 @@ namespace AdminRoles
             return rol;
         }
 
+        public int devuelveIdUsuario()
+        {
+            int idUsuario = 0;
+
+            if (Request["idUsuario"] != null)
+                idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+            return idUsuario;
+        }
+
         public string devuelveAppXRolJson()
         {
             string json = string.Empty;
