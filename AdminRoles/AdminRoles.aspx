@@ -142,7 +142,7 @@
                             <asp:DropDownList ID="ddlAsignarPerfil" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
-                    <div id="progressBarAsignarPerfil" class="progress progress-striped active" >
+                    <div id="progressBarAsignarPerfil" class="progress progress-striped active">
                         <div id="progressAsignarPerfil" class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
                     </div>
                 </div>
