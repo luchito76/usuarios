@@ -48,15 +48,19 @@ namespace AdminRoles
                 set { habilitado = value; }
             }
         }
-
-
         #endregion
 
         ModulosNego moduloNego = new ModulosNego();
+        PermisosNego permisoNego = new PermisosNego();
+        RolesNego rolNego = new RolesNego();
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack) return;
 
+            Session["idRol"] = Request.QueryString["idRol"];
+            Session["idUsuario"] = Request.QueryString["idUsuario"];
         }
 
         public string devuelveNombreAplicacion()
@@ -64,6 +68,70 @@ namespace AdminRoles
             string nombreAplicacion = Request["nombreAplicacion"].ToString();
 
             return nombreAplicacion;
+        }
+
+        [ScriptMethod(), WebMethod(EnableSession = true)]
+        public static void guardarModulos(int habilitados)
+        {
+            if (HttpContext.Current.Session["idRol"] != null)
+            {
+                guardaSSO_Permission(habilitados);
+            }
+            else if (HttpContext.Current.Session["idUsuario"] != null)
+            {
+                guardaSSO_PermissionCache(habilitados);
+            }
+        }
+
+        private static void guardaSSO_Permission(int habilitados)
+        {
+            RolesNego rolNego = new RolesNego();
+            PermisosNego permisoNego = new PermisosNego();
+
+            SSO_Permission ssoPermisos = new SSO_Permission();
+
+            System.Web.UI.Page session = new Page();
+
+            int idEfector = int.Parse(session.Session["idEfector"].ToString());
+            int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
+            int idRol = int.Parse(session.Session["idRol"].ToString());
+
+            int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
+
+            ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, habilitados).FirstOrDefault();
+
+            bool allow = true;
+
+            if (ssoPermisos.Allow == true)
+                allow = false;
+
+            ssoPermisos.Allow = allow;
+            ssoPermisos.Readonly = false;
+
+            permisoNego.permisoModulo(ssoPermisos);
+        }
+
+        public static void guardaSSO_PermissionCache(int habilitados)
+        {
+            System.Web.UI.Page session = new Page();
+
+            int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
+            int idUsuario = int.Parse(session.Session["idUsuario"].ToString());
+
+            PermisosNego permisoNego = new PermisosNego();
+
+            SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
+            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, habilitados).FirstOrDefault();
+
+            bool allow = true;
+
+            if (ssoPermisosCache.Allow == true)
+                allow = false;
+
+            ssoPermisosCache.Allow = allow;
+            ssoPermisosCache.Readonly = false;
+
+            permisoNego.permisoModuloUsuario(ssoPermisosCache);
         }
 
         private IList<moduloHelper> devuelveModulosXAplicacionJson()
@@ -97,43 +165,6 @@ namespace AdminRoles
 
             return lista; //json = JsonConvert.SerializeObject(lista);
         }
-
-        [ScriptMethod(), WebMethod()]
-        public static void guardarModulos(int habilitados)
-        {
-            System.Web.UI.Page session = new Page();
-
-            int idEfector = int.Parse(session.Session["idEfector"].ToString());
-            int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
-            int idRol = int.Parse(session.Session["idRol"].ToString());
-
-            RolesNego rolNego = new RolesNego();
-            PermisosNego permisoNego = new PermisosNego();
-
-            //IList<SSO_RoleGroup> lista = rolNego.eliminarAplicacionXRol(idEfector, idRol, idAplicacion).ToList();
-
-            int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
-
-            //foreach (SSO_RoleGroup data in lista)
-            //{
-            //    idRolGroup = data.Id;
-            //}
-
-            
-            SSO_Permission permisos = new SSO_Permission();
-            permisos = permisoNego.listaPermisosXId(idRolGroup, habilitados).FirstOrDefault();
-
-            bool allow = true;
-
-            if (permisos.Allow == true)
-                allow = false;
-
-            permisos.Allow = allow;
-            permisos.Readonly = false;
-
-            permisoNego.permisoModulo(permisos);
-        }
-
 
         //*********************************Módulos x Usuario****************************
         private IList<moduloHelper> devuelveModulosXUsuario()

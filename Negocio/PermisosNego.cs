@@ -26,14 +26,29 @@ namespace Negocio
             permisosRepo.permisoModulo(permisoModulo);
         }
 
+        public void permisoModuloUsuario(SSO_Permissions_Cache ssoPermisoCache)
+        {
+            permisosRepo.permisoModuloUsuario(ssoPermisoCache);
+        }
+
         public IEnumerable<SSO_Permission> listaPermisosXId(int source, int idPermiso)
         {
             return permisosRepo.listaPermisosXId(source, idPermiso);
         }
 
-        public void borrarPermisosCache(int idusuario)
+        public IEnumerable<SSO_Permissions_Cache> listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
         {
-            permisosRepo.borrarPermisosCache(idusuario);
+            return permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo);
+        }
+
+        public void borrarPermisosCacheXIdRolGroup(int idRolGroup)
+        {
+            permisosRepo.borrarPermisosCacheXIdRolGroup(idRolGroup);
+        }
+
+        public void borrarPermisosCacheXIdUsuario(int idusuario)
+        {
+            permisosRepo.borrarPermisosCacheXIdUsuario(idusuario);
         }
 
         public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario(int idPerfil, int idEfector)

@@ -306,7 +306,7 @@
 
         window.eventosAplicaciones = {                      
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario; 
+                window.location = 'RolPermisos.aspx?rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario; 
             }
         };       
 

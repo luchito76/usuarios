@@ -75,19 +75,6 @@ namespace Dominio
 			}
 		}
 		
-		private int _id;
-		public virtual int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				this._id = value;
-			}
-		}
-		
 	}
 }
 #pragma warning restore 1591

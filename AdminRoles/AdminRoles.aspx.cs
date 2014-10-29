@@ -215,7 +215,7 @@ namespace AdminRoles
 
         private void borrarPermisosCache(int idUsuario)
         {
-            permisoNego.borrarPermisosCache(idUsuario);
+            permisoNego.borrarPermisosCacheXIdUsuario(idUsuario);
         }
 
         private void guardarPermisosCache(int idUsuario)

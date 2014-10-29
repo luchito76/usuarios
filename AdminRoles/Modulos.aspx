@@ -14,8 +14,6 @@
 <body>
 
     <form id="form1" class="form-horizontal" runat="server">
-        <asp:ScriptManager ID="myScriptManager" runat="server" EnablePageMethods="true">
-        </asp:ScriptManager>
         <div class="panel panel-primary" id="form">
             <div class="panel-heading">
                 <h2 class="panel-title">Módulos de <%= devuelveNombreAplicacion() %> </h2>
@@ -29,7 +27,7 @@
                             <th data-field="IdModulo" data-align="center" data-sortable="true">ID</th>
                             <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="Descripcion" data-align="left" data-sortable="true">Descripcion</th>
-                            <th data-field="Habilitado" data-align="left" data-sortable="true">Habilitado</th>
+                            <th data-field="Habilitado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
                         </tr>
                     </thead>
                 </table>
@@ -59,7 +57,7 @@
 
                 $("[name='" + row.IdModulo + "']").bootstrapSwitch('onText', '<i class="fa fa-power-off"></i>');  
                 $("[name='" + row.IdModulo + "']").bootstrapSwitch('offText', '<i class="fa fa-power-off"></i>'); 
-
+                
                 if (habilitado == false) {                    
                     $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', false, false);                      
                 } else if (habilitado == true) {                    
@@ -75,7 +73,8 @@
         }
 
         window.eventosCheck = {            
-            'click .habilitar': function (e, value, row, index) {                   
+            'click .habilitar': function (e, value, row, index) {  
+            
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
@@ -94,9 +93,9 @@
     </script>
 
     <script>
-            $table = $('#tblModulos').bootstrapTable({            
+        $table = $('#tblModulos').bootstrapTable({            
             data: <%= devuelveModulos() %>           
-                });               
+            });               
     </script>
 
 </body>

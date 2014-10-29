@@ -40,12 +40,10 @@
                 <table id="tblAppXUsuarios" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
                     <thead>
                         <tr>
-                            <th data-field="id" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
                             <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
-                            <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
-                            <%--<th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
                             <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
-                            <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>--%>
+                            <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
                         </tr>
                     </thead>
                 </table>
@@ -110,8 +108,10 @@
         window.operateEvents1 = {
             'click .eliminar': function (e, value, row, index) {                 
                 $(document).ready(function () {
+
                     var idRol = '<%= devuelveIdRol() %>';
                     var idEfector = document.getElementById('<%= hdnIdEfector.ClientID %>').value;
+                    
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
@@ -122,8 +122,7 @@
                             window.location = window.location.href;
                         },
                         error: function (e) {
-                            alert("Mal");
-                            
+                            alert("Mal");                            
                         }
                     });  
                 })                
@@ -143,8 +142,6 @@
                 window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
-
-
 
         function formatoModulosXUsuario(value, row, index) {           
 

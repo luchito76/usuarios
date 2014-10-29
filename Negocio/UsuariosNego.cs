@@ -26,5 +26,15 @@ namespace Negocio
         {
             return usuarioRepo.listaAppXUsuario(idUsuario, idEfector);
         }
+
+        public IEnumerable<SSO_Users_Role> listaUsuariosXIdPerfil(int idPerfil)
+        {
+            return usuarioRepo.listaUsuariosXIdPerfil(idPerfil);
+        }
+
+        public IEnumerable<SSO_Users_Role> listaPerfilXIdUsuario(int idUsuario)
+        {
+            return usuarioRepo.listaPerfilXIdUsuario(idUsuario);
+        }
     }
 }

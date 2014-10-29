@@ -23,16 +23,16 @@ namespace Dominio
 {
 	public partial class sp_SSO_AllowedAppsByEfectorResultSet0
 	{
-		private int _id;
-		public virtual int id
+		private int _idAplicacion;
+		public virtual int idAplicacion
 		{
 			get
 			{
-				return this._id;
+				return this._idAplicacion;
 			}
 			set
 			{
-				this._id = value;
+				this._idAplicacion = value;
 			}
 		}
 		

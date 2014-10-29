@@ -28,7 +28,21 @@ namespace Repositorio
         {
             IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> result = dominio.Sp_SSO_AllowedAppsByEfector(idUsuario, idEfector).ToList();
 
-            dominio.Dispose();
+            //dominio.Dispose();
+
+            return result;
+        }
+
+        public IEnumerable<SSO_Users_Role> listaUsuariosXIdPerfil(int idPerfil)
+        {
+            IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.RoleId == idPerfil).ToList();
+
+            return result;
+        }
+
+        public IEnumerable<SSO_Users_Role> listaPerfilXIdUsuario(int idUsuario)
+        {
+            IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
 
             return result;
         }

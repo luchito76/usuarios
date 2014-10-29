@@ -49,9 +49,9 @@ namespace AdminRoles
         /// </summary>
         private void mostrarTablas()
         {
-            if (Request["rolId"] != null)
+            if (Request["idUsuario"] == null)
                 divAppXRoles.Visible = true;
-            else if (Request["idUsuario"] != null)
+            else
                 divAppXUsuarios.Visible = true;
         }
 
@@ -64,18 +64,28 @@ namespace AdminRoles
         {
             int idRol = devuelveIdRol();
             int idEfector = int.Parse(Session["idEfector"].ToString());
+            int idUsuario = 0;
 
-            List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
+            HashSet<int> listaResultado;
 
-            List<SSO_Application> listaAplicaciones = aplicacionesNego.listaAplicaciones().ToList();
+            if (Request["idUsuario"] == null)
+            {
+                List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
+                listaResultado = new HashSet<int>(listaAppXRol.Select(s => s.idAplicacion));
+            }
+            else
+            {
+                idUsuario = int.Parse(Request["idUsuario"].ToString());
+                List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(idUsuario, idEfector).ToList();
+                listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.idAplicacion));
+            }
 
-            HashSet<int> listaResultado = new HashSet<int>(listaAppXRol.Select(s => s.idAplicacion));
+            List<SSO_Application> listaAplicaciones = aplicacionesNego.listaAplicaciones().ToList();            
 
             var results = listaAplicaciones.Where(m => !listaResultado.Contains(m.Id)).ToList();
 
             return results;
         }
-
 
         public int devuelveIdRol()
         {
@@ -140,7 +150,14 @@ namespace AdminRoles
 
                 guardaRoleGroups(idAplicacion);
 
-                guardaSSOPermissions(idAplicacion);
+                //* Si rolId tiene un valor la aplicación seleccionada es agregada al Perfil.
+                //* Si rolId no tiene valor la aplicación seleccionada es agregada al Usuario.
+                if (Request["idUsuario"] == null)
+                {
+                    guardaSSOPermissions(idAplicacion);
+                }
+
+                guardaSSOPermisosCache(idAplicacion);
 
                 ddlAplicaciones.ClearSelection();
 
@@ -199,6 +216,33 @@ namespace AdminRoles
             }
         }
 
+        private void guardaSSOPermisosCache(int idAplicacion)
+        {
+            IList<SSO_Users_Role> listaUsuarios = usuarioNego.listaUsuariosXIdPerfil(devuelveIdRol()).ToList();
+
+            List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
+
+            int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
+
+            foreach (SSO_Users_Role data in listaUsuarios)
+            {
+                foreach (SSO_Module data1 in listaModulosXAplicacion)
+                {
+                    SSO_Permissions_Cache ssoPermisoCache = new SSO_Permissions_Cache();
+
+                    ssoPermisoCache.UserId = data.UserId;
+                    ssoPermisoCache.ApplicationId = idAplicacion;
+                    ssoPermisoCache.TargetType = 2;
+                    ssoPermisoCache.Target = data1.Id;
+                    ssoPermisoCache.GroupId = ultimoIdRolGroupInsertado;
+                    ssoPermisoCache.Allow = true;
+                    ssoPermisoCache.Readonly = false;
+
+                    permisoNego.guardaPermisosCache(ssoPermisoCache);
+                }
+            }
+        }
+
         [ScriptMethod(), WebMethod()]
         public static void eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
@@ -212,11 +256,17 @@ namespace AdminRoles
             {
                 idRoleGroup = data.Id;
             }
-
-            //borrarPermisosCache(idRoleGroup);
+                     
+            borrarPermisosCache(idRoleGroup);
             borrarRoleGroups(idRoleGroup);
             borrarPermisos(idRoleGroup);
+        }
 
+        private static void borrarPermisosCache(int idRolGroup)
+        {
+            PermisosNego permisoNego = new PermisosNego();
+
+            permisoNego.borrarPermisosCacheXIdRolGroup(idRolGroup);
         }
 
         private static void borrarPermisos(int idPermiso)
