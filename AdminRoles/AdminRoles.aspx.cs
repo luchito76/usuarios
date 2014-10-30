@@ -129,8 +129,6 @@ namespace AdminRoles
         {
             try
             {
-                txtRol.Text = "";
-
                 if (hdnIdRol.Value == "")
                 {
                     crearRol();
@@ -139,8 +137,6 @@ namespace AdminRoles
                 {
                     actualizarRol();
                 }
-
-                txtRol.Text = "";
 
                 Response.Redirect("AdminRoles.aspx");
             }
