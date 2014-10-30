@@ -88,8 +88,8 @@ namespace AdminRoles
         public int devuelveIdRol()
         {
             int rolId = 0;
-
-            if (Request["rolId"] != null)
+         
+            if (Request["rolId"] != null && Request["rolId"] != "")
                 rolId = int.Parse(Request["rolId"].ToString());
 
             return rolId;
@@ -150,7 +150,8 @@ namespace AdminRoles
 
                 //* Si rolId tiene un valor la aplicación seleccionada es agregada al Perfil.
                 //* Si rolId no tiene valor la aplicación seleccionada es agregada al Usuario.
-                if (Request["idUsuario"] == null)
+                //if (Request["idUsuario"] == null)
+                if (Request["llamada"] == "aplicacion")
                 {
                     guardaSSOPermissions(idAplicacion);
                 }

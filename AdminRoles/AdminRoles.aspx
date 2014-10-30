@@ -78,7 +78,7 @@
                                                 <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
-                                                <th data-field="RolId" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
+                                                <th data-field="RolId" data-align="left" data-sortable="true" data-visible="true">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">Aplicaciones</th>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btnAsignarPerfil" onserverclick="btnAsignarPerfil_ServerClick" onclick="barraProgresoAsignarPerfil();" runat="server" type="button" class="btn btn-primary">Agregar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -303,8 +303,9 @@
         };
 
         function formatoAplicaciones(value, row, index) {
+            
             return [
-                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones">',
+                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones" aria-disabled="true">',
                     '<i class="fa fa-desktop"></i>',
                 '</a>'
             ].join('');
