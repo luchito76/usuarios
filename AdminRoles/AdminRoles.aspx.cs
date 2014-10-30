@@ -39,7 +39,8 @@ namespace AdminRoles
 
         #endregion
 
-        public string nombreDeRol = string.Empty;
+        //public string nombreDeRol = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -107,23 +108,23 @@ namespace AdminRoles
         /// Devuelve el nombre del rol de cada usuario listado en la grilla.
         /// </summary>
         /// <returns></returns>
-        public string devuelveNombreRol(int idUsuario)
-        {
-            string nombreRol = string.Empty;
+        //public string devuelveNombreRol(int idUsuario)
+        //{
+        //    string nombreRol = string.Empty;
 
-            List<SSO_Users_Role> listaUserRol = rolesNego.listaUserRolXIdUsuario(idUsuario).ToList();
-            List<SSO_Role> listaRoles = rolesNego.listaRoles(12, true).ToList();
+        //    List<SSO_Users_Role> listaUserRol = rolesNego.listaUserRolXIdUsuario(idUsuario).ToList();
+        //    List<SSO_Role> listaRoles = rolesNego.listaRoles(12, true).ToList();
 
-            foreach (SSO_Users_Role data in listaUserRol)
-            {
-                if (data.SSO_Role.Parent == 12)
-                {
-                    nombreRol = data.SSO_Role.Name;
-                }
-            }
+        //    foreach (SSO_Users_Role data in listaUserRol)
+        //    {
+        //        if (data.SSO_Role.Parent == 12)
+        //        {
+        //            nombreRol = data.SSO_Role.Name;
+        //        }
+        //    }
 
-            return nombreRol;
-        }
+        //    return nombreRol;
+        //}
 
         protected void crearRol_Click(object sender, EventArgs e)
         {
