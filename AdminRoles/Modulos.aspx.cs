@@ -73,11 +73,16 @@ namespace AdminRoles
         [ScriptMethod(), WebMethod(EnableSession = true)]
         public static void guardarModulos(int habilitados)
         {
-            if (HttpContext.Current.Session["idRol"] != null)
+            int idUsuario = 0;
+
+            if (HttpContext.Current.Session["idUsuario"] != null)
+                idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+
+            if (idUsuario == 0)
             {
                 guardaSSO_Permission(habilitados);
             }
-            else if (HttpContext.Current.Session["idUsuario"] != null)
+            else
             {
                 guardaSSO_PermissionCache(habilitados);
             }
@@ -196,14 +201,19 @@ namespace AdminRoles
                 lista.Add(helper);
             }
 
-            return lista; //json = JsonConvert.SerializeObject(lista);
+            return lista;
         }
 
         public string devuelveModulos()
         {
             string json = string.Empty;
 
-            if (Request["idUsuario"] != null)
+            int idUsuario = 0;
+
+            if (Request.QueryString["idUsuario"] != null)
+                idUsuario = int.Parse(Request.QueryString["idUsuario"].ToString());
+
+            if (idUsuario != 0)
             {
                 json = JsonConvert.SerializeObject(devuelveModulosXUsuario());
             }
