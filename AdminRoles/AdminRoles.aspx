@@ -27,7 +27,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1primary">
                                 <div class="col-md-12">
-                                    <input type="button" class="btn btn-primary launch-modal" value="Crear Rol" />
+                                    <input type="button" class="btn btn-primary launch-modal" value="Crear Perfil" />
                                     <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead class="table">
                                             <tr>
@@ -105,7 +105,7 @@
                     <div class="modal-body center-block">
                         <div class="form-group">
                             <b>
-                                <asp:Label ID="lbRoles" runat="server" Text="Nombre" for="ddlAutorizado" class="col-sm-4 control-label">      
+                                <asp:Label ID="lbRoles" runat="server" Text="Nombre" for="ddlAutorizado" class="col-sm-4 control-label">
                                 </asp:Label></b>
                             <div class="col-sm-5">
                                 <asp:TextBox runat="server" ID="txtRol" CssClass="form-control" placeholder="Ingrese Nombre de Perfil" />
@@ -115,7 +115,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="crearRoles" onserverclick="crearRol_Click" runat="server" type="button" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('<%= txtRol.ClientID %>').value = ''">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -124,7 +124,6 @@
         </div>
         <!-- /.modal -->
     </div>
-
 
     <!--Modal para asignar perfiles a un usuario  -->
     <div id="asignarPerfilModal" class="modal fade">
@@ -137,7 +136,7 @@
                 <div class="modal-body center-block">
                     <div class="form-group">
                         <b>
-                            <asp:Label ID="lblAsignarPerfil" runat="server" Text="Asignar Perfil" for="ddlAsignarPerfil" class="col-sm-4 control-label">      
+                            <asp:Label ID="lblAsignarPerfil" runat="server" Text="Asignar Perfil" for="ddlAsignarPerfil" class="col-sm-4 control-label">
                             </asp:Label></b>
                         <div class="col-sm-5">
                             <asp:DropDownList ID="ddlAsignarPerfil" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -149,7 +148,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btnAsignarPerfil" onserverclick="btnAsignarPerfil_ServerClick" onclick="barraProgresoAsignarPerfil();" runat="server" type="button" class="btn btn-primary">Agregar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -157,7 +156,6 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
 
     <!--Modal para mostrar barra de progreso  -->
     <div id="progressBarModal" class="modal fade">
@@ -179,25 +177,32 @@
     </div>
     <!-- /.modal -->
 
-    <script>        
+    <script>
         function barraProgresoAsignarPerfil() {
-            $(document).ready(function() {                
+            $(document).ready(function() {
                 $('#progressBarAsignarPerfil #progressAsignarPerfil').progressbar({
-                    display_text: 'fill', 
+                    display_text: 'fill',
                     use_percentage: true,
                     refresh_speed: 500
                 });
             });
-        }        
+        }
+
+    </script>
+
+    <script>
+        function limpiarTextbox() {
+            document.getElementById('<%= txtRol.ClientID %>').value = '';            
+        }
     </script>
 
     <script>
         function formatoAsignarPerfil(value, row, index) {
-            
+
             var check = "";
             var btn = "";
-                        
-            if (row.RolId != null) {                
+
+            if (row.RolId != null) {
                 btn = "btn  btn-info btn-circle btn-xs";
                 check = "fa fa-check";
             } else if (row.RolId == null){
@@ -205,54 +210,54 @@
                 check = "fa fa-times";
             }
 
-            return [                               
+            return [
                 '<a class="asignarPerfil launch-modal1 ' + btn + '" href="javascript:void(0)" title="Asignar Perfil">',
                     '<i class="' + check + '"></i><asp:Label ID="lblNombreRol" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',
-                '</a>' ,                
+                '</a>' ,
             ].join('');
         }
 
         window.eventoAsignarPerfil = {
-            'click .asignarPerfil': function (e, value, row, index) {                 
-                $('#asignarPerfilModal').modal('show');                                    
-                
-                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;               
+            'click .asignarPerfil': function (e, value, row, index) {
+                $('#asignarPerfilModal').modal('show');
+
+                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;
             }
         };
 
         function formatoEliminarPerfil(value, row, index) {
-            return [               
+            return [
                 '<a class="eliminarPerfil" href="javascript:void(0)" title="Eliminar Perfil">',
                     '<i class="fa fa-times-circle-o fa-lg"></i>',
-                '</a>'                
+                '</a>'
             ].join('');
         }
 
         window.eventoEliminarPerfil = {
-            'click .eliminarPerfil': function (e, value, row, index) { 
-                
+            'click .eliminarPerfil': function (e, value, row, index) {
+
                 $('#progressBarModal').modal('show');
 
                 $(document).ready(function () {
                     var idUser = row.IdUsuario;
-                    
+
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("AdminRoles.aspx/eliminarPerfil")%>' ,
-                        data: "{ 'idUsuario' : '" + idUser + "'}",                      
+                        data: "{ 'idUsuario' : '" + idUser + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         beforeSend:function(x){
                             $(document).ready(function() {
                                 $('#progressBarEliminarPerfil #progressEliminarPerfil').progressbar({
-                                    display_text: 'fill', 
+                                    display_text: 'fill',
                                     use_percentage: true,
                                     refresh_speed: 500});
                             });
                         },
-                        success: function (msg) {    
-                            
-                            window.location = window.location.href;                            
+                        success: function (msg) {
+
+                            window.location = window.location.href;
                         },
                         complete:function(){
                             $('.progressBarModal').modal('hide');
@@ -260,11 +265,11 @@
                         },
                         error: function (e) {
                             alert("Mal");
-                            
+
                         }
-                    });  
-                })       
-            }            
+                    });
+                })
+            }
         }
 
         function operateFormatter(value, row, index) {
@@ -276,40 +281,40 @@
         }
 
         window.operateEvents = {
-            'click .editar': function (e, value, row, index) {                          
-                $('#myModal').modal('show');                 
-                document.getElementById('<%= txtRol.ClientID %>').value = row.Name;   
-                document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;   
+            'click .editar': function (e, value, row, index) {
+                $('#myModal').modal('show');
+                document.getElementById('<%= txtRol.ClientID %>').value = row.Name;
+                document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;
             }
-        };        
+        };
 
         function operateFormatter1(value, row, index) {
-            return [                
+            return [
                 '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones">',
                     '<i class="fa fa-desktop"></i>',
                 '</a>'
             ].join('');
-        }       
+        }
 
-        window.operateEvents1 = {                      
+        window.operateEvents1 = {
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?rolName=' + row.Name + "&rolId=" + row.Id; 
+                window.location = 'RolPermisos.aspx?rolName=' + row.Name + "&rolId=" + row.Id;
             }
         };
 
         function formatoAplicaciones(value, row, index) {
-            return [                
+            return [
                 '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones">',
                     '<i class="fa fa-desktop"></i>',
                 '</a>'
             ].join('');
-        }       
+        }
 
-        window.eventosAplicaciones = {                      
+        window.eventosAplicaciones = {
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario; 
+                window.location = 'RolPermisos.aspx?rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario;
             }
-        };       
+        };
 
         function formatoEditarUsuario(value, row, index) {
             return [
@@ -319,27 +324,26 @@
             ].join('');
         }
 
-        window.eventosEditarUsuario = {                      
+        window.eventosEditarUsuario = {
             'click .editarUsuario': function (e, value, row, index) {
                 window.location = 'EditarUsuario.aspx?idUsuario=' + row.IdUsuario;
             }
-        }; 
+        };
     </script>
 
     <script>
-        $table = $('#tblRoles').bootstrapTable({            
+        $table = $('#tblRoles').bootstrapTable({
             data: <%= devuelveRolesJson() %>
             });
 
-
         <%--Se comenta para un desarrollo futuro.
-        $table = $('#tblAplicaciones').bootstrapTable({            
+        $table = $('#tblAplicaciones').bootstrapTable({
             data: <%= devuelveAplicacionesJson() %>
             });
-        $table = $('#tblEfectores').bootstrapTable({            
+        $table = $('#tblEfectores').bootstrapTable({
             data: <%= devuelveEfectoresJson() %>
             });--%>
-        $table = $('#tblUsuarios').bootstrapTable({            
+        $table = $('#tblUsuarios').bootstrapTable({
             data: <%= devuelveUsuariosJson() %>
             });
     </script>

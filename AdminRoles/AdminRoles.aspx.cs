@@ -129,6 +129,8 @@ namespace AdminRoles
         {
             try
             {
+                txtRol.Text = "";
+
                 if (hdnIdRol.Value == "")
                 {
                     crearRol();
