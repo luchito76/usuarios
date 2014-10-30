@@ -43,13 +43,11 @@ namespace AdminRoles
         }
 
         /// <summary>
-        /// Muestra la tablas de aplicacions por Rol o de aplicaciones por Usuario dependiendo si el parámetro recibido es rolId o Idusuario.
-        /// - Si recibe rolId muestra las aplicaciones habilitadas para el perfil seleccionado.
-        /// - Si recibe Idusuario muestra las aplicaciones habilitadas para el usuario seleccionado.
+        /// Muestra la tablas de aplicacions por Rol o de aplicaciones por Usuario dependiendo si la llamada es de Aplicación o Usuario.        
         /// </summary>
         private void mostrarTablas()
         {
-            if (Request["idUsuario"] == null)
+            if (Request["llamada"] == "aplicacion")
                 divAppXRoles.Visible = true;
             else
                 divAppXUsuarios.Visible = true;
@@ -80,7 +78,7 @@ namespace AdminRoles
                 listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.idAplicacion));
             }
 
-            List<SSO_Application> listaAplicaciones = aplicacionesNego.listaAplicaciones().ToList();            
+            List<SSO_Application> listaAplicaciones = aplicacionesNego.listaAplicaciones().ToList();
 
             var results = listaAplicaciones.Where(m => !listaResultado.Contains(m.Id)).ToList();
 
@@ -256,7 +254,7 @@ namespace AdminRoles
             {
                 idRoleGroup = data.Id;
             }
-                     
+
             borrarPermisosCache(idRoleGroup);
             borrarRoleGroups(idRoleGroup);
             borrarPermisos(idRoleGroup);

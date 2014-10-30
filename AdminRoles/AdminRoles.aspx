@@ -298,7 +298,7 @@
 
         window.operateEvents1 = {
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?rolName=' + row.Name + "&rolId=" + row.Id;
+                window.location = 'RolPermisos.aspx?llamada=aplicacion&rolName=' + row.Name + "&rolId=" + row.Id;
             }
         };
 
@@ -312,7 +312,7 @@
 
         window.eventosAplicaciones = {
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario;
+                window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario;
             }
         };
 

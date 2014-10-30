@@ -39,7 +39,6 @@ namespace AdminRoles
 
         #endregion
 
-        //public string nombreDeRol = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -103,28 +102,6 @@ namespace AdminRoles
 
             return json = JsonConvert.SerializeObject(listaUsuario, Formatting.Indented);
         }
-
-        /// <summary>
-        /// Devuelve el nombre del rol de cada usuario listado en la grilla.
-        /// </summary>
-        /// <returns></returns>
-        //public string devuelveNombreRol(int idUsuario)
-        //{
-        //    string nombreRol = string.Empty;
-
-        //    List<SSO_Users_Role> listaUserRol = rolesNego.listaUserRolXIdUsuario(idUsuario).ToList();
-        //    List<SSO_Role> listaRoles = rolesNego.listaRoles(12, true).ToList();
-
-        //    foreach (SSO_Users_Role data in listaUserRol)
-        //    {
-        //        if (data.SSO_Role.Parent == 12)
-        //        {
-        //            nombreRol = data.SSO_Role.Name;
-        //        }
-        //    }
-
-        //    return nombreRol;
-        //}
 
         protected void crearRol_Click(object sender, EventArgs e)
         {
@@ -197,19 +174,19 @@ namespace AdminRoles
 
         private void guardaSSOUserRol(int idusuario)
         {
-            SSO_Users_Role userRol = new SSO_Users_Role();
+            List<int> lista = new List<int>();
+            lista.Add(int.Parse(ddlAsignarPerfil.SelectedValue));
+            lista.Add(int.Parse(Session["idEfector"].ToString()));
 
-            userRol.UserId = idusuario; //int.Parse(hdfIdUsuario.Value);
-            userRol.RoleId = int.Parse(ddlAsignarPerfil.SelectedValue);
+            foreach (int data in lista)
+            {
+                SSO_Users_Role userRol = new SSO_Users_Role();
 
-            usuarioNego.guardaSSOUserRol(userRol);
+                userRol.UserId = idusuario;
+                userRol.RoleId = data;
 
-            SSO_Users_Role userRol1 = new SSO_Users_Role();
-
-            userRol1.UserId = idusuario; //int.Parse(hdfIdUsuario.Value);
-            userRol1.RoleId = int.Parse(Session["idEfector"].ToString());
-
-            usuarioNego.guardaSSOUserRol(userRol1);
+                usuarioNego.guardaSSOUserRol(userRol);
+            }
         }
 
         private void borrarPermisosCache(int idUsuario)
@@ -219,7 +196,6 @@ namespace AdminRoles
 
         private void guardarPermisosCache(int idUsuario)
         {
-            //int idUsuario = int.Parse(hdfIdUsuario.Value);
             int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);
             int idEfector = int.Parse(Session["idEfector"].ToString());
 
@@ -247,7 +223,6 @@ namespace AdminRoles
         [WebMethod(), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static void eliminarPerfil(int idUsuario)
         {
-            System.Threading.Thread.Sleep(5000);
             AdminRoles ad = new AdminRoles();
 
             ad.borrarPerfil(idUsuario);
