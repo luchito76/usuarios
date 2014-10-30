@@ -82,6 +82,7 @@
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">Aplicaciones</th>
+                                                <th data-field="operate" data-formatter="formatoEditarUsuario" data-events="eventosEditarUsuario" data-align="center">Editar</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -310,6 +311,19 @@
             }
         };       
 
+        function formatoEditarUsuario(value, row, index) {
+            return [
+            '<a class="editarUsuario ml10" href="javascript:void(0)" title="Aplicaciones">',
+                '<i class="fa fa-pencil-square-o"></i>',
+            '</a>'
+            ].join('');
+        }
+
+        window.eventosEditarUsuario = {                      
+            'click .editarUsuario': function (e, value, row, index) {
+                window.location = 'EditarUsuario.aspx?idUsuario=' + row.IdUsuario;
+            }
+        }; 
     </script>
 
     <script>

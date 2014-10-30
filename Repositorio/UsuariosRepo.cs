@@ -11,6 +11,19 @@ namespace Repositorio
     {
         ModeloDominio dominio = new ModeloDominio();
 
+        public IEnumerable<SSO_User> devuelveUsuarioXIdUsuario(int idUsuario)
+        {
+            IEnumerable<SSO_User> result = dominio.SSO_Users.Where(c => c.Id == idUsuario);
+
+            return result;
+        }
+
+        public void actualizarUsuario(SSO_User ssoUsuario)
+        {
+            dominio.AttachCopy(ssoUsuario);
+            dominio.SaveChanges();
+        }
+
         public void guardaSSOUserRol(SSO_Users_Role userRol)
         {
             dominio.Add(userRol);

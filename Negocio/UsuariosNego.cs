@@ -12,6 +12,16 @@ namespace Negocio
     {
         UsuariosRepo usuarioRepo = new UsuariosRepo();
 
+        public IEnumerable<SSO_User> devuelveUsuarioXIdUsuario(int idUsuario)
+        {
+            return usuarioRepo.devuelveUsuarioXIdUsuario(idUsuario);
+        }
+
+        public void actualizarUsuario(SSO_User ssoUsuario)
+        {
+            usuarioRepo.actualizarUsuario(ssoUsuario);
+        }
+
         public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> listaUsuariosXPerfil()
         {
             return usuarioRepo.listaUsuariosXPerfil();
