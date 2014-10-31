@@ -54,7 +54,7 @@
                             <asp:Label ID="lblEmail" runat="server" Text="e-Mail" for="txtEmail" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <asp:TextBox runat="server" class="form-control" ID="txtEmail" placeholder="e-Mail" MaxLength="8"></asp:TextBox>
+                            <asp:TextBox runat="server" class="form-control" ID="txtEmail" placeholder="e-Mail" ></asp:TextBox>
                         </div>
                         <b>
                             <asp:Label ID="lblObservaciones" runat="server" Text="Observaciones" for="txtObservaciones" class="col-sm-2 control-label">      
@@ -77,7 +77,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" class="btn btn-primary" OnClick="btnGuardar_Click" />
-                            <asp:Button ID="btnResetClave" runat="server" Text="Reset Clave" class="btn btn-primary" OnClick="btnResetClave_Click"  />
+                            <asp:Button ID="btnResetClave" runat="server" Text="Reset Clave" class="btn btn-primary" OnClick="btnResetClave_Click" />
                         </div>
 
                         <div id="alerta" runat="server" class="col-lg-4">

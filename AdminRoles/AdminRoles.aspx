@@ -177,6 +177,26 @@
     </div>
     <!-- /.modal -->
 
+    <!--Modal para informar que el usuario no tiene permiso a ninguna aplicación  -->
+    <div id="errorModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body center-block">
+                    <h4>El usuario seleccionado no tiene permiso a ninguna aplicación.</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
     <script>
         function barraProgresoAsignarPerfil() {
             $(document).ready(function() {
@@ -302,10 +322,9 @@
             }
         };
 
-        function formatoAplicaciones(value, row, index) {
-            
+        function formatoAplicaciones(value, row, index) {            
             return [
-                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones" aria-disabled="true">',
+                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones" >',
                     '<i class="fa fa-desktop"></i>',
                 '</a>'
             ].join('');
@@ -313,7 +332,10 @@
 
         window.eventosAplicaciones = {
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario;
+                if (row.RolId == null)
+                    $('#errorModal').modal('show');
+                else                   
+                    window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario;                
             }
         };
 
