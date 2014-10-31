@@ -183,12 +183,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Usuarios</h4>
                 </div>
                 <div class="modal-body center-block">
-                    <h4>El usuario seleccionado no tiene permiso a ninguna aplicación.</h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    <a>
+                        <i class="fa fa-user fa-4x"></i>
+                    </a>
+                    <h5>El usuario seleccionado no tiene permiso a ninguna aplicación.</h5>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -196,6 +197,7 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
 
     <script>
         function barraProgresoAsignarPerfil() {
