@@ -78,7 +78,7 @@
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                    data: "{'habilitados':'" + row.IdModulo + "'}",                    
+                    data: "{'idModulo':'" + row.IdModulo + "'}",                    
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {                            

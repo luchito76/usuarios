@@ -95,17 +95,7 @@
                     '<i class="fa fa-trash"></i>',                        
             '</a>'
             ].join('');
-        }
-
-        function formatoModulos(value, row, index) {
-            return [
-                '<a class="usuarios" href="javascript:void(0)" title="Usuarios">',
-                    '<i class="fa fa-puzzle-piece"></i>',                    
-                '</a>'
-            ].join('');
-        }
-
-        
+        }        
 
         window.operateEvents1 = {
             'click .eliminar': function (e, value, row, index) {                 
@@ -131,6 +121,14 @@
             }
         }
         
+        function formatoModulos(value, row, index) {
+            return [
+                '<a class="usuarios" href="javascript:void(0)" title="Usuarios">',
+                    '<i class="fa fa-puzzle-piece"></i>',                    
+                '</a>'
+            ].join('');
+        }
+
         window.eventoModulos = {
             'click .usuarios': function (e, value, row, index) { 
                
@@ -141,7 +139,7 @@
 
                 var idRol = '<%= devuelveIdRol() %>';
                 
-                window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
 
@@ -164,7 +162,7 @@
 
                 var idUsuario = '<%= devuelveIdUsuario() %>'
                 
-                window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                window.open("Modulos.aspx?llamada=usuario&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
     </script>

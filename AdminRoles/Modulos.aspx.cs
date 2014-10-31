@@ -61,6 +61,7 @@ namespace AdminRoles
 
             Session["idRol"] = Request.QueryString["idRol"];
             Session["idUsuario"] = Request.QueryString["idUsuario"];
+            Session["llamada"] = Request.QueryString["llamada"];
         }
 
         public string devuelveNombreAplicacion()
@@ -71,24 +72,25 @@ namespace AdminRoles
         }
 
         [ScriptMethod(), WebMethod(EnableSession = true)]
-        public static void guardarModulos(int habilitados)
+        public static void guardarModulos(int idModulo)
         {
-            int idUsuario = 0;
+            //int idUsuario = 0;
 
-            if (HttpContext.Current.Session["idUsuario"] != null)
-                idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+            //if (HttpContext.Current.Session["idUsuario"] != null)
+            //    idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
 
-            if (idUsuario == 0)
+            //if (idUsuario == 0)
+            string llamada = HttpContext.Current.Session["llamada"].ToString();
+
+            if (llamada == "aplicacion")
             {
-                guardaSSO_Permission(habilitados);
+                guardaSSO_Permission(idModulo);
             }
-            else
-            {
-                guardaSSO_PermissionCache(habilitados);
-            }
+
+            guardaSSO_PermissionCache(idModulo);
         }
 
-        private static void guardaSSO_Permission(int habilitados)
+        private static void guardaSSO_Permission(int idModulo)
         {
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
@@ -103,7 +105,7 @@ namespace AdminRoles
 
             int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
 
-            ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, habilitados).FirstOrDefault();
+            ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo).FirstOrDefault();
 
             bool allow = true;
 
@@ -116,27 +118,38 @@ namespace AdminRoles
             permisoNego.permisoModulo(ssoPermisos);
         }
 
-        public static void guardaSSO_PermissionCache(int habilitados)
+        public static void guardaSSO_PermissionCache(int idModulo)
         {
             System.Web.UI.Page session = new Page();
 
+            int idPerfil = 0;
+            
+            if (session.Session["idRol"] != null)
+                idPerfil = int.Parse(session.Session["idRol"].ToString());
+
             int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
-            int idUsuario = int.Parse(session.Session["idUsuario"].ToString());
+
+            UsuariosNego usuarioNego = new UsuariosNego();
+
+            IList<SSO_Users_Role> ssoUserRol = usuarioNego.listaUsuariosXIdPerfil(idPerfil).ToList();
 
             PermisosNego permisoNego = new PermisosNego();
 
-            SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
-            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, habilitados).FirstOrDefault();
+            foreach (SSO_Users_Role data in ssoUserRol)
+            {
+                SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
+                ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(data.UserId, idAplicacion, idModulo).FirstOrDefault();
 
-            bool allow = true;
+                bool allow = true;
 
-            if (ssoPermisosCache.Allow == true)
-                allow = false;
+                if (ssoPermisosCache.Allow == true)
+                    allow = false;
 
-            ssoPermisosCache.Allow = allow;
-            ssoPermisosCache.Readonly = false;
+                ssoPermisosCache.Allow = allow;
+                ssoPermisosCache.Readonly = false;
 
-            permisoNego.permisoModuloUsuario(ssoPermisosCache);
+                permisoNego.permisoModuloUsuario(ssoPermisosCache);
+            }
         }
 
         private IList<moduloHelper> devuelveModulosXAplicacionJson()
@@ -224,6 +237,5 @@ namespace AdminRoles
 
             return json;
         }
-
     }
 }
