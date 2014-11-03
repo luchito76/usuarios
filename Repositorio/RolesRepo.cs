@@ -66,21 +66,15 @@ namespace Repositorio
         }
 
         public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
-        {
-            //int idRolGroup = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion).FirstOrDefault().Id;
-            var idRolGroup = (from roleGroups in dominio.SSO_RoleGroups
+        {            
+            var rolGroup = (from roleGroups in dominio.SSO_RoleGroups
                              join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
                              where(roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
                              select  new  { source = permisos.Source  }).FirstOrDefault();
 
-            int pepe = idRolGroup.source;
-    //        var query =
-    //from sso in domino.Artists
-    //join role in context.ArtistRoles on artist.Id equals role.ArtistId
-    //join master in context.ArtistRoleMaster on role.Id equals master.ArtistRoleMasterId
-    //select new { master.ID, master.Name };
-
-            return pepe;
+            int idRolGroup = rolGroup.source;
+    
+            return idRolGroup;
         }
 
 
