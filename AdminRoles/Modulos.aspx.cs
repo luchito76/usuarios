@@ -40,12 +40,12 @@ namespace AdminRoles
                 set { descripcion = value; }
             }
 
-            private bool habilitado;
+            private bool estado;
 
-            public bool Habilitado
+            public bool Estado
             {
-                get { return habilitado; }
-                set { habilitado = value; }
+                get { return estado; }
+                set { estado = value; }
             }
         }
         #endregion
@@ -72,7 +72,7 @@ namespace AdminRoles
         }
 
         [ScriptMethod(), WebMethod(EnableSession = true)]
-        public static void guardarModulos(int idModulo)
+        public static void guardarModulos(int idModulo, bool estadoModulo)
         {
             //int idUsuario = 0;
 
@@ -84,13 +84,13 @@ namespace AdminRoles
 
             if (llamada == "aplicacion")
             {
-                guardaSSO_Permission(idModulo);
+                guardaSSO_Permission(idModulo, estadoModulo);
             }
 
-            guardaSSO_PermissionCache(idModulo);
+            guardaSSO_PermissionCache(idModulo, estadoModulo);
         }
 
-        private static void guardaSSO_Permission(int idModulo)
+        private static void guardaSSO_Permission(int idModulo, bool estadoModulo)
         {
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
@@ -109,7 +109,7 @@ namespace AdminRoles
 
             bool allow = true;
 
-            if (ssoPermisos.Allow == true)
+            if (estadoModulo == true)
                 allow = false;
 
             ssoPermisos.Allow = allow;
@@ -118,12 +118,12 @@ namespace AdminRoles
             permisoNego.permisoModulo(ssoPermisos);
         }
 
-        public static void guardaSSO_PermissionCache(int idModulo)
+        public static void guardaSSO_PermissionCache(int idModulo, bool estadoModulo)
         {
             System.Web.UI.Page session = new Page();
 
             int idPerfil = 0;
-            
+
             if (session.Session["idRol"] != null)
                 idPerfil = int.Parse(session.Session["idRol"].ToString());
 
@@ -142,7 +142,7 @@ namespace AdminRoles
 
                 bool allow = true;
 
-                if (ssoPermisosCache.Allow == true)
+                if (estadoModulo == true)
                     allow = false;
 
                 ssoPermisosCache.Allow = allow;
@@ -176,7 +176,7 @@ namespace AdminRoles
                 helper.IdModulo = data.idModulo;
                 helper.Nombre = data.Nombre;
                 helper.Descripcion = data.Descripcion;
-                helper.Habilitado = data.Habilitado;
+                helper.Estado = data.Estado;
 
                 lista.Add(helper);
             }
@@ -209,7 +209,7 @@ namespace AdminRoles
                 helper.IdModulo = data.idModulo;
                 helper.Nombre = data.Nombre;
                 helper.Descripcion = data.Descripcion;
-                helper.Habilitado = data.Habilitado;
+                helper.Estado = data.Estado;
 
                 lista.Add(helper);
             }

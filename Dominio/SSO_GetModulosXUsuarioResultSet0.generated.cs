@@ -62,16 +62,16 @@ namespace Dominio
 			}
 		}
 		
-		private bool _habilitado;
-		public virtual bool Habilitado
+		private bool _estado;
+		public virtual bool Estado
 		{
 			get
 			{
-				return this._habilitado;
+				return this._estado;
 			}
 			set
 			{
-				this._habilitado = value;
+				this._estado = value;
 			}
 		}
 		

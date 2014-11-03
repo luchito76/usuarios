@@ -1011,7 +1011,7 @@
     <domainModelHasDomainMethods Id="2b50108f-ba55-43f6-a88c-1de4559290dd">
       <domainMethod name="SSO_GetModulosXAplicacion" storedProcedureName="'SSO_GetModulosXAplicacion'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="230b0954-ed33-4ff3-8c63-6bbbb9a9041e">
+          <domainMethodReferencesDomainMethodReturnShape Id="4c5ef83d-7ac6-49be-b7b2-cf5a41fcfdd6">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetModulosXAplicacionResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1047,7 +1047,7 @@
     <domainModelHasDomainMethods Id="dff0050b-aec8-4150-bd0a-0507fb63916a">
       <domainMethod name="SSO_GetModulosXUsuario" storedProcedureName="'SSO_GetModulosXUsuario'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="4208982b-8e47-41c7-ac44-e452a5458ed5">
+          <domainMethodReferencesDomainMethodReturnShape Id="5e94f1e4-cf04-4da6-8a6d-23f3fd16e726">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetModulosXUsuarioResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1131,22 +1131,6 @@
         <Property Id="dd559c60-b13a-4fa9-b08b-a35f4311a241" name="version" type="System.String" label="version : System.String" nullable="true" fieldName="_version" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="da8ca02d-7d5e-42aa-8416-49da11942d6b">
-      <domainMethodReturnShape name="SSO_GetModulosXUsuarioResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="81703d35-6fe6-4397-b063-142691d571f1" name="idModulo" type="System.Int32" label="idModulo : System.Int32" fieldName="_idModulo" />
-        <Property Id="f9f64b0c-c9ba-4981-966b-1b3ad7974756" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
-        <Property Id="7c67d5b8-2abc-4593-b6c4-0c4247199474" name="Descripcion" type="System.String" label="Descripcion : System.String" nullable="true" fieldName="_descripcion" />
-        <Property Id="b78476a7-d8f7-49c6-9112-672e83119a05" name="Habilitado" type="System.Boolean" label="Habilitado : System.Boolean" fieldName="_habilitado" />
-      </domainMethodReturnShape>
-    </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="df0aa160-a4b5-4ecc-b3c5-747ac8114ab7">
-      <domainMethodReturnShape name="SSO_GetModulosXAplicacionResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="c6656793-31a5-4551-b786-4431bd3be04e" name="idModulo" type="System.Int32" label="idModulo : System.Int32" fieldName="_idModulo" />
-        <Property Id="baae6214-faeb-48e7-9311-30e8ca272bf2" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
-        <Property Id="111be23a-569b-4cc3-b613-822b1fd5d117" name="Descripcion" type="System.String" label="Descripcion : System.String" nullable="true" fieldName="_descripcion" />
-        <Property Id="b28cb3b0-515e-4fcc-b05e-d48365c6b3d2" name="Habilitado" type="System.Boolean" label="Habilitado : System.Boolean" fieldName="_habilitado" />
-      </domainMethodReturnShape>
-    </domainModelHasDomainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="e619aa90-16ef-4bee-b48a-64a6ee16b723">
       <domainMethodReturnShape name="SSO_GetAppByRolResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
         <Property Id="e0827db9-3432-4003-8bb5-2ff065be1094" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" fieldName="_idAplicacion" />
@@ -1167,6 +1151,22 @@
         <Property Id="5a8285c5-209a-471b-a5b4-a925ee361f4a" name="hasProtectedModules" type="System.Boolean" label="hasProtectedModules : System.Boolean" nullable="true" fieldName="_hasProtectedModules" />
         <Property Id="edc3c558-2d8d-4b15-82d6-b551d145955b" name="intefase_visible" type="System.Boolean" label="intefase_visible : System.Boolean" fieldName="_intefase_Visible" />
         <Property Id="4930d3a2-5a69-4d33-973d-59537a540c20" name="version" type="System.String" label="version : System.String" nullable="true" fieldName="_version" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="499fade5-fcdc-4e72-87ab-534db38bf614">
+      <domainMethodReturnShape name="SSO_GetModulosXAplicacionResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="cf69f533-ef13-4c42-9614-79f80310f9e0" name="idModulo" type="System.Int32" label="idModulo : System.Int32" fieldName="_idModulo" />
+        <Property Id="ef745e82-79d6-4d9a-aab5-a4b7a0d0c928" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="ee7b3462-7358-4a9f-9c11-3acffdea74cd" name="Descripcion" type="System.String" label="Descripcion : System.String" nullable="true" fieldName="_descripcion" />
+        <Property Id="0c6a265f-d9c4-4671-865c-3809604415d5" name="Estado" type="System.Boolean" label="Estado : System.Boolean" fieldName="_estado" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="b0bdc334-8e3f-4816-b075-383f015fabde">
+      <domainMethodReturnShape name="SSO_GetModulosXUsuarioResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="168fd8bb-cdc4-444f-91d9-a4891c08ce92" name="idModulo" type="System.Int32" label="idModulo : System.Int32" fieldName="_idModulo" />
+        <Property Id="8ae2756d-f063-4d62-9918-987cb1e094bb" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="a3057385-5929-4270-bbf4-f3f2757a5778" name="Descripcion" type="System.String" label="Descripcion : System.String" nullable="true" fieldName="_descripcion" />
+        <Property Id="3e006202-0957-43dc-a5c9-16f58640fb99" name="Estado" type="System.Boolean" label="Estado : System.Boolean" fieldName="_estado" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

@@ -27,7 +27,7 @@
                             <th data-field="IdModulo" data-align="center" data-sortable="true">ID</th>
                             <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="Descripcion" data-align="left" data-sortable="true">Descripcion</th>
-                            <th data-field="Habilitado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
+                            <th data-field="Estado" data-align="left" data-sortable="true" data-visible="true">Habilitado</th>
                         </tr>
                     </thead>
                 </table>
@@ -53,21 +53,21 @@
         function formatoCheck(value, row, index) {
 
             jQuery(document).ready(function() {             
-                var habilitado = row.Habilitado;                    
+                var estado = row.Estado;                    
 
                 $("[name='" + row.IdModulo + "']").bootstrapSwitch('onText', '<i class="fa fa-power-off"></i>');  
                 $("[name='" + row.IdModulo + "']").bootstrapSwitch('offText', '<i class="fa fa-power-off"></i>'); 
                 
-                if (habilitado == false) {                    
-                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', false, false);                      
-                } else if (habilitado == true) {                    
-                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', true, true);                       
+                if (estado == false) {                    
+                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', false, false);                        
+                } else if (estado == true) {                    
+                    $("[name='" + row.IdModulo + "']").bootstrapSwitch('state', true, true);                                           
                 }                
             });  
             return [
             
                 '<a class="habilitar" href="javascript:void(0)" title="Habilitar">',
-                    '<input name="' + row.IdModulo + '" checked="' + row.Habilitado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini"  > ',
+                    '<input name="' + row.IdModulo + '" checked="' + row.Estado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini"  > ',
                 '</a>'               
             ].join('');
         }
@@ -78,7 +78,7 @@
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                    data: "{'idModulo':'" + row.IdModulo + "'}",                    
+                    data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + row.Estado + "'}",                    
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {                            
