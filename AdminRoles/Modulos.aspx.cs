@@ -129,16 +129,38 @@ namespace AdminRoles
 
             int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
 
+            int idUsuario = 0;
+            if (session.Session["idUsuario"] != null)
+                idUsuario = int.Parse(session.Session["idUsuario"].ToString());
+
             UsuariosNego usuarioNego = new UsuariosNego();
 
             IList<SSO_Users_Role> ssoUserRol = usuarioNego.listaUsuariosXIdPerfil(idPerfil).ToList();
 
             PermisosNego permisoNego = new PermisosNego();
 
-            foreach (SSO_Users_Role data in ssoUserRol)
+            if (idUsuario == 0)
+            {
+                foreach (SSO_Users_Role data in ssoUserRol)
+                {
+                    SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
+                    ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(data.UserId, idAplicacion, idModulo).FirstOrDefault();
+
+                    bool allow = true;
+
+                    if (estadoModulo == true)
+                        allow = false;
+
+                    ssoPermisosCache.Allow = allow;
+                    ssoPermisosCache.Readonly = false;
+
+                    permisoNego.permisoModuloUsuario(ssoPermisosCache);
+                }
+            }
+            else
             {
                 SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
-                ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(data.UserId, idAplicacion, idModulo).FirstOrDefault();
+                ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo).FirstOrDefault();
 
                 bool allow = true;
 
