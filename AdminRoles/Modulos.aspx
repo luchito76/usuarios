@@ -47,7 +47,7 @@
 
     <script>
         function cerrarVentana() {
-            window.close();
+            window.close();            
         }
 
         function formatoCheck(value, row, index) {
@@ -75,10 +75,17 @@
         window.eventosCheck = {            
             'click .habilitar': function (e, value, row, index) {  
             
+                var estado = row.Estado;
+
+                if (estado == true)
+                    estado = false;
+                else
+                    estado = false;
+
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                    data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + row.Estado + "'}",                    
+                    data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + estado + "'}",                    
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (msg) {                            

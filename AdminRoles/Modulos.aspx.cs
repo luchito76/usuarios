@@ -71,15 +71,10 @@ namespace AdminRoles
             return nombreAplicacion;
         }
 
+        #region GuardaModulos
         [ScriptMethod(), WebMethod(EnableSession = true)]
         public static void guardarModulos(int idModulo, bool estadoModulo)
         {
-            //int idUsuario = 0;
-
-            //if (HttpContext.Current.Session["idUsuario"] != null)
-            //    idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
-
-            //if (idUsuario == 0)
             string llamada = HttpContext.Current.Session["llamada"].ToString();
 
             if (llamada == "aplicacion")
@@ -95,8 +90,6 @@ namespace AdminRoles
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
 
-            SSO_Permission ssoPermisos = new SSO_Permission();
-
             System.Web.UI.Page session = new Page();
 
             int idEfector = int.Parse(session.Session["idEfector"].ToString());
@@ -105,14 +98,10 @@ namespace AdminRoles
 
             int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
 
+            SSO_Permission ssoPermisos = new SSO_Permission();
             ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo).FirstOrDefault();
 
-            bool allow = true;
-
-            if (estadoModulo == true)
-                allow = false;
-
-            ssoPermisos.Allow = allow;
+            ssoPermisos.Allow = estadoModulo;
             ssoPermisos.Readonly = false;
 
             permisoNego.permisoModulo(ssoPermisos);
@@ -123,56 +112,47 @@ namespace AdminRoles
             System.Web.UI.Page session = new Page();
 
             int idPerfil = 0;
+            int idUsuario = 0;
 
             if (session.Session["idRol"] != null)
                 idPerfil = int.Parse(session.Session["idRol"].ToString());
 
-            int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
-
-            int idUsuario = 0;
             if (session.Session["idUsuario"] != null)
                 idUsuario = int.Parse(session.Session["idUsuario"].ToString());
+
+            int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
 
             UsuariosNego usuarioNego = new UsuariosNego();
 
             IList<SSO_Users_Role> ssoUserRol = usuarioNego.listaUsuariosXIdPerfil(idPerfil).ToList();
 
-            PermisosNego permisoNego = new PermisosNego();
-
             if (idUsuario == 0)
             {
                 foreach (SSO_Users_Role data in ssoUserRol)
                 {
-                    SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
-                    ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(data.UserId, idAplicacion, idModulo).FirstOrDefault();
-
-                    bool allow = true;
-
-                    if (estadoModulo == true)
-                        allow = false;
-
-                    ssoPermisosCache.Allow = allow;
-                    ssoPermisosCache.Readonly = false;
-
-                    permisoNego.permisoModuloUsuario(ssoPermisosCache);
+                    guardaEnPermisosCache(data.UserId, idAplicacion, idModulo, estadoModulo);
                 }
             }
             else
-            {
-                SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
-                ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo).FirstOrDefault();
-
-                bool allow = true;
-
-                if (estadoModulo == true)
-                    allow = false;
-
-                ssoPermisosCache.Allow = allow;
-                ssoPermisosCache.Readonly = false;
-
-                permisoNego.permisoModuloUsuario(ssoPermisosCache);
-            }
+                guardaEnPermisosCache(idUsuario, idAplicacion, idModulo, estadoModulo);
         }
+
+        private static void guardaEnPermisosCache(int idUsuario, int idAplicacion, int idModulo, bool estadoModulo)
+        {
+            PermisosNego permisoNego = new PermisosNego();
+
+            SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
+            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo).FirstOrDefault();
+
+            ssoPermisosCache.Allow = estadoModulo;
+            ssoPermisosCache.Readonly = false;
+
+            permisoNego.permisoModuloUsuario(ssoPermisosCache);
+        }
+
+        #endregion
+
+        #region Carga de Módulos
 
         private IList<moduloHelper> devuelveModulosXAplicacionJson()
         {
@@ -203,10 +183,9 @@ namespace AdminRoles
                 lista.Add(helper);
             }
 
-            return lista; //json = JsonConvert.SerializeObject(lista);
+            return lista;
         }
 
-        //*********************************Módulos x Usuario****************************
         private IList<moduloHelper> devuelveModulosXUsuario()
         {
             string json = string.Empty;
@@ -259,5 +238,6 @@ namespace AdminRoles
 
             return json;
         }
+        #endregion
     }
 }
