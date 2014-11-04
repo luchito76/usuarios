@@ -41,6 +41,24 @@ namespace Negocio
             return permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo);
         }
 
+        /// <summary>
+        /// Este método comprueba si el usuario ya tiene permisos sobre una aplicación en la tabla Permission_Cache
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="idAplicacion"></param>
+        /// <returns></returns>
+        public bool esUsuarioEnPermisoCache(int idUsuario, int idAplicacion)
+        {
+            bool compruebaUsuario = false;
+
+            IList<SSO_Permissions_Cache> listaPermisoCache = permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion).ToList();
+
+            if (listaPermisoCache.Count == 0)
+                compruebaUsuario = true;
+
+            return compruebaUsuario;
+        }
+
         public void borrarPermisosCacheXIdRolGroup(int idRolGroup)
         {
             permisosRepo.borrarPermisosCacheXIdRolGroup(idRolGroup);

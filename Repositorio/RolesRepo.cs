@@ -61,19 +61,32 @@ namespace Repositorio
         public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
             IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion);
-            
+
             return result;
         }
 
         public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
-        {            
+        {
+            int idRolGroup = 0;
+
+            SSO_RoleGroup rolGroup = new SSO_RoleGroup();
+            rolGroup = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion).FirstOrDefault();
+
+            if (rolGroup != null)
+                idRolGroup = rolGroup.Id;
+
+            return idRolGroup;
+        }
+
+        public int devuelveIdRolGroupXPermisos(int idEfector, int idPerfil, int idAplicacion)
+        {
             var rolGroup = (from roleGroups in dominio.SSO_RoleGroups
-                             join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
-                             where(roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
-                             select  new  { source = permisos.Source  }).FirstOrDefault();
+                            join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
+                            where (roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
+                            select new { source = permisos.Source }).FirstOrDefault();
 
             int idRolGroup = rolGroup.source;
-    
+
             return idRolGroup;
         }
 

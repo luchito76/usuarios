@@ -96,7 +96,7 @@ namespace AdminRoles
             int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
             int idRol = int.Parse(session.Session["idRol"].ToString());
 
-            int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
+            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(idEfector, idRol, idAplicacion);
 
             SSO_Permission ssoPermisos = new SSO_Permission();
             ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo).FirstOrDefault();

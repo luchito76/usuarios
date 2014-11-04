@@ -88,7 +88,7 @@ namespace AdminRoles
         public int devuelveIdRol()
         {
             int rolId = 0;
-         
+
             if (Request["rolId"] != null && Request["rolId"] != "")
                 rolId = int.Parse(Request["rolId"].ToString());
 
@@ -149,8 +149,7 @@ namespace AdminRoles
                 guardaRoleGroups(idAplicacion);
 
                 //* Si rolId tiene un valor la aplicación seleccionada es agregada al Perfil.
-                //* Si rolId no tiene valor la aplicación seleccionada es agregada al Usuario.
-                //if (Request["idUsuario"] == null)
+                //* Si rolId no tiene valor la aplicación seleccionada es agregada al Usuario.                
                 if (Request["llamada"] == "aplicacion")
                 {
                     guardaSSOPermissions(idAplicacion);
@@ -176,14 +175,17 @@ namespace AdminRoles
             int idEfector = int.Parse(Session["idEfector"].ToString());
             int idRol = int.Parse(Request["rolId"].ToString());
 
-            SSO_RoleGroup rolGroup = new SSO_RoleGroup();
+            if (roleNego.esAplicacionEnRoleGroup(idEfector, idRol, idAplicacion))
+            {
+                SSO_RoleGroup rolGroup = new SSO_RoleGroup();
 
-            rolGroup.IdAplicacion = idAplicacion;
-            rolGroup.IdEfector = idEfector;
-            rolGroup.IdPerfil = idRol;
-            rolGroup.AutomaticName = true;
+                rolGroup.IdAplicacion = idAplicacion;
+                rolGroup.IdEfector = idEfector;
+                rolGroup.IdPerfil = idRol;
+                rolGroup.AutomaticName = true;
 
-            roleNego.guardaRoleGroup(rolGroup);
+                roleNego.guardaRoleGroup(rolGroup);
+            }
         }
 
         //Devuelve el último idRolGroup insertado en la tabla SSO_RoleGroups.
@@ -198,14 +200,24 @@ namespace AdminRoles
         {
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
 
-            int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
+            int idEfector = int.Parse(Session["idEfector"].ToString());
+            int idRol = int.Parse(Request["rolId"].ToString());
+            int? source = 0;
+
+            if (roleNego.esAplicacionEnRoleGroup(idEfector, idRol, idAplicacion))
+                source = ultimoIdRolGroup();
+            else
+                source = roleNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
+
+
+            //int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
 
             foreach (SSO_Module data in listaModulosXAplicacion)
             {
                 SSO_Permission ssoPermission = new SSO_Permission();
 
                 ssoPermission.SourceType = 3;
-                ssoPermission.Source = ultimoIdRolGroupInsertado;
+                ssoPermission.Source = source.Value;
                 ssoPermission.TargetType = 2;
                 ssoPermission.Target = data.Id;
                 ssoPermission.Allow = true;
@@ -217,6 +229,7 @@ namespace AdminRoles
 
         private void guardaSSOPermisosCache(int idAplicacion)
         {
+
             IList<SSO_Users_Role> listaUsuarios = usuarioNego.listaUsuariosXIdPerfil(devuelveIdRol()).ToList();
 
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
@@ -225,19 +238,22 @@ namespace AdminRoles
 
             foreach (SSO_Users_Role data in listaUsuarios)
             {
-                foreach (SSO_Module data1 in listaModulosXAplicacion)
+                if (permisoNego.esUsuarioEnPermisoCache(data.UserId, idAplicacion))
                 {
-                    SSO_Permissions_Cache ssoPermisoCache = new SSO_Permissions_Cache();
+                    foreach (SSO_Module data1 in listaModulosXAplicacion)
+                    {
+                        SSO_Permissions_Cache ssoPermisoCache = new SSO_Permissions_Cache();
 
-                    ssoPermisoCache.UserId = data.UserId;
-                    ssoPermisoCache.ApplicationId = idAplicacion;
-                    ssoPermisoCache.TargetType = 2;
-                    ssoPermisoCache.Target = data1.Id;
-                    ssoPermisoCache.GroupId = ultimoIdRolGroupInsertado;
-                    ssoPermisoCache.Allow = true;
-                    ssoPermisoCache.Readonly = false;
+                        ssoPermisoCache.UserId = data.UserId;
+                        ssoPermisoCache.ApplicationId = idAplicacion;
+                        ssoPermisoCache.TargetType = 2;
+                        ssoPermisoCache.Target = data1.Id;
+                        ssoPermisoCache.GroupId = ultimoIdRolGroupInsertado;
+                        ssoPermisoCache.Allow = true;
+                        ssoPermisoCache.Readonly = false;
 
-                    permisoNego.guardaPermisosCache(ssoPermisoCache);
+                        permisoNego.guardaPermisosCache(ssoPermisoCache);
+                    }
                 }
             }
         }
@@ -254,11 +270,11 @@ namespace AdminRoles
             foreach (SSO_RoleGroup data in lista)
             {
                 idRoleGroup = data.Id;
-            }
 
-            borrarPermisosCache(idRoleGroup);
-            borrarRoleGroups(idRoleGroup);
-            borrarPermisos(idRoleGroup);
+                borrarPermisosCache(idRoleGroup);
+                borrarRoleGroups(idRoleGroup);
+                borrarPermisos(idRoleGroup);
+            }
         }
 
         private static void borrarPermisosCache(int idRolGroup)

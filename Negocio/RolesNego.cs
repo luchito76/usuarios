@@ -67,9 +67,35 @@ namespace Negocio
             return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
         }
 
+        public int devuelveIdRolGroupXPermisos(int idEfector, int idPerfil, int idAplicacion)
+        {
+            return rolesRepo.devuelveIdRolGroupXPermisos(idEfector, idPerfil, idAplicacion);
+        }
+
         public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
         {
-            return rolesRepo.devuelveIdRolGroup(idEfector, idPerfil, idAplicacion);
+            int idRolGroup = rolesRepo.devuelveIdRolGroup(idEfector, idPerfil, idAplicacion);
+
+            return idRolGroup;
+        }
+
+        /// <summary>
+        /// Comprueba si el efector, el perfil y la aplicacion ya están en la tabla RoleGroup.
+        /// </summary>
+        /// <param name="idEfector"></param>
+        /// <param name="idPerfil"></param>
+        /// <param name="idAplicacion"></param>
+        /// <returns></returns>
+        public bool esAplicacionEnRoleGroup(int idEfector, int idPerfil, int idAplicacion)
+        {
+            bool compruebaAplicacionEnRoleGroup = true;
+
+            int? idRolGroup = rolesRepo.devuelveIdRolGroup(idEfector, idPerfil, idAplicacion);
+
+            if (idRolGroup != 0)
+                compruebaAplicacionEnRoleGroup = false;
+
+            return compruebaAplicacionEnRoleGroup;
         }
 
         public void borrarRoleGroups(int idRoleGroup)

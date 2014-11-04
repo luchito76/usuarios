@@ -80,7 +80,7 @@
                 if (estado == true)
                     estado = false;
                 else
-                    estado = false;
+                    estado = true;
 
                 $.ajax({
                     type: "POST",

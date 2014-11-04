@@ -47,7 +47,13 @@ namespace Repositorio
             IEnumerable<SSO_Permissions_Cache> result = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.Target == idModulo).ToList();
 
             return result;
+        }
 
+        public IEnumerable<SSO_Permissions_Cache> listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion)
+        {
+            IEnumerable<SSO_Permissions_Cache> result = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion).ToList();
+
+            return result;
         }
 
         public void borrarPermisos(int idPermiso)
@@ -63,7 +69,8 @@ namespace Repositorio
             dominio.SaveChanges();
         }
 
-        public void borrarPermisosCacheXIdRolGroup(int idRolGroup) {
+        public void borrarPermisosCacheXIdRolGroup(int idRolGroup)
+        {
             IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup).ToList();
 
             if (ssoPermisoCache != null)
