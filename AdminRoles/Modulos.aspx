@@ -16,7 +16,7 @@
     <form id="form1" class="form-horizontal" runat="server">
         <div class="panel panel-primary" id="form">
             <div class="panel-heading">
-                <h2 class="panel-title">Módulos de <%= devuelveNombreAplicacion() %> </h2>
+                <span class="panel-title">Módulos de <%= devuelveNombreAplicacion() %> </span>
             </div>
             <br />
             <div class="col-md-12">

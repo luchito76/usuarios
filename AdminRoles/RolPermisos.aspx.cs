@@ -209,9 +209,6 @@ namespace AdminRoles
             else
                 source = roleNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
 
-
-            //int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
-
             foreach (SSO_Module data in listaModulosXAplicacion)
             {
                 SSO_Permission ssoPermission = new SSO_Permission();

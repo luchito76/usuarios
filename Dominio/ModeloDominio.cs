@@ -114,6 +114,22 @@ namespace Dominio
 			}
 		}
 		
+		public IQueryable<SSO_StoredVariables_Template> SSO_StoredVariables_Templates 
+		{
+			get
+			{
+				return this.GetAll<SSO_StoredVariables_Template>();
+			}
+		}
+		
+		public IQueryable<SSO_StoredVariable> SSO_StoredVariables 
+		{
+			get
+			{
+				return this.GetAll<SSO_StoredVariable>();
+			}
+		}
+		
 		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
 		{
 			int returnValue;
@@ -417,6 +433,27 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales()
+		{
+			int returnValue;
+			return SSO_GetProfesionales(out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales(out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			IEnumerable<SSO_GetProfesionalesResultSet0> queryResult = this.ExecuteQuery<SSO_GetProfesionalesResultSet0>("[dbo].[SSO_GetProfesionales]", CommandType.StoredProcedure, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -473,6 +510,14 @@ namespace Dominio
 		{
 			get;
 		}
+		IQueryable<SSO_StoredVariables_Template> SSO_StoredVariables_Templates
+		{
+			get;
+		}
+		IQueryable<SSO_StoredVariable> SSO_StoredVariables
+		{
+			get;
+		}
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
@@ -487,6 +532,8 @@ namespace Dominio
 		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion);
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
+		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales();
+		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales(out int returnValue);
 	}
 }
 #pragma warning restore 1591

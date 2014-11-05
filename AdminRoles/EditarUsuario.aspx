@@ -8,8 +8,8 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Editar Datos de Usuario
-            </h3>
+            <span class="panel-title">Editar Datos de Usuario
+            </span>
         </div>
         <div class="panel-body">
             <div class="container">
@@ -54,7 +54,7 @@
                             <asp:Label ID="lblEmail" runat="server" Text="e-Mail" for="txtEmail" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <asp:TextBox runat="server" class="form-control" ID="txtEmail" placeholder="e-Mail" ></asp:TextBox>
+                            <asp:TextBox runat="server" class="form-control" ID="txtEmail" placeholder="e-Mail"></asp:TextBox>
                         </div>
                         <b>
                             <asp:Label ID="lblObservaciones" runat="server" Text="Observaciones" for="txtObservaciones" class="col-sm-2 control-label">      
@@ -62,15 +62,19 @@
                         <div class="col-sm-3">
                             <asp:TextBox ID="txtObservaciones" class="form-control" Rows="2" TextMode="MultiLine" runat="server"></asp:TextBox>
                         </div>
-
                     </div>
 
                     <div class="form-group">
-
-
+                        <b>
+                            <asp:Label ID="lblProfesional" runat="server" Text="Profesional" for="txtProfesionalVinculado" class="col-sm-2 control-label">      
+                            </asp:Label></b>
                         <div class="col-sm-3">
-                            <%--<asp:TextBox runat="server" class="form-control" TextMode="Password" ID="txtClave" placeholder="Clave"></asp:TextBox>--%>
-                            <%--<input id="txtClave" runat="server" type="password" class="form-control" visible="false" name="password" />--%>
+                            <div class="input-group">
+                                <input type="text" id="txtProfesional" runat="server" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary launch-modal" type="button"><i class="fa fa-chain"></i></button>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -87,13 +91,50 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
         <%--<div class="panel-footer">
             Panel footer
         </div>--%>
     </div>
+
+    <!--Modal para vincular profesionales con usuarios  -->
+    <div id="profesionalModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Profesionales</h4>
+                </div>
+                <div class="modal-body center-block">
+                    <div class="form-group">
+                        <b>
+                            <asp:Label ID="lbProfesionales" runat="server" Text="Profesionales" for="ddlProfesional" class="col-sm-4 control-label">
+                            </asp:Label></b>
+                        <div class="col-sm-5">
+                            <asp:DropDownList ID="ddlProfesional" runat="server" class="form-control" DataTextField="Nombre" DataValueField="Codigo"></asp:DropDownList>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="crearRoles" onserverclick="crearRoles_ServerClick" runat="server" type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.launch-modal').click(function () {
+                $('#profesionalModal').modal({
+                    keyboard: true
+                });
+            });
+        });
+    </script>
 </asp:Content>

@@ -13,7 +13,7 @@
 
     <div class="panel panel-primary" id="form">
         <div class="panel-heading">
-            <h2 class="panel-title">Permisios del Rol</h2>
+            <span class="panel-title">Permisios del Rol</span>
         </div>
         <br />
         <div class="col-md-12">

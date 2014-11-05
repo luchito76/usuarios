@@ -13,6 +13,7 @@ namespace AdminRoles
     public partial class EditarUsuario : System.Web.UI.Page
     {
         UsuariosNego usuarioNego = new UsuariosNego();
+        ProfesionaNego profesionalNego = new ProfesionaNego();
 
         string clave = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
@@ -22,12 +23,20 @@ namespace AdminRoles
             validaSoloNumeros();
             alerta.Visible = false;
             mostrarUsuario();
+            llenarListas();
         }
 
         private void validaSoloNumeros()
         {
             txtDocumento.Attributes.Add("onkeypress",
       "return validarNumero(event,'" + btnGuardar.ClientID + "')");
+        }
+
+        private void llenarListas()
+        {
+            ddlProfesional.DataSource = profesionalNego.listaProfesionales().ToList();
+            ddlProfesional.DataBind();
+            ddlProfesional.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
         private void mostrarUsuario()
@@ -102,6 +111,27 @@ namespace AdminRoles
             ssoUsuario.Password = HashSHA1("12345");
 
             usuarioNego.actualizarUsuario(ssoUsuario);
+        }
+
+        protected void crearRoles_ServerClick(object sender, EventArgs e)
+        {
+            vincularProfesional();
+
+            txtProfesional.Value = ddlProfesional.SelectedItem.ToString();
+        }
+
+        private void vincularProfesional()
+        {
+            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+            SSO_StoredVariable vincularProfesional = new SSO_StoredVariable();
+
+            vincularProfesional.Name = "Common_Medicos";
+            vincularProfesional.TargetType = 3;
+            vincularProfesional.Target = idUsuario;
+            vincularProfesional.Value = ddlProfesional.SelectedValue;
+
+            profesionalNego.vincularProfesional(vincularProfesional);
         }
 
     }

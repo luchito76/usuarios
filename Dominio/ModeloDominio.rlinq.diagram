@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDiagrams>
-  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11.25, 8.75" name="ModeloDominio" isDefault="true">
+  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11.25, 9.625" name="ModeloDominio" isDefault="true">
     <DomainModelMoniker name="/ModeloDominio" />
     <nestedChildShapes>
       <classShape Id="b2535b2b-aff2-4a30-90b8-b2e6612dac40" absoluteBounds="2.5, 0.5, 1.5, 2.3396761067708334">
@@ -107,6 +107,22 @@
           <classShapeMoniker Id="a364dc32-e6ea-4b89-880e-07bc5aee1b93" />
         </nodes>
       </associationConnector>
+      <classShape Id="dfe2521c-e2b9-42b8-bca1-2263c8dfa769" absoluteBounds="2.5, 7, 1.5, 2.3396761067708329">
+        <DomainClassMoniker name="/ModeloDominio/SSO_StoredVariables_Template" />
+        <nestedChildShapes>
+          <elementListCompartment Id="a37503d2-5912-4785-8dcb-3f48c3d0367b" absoluteBounds="2.515, 7.51, 1.4700000000000002, 1.2108968098958333" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="f4d21bac-255a-42ac-9a09-b7d917bc812e" absoluteBounds="2.515, 8.7308968098958335, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="aa7cdc46-6882-45b0-8711-876d0e35f30f" absoluteBounds="2.515, 8.9902864583333333, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <classShape Id="3c37f152-32cf-44fc-b320-51e8c0fc3981" absoluteBounds="0.5, 6.625, 1.5, 2.1473746744791669">
+        <DomainClassMoniker name="/ModeloDominio/SSO_StoredVariable" />
+        <nestedChildShapes>
+          <elementListCompartment Id="f42180fc-2f1b-4217-9def-1f273559c5ec" absoluteBounds="0.515, 7.135, 1.4700000000000002, 1.0185953776041665" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="170a4b9d-ea66-4c94-a8b1-a6a1395df40a" absoluteBounds="0.515, 8.1635953776041674, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="bdf38d4d-51a9-42d5-ad61-2f089152df02" absoluteBounds="0.515, 8.4229850260416672, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
     </nestedChildShapes>
   </entityDiagramsDiagram>
 </EntityDiagrams>

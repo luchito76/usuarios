@@ -50,6 +50,7 @@
     <Compile Include="AplicacionesRepo.cs" />
     <Compile Include="ModulosRepo.cs" />
     <Compile Include="PermisosRepo.cs" />
+    <Compile Include="ProfesionalRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesRepo.cs" />
     <Compile Include="UsuariosRepo.cs" />

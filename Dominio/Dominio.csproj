@@ -68,6 +68,9 @@
     <Compile Include="SSO_GetPermisosXUsuarioResultSet0.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="SSO_GetProfesionalesResultSet0.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SSO_GetUsuariosXAplicacionResultSet0.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
@@ -90,6 +93,12 @@
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
     <Compile Include="SSO_RoleGroup.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_StoredVariable.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_StoredVariables_Template.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
     <Compile Include="SSO_User.generated.cs">

@@ -50,6 +50,7 @@
     <Compile Include="AplicacionesNego.cs" />
     <Compile Include="ModulosNego.cs" />
     <Compile Include="PermisosNego.cs" />
+    <Compile Include="ProfesionaNego.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesNego.cs" />
     <Compile Include="UsuariosNego.cs" />

@@ -464,6 +464,60 @@
           </orm:columnMapping>
         </orm:index>
       </orm:class>
+      <orm:class name="SSO_StoredVariables_Template" uniqueId="746a00b8-01c7-4457-88b4-55809943d226">
+        <orm:table name="SSO_StoredVariables_Templates" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="Id1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="c208a24a-c3cc-4610-9b55-c1f95c195f0d" type="System.Int32">
+          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="7e281ff5-ed22-42c7-a8fb-b8ddaf33906e" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Description1" property="Description" behavior="readwrite" uniqueId="dc0c54a0-9454-45a2-93e0-532c84d81317" type="System.String">
+          <orm:column name="description" sql-type="varchar(max)" nullable="false" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="Query1" property="Query" behavior="readwrite" uniqueId="d21cba39-e326-4799-9242-f02fc6eeba55" type="System.String">
+          <orm:column name="query" sql-type="varchar(max)" nullable="false" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="MultipleValues1" property="MultipleValues" behavior="readwrite" uniqueId="e4b4a99e-b99e-4fd0-81f1-85cbd034e313" type="System.Boolean">
+          <orm:column name="multipleValues" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:index name="IX_SSO_StoredVariables_Templates_1" unique="true">
+          <orm:columnMapping>
+            <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="SSO_StoredVariable" uniqueId="244e181b-4346-49d2-a9b6-9a75d0dfb641">
+        <orm:table name="SSO_StoredVariables" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="Name1" />
+            <orm:single-field field-name="TargetType1" />
+            <orm:single-field field-name="Target1" />
+            <orm:single-field field-name="Value1" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="1bb330a2-233c-4b45-b61d-5cf6c4c22b6e" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="TargetType1" property="TargetType" behavior="readwrite" uniqueId="0a1a0ccc-83f5-40a3-b0cf-dd9fb6627605" type="System.Int32">
+          <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Target1" property="Target" behavior="readwrite" uniqueId="5d944a8e-609c-4f08-8941-6756506aed01" type="System.Int32">
+          <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Value1" property="Value" behavior="readwrite" uniqueId="c79eab9f-a9ff-44ec-8481-e5b521544a34" type="System.Object">
+          <orm:column name="value" sql-type="sql_variant" nullable="false" length="0" scale="0" primary-key="true" ado-type="Variant" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="SSO_Users_Roles">
@@ -686,6 +740,24 @@
           </orm:columnMapping>
         </orm:index>
       </orm:table>
+      <orm:table name="SSO_StoredVariables_Templates">
+        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="description" sql-type="varchar(max)" nullable="false" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="query" sql-type="varchar(max)" nullable="false" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="multipleValues" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:index name="IX_SSO_StoredVariables_Templates_1" unique="true">
+          <orm:columnMapping>
+            <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="SSO_StoredVariables">
+        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="value" sql-type="sql_variant" nullable="false" length="0" scale="0" primary-key="true" ado-type="Variant" />
+      </orm:table>
       <orm:procedure name="SSO_GetAppByRol">
         <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
@@ -720,6 +792,9 @@
         <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_GetProfesionales">
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -729,7 +804,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.15;initial catalog=SSO_HOSPITAL;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO_Admin;user id=sa;password=ssecure</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -974,6 +1049,19 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="746a00b8-01c7-4457-88b4-55809943d226" name="SSO_StoredVariables_Template" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="c208a24a-c3cc-4610-9b55-c1f95c195f0d" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="dc0c54a0-9454-45a2-93e0-532c84d81317" name="Description" label="Description : String" kind="Persistent" fieldName="Description1" />
+      <Property Id="e4b4a99e-b99e-4fd0-81f1-85cbd034e313" name="MultipleValues" type="Boolean" label="MultipleValues : Boolean" kind="Persistent" fieldName="MultipleValues1" />
+      <Property Id="7e281ff5-ed22-42c7-a8fb-b8ddaf33906e" name="Name" label="Name : String" kind="Persistent" fieldName="Name1" />
+      <Property Id="d21cba39-e326-4799-9242-f02fc6eeba55" name="Query" label="Query : String" kind="Persistent" fieldName="Query1" />
+    </DomainClass>
+    <DomainClass Id="244e181b-4346-49d2-a9b6-9a75d0dfb641" name="SSO_StoredVariable" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="1bb330a2-233c-4b45-b61d-5cf6c4c22b6e" name="Name" label="Name : String" kind="Persistent" identity="true" fieldName="Name1" />
+      <Property Id="5d944a8e-609c-4f08-8941-6756506aed01" name="Target" type="Int32" label="Target : Int32" kind="Persistent" identity="true" fieldName="Target1" />
+      <Property Id="0a1a0ccc-83f5-40a3-b0cf-dd9fb6627605" name="TargetType" type="Int32" label="TargetType : Int32" kind="Persistent" identity="true" fieldName="TargetType1" />
+      <Property Id="c79eab9f-a9ff-44ec-8481-e5b521544a34" name="Value" type="Object" label="Value : Object" kind="Persistent" identity="true" fieldName="Value1" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
@@ -986,6 +1074,8 @@
         <entitySetProperty name="SSO_Permissions" namespace="Dominio" type="SSO_Permission" label="SSO_Permissions : IQueryable&lt;Dominio.SSO_Permission&gt;" />
         <entitySetProperty name="SSO_Modules" namespace="Dominio" type="SSO_Module" label="SSO_Modules : IQueryable&lt;Dominio.SSO_Module&gt;" />
         <entitySetProperty name="SSO_Applications" namespace="Dominio" type="SSO_Application" label="SSO_Applications : IQueryable&lt;Dominio.SSO_Application&gt;" />
+        <entitySetProperty name="SSO_StoredVariables_Templates" namespace="Dominio" type="SSO_StoredVariables_Template" label="SSO_StoredVariables_Templates : IQueryable&lt;Dominio.SSO_StoredVariables_Template&gt;" />
+        <entitySetProperty name="SSO_StoredVariables" namespace="Dominio" type="SSO_StoredVariable" label="SSO_StoredVariables : IQueryable&lt;Dominio.SSO_StoredVariable&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
@@ -1049,6 +1139,15 @@
         <domainMethodReturnShape>
           <domainMethodReferencesDomainMethodReturnShape Id="5e94f1e4-cf04-4da6-8a6d-23f3fd16e726">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetModulosXUsuarioResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="30137003-22be-4ffc-b60b-010605ce82a3">
+      <domainMethod name="SSO_GetProfesionales" storedProcedureName="'SSO_GetProfesionales'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="1874fa80-2cd7-4702-b063-ee1734358b15">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetProfesionalesResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>
@@ -1167,6 +1266,12 @@
         <Property Id="8ae2756d-f063-4d62-9918-987cb1e094bb" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
         <Property Id="a3057385-5929-4270-bbf4-f3f2757a5778" name="Descripcion" type="System.String" label="Descripcion : System.String" nullable="true" fieldName="_descripcion" />
         <Property Id="3e006202-0957-43dc-a5c9-16f58640fb99" name="Estado" type="System.Boolean" label="Estado : System.Boolean" fieldName="_estado" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="2515b6e2-58a6-4933-92c1-ca26c5520b43">
+      <domainMethodReturnShape name="SSO_GetProfesionalesResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="befd6ca1-2206-4e60-b794-6015f92ac6e0" name="Codigo" type="System.Int32" label="Codigo : System.Int32" fieldName="_codigo" />
+        <Property Id="0961cfaf-5f9b-4d64-bef2-34f2a207d579" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>
