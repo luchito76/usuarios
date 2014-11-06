@@ -23,5 +23,19 @@ namespace Repositorio
             dominio.Add(vincularProfesional);
             dominio.SaveChanges();
         }
+
+        public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
+        {
+            IEnumerable<SSO_StoredVariable> result = dominio.SSO_StoredVariables.Where(c => c.Target == idUsuario).ToList();
+
+            return result;
+        }
+
+        public IEnumerable<Sys_Profesional> listaProfesionalXIdProfesional(int idProfesional)
+        {
+            IEnumerable<Sys_Profesional> result = dominio.Sys_Profesionals.Where(c => c.IdProfesional == idProfesional).ToList();
+
+            return result;
+        }
     }
 }

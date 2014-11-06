@@ -53,6 +53,27 @@ namespace AdminRoles
             txtEmail.Text = ssoUsuario.Email;
             txtObservaciones.Text = ssoUsuario.Observacion;
             ViewState["Password"] = ssoUsuario.Password;
+
+            txtProfesional.Value = mostrarProfesionalVinculado();
+        }
+
+        private string mostrarProfesionalVinculado()
+        {
+            string profesional = string.Empty;
+            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+            SSO_StoredVariable storedVariable = new SSO_StoredVariable();
+            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario).FirstOrDefault();
+
+            Sys_Profesional nombreProfesional = new Sys_Profesional();
+
+            if (storedVariable != null)
+            {
+                nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
+                profesional = nombreProfesional.Nombre + " " + nombreProfesional.Apellido;
+            }
+
+            return profesional;
         }
 
         private void actualizarUsuario()
@@ -84,6 +105,7 @@ namespace AdminRoles
             }
             return sb.ToString();
         }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try

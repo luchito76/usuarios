@@ -518,6 +518,25 @@
           <orm:column name="value" sql-type="sql_variant" nullable="false" length="0" scale="0" primary-key="true" ado-type="Variant" />
         </orm:field>
       </orm:class>
+      <orm:class name="Sys_Profesional" uniqueId="e12cdb74-7cbf-4bea-873e-128f87969f91">
+        <orm:table name="Sys_Profesional" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="IdProfesional" />
+          </orm:key-generator>
+          <orm:single-field field-name="IdProfesional1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="IdProfesional1" property="IdProfesional" behavior="readwrite" uniqueId="6080d3b3-64b6-4db6-860c-646fb059468a" type="System.Int32">
+          <orm:column name="idProfesional" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Nombre1" property="Nombre" behavior="readwrite" uniqueId="d75c283b-9f56-4d58-a6a1-42cf29684cf2" type="System.String">
+          <orm:column name="Nombre" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="Apellido1" property="Apellido" behavior="readwrite" uniqueId="5fcb99f7-e135-4e98-a345-736acf932255" type="System.String">
+          <orm:column name="Apellido" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="SSO_Users_Roles">
@@ -758,6 +777,11 @@
         <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         <orm:column name="value" sql-type="sql_variant" nullable="false" length="0" scale="0" primary-key="true" ado-type="Variant" />
       </orm:table>
+      <orm:table name="Sys_Profesional">
+        <orm:column name="idProfesional" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Nombre" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Apellido" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
       <orm:procedure name="SSO_GetAppByRol">
         <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
@@ -804,7 +828,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO_Admin;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=.\recupero;initial catalog=SSO_HOSPITAL;user id=sa;password=zapala76</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1062,6 +1086,11 @@
       <Property Id="0a1a0ccc-83f5-40a3-b0cf-dd9fb6627605" name="TargetType" type="Int32" label="TargetType : Int32" kind="Persistent" identity="true" fieldName="TargetType1" />
       <Property Id="c79eab9f-a9ff-44ec-8481-e5b521544a34" name="Value" type="Object" label="Value : Object" kind="Persistent" identity="true" fieldName="Value1" />
     </DomainClass>
+    <DomainClass Id="e12cdb74-7cbf-4bea-873e-128f87969f91" name="Sys_Profesional" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="IdProfesional">
+      <Property Id="6080d3b3-64b6-4db6-860c-646fb059468a" name="IdProfesional" type="Int32" label="IdProfesional : Int32" kind="Persistent" identity="true" fieldName="IdProfesional1" />
+      <Property Id="5fcb99f7-e135-4e98-a345-736acf932255" name="Apellido" label="Apellido : String" kind="Persistent" fieldName="Apellido1" />
+      <Property Id="d75c283b-9f56-4d58-a6a1-42cf29684cf2" name="Nombre" label="Nombre : String" kind="Persistent" fieldName="Nombre1" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
@@ -1076,6 +1105,7 @@
         <entitySetProperty name="SSO_Applications" namespace="Dominio" type="SSO_Application" label="SSO_Applications : IQueryable&lt;Dominio.SSO_Application&gt;" />
         <entitySetProperty name="SSO_StoredVariables_Templates" namespace="Dominio" type="SSO_StoredVariables_Template" label="SSO_StoredVariables_Templates : IQueryable&lt;Dominio.SSO_StoredVariables_Template&gt;" />
         <entitySetProperty name="SSO_StoredVariables" namespace="Dominio" type="SSO_StoredVariable" label="SSO_StoredVariables : IQueryable&lt;Dominio.SSO_StoredVariable&gt;" />
+        <entitySetProperty name="Sys_Profesionals" namespace="Dominio" type="Sys_Profesional" label="Sys_Profesionals : IQueryable&lt;Dominio.Sys_Profesional&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

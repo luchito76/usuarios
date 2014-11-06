@@ -123,6 +123,14 @@
           <elementListCompartment Id="bdf38d4d-51a9-42d5-ad61-2f089152df02" absoluteBounds="0.515, 8.4229850260416672, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
+      <classShape Id="e9255809-b71a-42e2-b1ad-cb463705d1ab" absoluteBounds="4.5, 7.25, 1.5, 1.955073242187499">
+        <DomainClassMoniker name="/ModeloDominio/Sys_Profesional" />
+        <nestedChildShapes>
+          <elementListCompartment Id="c9beb2df-184d-4cf4-947f-d81112556c89" absoluteBounds="4.515, 7.76, 1.4700000000000002, 0.8262939453125" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="08a3fbc8-d7fb-4e6b-a52f-052b47ceeb09" absoluteBounds="4.515, 8.5962939453125, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="ef2e15d0-0842-4992-9ed0-ebb0b8a34b98" absoluteBounds="4.515, 8.85568359375, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
     </nestedChildShapes>
   </entityDiagramsDiagram>
 </EntityDiagrams>

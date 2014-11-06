@@ -130,6 +130,14 @@ namespace Dominio
 			}
 		}
 		
+		public IQueryable<Sys_Profesional> Sys_Profesionals 
+		{
+			get
+			{
+				return this.GetAll<Sys_Profesional>();
+			}
+		}
+		
 		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
 		{
 			int returnValue;
@@ -515,6 +523,10 @@ namespace Dominio
 			get;
 		}
 		IQueryable<SSO_StoredVariable> SSO_StoredVariables
+		{
+			get;
+		}
+		IQueryable<Sys_Profesional> Sys_Profesionals
 		{
 			get;
 		}

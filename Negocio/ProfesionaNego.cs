@@ -21,5 +21,15 @@ namespace Negocio
         {
             profesionalRepo.vincularProfesional(vincularProfesional);
         }
+
+        public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
+        {
+            return profesionalRepo.devuelveProfesionalXUsuario(idUsuario);
+        }
+
+        public IEnumerable<Sys_Profesional> listaProfesionalXIdProfesional(int idProfesional)
+        {
+            return profesionalRepo.listaProfesionalXIdProfesional(idProfesional);
+        }
     }
 }
