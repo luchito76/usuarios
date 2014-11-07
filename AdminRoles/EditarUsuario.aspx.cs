@@ -54,10 +54,33 @@ namespace AdminRoles
             txtObservaciones.Text = ssoUsuario.Observacion;
             ViewState["Password"] = ssoUsuario.Password;
 
-            txtProfesional.Value = mostrarProfesionalVinculado();
+            txtProfesional.Value = devuelveProfesionalVinculado();
+
+            if (devuelveIdProfesional() != 0)
+                ddlProfesional.Text = devuelveIdProfesional().ToString();
         }
 
-        private string mostrarProfesionalVinculado()
+        private int devuelveIdProfesional()
+        {
+            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+            int idProfesional = 0;
+
+            SSO_StoredVariable storedVariable = new SSO_StoredVariable();
+            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario).FirstOrDefault();
+
+            Sys_Profesional nombreProfesional = new Sys_Profesional();
+
+            if (storedVariable != null)
+            {
+                nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
+                idProfesional = nombreProfesional.IdProfesional;
+            }
+
+            return idProfesional;
+
+        }
+
+        private string devuelveProfesionalVinculado()
         {
             string profesional = string.Empty;
             int idUsuario = int.Parse(Request["idUsuario"].ToString());
@@ -135,18 +158,12 @@ namespace AdminRoles
             usuarioNego.actualizarUsuario(ssoUsuario);
         }
 
-        protected void crearRoles_ServerClick(object sender, EventArgs e)
-        {
-            vincularProfesional();
-
-            txtProfesional.Value = ddlProfesional.SelectedItem.ToString();
-        }
-
         private void vincularProfesional()
         {
             int idUsuario = int.Parse(Request["idUsuario"].ToString());
 
             SSO_StoredVariable vincularProfesional = new SSO_StoredVariable();
+
 
             vincularProfesional.Name = "Common_Medicos";
             vincularProfesional.TargetType = 3;
@@ -156,5 +173,11 @@ namespace AdminRoles
             profesionalNego.vincularProfesional(vincularProfesional);
         }
 
+        protected void btnGuardarProfesionalVinculado_ServerClick(object sender, EventArgs e)
+        {
+            vincularProfesional();
+
+            txtProfesional.Value = ddlProfesional.SelectedItem.ToString();
+        }
     }
 }

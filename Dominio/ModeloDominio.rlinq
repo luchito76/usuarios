@@ -506,7 +506,7 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="1bb330a2-233c-4b45-b61d-5cf6c4c22b6e" type="System.String">
-          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" primary-key="true" ado-type="StringVariableLength" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
         </orm:field>
         <orm:field name="TargetType1" property="TargetType" behavior="readwrite" uniqueId="0a1a0ccc-83f5-40a3-b0cf-dd9fb6627605" type="System.Int32">
           <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
@@ -772,7 +772,7 @@
         </orm:index>
       </orm:table>
       <orm:table name="SSO_StoredVariables">
-        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
         <orm:column name="targetType" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         <orm:column name="target" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         <orm:column name="value" sql-type="sql_variant" nullable="false" length="0" scale="0" primary-key="true" ado-type="Variant" />
@@ -817,6 +817,10 @@
         <orm:result-sets />
       </orm:procedure>
       <orm:procedure name="SSO_GetProfesionales">
+        <orm:result-sets />
+      </orm:procedure>
+      <orm:procedure name="SSO_Actualiza_StoredVariables">
+        <orm:procedure-parameter name="idUsuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -1178,6 +1182,15 @@
         <domainMethodReturnShape>
           <domainMethodReferencesDomainMethodReturnShape Id="1874fa80-2cd7-4702-b063-ee1734358b15">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetProfesionalesResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="fd8f9e3c-9221-43ee-ac6c-1f6617da9b97">
+      <domainMethod name="SSO_Actualiza_StoredVariables" storedProcedureName="'SSO_Actualiza_StoredVariables'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="5fd4e8ae-7ac0-4e5d-9b19-1039c5474fd1">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/Void" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>

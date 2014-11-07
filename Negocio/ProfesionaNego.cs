@@ -20,7 +20,7 @@ namespace Negocio
         public void vincularProfesional(SSO_StoredVariable vincularProfesional)
         {
             profesionalRepo.vincularProfesional(vincularProfesional);
-        }
+        }       
 
         public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
         {

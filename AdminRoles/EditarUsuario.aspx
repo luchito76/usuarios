@@ -72,7 +72,7 @@
                             <div class="input-group">
                                 <input type="text" id="txtProfesional" runat="server" class="form-control">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary launch-modal" type="button"><i class="fa fa-chain"></i></button>
+                                    <button id="" class="btn btn-primary launch-modal" type="button"><i class="fa fa-chain"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="crearRoles" onserverclick="crearRoles_ServerClick" runat="server" type="button" class="btn btn-primary">Guardar</button>
+                    <button id="btnGuardarProfesionalVinculado" onserverclick="btnGuardarProfesionalVinculado_ServerClick"  runat="server" type="button" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

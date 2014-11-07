@@ -20,9 +20,16 @@ namespace Repositorio
 
         public void vincularProfesional(SSO_StoredVariable vincularProfesional)
         {
+            borrarStoredVariable(vincularProfesional.Target);
+
             dominio.Add(vincularProfesional);
             dominio.SaveChanges();
         }
+
+        private void borrarStoredVariable(int idUsuario)
+        {
+            dominio.SSO_Actualiza_StoredVariables(idUsuario);
+        }       
 
         public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
         {

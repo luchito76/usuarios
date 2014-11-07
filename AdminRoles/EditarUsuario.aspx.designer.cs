@@ -202,12 +202,12 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.DropDownList ddlProfesional;
         
         /// <summary>
-        /// crearRoles control.
+        /// btnGuardarProfesionalVinculado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton crearRoles;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnGuardarProfesionalVinculado;
     }
 }

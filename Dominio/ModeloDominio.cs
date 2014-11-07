@@ -462,6 +462,39 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public int SSO_Actualiza_StoredVariables(int? idUsuario)
+		{
+			int returnValue;
+			return SSO_Actualiza_StoredVariables(idUsuario, out returnValue);
+		}
+		
+		public int SSO_Actualiza_StoredVariables(int? idUsuario, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdUsuario = new OAParameter();
+			parameterIdUsuario.ParameterName = "idUsuario";
+			if(idUsuario.HasValue)
+			{
+				parameterIdUsuario.Value = idUsuario.Value;
+			}
+			else
+			{
+				parameterIdUsuario.DbType = DbType.Int32;
+				parameterIdUsuario.Value = DBNull.Value;
+			}
+
+			int queryResult = this.ExecuteNonQuery("[dbo].[SSO_Actualiza_StoredVariables]", CommandType.StoredProcedure, parameterIdUsuario, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -546,6 +579,8 @@ namespace Dominio
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales();
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales(out int returnValue);
+		int SSO_Actualiza_StoredVariables(int? idUsuario);
+		int SSO_Actualiza_StoredVariables(int? idUsuario, out int returnValue);
 	}
 }
 #pragma warning restore 1591
