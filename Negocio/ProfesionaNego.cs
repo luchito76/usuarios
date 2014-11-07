@@ -27,7 +27,7 @@ namespace Negocio
             return profesionalRepo.devuelveProfesionalXUsuario(idUsuario);
         }
 
-        public IEnumerable<Sys_Profesional> listaProfesionalXIdProfesional(int idProfesional)
+        public IEnumerable<SSO_GetProfesionalXIdResultSet0> listaProfesionalXIdProfesional(int idProfesional)
         {
             return profesionalRepo.listaProfesionalXIdProfesional(idProfesional);
         }

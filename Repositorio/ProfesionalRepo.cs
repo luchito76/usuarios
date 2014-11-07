@@ -28,8 +28,8 @@ namespace Repositorio
 
         private void borrarStoredVariable(int idUsuario)
         {
-            dominio.SSO_Actualiza_StoredVariables(idUsuario);
-        }       
+            dominio.SSO_BorrarStoredVariable(idUsuario);
+        }
 
         public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
         {
@@ -38,9 +38,9 @@ namespace Repositorio
             return result;
         }
 
-        public IEnumerable<Sys_Profesional> listaProfesionalXIdProfesional(int idProfesional)
+        public IEnumerable<SSO_GetProfesionalXIdResultSet0> listaProfesionalXIdProfesional(int idProfesional)
         {
-            IEnumerable<Sys_Profesional> result = dominio.Sys_Profesionals.Where(c => c.IdProfesional == idProfesional).ToList();
+            IEnumerable<SSO_GetProfesionalXIdResultSet0> result = dominio.SSO_GetProfesionalXId(idProfesional).ToList();
 
             return result;
         }

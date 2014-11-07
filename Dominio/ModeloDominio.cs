@@ -462,13 +462,46 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public int SSO_Actualiza_StoredVariables(int? idUsuario)
+		public IEnumerable<SSO_GetProfesionalXIdResultSet0> SSO_GetProfesionalXId(int? idProfesional)
 		{
 			int returnValue;
-			return SSO_Actualiza_StoredVariables(idUsuario, out returnValue);
+			return SSO_GetProfesionalXId(idProfesional, out returnValue);
 		}
 		
-		public int SSO_Actualiza_StoredVariables(int? idUsuario, out int returnValue)
+		public IEnumerable<SSO_GetProfesionalXIdResultSet0> SSO_GetProfesionalXId(int? idProfesional, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdProfesional = new OAParameter();
+			parameterIdProfesional.ParameterName = "idProfesional";
+			if(idProfesional.HasValue)
+			{
+				parameterIdProfesional.Value = idProfesional.Value;
+			}
+			else
+			{
+				parameterIdProfesional.DbType = DbType.Int32;
+				parameterIdProfesional.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetProfesionalXIdResultSet0> queryResult = this.ExecuteQuery<SSO_GetProfesionalXIdResultSet0>("[dbo].[SSO_GetProfesionalXId]", CommandType.StoredProcedure, parameterIdProfesional, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
+		public int SSO_BorrarStoredVariable(int? idUsuario)
+		{
+			int returnValue;
+			return SSO_BorrarStoredVariable(idUsuario, out returnValue);
+		}
+		
+		public int SSO_BorrarStoredVariable(int? idUsuario, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
@@ -486,7 +519,7 @@ namespace Dominio
 				parameterIdUsuario.Value = DBNull.Value;
 			}
 
-			int queryResult = this.ExecuteNonQuery("[dbo].[SSO_Actualiza_StoredVariables]", CommandType.StoredProcedure, parameterIdUsuario, parameterReturnValue);
+			int queryResult = this.ExecuteNonQuery("[dbo].[SSO_BorrarStoredVariable]", CommandType.StoredProcedure, parameterIdUsuario, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -579,8 +612,10 @@ namespace Dominio
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales();
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales(out int returnValue);
-		int SSO_Actualiza_StoredVariables(int? idUsuario);
-		int SSO_Actualiza_StoredVariables(int? idUsuario, out int returnValue);
+		IEnumerable<SSO_GetProfesionalXIdResultSet0> SSO_GetProfesionalXId(int? idProfesional);
+		IEnumerable<SSO_GetProfesionalXIdResultSet0> SSO_GetProfesionalXId(int? idProfesional, out int returnValue);
+		int SSO_BorrarStoredVariable(int? idUsuario);
+		int SSO_BorrarStoredVariable(int? idUsuario, out int returnValue);
 	}
 }
 #pragma warning restore 1591

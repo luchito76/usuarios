@@ -68,12 +68,12 @@ namespace AdminRoles
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
             storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario).FirstOrDefault();
 
-            Sys_Profesional nombreProfesional = new Sys_Profesional();
+            SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
 
             if (storedVariable != null)
             {
                 nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
-                idProfesional = nombreProfesional.IdProfesional;
+                idProfesional = nombreProfesional.Codigo;
             }
 
             return idProfesional;
@@ -88,12 +88,12 @@ namespace AdminRoles
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
             storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario).FirstOrDefault();
 
-            Sys_Profesional nombreProfesional = new Sys_Profesional();
+            SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
 
             if (storedVariable != null)
             {
                 nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
-                profesional = nombreProfesional.Nombre + " " + nombreProfesional.Apellido;
+                profesional = nombreProfesional.Nombre + " " + nombreProfesional.Nombre;
             }
 
             return profesional;
