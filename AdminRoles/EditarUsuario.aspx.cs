@@ -14,7 +14,7 @@ namespace AdminRoles
     {
         UsuariosNego usuarioNego = new UsuariosNego();
         ProfesionaNego profesionalNego = new ProfesionaNego();
-
+        //Prueba con dos repositorios
         string clave = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
