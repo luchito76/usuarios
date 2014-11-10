@@ -20,7 +20,7 @@ namespace Negocio
         public void vincularProfesional(SSO_StoredVariable vincularProfesional)
         {
             profesionalRepo.vincularProfesional(vincularProfesional);
-        }       
+        }
 
         public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
         {
@@ -30,6 +30,16 @@ namespace Negocio
         public IEnumerable<SSO_GetProfesionalXIdResultSet0> listaProfesionalXIdProfesional(int idProfesional)
         {
             return profesionalRepo.listaProfesionalXIdProfesional(idProfesional);
+        }
+
+        public void guardaProfesionalEnGuardia(int idProfesional, bool estado)
+        {
+            profesionalRepo.guardaProfesionalEnGuardia(idProfesional, estado);
+        }
+
+        public IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> listaProfesionalesEnGuardiaXIdProfesional(int idProfesional)
+        {
+            return profesionalRepo.listaProfesionalesEnGuardiaXIdProfesional(idProfesional);
         }
     }
 }

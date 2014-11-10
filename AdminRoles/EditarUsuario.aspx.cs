@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 using System.Text;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace AdminRoles
 {
@@ -14,16 +16,20 @@ namespace AdminRoles
     {
         UsuariosNego usuarioNego = new UsuariosNego();
         ProfesionaNego profesionalNego = new ProfesionaNego();
-        
-        string clave = string.Empty;
+                
+
+        //string clave = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["idUsuario"] = Request["idUsuario"].ToString();
+
             if (IsPostBack) return;
 
             validaSoloNumeros();
             alerta.Visible = false;
             mostrarUsuario();
-            llenarListas();
+            llenarListas();           
         }
 
         private void validaSoloNumeros()
@@ -41,7 +47,9 @@ namespace AdminRoles
 
         private void mostrarUsuario()
         {
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+            int idUsuario =  int.Parse(Session["idUsuario"].ToString());//int.Parse(Request["idUsuario"].ToString());
+
+            //Idusuario = int.Parse(Request["idUsuario"].ToString());
 
             SSO_User ssoUsuario = new SSO_User();
             ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
@@ -52,7 +60,7 @@ namespace AdminRoles
             txtDocumento.Text = ssoUsuario.Documento.ToString();
             txtEmail.Text = ssoUsuario.Email;
             txtObservaciones.Text = ssoUsuario.Observacion;
-            ViewState["Password"] = ssoUsuario.Password;
+            //ViewState["Password"] = ssoUsuario.Password;
 
             txtProfesional.Value = devuelveProfesionalVinculado();
 
@@ -60,9 +68,24 @@ namespace AdminRoles
                 ddlProfesional.Text = devuelveIdProfesional().ToString();
         }
 
+        public string trabajaEnGuardia()
+        {
+            string esGuardia = string.Empty;
+            int idProfesional = devuelveIdProfesional();
+
+            IList<SSO_GetProfesionalesXGuardiaResultSet0> lista = profesionalNego.listaProfesionalesEnGuardiaXIdProfesional(idProfesional).ToList();
+
+            if (lista.Count == 0)
+                esGuardia = "false";
+            else
+                esGuardia = "true";
+
+            return esGuardia.ToString().ToLower();
+        }
+
         private int devuelveIdProfesional()
         {
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());  //int.Parse(Request["idUsuario"].ToString());
             int idProfesional = 0;
 
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
@@ -77,7 +100,6 @@ namespace AdminRoles
             }
 
             return idProfesional;
-
         }
 
         private string devuelveProfesionalVinculado()
@@ -148,7 +170,7 @@ namespace AdminRoles
 
         protected void btnResetClave_Click(object sender, EventArgs e)
         {
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
             SSO_User ssoUsuario = new SSO_User();
             ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
@@ -160,10 +182,9 @@ namespace AdminRoles
 
         private void vincularProfesional()
         {
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
             SSO_StoredVariable vincularProfesional = new SSO_StoredVariable();
-
 
             vincularProfesional.Name = "Common_Medicos";
             vincularProfesional.TargetType = 3;
@@ -175,9 +196,21 @@ namespace AdminRoles
 
         protected void btnGuardarProfesionalVinculado_ServerClick(object sender, EventArgs e)
         {
-            vincularProfesional();
+            vincularProfesional();                     
 
             txtProfesional.Value = ddlProfesional.SelectedItem.ToString();
+        }
+
+        [ScriptMethod(), WebMethod()]
+        public static void trabajaEnGuardia(bool estado)
+        {
+            ProfesionaNego profesionalNego = new ProfesionaNego();
+            EditarUsuario editarUsuario = new EditarUsuario();
+
+            bool trabajaEnGuardia = estado;
+            int idProfesional = editarUsuario.devuelveIdProfesional();//  int.Parse(HttpContext.Current.Session["idProfesional"].ToString());
+
+            profesionalNego.guardaProfesionalEnGuardia(idProfesional, estado);
         }
     }
 }

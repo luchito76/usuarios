@@ -537,6 +537,22 @@
           <orm:column name="Apellido" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
         </orm:field>
       </orm:class>
+      <orm:class name="Guardia_Medicos_Funcione" discriminator-value="idMedico" uniqueId="bc4a4e02-d09c-428b-9743-cc8370832ba7">
+        <orm:table name="Guardia_Medicos_Funciones" />
+        <orm:identity>
+          <orm:single-field field-name="IdMedico1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:discriminator discriminator-value="idMedico">
+          <orm:column name="idMedico" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:discriminator>
+        <orm:field name="IdMedico1" property="IdMedico" behavior="readwrite" uniqueId="1fdd9f0a-76a7-43f2-8b47-85aa16a2541d" type="System.Int32">
+          <orm:column name="idMedico" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="IdFuncion1" property="IdFuncion" behavior="readwrite" uniqueId="84999ffb-0c58-4fc9-94d1-e5c51cbd4555" type="System.String">
+          <orm:column name="idFuncion" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="SSO_Users_Roles">
@@ -782,6 +798,10 @@
         <orm:column name="Nombre" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
         <orm:column name="Apellido" sql-type="varchar" nullable="true" length="30" scale="0" ado-type="StringVariableLength" />
       </orm:table>
+      <orm:table name="Guardia_Medicos_Funciones">
+        <orm:column name="idMedico" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="idFuncion" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
       <orm:procedure name="SSO_GetAppByRol">
         <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
@@ -825,6 +845,15 @@
       </orm:procedure>
       <orm:procedure name="SSO_BorrarStoredVariable">
         <orm:procedure-parameter name="idUsuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
+      <orm:procedure name="SSO_SetProfesionalEnGuardia">
+        <orm:procedure-parameter name="idProfesional" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="estado" sql-type="bit" nullable="true" length="0" scale="0" ado-type="Bit" mode="in" type="System.Nullable`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
+      <orm:procedure name="SSO_GetProfesionalesXGuardia">
+        <orm:procedure-parameter name="idProfesional" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -1099,6 +1128,10 @@
       <Property Id="5fcb99f7-e135-4e98-a345-736acf932255" name="Apellido" label="Apellido : String" kind="Persistent" fieldName="Apellido1" />
       <Property Id="d75c283b-9f56-4d58-a6a1-42cf29684cf2" name="Nombre" label="Nombre : String" kind="Persistent" fieldName="Nombre1" />
     </DomainClass>
+    <DomainClass Id="bc4a4e02-d09c-428b-9743-cc8370832ba7" name="Guardia_Medicos_Funcione" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="1fdd9f0a-76a7-43f2-8b47-85aa16a2541d" name="IdMedico" type="Int32" label="IdMedico : Int32" kind="Persistent" identity="true" fieldName="IdMedico1" />
+      <Property Id="84999ffb-0c58-4fc9-94d1-e5c51cbd4555" name="IdFuncion" label="IdFuncion : String" kind="Persistent" fieldName="IdFuncion1" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
@@ -1114,6 +1147,7 @@
         <entitySetProperty name="SSO_StoredVariables_Templates" namespace="Dominio" type="SSO_StoredVariables_Template" label="SSO_StoredVariables_Templates : IQueryable&lt;Dominio.SSO_StoredVariables_Template&gt;" />
         <entitySetProperty name="SSO_StoredVariables" namespace="Dominio" type="SSO_StoredVariable" label="SSO_StoredVariables : IQueryable&lt;Dominio.SSO_StoredVariable&gt;" />
         <entitySetProperty name="Sys_Profesionals" namespace="Dominio" type="Sys_Profesional" label="Sys_Profesionals : IQueryable&lt;Dominio.Sys_Profesional&gt;" />
+        <entitySetProperty name="Guardia_Medicos_Funciones" namespace="Dominio" type="Guardia_Medicos_Funcione" label="Guardia_Medicos_Funciones : IQueryable&lt;Dominio.Guardia_Medicos_Funcione&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
@@ -1204,6 +1238,15 @@
         <domainMethodReturnShape>
           <domainMethodReferencesDomainMethodReturnShape Id="30fab07c-8eec-4b6a-948b-8f7f9544d7b9">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/Void" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="55e56f30-dde3-463c-9f38-20e93686de73">
+      <domainMethod name="SSO_GetProfesionalesXGuardia" storedProcedureName="'SSO_GetProfesionalesXGuardia'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="9d0374e6-b7a4-4269-a189-0c03d3fcb672">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetProfesionalesXGuardiaResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>
@@ -1334,6 +1377,18 @@
       <domainMethodReturnShape name="SSO_GetProfesionalXIdResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
         <Property Id="a89b7b7d-be34-4076-9e0d-a2a9e1c834e0" name="Codigo" type="System.Int32" label="Codigo : System.Int32" fieldName="_codigo" />
         <Property Id="55243242-d409-4ce9-9484-67d7004c5126" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="e75e01b6-44b0-4fde-8d6a-b4e7256e1142">
+      <domainMethodReturnShape name="Guardia_Medicos_Funcione" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="PersistentType" />
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="8dbb445f-f628-46bd-ba0f-8db4468c408d">
+      <domainMethodReturnShape name="Guid" namespace="System" showPropertiesCompartment="true" domainMethodType="PrimitiveType" />
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="b26378d5-2b48-43c9-9c9f-ed780ab56866">
+      <domainMethodReturnShape name="SSO_GetProfesionalesXGuardiaResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="c64af217-8354-40d2-8e4b-8b187e23532f" name="idMedico" type="System.Int32" label="idMedico : System.Int32" fieldName="_idMedico" />
+        <Property Id="48a862e3-0e95-484d-b41e-d0a10b5ffc81" name="idFuncion" type="System.String" label="idFuncion : System.String" fieldName="_idFuncion" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

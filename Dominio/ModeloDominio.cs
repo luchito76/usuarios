@@ -138,6 +138,14 @@ namespace Dominio
 			}
 		}
 		
+		public IQueryable<Guardia_Medicos_Funcione> Guardia_Medicos_Funciones 
+		{
+			get
+			{
+				return this.GetAll<Guardia_Medicos_Funcione>();
+			}
+		}
+		
 		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
 		{
 			int returnValue;
@@ -528,6 +536,39 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> SSO_GetProfesionalesXGuardia(int? idProfesional)
+		{
+			int returnValue;
+			return SSO_GetProfesionalesXGuardia(idProfesional, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> SSO_GetProfesionalesXGuardia(int? idProfesional, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdProfesional = new OAParameter();
+			parameterIdProfesional.ParameterName = "idProfesional";
+			if(idProfesional.HasValue)
+			{
+				parameterIdProfesional.Value = idProfesional.Value;
+			}
+			else
+			{
+				parameterIdProfesional.DbType = DbType.Int32;
+				parameterIdProfesional.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> queryResult = this.ExecuteQuery<SSO_GetProfesionalesXGuardiaResultSet0>("[dbo].[SSO_GetProfesionalesXGuardia]", CommandType.StoredProcedure, parameterIdProfesional, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -596,6 +637,10 @@ namespace Dominio
 		{
 			get;
 		}
+		IQueryable<Guardia_Medicos_Funcione> Guardia_Medicos_Funciones
+		{
+			get;
+		}
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
@@ -616,6 +661,8 @@ namespace Dominio
 		IEnumerable<SSO_GetProfesionalXIdResultSet0> SSO_GetProfesionalXId(int? idProfesional, out int returnValue);
 		int SSO_BorrarStoredVariable(int? idUsuario);
 		int SSO_BorrarStoredVariable(int? idUsuario, out int returnValue);
+		IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> SSO_GetProfesionalesXGuardia(int? idProfesional);
+		IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> SSO_GetProfesionalesXGuardia(int? idProfesional, out int returnValue);
 	}
 }
 #pragma warning restore 1591

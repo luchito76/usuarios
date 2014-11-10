@@ -131,6 +131,14 @@
           <elementListCompartment Id="ef2e15d0-0842-4992-9ed0-ebb0b8a34b98" absoluteBounds="4.515, 8.85568359375, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
+      <classShape Id="ec016357-2f5a-46a7-a3fe-dd9d77f8b7c4" absoluteBounds="9.25, 6, 1.5, 1.7627718098958329">
+        <DomainClassMoniker name="/ModeloDominio/Guardia_Medicos_Funcione" />
+        <nestedChildShapes>
+          <elementListCompartment Id="d12b504a-3b32-473a-9775-fd5bd2f279b0" absoluteBounds="9.265, 6.51, 1.4700000000000002, 0.63399251302083326" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="d4e54114-930d-4f16-9adb-04d618de9a95" absoluteBounds="9.265, 7.1539925130208335, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="24b0af42-0b9f-42d8-8528-7cf12719fdf1" absoluteBounds="9.265, 7.4133821614583333, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
     </nestedChildShapes>
   </entityDiagramsDiagram>
 </EntityDiagrams>

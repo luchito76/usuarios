@@ -76,6 +76,15 @@
                                 </span>
                             </div>
                         </div>
+
+                        <b>
+                            <asp:Label ID="Label1" runat="server" Text="Trabaja En Guardia" for="option1" class="col-sm-2 control-label">      
+                            </asp:Label></b>
+                        <div class="col-sm-3">
+                            <label for="LIbretaSanitaria" class="checkbox inline">
+                                <input name="trabajaEnGuardia" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
+                            </label>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -118,7 +127,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btnGuardarProfesionalVinculado" onserverclick="btnGuardarProfesionalVinculado_ServerClick"  runat="server" type="button" class="btn btn-primary">Guardar</button>
+                    <button id="btnGuardarProfesionalVinculado" onserverclick="btnGuardarProfesionalVinculado_ServerClick" runat="server" type="button" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -136,5 +145,25 @@
                 });
             });
         });
+
+        $("[name='trabajaEnGuardia']").bootstrapSwitch('state', <%= trabajaEnGuardia() %>, <%= trabajaEnGuardia() %>).on('switchChange.bootstrapSwitch', function (event, state) {
+
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("EditarUsuario.aspx/trabajaEnGuardia")%>',
+                data: "{'estado':'" + state + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //alert("Bien");
+                },
+                error: function (e) {
+                    alert("Mal");
+                }
+            });
+
+
+        });
+
     </script>
 </asp:Content>
