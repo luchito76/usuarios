@@ -67,8 +67,7 @@
                 llamada = "aplicacion";
             else
                 llamada = "usuario";
-
-            //window.open("Modulos.aspx?nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                            
             window.open("Modulos.aspx?llamada=" + llamada + "&nombreAplicacion=" + nombreAplicacion +  "&idAplicacion=" + idAplicacion + "&idRol=" + idRol + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
         }
     </script>
@@ -120,7 +119,7 @@
                             window.location = window.location.href;
                         },
                         error: function (e) {
-                            alert("Mal");                            
+                            alert("Error");                            
                         }
                     });  
                 })                

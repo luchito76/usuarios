@@ -268,9 +268,14 @@ namespace AdminRoles
             {
                 idRoleGroup = data.Id;
 
+                if (HttpContext.Current.Request.QueryString["llamada"] == "aplicacion")
+                {
+                    borrarPermisos(idRoleGroup);
+                    borrarRoleGroups(idRoleGroup);
+                }
+
                 borrarPermisosCache(idRoleGroup);
-                borrarRoleGroups(idRoleGroup);
-                borrarPermisos(idRoleGroup);
+                
             }
         }
 
