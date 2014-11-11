@@ -1,79 +1,109 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="AdminRoles.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="WebInternacion2.Site1" %>
 
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="es-AR">
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-control" content="no-cache">
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <meta charset="utf-8">
+    <title>Subsecretaría de Salud - Sistema Integral Provincial de Salud</title>
+    <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="style.responsive.css" media="all">
+    <link rel="stylesheet" type="text/css" href="App_Themes/default/principal/style.css"
+        media="screen" />
 
-    <%--<asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>--%>
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <%--<script type="text/javascript" src="/sips/js/jquery.min.js"></script>    --%>
+    
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/sips/js/script.js"></script>
+    <script type="text/javascript" src="/sips/js/script.responsive.js"></script>
 
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Content/bootstrap-table.css" rel="stylesheet" />
-    <link href="Content/bootstrap-switch.css" rel="stylesheet" />
-    <link href="Content/bootstrap-progressbar-3.2.0.css" rel="stylesheet" />
-    <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
+    <!--Bootsrap-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
-    <form class="form-horizontal" runat="server" method="post">
-
-        <script src="Scripts/jquery-1.10.2.js"></script>
-        <script src="Scripts/bootstrap.js"></script>
-        <script src="Scripts/bootstrap-table.js"></script>
-        <script src="Scripts/bootstrap-switch.js"></script>
-        <script src="Scripts/bootstrap-progressbar.js"></script>
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+    <form id="form1" runat="server">
+    <div id="art-sheet">
+        <header class="art-header clearfix">
+            <div class="art-shapes">
+                <div class="art-logoDiv">
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/AdminRoles.aspx">Admin. Perfiles</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
-                    </ul>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Register</a></li>
-                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
-                                <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                </li>
-                            </ul>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
+                <div class="art-systemDiv">
+                    <strong>
+                        <asp:Label ID="lblSistema" runat="server" Text="SISTEMA INTEGRADO PROVINCIAL DE SALUD" />
+                    </strong>
+                    <div id="EfectorDiv">
+                        <asp:Label ID="lblEfector" runat="server" />
+                    </div>
+                </div>
+                <div class="art-datousrM">
+                   <%-- <asp:ImageButton ID="ImgHomeSip" runat="server" ImageUrl="~/App_Themes/default/images/desktop.png" CssClass="art-imgs"
+                        ToolTip="Inicio SIPS" />--%>
+                    <asp:ImageButton ID="ImgHomeSystem" runat="server" ImageUrl="~/App_Themes/default/images/home.png" CssClass="art-imgs"
+                        ToolTip="Página principal" />
+                    <asp:ImageButton ID="ImgChangePass" runat="server" ImageUrl="~/App_Themes/default/images/config.png" CssClass="art-imgs"
+                        ToolTip="Datos Usuario" />
+                    <asp:ImageButton ID="ImgExit" runat="server" ImageUrl="~/App_Themes/default/images/shut-down.png" CssClass="art-imgs"
+                        ToolTip="Cerrar Sesión. Salir del Sistema" />
+                    <br />
+                    Usuario:
+                    <asp:Label ID="lblUsr" runat="server" />
                 </div>
             </div>
+        </header>
+        <nav class="art-nav clearfix">
+            <asp:ListView runat="server" ID="lvMenuSSO" EnableTheming="True" ItemPlaceholderID="menuItem"
+                OnItemDataBound="lvMenuSSO_ItemDataBound">
+                <LayoutTemplate>
+                    <ul class="art-hmenu clearfix">
+                        <asp:PlaceHolder ID="menuItem" runat="server" />
+                    </ul>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <li><a href="#" id="hlMenu" runat="server" class="active">
+                        <%# Eval("text") %></a>
+                        <asp:ListView runat="server" ID="lvSubMenuSSO" EnableTheming="True" ItemPlaceholderID="menuSubItem">
+                            <LayoutTemplate>
+                                <ul class="active">
+                                    <asp:PlaceHolder ID="menuSubItem" runat="server" />
+                                </ul>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <li>
+                                    <asp:HyperLink ID="hlMenu2" runat="server" NavigateUrl='<%# Page.ResolveUrl("~/" +Eval("url").ToString()) %>'> 
+                         <%# Eval("text") %>
+                                    </asp:HyperLink>
+                                </li>
+                            </ItemTemplate>
+                        </asp:ListView>
+                    </li>
+                </ItemTemplate>
+            </asp:ListView>
+        </nav>
+        <div id="subheader">
+            <%--<div class="tit">
+                Consultorio<br />
+            </div>--%>
         </div>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
+        <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="Superior" runat="server">
+        </asp:ContentPlaceHolder>
+        <div id="main">
+            <div id="leftside">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="Botones" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
+        <footer class="art-footer clearfix">
+            <p>
+                Copyright © 2013. Subsecretaría de Salud de Neuquén - Dirección Gral. de TIC'S</p>
+        </footer>
+    </div>
     </form>
 </body>
 </html>

@@ -9,6 +9,7 @@ using Negocio;
 using Newtonsoft.Json;
 using System.Web.Services;
 using System.Web.Script.Services;
+using Salud.Security.SSO;
 
 namespace AdminRoles
 {
@@ -42,7 +43,13 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;
+            if (IsPostBack) return;                       
+
+            SSOHelper.Authenticate();
+            if (SSOHelper.CurrentIdentity == null)
+            {
+                SSOHelper.RedirectToSSOPage("Login.aspx", Request.Url.ToString());
+            }
 
             llenarListas();
             devuelveEfector();
@@ -60,7 +67,7 @@ namespace AdminRoles
         public string devuelveEfector()
         {
             Session["efector"] = "Chos Malal";
-            Session["idEfector"] = 693; //IdEfector de Chos Malal
+            Session["idEfector"] = 693;//SSOHelper.CurrentIdentity.IdEfector;//  //IdEfector de Chos Malal
 
             string efector = Session["efector"].ToString();
 
