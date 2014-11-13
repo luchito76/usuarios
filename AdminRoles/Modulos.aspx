@@ -54,7 +54,7 @@
 
             jQuery(document).ready(function() {             
                 var estado = row.Estado;                    
-
+                alert("Estado: " + estado);
                 $("[name='" + row.IdModulo + "']").bootstrapSwitch('onText', '<i class="fa fa-power-off"></i>');  
                 $("[name='" + row.IdModulo + "']").bootstrapSwitch('offText', '<i class="fa fa-power-off"></i>'); 
                 

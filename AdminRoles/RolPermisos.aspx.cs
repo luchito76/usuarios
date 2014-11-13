@@ -20,6 +20,18 @@ namespace AdminRoles
         PermisosNego permisoNego = new PermisosNego();
         UsuariosNego usuarioNego = new UsuariosNego();
 
+        public int IdEfector
+        {
+            get { return int.Parse(Session["idEfector"].ToString()); }
+            set { dynamic IdEfector = int.Parse(Session["idEfector"].ToString()); }
+        }
+
+        public int IdUsuario
+        {
+            get { return int.Parse(Request["idUsuario"].ToString()); }
+            set { dynamic IdUsuario = int.Parse(Request["idUsuario"].ToString()); }
+        }
+
         public string nomApp = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -29,8 +41,6 @@ namespace AdminRoles
             llenarListas();
 
             mostrarTablas();
-
-            hdnIdEfector.Value = Session["idEfector"].ToString();
         }
 
         private void llenarListas()
@@ -61,20 +71,20 @@ namespace AdminRoles
         private List<SSO_Application> quitarAplicacionesDuplicadas()
         {
             int idRol = devuelveIdRol();
-            int idEfector = int.Parse(Session["idEfector"].ToString());
-            int idUsuario = 0;
+            //int idUsuario = 0;
 
             HashSet<int> listaResultado;
 
-            if (Request["idUsuario"] == null)
+            //if (Request["idUsuario"] == null)
+            if (IdUsuario == 0)
             {
-                List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
+                List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, IdEfector).ToList();
                 listaResultado = new HashSet<int>(listaAppXRol.Select(s => s.idAplicacion));
             }
             else
             {
-                idUsuario = int.Parse(Request["idUsuario"].ToString());
-                List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(idUsuario, idEfector).ToList();
+                //idUsuario = int.Parse(Request["idUsuario"].ToString());
+                List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
                 listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.idAplicacion));
             }
 
@@ -117,9 +127,8 @@ namespace AdminRoles
             string json = string.Empty;
 
             int idRol = devuelveIdRol();
-            int idEfector = int.Parse(Session["idEfector"].ToString());
 
-            List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, idEfector).ToList();
+            List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(idRol, IdEfector).ToList();
 
             return json = JsonConvert.SerializeObject(listaAppXRol);
         }
@@ -129,12 +138,11 @@ namespace AdminRoles
             string json = string.Empty;
 
             int idUsuario = 0;
-            int idEfector = int.Parse(Session["idEfector"].ToString());
 
             if (Request["idUsuario"] != null)
                 idUsuario = int.Parse(Request["idUsuario"].ToString());
 
-            List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(idUsuario, idEfector).ToList();
+            List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(idUsuario, IdEfector).ToList();
 
             return json = JsonConvert.SerializeObject(listaAppXUsuario, Formatting.Indented);
         }
@@ -172,15 +180,14 @@ namespace AdminRoles
 
         private void guardaRoleGroups(int idAplicacion)
         {
-            int idEfector = int.Parse(Session["idEfector"].ToString());
             int idRol = int.Parse(Request["rolId"].ToString());
 
-            if (roleNego.esAplicacionEnRoleGroup(idEfector, idRol, idAplicacion))
+            if (roleNego.esAplicacionEnRoleGroup(IdEfector, idRol, idAplicacion))
             {
                 SSO_RoleGroup rolGroup = new SSO_RoleGroup();
 
                 rolGroup.IdAplicacion = idAplicacion;
-                rolGroup.IdEfector = idEfector;
+                rolGroup.IdEfector = IdEfector;
                 rolGroup.IdPerfil = idRol;
                 rolGroup.AutomaticName = true;
 
@@ -200,14 +207,13 @@ namespace AdminRoles
         {
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
 
-            int idEfector = int.Parse(Session["idEfector"].ToString());
             int idRol = int.Parse(Request["rolId"].ToString());
             int? source = 0;
 
-            if (roleNego.esAplicacionEnRoleGroup(idEfector, idRol, idAplicacion))
+            if (roleNego.esAplicacionEnRoleGroup(IdEfector, idRol, idAplicacion))
                 source = ultimoIdRolGroup();
             else
-                source = roleNego.devuelveIdRolGroup(idEfector, idRol, idAplicacion);
+                source = roleNego.devuelveIdRolGroup(IdEfector, idRol, idAplicacion);
 
             foreach (SSO_Module data in listaModulosXAplicacion)
             {

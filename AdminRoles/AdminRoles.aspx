@@ -289,8 +289,7 @@
                             $('.progress .progress-bar').progressbar().hide();
                         },
                         error: function (e) {
-                            alert("Mal");
-
+                            alert("Error!");
                         }
                     });
                 })

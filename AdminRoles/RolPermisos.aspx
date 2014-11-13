@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="myScriptManager" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
-
-    <asp:HiddenField ID="hdnIdEfector" runat="server" />
+        
     <asp:HiddenField ID="hdIdAplicacion" runat="server" />
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />
     <asp:HiddenField ID="hdnNombreRol" runat="server" />
@@ -108,8 +107,8 @@
                 $(document).ready(function () {
 
                     var idRol = '<%= devuelveIdRol() %>';
-                    var idEfector = document.getElementById('<%= hdnIdEfector.ClientID %>').value;
-                    
+                    var idEfector = '<%= IdEfector %>'; 
+                    alert(idEfector);
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
