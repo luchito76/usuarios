@@ -106,20 +106,20 @@
             'click .eliminar': function (e, value, row, index) {                 
                 $(document).ready(function () {
 
-                    var idRol = '<%= devuelveIdRol() %>';
+                    var idPerfil = '<%= IdPerfil %>' <%--'<%= devuelveIdRol() %>';--%>
                     var idEfector = '<%= IdEfector %>'; 
-                    alert(idEfector);
+                    
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
-                        data: "{'idEfector':'" + idEfector + "', 'idPerfil':'" + idRol + "', 'idAplicacion':'" + row.idAplicacion + "'}",                        
+                        data: "{'idEfector':'" + idEfector + "', 'idPerfil':'" + idPerfil + "', 'idAplicacion':'" + row.idAplicacion + "'}",                        
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (msg) {                            
                             window.location = window.location.href;
                         },
                         error: function (e) {
-                            alert("Mal");                            
+                            alert("Error");                            
                         }
                     });  
                 })                
@@ -142,9 +142,9 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
 
-                var idRol = '<%= devuelveIdRol() %>';
+                var idPerfil = '<%= IdPerfil %>';
                 
-                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idPerfil,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
 
