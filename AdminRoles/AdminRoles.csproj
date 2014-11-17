@@ -39,6 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Salud.Applications.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Salud.Applications.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Salud.Security.SSO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Salud.Security.SSO.dll</HintPath>
@@ -181,6 +185,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
     <Content Include="EditarUsuario.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Modulos.aspx" />
@@ -194,6 +199,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="connectionstrings.config" />
+    <None Include="Properties\PublishProfiles\SSO_Admin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RolPermisos.aspx" />
     <Content Include="Scripts\bootstrap-progressbar.js" />
@@ -233,29 +239,22 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Site_OLD.Master" />
+    <Content Include="Site.Master" />
     <Content Include="UsuariosXAplicacion.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web_OLD.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Bundle.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
-    <Content Include="Site.Master" />
-    <Content Include="Web.config" />
+    <Content Include="Site_back.Master" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web_OLD.Debug.config">
-      <DependentUpon>Web_OLD.config</DependentUpon>
-    </None>
-    <None Include="Web_OLD.Release.config">
-      <DependentUpon>Web_OLD.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -380,19 +379,19 @@
     <Compile Include="RolPermisos.aspx.designer.cs">
       <DependentUpon>RolPermisos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site_back.Master.cs">
+      <DependentUpon>Site_back.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site_back.Master.designer.cs">
+      <DependentUpon>Site_back.Master</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site_OLD.Master.cs">
-      <DependentUpon>Site_OLD.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site_OLD.Master.designer.cs">
-      <DependentUpon>Site_OLD.Master</DependentUpon>
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>

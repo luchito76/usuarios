@@ -9,6 +9,7 @@ using Negocio;
 using Newtonsoft.Json;
 using System.Web.Services;
 using System.Web.Script.Services;
+using Salud.Security.SSO;
 
 namespace AdminRoles
 {
@@ -61,7 +62,7 @@ namespace AdminRoles
         private List<SSO_Application> quitarAplicacionesDuplicadas()
         {
             int idRol = devuelveIdRol();
-            int idEfector = int.Parse(Session["idEfector"].ToString());
+            int idEfector = SSOHelper.CurrentIdentity.IdEfector;
             int idUsuario = 0;
 
             HashSet<int> listaResultado;

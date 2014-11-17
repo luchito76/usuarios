@@ -1,69 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Collections;
 using Salud.Security.SSO;
 
-namespace WebInternacion2
+namespace AdminRoles
 {
-    public partial class Site1 : System.Web.UI.MasterPage
+    public partial class SiteMaster : System.Web.UI.MasterPage
     {
+        private const string AntiXsrfTokenKey = "__AntiXsrfToken";
+        private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
+        private string _antiXsrfTokenValue;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
-
-            if (!Page.IsPostBack)
+            // The code below helps to protect against XSRF attacks
+            var requestCookie = Request.Cookies[AntiXsrfTokenKey];
+            Guid requestCookieGuidValue;
+            if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
             {
-                lblUsr.Text = string.Format("{0}, {1}", SSOHelper.CurrentIdentity.Surname, SSOHelper.CurrentIdentity.FirstName);
-                lblEfector.Text = string.Format("{0}", SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol));
-                ImgHomeSystem.PostBackUrl = "../sips/default.aspx";
-                ImgChangePass.PostBackUrl = "/SSO/Options.aspx";
-                ImgExit.PostBackUrl = String.Format("/SSO/Logout.aspx");
- 
-                ////Armo el menú de la Aplicación seleccionada para el efector seleccionado
-                List<SSOMenuItem> menu = SSOHelper.GetApplicationMenuByEfector();
-                lvMenuSSO.DataSource = menu[0].items;
-                lvMenuSSO.DataBind();
+                // Use the Anti-XSRF token from the cookie
+                _antiXsrfTokenValue = requestCookie.Value;
+                Page.ViewStateUserKey = _antiXsrfTokenValue;
             }
+            else
+            {
+                // Generate a new Anti-XSRF token and save to the cookie
+                _antiXsrfTokenValue = Guid.NewGuid().ToString("N");
+                Page.ViewStateUserKey = _antiXsrfTokenValue;
+
+                var responseCookie = new HttpCookie(AntiXsrfTokenKey)
+                {
+                    HttpOnly = true,
+                    Value = _antiXsrfTokenValue
+                };
+                if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
+                {
+                    responseCookie.Secure = true;
+                }
+                Response.Cookies.Set(responseCookie);
+            }
+
+            Page.PreLoad += master_Page_PreLoad;
         }
 
-        protected void lvMenuSSO_ItemDataBound(object sender, ListViewItemEventArgs e)
+        protected void master_Page_PreLoad(object sender, EventArgs e)
         {
-            if (e.Item.ItemType == ListViewItemType.DataItem)
+            if (!IsPostBack)
             {
-                ListView lv = (ListView)e.Item.FindControl("lvSubMenuSSO");
-                if (lv != null)
+                // Set Anti-XSRF token
+                ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
+                ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
+            }
+            else
+            {
+                // Validate the Anti-XSRF token
+                if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
+                    || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
                 {
-                    ListViewDataItem dataItem = (ListViewDataItem)e.Item;
-                    if (dataItem != null)
-                    {
-                        SSOMenuItem node = (SSOMenuItem)dataItem.DataItem;
-                        List<SSOMenuItem> dv = node.items;
-                        if (dv.Count > 0)
-                        {
-                            lv.DataSource = dv;
-                            lv.DataBind();
-                            HyperLink hl = (HyperLink)lv.Parent.FindControl("hlMenu2");
-                            if (hl != null)
-                                hl.Text = node.text;
-                        }
-                        else
-                        {
-                            lv.Visible = false;
-                        }
-                    }
+                    throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
                 }
             }
         }
 
-        protected void hkbSesion_Click(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("~/SSO/Logout.aspx");
-        }   
+
+        }
+
+        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Context.GetOwinContext().Authentication.SignOut();
+        }
+
+
     }
+
 }

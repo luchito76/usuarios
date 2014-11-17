@@ -5,8 +5,7 @@
     <asp:HiddenField ID="hdfIdUsuario" runat="server" />
 
     <div class="container">
-        <div class="page-header">
-            <h1>Administración de Perfiles<span class="pull-right label label-default"></span></h1>
+        <div class="page-header">            
             <h3><%= devuelveEfector() %><span class="pull-left label label-default"></span></h3>
         </div>
         <div class="row">

@@ -66,8 +66,8 @@ namespace AdminRoles
         //*******************Refactorizar*******************
         public string devuelveEfector()
         {
-            Session["efector"] = "Chos Malal";
-            Session["idEfector"] = 693;//SSOHelper.CurrentIdentity.IdEfector;//  //IdEfector de Chos Malal
+            Session["efector"] = "Chos Malal"; //SSOHelper.CurrentIdentity.Name; 
+           // Session["idEfector"] = SSOHelper.CurrentIdentity.IdEfector;//  //IdEfector de Chos Malal
 
             string efector = Session["efector"].ToString();
 
@@ -183,7 +183,7 @@ namespace AdminRoles
         {
             List<int> lista = new List<int>();
             lista.Add(int.Parse(ddlAsignarPerfil.SelectedValue));
-            lista.Add(int.Parse(Session["idEfector"].ToString()));
+            lista.Add(SSOHelper.CurrentIdentity.IdEfector);
 
             foreach (int data in lista)
             {
@@ -204,7 +204,7 @@ namespace AdminRoles
         private void guardarPermisosCache(int idUsuario)
         {
             int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);
-            int idEfector = int.Parse(Session["idEfector"].ToString());
+            int idEfector = SSOHelper.CurrentIdentity.IdEfector;
 
             IList<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario = permisoNego.listaPermisosXUsuario(idPerfil, idEfector).ToList();
 
