@@ -15,10 +15,7 @@ namespace AdminRoles
     public partial class EditarUsuario : System.Web.UI.Page
     {
         UsuariosNego usuarioNego = new UsuariosNego();
-        ProfesionaNego profesionalNego = new ProfesionaNego();
-                
-
-        //string clave = string.Empty;
+        ProfesionaNego profesionalNego = new ProfesionaNego();       
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,9 +44,7 @@ namespace AdminRoles
 
         private void mostrarUsuario()
         {
-            int idUsuario =  int.Parse(Session["idUsuario"].ToString());//int.Parse(Request["idUsuario"].ToString());
-
-            //Idusuario = int.Parse(Request["idUsuario"].ToString());
+            int idUsuario =  int.Parse(Session["idUsuario"].ToString());           
 
             SSO_User ssoUsuario = new SSO_User();
             ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
@@ -59,8 +54,7 @@ namespace AdminRoles
             txtUsuario.Text = ssoUsuario.Username;
             txtDocumento.Text = ssoUsuario.Documento.ToString();
             txtEmail.Text = ssoUsuario.Email;
-            txtObservaciones.Text = ssoUsuario.Observacion;
-            //ViewState["Password"] = ssoUsuario.Password;
+            txtObservaciones.Text = ssoUsuario.Observacion;            
 
             txtProfesional.Value = devuelveProfesionalVinculado();
 

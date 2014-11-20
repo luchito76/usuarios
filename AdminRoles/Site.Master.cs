@@ -50,6 +50,13 @@ namespace AdminRoles
 
         protected void master_Page_PreLoad(object sender, EventArgs e)
         {
+            SSOHelper.Authenticate();
+
+            if (SSOHelper.CurrentIdentity == null)
+            {
+                SSOHelper.RedirectToSSOPage("Login.aspx", Request.Url.ToString());
+            }
+
             if (!IsPostBack)
             {
                 // Set Anti-XSRF token

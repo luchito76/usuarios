@@ -9,6 +9,7 @@ using Negocio;
 using Newtonsoft.Json;
 using System.Web.Services;
 using System.Web.Script.Services;
+using Salud.Security.SSO;
 
 namespace AdminRoles
 {
@@ -54,9 +55,21 @@ namespace AdminRoles
         PermisosNego permisoNego = new PermisosNego();
         RolesNego rolNego = new RolesNego();
 
+        #region propiedades
+
+        public int IdEfector
+        {
+            get { return SSOHelper.CurrentIdentity.IdEfectorRol; }
+            set
+            { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
+        }
+
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SSOHelper.Authenticate();
+
             if (IsPostBack) return;
 
             Session["idRol"] = Request.QueryString["idRol"];
@@ -89,14 +102,15 @@ namespace AdminRoles
         {
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
+            RolPermisos rolPermiso = new RolPermisos();
 
             System.Web.UI.Page session = new Page();
 
-            int idEfector = int.Parse(session.Session["idEfector"].ToString());
+            //int idEfector = int.Parse(session.Session["idEfector"].ToString());
             int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
             int idRol = int.Parse(session.Session["idRol"].ToString());
 
-            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(idEfector, idRol, idAplicacion);
+            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(rolPermiso.IdEfector, idRol, idAplicacion);
 
             SSO_Permission ssoPermisos = new SSO_Permission();
             ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo).FirstOrDefault();
@@ -160,14 +174,14 @@ namespace AdminRoles
 
             moduloHelper mod = new moduloHelper();
 
-            int idEfector = int.Parse(Session["idEfector"].ToString());
+            //int idEfector = int.Parse(Session["idEfector"].ToString());
             Session["idAplicacion"] = int.Parse(Request["idAplicacion"].ToString());
             Session["idRol"] = int.Parse(Request["idRol"].ToString());
 
             int idAplicacion = int.Parse(Session["idAplicacion"].ToString());
             int idRol = int.Parse(Session["idRol"].ToString());
 
-            List<SSO_GetModulosXAplicacionResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXPermisos(idEfector, idRol, idAplicacion).ToList();
+            List<SSO_GetModulosXAplicacionResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXPermisos(IdEfector, idRol, idAplicacion).ToList();
 
             List<moduloHelper> lista = new List<moduloHelper>();
 
@@ -192,14 +206,14 @@ namespace AdminRoles
 
             moduloHelper mod = new moduloHelper();
 
-            int idEfector = int.Parse(Session["idEfector"].ToString());
+            //int idEfector = int.Parse(Session["idEfector"].ToString());
             Session["idAplicacion"] = int.Parse(Request["idAplicacion"].ToString());
             Session["idUsuario"] = int.Parse(Request["idusuario"].ToString());
 
             int idAplicacion = int.Parse(Session["idAplicacion"].ToString());
             int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
-            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(idEfector, idUsuario, idAplicacion).ToList();
+            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(IdEfector, idUsuario, idAplicacion).ToList();
 
             List<moduloHelper> lista = new List<moduloHelper>();
 

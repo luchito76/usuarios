@@ -27,7 +27,7 @@
                 <table id="tblAppXRoles" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
                     <thead>
                         <tr>
-                            <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="id" data-align="center" data-sortable="true">ID</th>
                             <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
                             <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
@@ -40,7 +40,7 @@
                 <table id="tblAppXUsuarios" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
                     <thead>
                         <tr>
-                            <th data-field="idAplicacion" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="id" data-align="center" data-sortable="true">ID</th>
                             <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
                             <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
@@ -60,7 +60,7 @@
             var tops = Number((screen.height/2)-(h/2));          
                 
             var nombreAplicacion = '<%= nomApp %>';
-            var idUsuario = '<%= devuelveIdUsuario() %>'
+            var idUsuario = IdUsuario; <%--'<%= devuelveIdUsuario() %>'--%>
             var llamada = "";    
 
             if (idUsuario == 0)
@@ -90,7 +90,7 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
                 
-                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.idAplicacion, '', 'toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.id, '', 'toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         };  
 
@@ -106,13 +106,13 @@
             'click .eliminar': function (e, value, row, index) {                 
                 $(document).ready(function () {
 
-                    var idRol = '<%= devuelveIdRol() %>';
-                    var idEfector = document.getElementById('<%= hdnIdEfector.ClientID %>').value;
+                    var idPerfil = '<%= IdPerfil %>'; <%--'<%= devuelveIdRol() %>';--%>
+                    //var idEfector = document.getElementById('<%= hdnIdEfector.ClientID %>').value;
                     
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
-                        data: "{'idEfector':'" + idEfector + "', 'idPerfil':'" + idRol + "', 'idAplicacion':'" + row.idAplicacion + "'}",                        
+                        data: "{'idPerfil':'" + idPerfil + "', 'idAplicacion':'" + row.id + "'}",                        
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (msg) {                            
@@ -142,9 +142,9 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
 
-                var idRol = '<%= devuelveIdRol() %>';
+                var idPerfil = '<%= IdPerfil %>'; <%--'<%= devuelveIdRol() %>';--%>
                 
-                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idRol=" + idRol,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idRol=" + idPerfil,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
 
@@ -165,9 +165,9 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
 
-                var idUsuario = '<%= devuelveIdUsuario() %>'
+                var idUsuario = '<%= IdUsuario %>'; <%--'<%= devuelveIdUsuario() %>'--%>
                 
-                window.open("Modulos.aspx?llamada=usuario&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.idAplicacion + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                window.open("Modulos.aspx?llamada=usuario&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
     </script>

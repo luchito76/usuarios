@@ -27,7 +27,7 @@
                             <th data-field="IdModulo" data-align="center" data-sortable="true">ID</th>
                             <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="Descripcion" data-align="left" data-sortable="true">Descripcion</th>
-                            <th data-field="Estado" data-align="left" data-sortable="true" data-visible="true">Habilitado</th>
+                            <th data-field="Estado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
                         </tr>
                     </thead>
                 </table>

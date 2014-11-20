@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Web.Services;
 using System.Web.Script.Services;
 using Salud.Security.SSO;
+using System.Security.Principal;
 
 namespace AdminRoles
 {
@@ -40,20 +41,25 @@ namespace AdminRoles
 
         #endregion
 
+        #region propiedades
+
+        public int IdEfector
+        {
+            get { return SSOHelper.CurrentIdentity.IdEfectorRol; }
+            set
+            { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
+        }
+
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack) return;                       
-
-            SSOHelper.Authenticate();
-            if (SSOHelper.CurrentIdentity == null)
-            {
-                SSOHelper.RedirectToSSOPage("Login.aspx", Request.Url.ToString());
-            }
+            if (IsPostBack) return;
 
             llenarListas();
             devuelveEfector();
         }
+
 
         private void llenarListas()
         {
@@ -66,12 +72,12 @@ namespace AdminRoles
         //*******************Refactorizar*******************
         public string devuelveEfector()
         {
-            Session["efector"] = "Chos Malal"; //SSOHelper.CurrentIdentity.Name; 
-           // Session["idEfector"] = SSOHelper.CurrentIdentity.IdEfector;//  //IdEfector de Chos Malal
+            //Session["efector"] = SSOHelper.CurrentIdentity.Name; //"Chos Malal";
+            //Session["idEfector"] = IdEfector;//  //IdEfector de Chos Malal
 
-            string efector = Session["efector"].ToString();
+            //string efector = Session["efector"].ToString();
 
-            return efector;
+            return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol); 
         }
 
         public string devuelveRolesJson()
@@ -183,7 +189,7 @@ namespace AdminRoles
         {
             List<int> lista = new List<int>();
             lista.Add(int.Parse(ddlAsignarPerfil.SelectedValue));
-            lista.Add(SSOHelper.CurrentIdentity.IdEfector);
+            lista.Add(IdEfector);
 
             foreach (int data in lista)
             {
@@ -203,10 +209,9 @@ namespace AdminRoles
 
         private void guardarPermisosCache(int idUsuario)
         {
-            int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);
-            int idEfector = SSOHelper.CurrentIdentity.IdEfector;
+            int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);            
 
-            IList<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario = permisoNego.listaPermisosXUsuario(idPerfil, idEfector).ToList();
+            IList<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario = permisoNego.listaPermisosXUsuario(idPerfil, IdEfector).ToList();
 
             foreach (SSO_GetPermisosXUsuarioResultSet0 data in listaPermisosXUsuario)
             {

@@ -198,7 +198,9 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="connectionstrings.config" />
+    <Content Include="connectionstrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\SSO_Admin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RolPermisos.aspx" />
@@ -452,7 +454,7 @@
           <IISAppRootUrl>http://localhost:1074/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://www.desa.saludnqn.gob.ar/AdminRoles</CustomServerUrl>
+          <CustomServerUrl>http://www.test.saludnqn.gob.ar/sips</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

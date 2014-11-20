@@ -146,51 +146,6 @@ namespace Dominio
 			}
 		}
 		
-		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
-		{
-			int returnValue;
-			return SSO_GetAppByRol(idPerfil, idEfector, out returnValue);
-		}
-		
-		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue)
-		{
-			OAParameter parameterReturnValue = new OAParameter();
-		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
-		    parameterReturnValue.ParameterName = "parameterReturnValue";
-		
-			OAParameter parameterIdPerfil = new OAParameter();
-			parameterIdPerfil.ParameterName = "idPerfil";
-			if(idPerfil.HasValue)
-			{
-				parameterIdPerfil.Value = idPerfil.Value;
-			}
-			else
-			{
-				parameterIdPerfil.DbType = DbType.Int32;
-				parameterIdPerfil.Value = DBNull.Value;
-			}
-
-			OAParameter parameterIdEfector = new OAParameter();
-			parameterIdEfector.ParameterName = "idEfector";
-			if(idEfector.HasValue)
-			{
-				parameterIdEfector.Value = idEfector.Value;
-			}
-			else
-			{
-				parameterIdEfector.DbType = DbType.Int32;
-				parameterIdEfector.Value = DBNull.Value;
-			}
-
-			IEnumerable<SSO_GetAppByRolResultSet0> queryResult = this.ExecuteQuery<SSO_GetAppByRolResultSet0>("[dbo].[SSO_GetAppByRol]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdEfector, parameterReturnValue);
-		
-			returnValue = parameterReturnValue.Value == DBNull.Value 
-				? -1
-				: (int)parameterReturnValue.Value;
-		
-			return queryResult;
-		}
-		
 		public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion)
 		{
 			int returnValue;
@@ -339,51 +294,6 @@ namespace Dominio
 		    parameterReturnValue.ParameterName = "parameterReturnValue";
 		
 			IEnumerable<SSO_GetUsuariosXPerfilResultSet01> queryResult = this.ExecuteQuery<SSO_GetUsuariosXPerfilResultSet01>("[dbo].[SSO_GetUsuariosXPerfil]", CommandType.StoredProcedure, parameterReturnValue);
-		
-			returnValue = parameterReturnValue.Value == DBNull.Value 
-				? -1
-				: (int)parameterReturnValue.Value;
-		
-			return queryResult;
-		}
-		
-		public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId)
-		{
-			int returnValue;
-			return Sp_SSO_AllowedAppsByEfector(userId, roleId, out returnValue);
-		}
-		
-		public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue)
-		{
-			OAParameter parameterReturnValue = new OAParameter();
-		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
-		    parameterReturnValue.ParameterName = "parameterReturnValue";
-		
-			OAParameter parameterUserId = new OAParameter();
-			parameterUserId.ParameterName = "userId";
-			if(userId.HasValue)
-			{
-				parameterUserId.Value = userId.Value;
-			}
-			else
-			{
-				parameterUserId.DbType = DbType.Int32;
-				parameterUserId.Value = DBNull.Value;
-			}
-
-			OAParameter parameterRoleId = new OAParameter();
-			parameterRoleId.ParameterName = "roleId";
-			if(roleId.HasValue)
-			{
-				parameterRoleId.Value = roleId.Value;
-			}
-			else
-			{
-				parameterRoleId.DbType = DbType.Int32;
-				parameterRoleId.Value = DBNull.Value;
-			}
-
-			IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> queryResult = this.ExecuteQuery<sp_SSO_AllowedAppsByEfectorResultSet0>("[dbo].[sp_SSO_AllowedAppsByEfector]", CommandType.StoredProcedure, parameterUserId, parameterRoleId, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -569,6 +479,96 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId)
+		{
+			int returnValue;
+			return Sp_SSO_AllowedAppsByEfector(userId, roleId, out returnValue);
+		}
+		
+		public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterUserId = new OAParameter();
+			parameterUserId.ParameterName = "userId";
+			if(userId.HasValue)
+			{
+				parameterUserId.Value = userId.Value;
+			}
+			else
+			{
+				parameterUserId.DbType = DbType.Int32;
+				parameterUserId.Value = DBNull.Value;
+			}
+
+			OAParameter parameterRoleId = new OAParameter();
+			parameterRoleId.ParameterName = "roleId";
+			if(roleId.HasValue)
+			{
+				parameterRoleId.Value = roleId.Value;
+			}
+			else
+			{
+				parameterRoleId.DbType = DbType.Int32;
+				parameterRoleId.Value = DBNull.Value;
+			}
+
+			IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> queryResult = this.ExecuteQuery<sp_SSO_AllowedAppsByEfectorResultSet0>("[dbo].[sp_SSO_AllowedAppsByEfector]", CommandType.StoredProcedure, parameterUserId, parameterRoleId, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
+		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector)
+		{
+			int returnValue;
+			return SSO_GetAppByRol(idPerfil, idEfector, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdPerfil = new OAParameter();
+			parameterIdPerfil.ParameterName = "idPerfil";
+			if(idPerfil.HasValue)
+			{
+				parameterIdPerfil.Value = idPerfil.Value;
+			}
+			else
+			{
+				parameterIdPerfil.DbType = DbType.Int32;
+				parameterIdPerfil.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdEfector = new OAParameter();
+			parameterIdEfector.ParameterName = "idEfector";
+			if(idEfector.HasValue)
+			{
+				parameterIdEfector.Value = idEfector.Value;
+			}
+			else
+			{
+				parameterIdEfector.DbType = DbType.Int32;
+				parameterIdEfector.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetAppByRolResultSet0> queryResult = this.ExecuteQuery<SSO_GetAppByRolResultSet0>("[dbo].[SSO_GetAppByRol]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdEfector, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -641,8 +641,6 @@ namespace Dominio
 		{
 			get;
 		}
-		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
-		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion);
@@ -651,8 +649,6 @@ namespace Dominio
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil();
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue);
-		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId);
-		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion);
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales();
@@ -663,6 +659,10 @@ namespace Dominio
 		int SSO_BorrarStoredVariable(int? idUsuario, out int returnValue);
 		IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> SSO_GetProfesionalesXGuardia(int? idProfesional);
 		IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> SSO_GetProfesionalesXGuardia(int? idProfesional, out int returnValue);
+		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId);
+		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
+		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
+		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 	}
 }
 #pragma warning restore 1591
