@@ -282,7 +282,6 @@ namespace AdminRoles
 
         private void guardaSSOPermisosCache(int idAplicacion)
         {
-
             IList<SSO_Users_Role> listaUsuarios = usuarioNego.listaUsuariosXIdPerfil(IdPerfil).ToList();
 
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
