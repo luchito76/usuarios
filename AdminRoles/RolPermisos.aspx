@@ -54,7 +54,7 @@
     <script>
         function MostrarModulos(idAplicacion, idRol)
         {
-            alert("Usuario ");
+            
             var w = 800;
             var h = 700;
             var left = Number((screen.width/2)-(w/2));
@@ -62,7 +62,7 @@
                 
             var nombreAplicacion = '<%= nomApp %>';
             var idUsuario = IdUsuario; <%--'<%= devuelveIdUsuario() %>'--%>
-           
+            alert("Usuario " + idUsuario);
             var llamada = "";    
 
             if (idUsuario == 0)
