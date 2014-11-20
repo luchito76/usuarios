@@ -61,7 +61,7 @@
             var tops = Number((screen.height/2)-(h/2));          
                 
             var nombreAplicacion = '<%= nomApp %>';
-            var idUsuario = IdUsuario; <%--'<%= devuelveIdUsuario() %>'--%>
+            var idUsuario = '<%= IdUsuario %>';
             alert("Usuario " + idUsuario);
             var llamada = "";    
 
