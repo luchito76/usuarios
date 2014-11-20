@@ -77,6 +77,7 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            int idUsuario = SSOHelper.CurrentIdentity.Id;
             if (IsPostBack) return;
 
             llenarListas();
@@ -115,13 +116,8 @@ namespace AdminRoles
         /// <returns></returns>
         private List<SSO_Application> quitarAplicacionesDuplicadas()
         {
-            //int idRol = devuelveIdRol();
-            //int idEfector = IdEfector;// SSOHelper.CurrentIdentity.IdEfector;
-            //int idUsuario = 0;
-
             HashSet<int> listaResultado;
 
-            //if (Request["idUsuario"] == null)
             if (IdUsuario == 0)
             {
                 List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(IdPerfil, IdEfector).ToList();
@@ -129,7 +125,7 @@ namespace AdminRoles
             }
             else
             {
-                //idUsuario = int.Parse(Request["idUsuario"].ToString());
+
                 List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
                 listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.id));
             }
@@ -141,16 +137,6 @@ namespace AdminRoles
             return results;
         }
 
-        //public int devuelveIdRol()
-        //{
-        //    int rolId = 0;
-
-        //    if (Request["rolId"] != null && Request["rolId"] != "")
-        //        rolId = int.Parse(Request["rolId"].ToString());
-
-        //    return rolId;
-        //}
-
         public string devuelveNombreDeRol()
         {
             string rol = Request["rolName"].ToString();
@@ -158,22 +144,9 @@ namespace AdminRoles
             return rol;
         }
 
-        //public int devuelveIdUsuario()
-        //{
-        //    int idUsuario = 0;
-
-        //    if (Request["idUsuario"] != null)
-        //        idUsuario = int.Parse(Request["idUsuario"].ToString());
-
-        //    return idUsuario;
-        //}
-
         public string devuelveAppXRolJson()
         {
             string json = string.Empty;
-
-            // int idRol = devuelveIdRol();
-            //int idEfector = int.Parse(Session["idEfector"].ToString());
 
             List<SSO_GetAppByRolResultSet0> listaAppXRol = roleNego.listaRolesXAplicacion(IdPerfil, IdEfector).ToList();
 
@@ -183,12 +156,6 @@ namespace AdminRoles
         public string devuelveAppXUsuario()
         {
             string json = string.Empty;
-
-            // int idUsuario = 0;
-            // int idEfector = int.Parse(Session["idEfector"].ToString());
-
-            //if (Request["idUsuario"] != null)
-            //    idUsuario = int.Parse(Request["idUsuario"].ToString());
 
             List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
 
@@ -200,7 +167,7 @@ namespace AdminRoles
             try
             {
                 int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
-                nomApp = ddlAplicaciones.SelectedItem.ToString();
+                nomApp = ddlAplicaciones.SelectedItem.ToString();                
 
                 guardaRoleGroups(idAplicacion);
 
@@ -218,7 +185,11 @@ namespace AdminRoles
                 //Se llama éste método para recargar la lista y no llenar el combo con aplicaciones que ya estan en la grilla.
                 llenarListas();
 
-                ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
+                //ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
+                string jquery = "MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');";
+
+                ClientScript.RegisterStartupScript(typeof(Page), "a key", "<script type=\"text/javascript\">" + jquery + "</script>" );
+
             }
             catch (Exception ex)
             {
@@ -228,9 +199,6 @@ namespace AdminRoles
 
         private void guardaRoleGroups(int idAplicacion)
         {
-            //int idEfector = int.Parse(Session["idEfector"].ToString());
-            //int idRol = int.Parse(Request["rolId"].ToString());
-
             if (roleNego.esAplicacionEnRoleGroup(IdEfector, IdPerfil, idAplicacion))
             {
                 SSO_RoleGroup rolGroup = new SSO_RoleGroup();
@@ -256,8 +224,6 @@ namespace AdminRoles
         {
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
 
-            //int idEfector = int.Parse(Session["idEfector"].ToString());
-            // int idRol = int.Parse(Request["rolId"].ToString());
             int? source = 0;
 
             if (roleNego.esAplicacionEnRoleGroup(IdEfector, IdPerfil, idAplicacion))

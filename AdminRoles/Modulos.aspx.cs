@@ -78,6 +78,33 @@ namespace AdminRoles
             set { idPerfil = value; }
         }
 
+        private int idAplicacion;
+
+        public int IdAplicacion
+        {
+            get
+            {
+                if (Request["idAplicacion"] != null)
+                    idAplicacion = int.Parse(Request["idAplicacion"].ToString());
+
+                return idAplicacion;
+            }
+            set { idAplicacion = value; }
+        }
+
+        private int idUsuario;
+        public int IdUsuario
+        {
+            get
+            {
+                if (Request["idUsuario"] != null)
+                    idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+                return idUsuario;
+            }
+            set { idUsuario = value; }
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -87,7 +114,8 @@ namespace AdminRoles
             if (IsPostBack) return;
 
             Session["idPerfil"] = IdPerfil;
-            Session["idUsuario"] = Request.QueryString["idUsuario"];
+            Session["idUsuario"] = IdUsuario;
+            Session["idAplicacion"] = IdAplicacion;
             Session["llamada"] = Request.QueryString["llamada"];
         }
 
@@ -134,18 +162,9 @@ namespace AdminRoles
 
         public static void guardaSSO_PermissionCache(int idModulo, bool estadoModulo)
         {
-            System.Web.UI.Page session = new Page();
-
             int idPerfil = int.Parse(HttpContext.Current.Session["idPerfil"].ToString());
-            int idUsuario = 0;
-
-            //if (session.Session["idRol"] != null)
-            //    idPerfil = int.Parse(session.Session["idRol"].ToString());
-
-            if (session.Session["idUsuario"] != null)
-                idUsuario = int.Parse(session.Session["idUsuario"].ToString());
-
-            int idAplicacion = int.Parse(session.Session["idAplicacion"].ToString());
+            int idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString()); ;
+            int idAplicacion = int.Parse(HttpContext.Current.Session["idAplicacion"].ToString());
 
             UsuariosNego usuarioNego = new UsuariosNego();
 
@@ -185,14 +204,7 @@ namespace AdminRoles
 
             moduloHelper mod = new moduloHelper();
 
-            //int idEfector = int.Parse(Session["idEfector"].ToString());
-            Session["idAplicacion"] = int.Parse(Request["idAplicacion"].ToString());
-            // Session["idRol"] = int.Parse(Request["idRol"].ToString());
-
-            int idAplicacion = int.Parse(Session["idAplicacion"].ToString());
-            //int idRol = int.Parse(Session["idRol"].ToString());
-
-            List<SSO_GetModulosXAplicacionResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXPermisos(IdEfector, IdPerfil, idAplicacion).ToList();
+            List<SSO_GetModulosXAplicacionResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXPermisos(IdEfector, IdPerfil, IdAplicacion).ToList();
 
             List<moduloHelper> lista = new List<moduloHelper>();
 
@@ -217,14 +229,7 @@ namespace AdminRoles
 
             moduloHelper mod = new moduloHelper();
 
-            //int idEfector = int.Parse(Session["idEfector"].ToString());
-            Session["idAplicacion"] = int.Parse(Request["idAplicacion"].ToString());
-            Session["idUsuario"] = int.Parse(Request["idusuario"].ToString());
-
-            int idAplicacion = int.Parse(Session["idAplicacion"].ToString());
-            int idUsuario = int.Parse(Session["idUsuario"].ToString());
-
-            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(IdEfector, idUsuario, idAplicacion).ToList();
+            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(IdEfector, IdUsuario, IdAplicacion).ToList();
 
             List<moduloHelper> lista = new List<moduloHelper>();
 
@@ -247,12 +252,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            int idUsuario = 0;
-
-            if (Request.QueryString["idUsuario"] != null)
-                idUsuario = int.Parse(Request.QueryString["idUsuario"].ToString());
-
-            if (idUsuario != 0)
+            if (IdUsuario != 0)
             {
                 json = JsonConvert.SerializeObject(devuelveModulosXUsuario());
             }
