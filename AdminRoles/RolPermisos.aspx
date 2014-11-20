@@ -62,7 +62,7 @@
                 
             var nombreAplicacion = '<%= nomApp %>';
             var idUsuario = '<%= IdUsuario %>';
-            alert("Usuario " + idUsuario);
+            
             var llamada = "";    
 
             if (idUsuario == 0)
