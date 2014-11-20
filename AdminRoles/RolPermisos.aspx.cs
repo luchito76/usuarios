@@ -87,6 +87,7 @@ namespace AdminRoles
             hdnIdEfector.Value = IdEfector.ToString();
 
             Session["llamada"] = Llamada;
+            Session["idUsuario"] = IdUsuario;
         }
 
         private void llenarListas()
@@ -167,7 +168,7 @@ namespace AdminRoles
             try
             {
                 int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
-                nomApp = ddlAplicaciones.SelectedItem.ToString();                
+                nomApp = ddlAplicaciones.SelectedItem.ToString();
 
                 guardaRoleGroups(idAplicacion);
 
@@ -185,10 +186,12 @@ namespace AdminRoles
                 //Se llama éste método para recargar la lista y no llenar el combo con aplicaciones que ya estan en la grilla.
                 llenarListas();
 
-                //ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
-                string jquery = "MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');";
+                IdUsuario = int.Parse(Session["idUsuario"].ToString());
 
-                ClientScript.RegisterStartupScript(typeof(Page), "a key", "<script type=\"text/javascript\">" + jquery + "</script>" );
+                ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
+                //string jquery = "MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');";
+
+                //ClientScript.RegisterStartupScript(typeof(Page), "a key", "<script type=\"text/javascript\">" + jquery + "</script>" );
 
             }
             catch (Exception ex)
