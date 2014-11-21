@@ -38,7 +38,7 @@
                             <asp:Label ID="lblUsuario" runat="server" Text="Usuario" for="txtUsuario" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <asp:TextBox runat="server" class="form-control" ID="txtUsuario" placeholder="Usuario"></asp:TextBox>
+                            <asp:TextBox runat="server" class="form-control" ID="txtUsuario" placeholder="Usuario" ReadOnly="true"></asp:TextBox>                            
                         </div>
 
                         <b>
@@ -46,6 +46,7 @@
                             </asp:Label></b>
                         <div class="col-sm-3">
                             <asp:TextBox runat="server" class="form-control" ID="txtDocumento" placeholder="Documento" MaxLength="8"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvDocumento" runat="server" ErrorMessage="Ingrese DNI" ControlToValidate="txtDocumento" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
 

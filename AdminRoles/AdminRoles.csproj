@@ -14,7 +14,7 @@
     <RootNamespace>AdminRoles</RootNamespace>
     <AssemblyName>AdminRoles</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -449,12 +449,12 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1074</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1074/</IISUrl>
+          <IISUrl>http://localhost/AdminRoles</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://localhost:1074/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://www.test.saludnqn.gob.ar/sips</CustomServerUrl>
+          <CustomServerUrl>http://www.desa.saludnqn.gob.ar/AdminRoles</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

@@ -103,6 +103,15 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.TextBox txtDocumento;
         
         /// <summary>
+        /// rfvDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDocumento;
+        
+        /// <summary>
         /// lblEmail control.
         /// </summary>
         /// <remarks>

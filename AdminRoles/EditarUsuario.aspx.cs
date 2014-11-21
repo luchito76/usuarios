@@ -54,8 +54,8 @@ namespace AdminRoles
             txtUsuario.Text = ssoUsuario.Username;
             txtDocumento.Text = ssoUsuario.Documento.ToString();
             txtEmail.Text = ssoUsuario.Email;
-            txtObservaciones.Text = ssoUsuario.Observacion;            
-
+            txtObservaciones.Text = ssoUsuario.Observacion;
+            ViewState["Password"] = ssoUsuario.Password;
             txtProfesional.Value = devuelveProfesionalVinculado();
 
             if (devuelveIdProfesional() != 0)
