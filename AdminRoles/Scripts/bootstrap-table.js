@@ -12,7 +12,7 @@
     // ======================
 
     // it only does '%s', and return '' when arguments are undefined
-    var sprintf = function(str) {
+    var sprintf = function (str) {
         var args = arguments,
             flag = true,
             i = 1;
@@ -68,9 +68,9 @@
         method: 'get',
         url: undefined,
         contentType: 'application/json',
-        queryParams: function (params) {return {};},
+        queryParams: function (params) { return {}; },
         queryParamsType: undefined,
-        responseHandler: function (res) {return res;},
+        responseHandler: function (res) { return res; },
         pagination: false,
         sidePagination: 'client', // client or server
         totalRows: 0, // server side need to set
@@ -78,6 +78,7 @@
         pageSize: 10,
         pageList: [10, 25, 50, 100],
         search: false,
+        btnCrearPerfil: false,
         selectItemName: 'btSelectItem',
         showHeader: true,
         showColumns: false,
@@ -89,7 +90,7 @@
         toolbar: undefined,
         checkboxHeader: true,
 
-        rowStyle: function (row, index) {return {};},
+        rowStyle: function (row, index) { return {}; },
 
         formatLoadingMessage: function () {
             return 'Cargando, espere por favor...';
@@ -107,16 +108,16 @@
             return 'No se encontraron registros';
         },
 
-        onAll: function (name, args) {return false;},
-        onClickRow: function (item, $element) {return false;},
-        onDblClickRow: function (item, $element) {return false;},
-        onSort: function (name, order) {return false;},
-        onCheck: function (row) {return false;},
-        onUncheck: function (row) {return false;},
-        onCheckAll: function () {return false;},
-        onUncheckAll: function () {return false;},
-        onLoadSuccess: function (data) {return false;},
-        onLoadError: function (status) {return false;}
+        onAll: function (name, args) { return false; },
+        onClickRow: function (item, $element) { return false; },
+        onDblClickRow: function (item, $element) { return false; },
+        onSort: function (name, order) { return false; },
+        onCheck: function (row) { return false; },
+        onUncheck: function (row) { return false; },
+        onCheckAll: function () { return false; },
+        onUncheckAll: function () { return false; },
+        onLoadSuccess: function (data) { return false; },
+        onLoadError: function (status) { return false; }
     };
 
     BootstrapTable.COLUMN_DEFAULTS = {
@@ -372,7 +373,9 @@
             html = [],
             timeoutId = 0,
             $keepOpen,
+            $btnCrearPerfil,
             $search;
+
 
         this.$toolbar = this.$container.find('.fixed-table-toolbar').html('');
 
@@ -431,14 +434,26 @@
                 '<div class="pull-right search">',
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
                         this.options.formatSearch()),
-                '</div>');
-
+                '</div>'
+                );
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
                 clearTimeout(timeoutId); // doesn't matter if it's 0
                 timeoutId = setTimeout($.proxy(that.onSearch, that), 500, event); // 500ms
             });
+        }
+
+        if (this.options.btnCrearPerfil) {
+            html = [];
+            html.push(
+            '<div class="pull-left search">',
+                    sprintf('<input type="button" class="btn btn-primary launch-modal form-control btn-crear-perfil" value="Crear Perfil" />',
+                        this.options.formatSearch()),
+            '</div>'
+            );
+            this.$toolbar.append(html.join(''));
+            $search = this.$toolbar.find('.btn-crear-perfil input');
         }
     };
 
@@ -459,7 +474,7 @@
                     if ((typeof item[key] === 'string' ||
                         typeof item[key] === 'number') &&
                         (item[key] + '').toLowerCase().indexOf(s) !== -1) {
-                            return true;
+                        return true;
                     }
                 }
                 return false;
@@ -557,7 +572,7 @@
         }
         for (i = from; i <= to; i++) {
             html.push('<li class="page-number' + (i === this.options.pageNumber ? ' active' : '') + '">',
-                '<a href="javascript:void(0)">', i ,'</a>',
+                '<a href="javascript:void(0)">', i, '</a>',
                 '</li>');
         }
 
@@ -772,7 +787,7 @@
                 that.$selectItem.filter(':checked').not(this).prop('checked', false);
             }
 
-//            $(this).parents('tr')[checked ? 'addClass' : 'removeClass']('selected');
+            //            $(this).parents('tr')[checked ? 'addClass' : 'removeClass']('selected');
         });
 
         $.each(this.header.events, function (i, events) {
@@ -924,7 +939,7 @@
             .html('').attr('class', this.$el.attr('class'))
             .append(this.$header_);
 
-        this.$body.find('tr:first-child:not(.no-records-found) > *').each(function(i) {
+        this.$body.find('tr:first-child:not(.no-records-found) > *').each(function (i) {
             that.$header_.find('div.fht-cell').eq(i).width($(this).innerWidth());
         });
     };
@@ -1052,7 +1067,7 @@
                 'destroy', 'resetView',
                 'showLoading', 'hideLoading',
                 'refresh'
-            ],
+        ],
             value;
 
         this.each(function () {
