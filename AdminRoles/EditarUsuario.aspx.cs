@@ -155,7 +155,7 @@ namespace AdminRoles
             SSO_User ssoUsuario = new SSO_User();
             ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
 
-            ssoUsuario.Password = HashSHA1("123456");
+            ssoUsuario.Password = HashSHA1("12345");
 
             usuarioNego.actualizarUsuario(ssoUsuario);
         }
