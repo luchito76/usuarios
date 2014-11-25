@@ -14,12 +14,12 @@
                 <div class="panel with-nav-tabs panel-primary">
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li><a href="#tab1primary" data-toggle="tab">Perfiles</a></li>
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">Perfiles</a></li>
                             <li><a href="#tab2primary" data-toggle="tab" runat="server" visible="false">Sistemas</a></li>
                             <!-- Se oculta para desarrollarlo en una versión posterior -->
                             <li><a href="#tab3primary" data-toggle="tab" runat="server" visible="false">Efectores</a></li>
                             <!-- Se oculta para desarrollarlo en una versión posterior -->
-                            <li class="active"><a href="#tab4primary" data-toggle="tab">Usuarios</a></li>
+                            <li><a href="#tab4primary" data-toggle="tab">Usuarios</a></li>
                         </ul>
                     </div>
                     <div class="panel-body">

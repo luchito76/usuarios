@@ -131,20 +131,6 @@ namespace AdminRoles
             usuarioNego.actualizarUsuario(ssousuario);
         }
 
-        private static string HashSHA1(string value)
-        {
-            var sha1 = System.Security.Cryptography.SHA1.Create();
-            var inputBytes = Encoding.ASCII.GetBytes(value);
-            var hash = sha1.ComputeHash(inputBytes);
-
-            var sb = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
-
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -169,9 +155,23 @@ namespace AdminRoles
             SSO_User ssoUsuario = new SSO_User();
             ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
 
-            ssoUsuario.Password = HashSHA1("12345");
+            ssoUsuario.Password = HashSHA1("123456");
 
             usuarioNego.actualizarUsuario(ssoUsuario);
+        }
+
+        private static string HashSHA1(string value)
+        {
+            var sha1 = System.Security.Cryptography.MD5.Create();
+            var inputBytes = Encoding.ASCII.GetBytes(value);
+            var hash = sha1.ComputeHash(inputBytes);
+
+            var sb = new StringBuilder();
+            for (var i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
         }
 
         private void vincularProfesional()
