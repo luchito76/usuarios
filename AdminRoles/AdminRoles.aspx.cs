@@ -11,6 +11,7 @@ using System.Web.Services;
 using System.Web.Script.Services;
 using Salud.Security.SSO;
 using System.Security.Principal;
+using System.Threading;
 
 namespace AdminRoles
 {
@@ -77,7 +78,7 @@ namespace AdminRoles
 
             //string efector = Session["efector"].ToString();
 
-            return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol); 
+            return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol);
         }
 
         public string devuelveRolesJson()
@@ -209,7 +210,7 @@ namespace AdminRoles
 
         private void guardarPermisosCache(int idUsuario)
         {
-            int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);            
+            int idPerfil = int.Parse(ddlAsignarPerfil.SelectedValue);
 
             IList<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario = permisoNego.listaPermisosXUsuario(idPerfil, IdEfector).ToList();
 
@@ -235,6 +236,8 @@ namespace AdminRoles
         [WebMethod(), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static void eliminarPerfil(int idUsuario)
         {
+            Thread.Sleep(3000);
+
             AdminRoles ad = new AdminRoles();
 
             ad.borrarPerfil(idUsuario);
