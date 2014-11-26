@@ -20,7 +20,7 @@
             </div>
             <br />
             <div class="col-md-12">
-                <table id="tblModulos" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id">
+                <table id="tblModulos" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id" data-page-size="30" data-page-list="[30, 40, 50]">
                     <thead>
                         <tr>
                             <th data-field="operate" data-formatter="formatoCheck" data-events="eventosCheck" data-align="center">App</th>
