@@ -17,7 +17,9 @@
     <link href="Content/bootstrap-switch.css" rel="stylesheet" />
     <link href="Content/bootstrap-progressbar-3.2.0.css" rel="stylesheet" />
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
+    <link href="Content/select2.css" rel="stylesheet" />
     <link href="Content/Site.css" rel="stylesheet" />
+    
 
 </head>
 <body>
@@ -28,6 +30,8 @@
         <script src="Scripts/bootstrap-table.js"></script>
         <script src="Scripts/bootstrap-switch.js"></script>
         <script src="Scripts/bootstrap-progressbar.js"></script>
+        <script src="Scripts/select2.js"></script>
+        <script src="Scripts/select2_locale_es.js"></script>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">

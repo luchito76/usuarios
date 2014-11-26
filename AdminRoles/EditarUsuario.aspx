@@ -38,7 +38,7 @@
                             <asp:Label ID="lblUsuario" runat="server" Text="Usuario" for="txtUsuario" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <asp:TextBox runat="server" class="form-control" ID="txtUsuario" placeholder="Usuario" ReadOnly="true"></asp:TextBox>                            
+                            <asp:TextBox runat="server" class="form-control" ID="txtUsuario" placeholder="Usuario" ReadOnly="true"></asp:TextBox>
                         </div>
 
                         <b>
@@ -122,8 +122,8 @@
                         <b>
                             <asp:Label ID="lbProfesionales" runat="server" Text="Profesionales" for="ddlProfesional" class="col-sm-4 control-label">
                             </asp:Label></b>
-                        <div class="col-sm-5">
-                            <asp:DropDownList ID="ddlProfesional" runat="server" class="form-control" DataTextField="Nombre" DataValueField="Codigo"></asp:DropDownList>
+                        <div class="col-sm-7">
+                            <asp:DropDownList ID="ddlProfesional" runat="server"  DataTextField="Nombre" DataValueField="Codigo"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,16 @@
     </div>
     <!-- /.modal -->
 
+
+    <script>
+        $('#<%= ddlProfesional.ClientID %>').select2();
+        //$(document).ready(function() { $("#ddlProfesional").select2(); });
+    </script>
+
     <script type="text/javascript">
+
+        
+
         $(document).ready(function () {
             $('.launch-modal').click(function () {
                 $('#profesionalModal').modal({
