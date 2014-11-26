@@ -15,7 +15,7 @@ namespace AdminRoles
     public partial class EditarUsuario : System.Web.UI.Page
     {
         UsuariosNego usuarioNego = new UsuariosNego();
-        ProfesionaNego profesionalNego = new ProfesionaNego();       
+        ProfesionaNego profesionalNego = new ProfesionaNego();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +26,7 @@ namespace AdminRoles
             validaSoloNumeros();
             alerta.Visible = false;
             mostrarUsuario();
-            llenarListas();           
+            llenarListas();
         }
 
         private void validaSoloNumeros()
@@ -44,7 +44,7 @@ namespace AdminRoles
 
         private void mostrarUsuario()
         {
-            int idUsuario =  int.Parse(Session["idUsuario"].ToString());           
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
             SSO_User ssoUsuario = new SSO_User();
             ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
@@ -169,7 +169,7 @@ namespace AdminRoles
             var sb = new StringBuilder();
             for (var i = 0; i < hash.Length; i++)
             {
-                sb.Append(hash[i].ToString("X2"));
+                sb.Append(hash[i].ToString("x2"));
             }
             return sb.ToString();
         }
@@ -190,7 +190,7 @@ namespace AdminRoles
 
         protected void btnGuardarProfesionalVinculado_ServerClick(object sender, EventArgs e)
         {
-            vincularProfesional();                     
+            vincularProfesional();
 
             txtProfesional.Value = ddlProfesional.SelectedItem.ToString();
         }
