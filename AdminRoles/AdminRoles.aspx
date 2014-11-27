@@ -5,11 +5,7 @@
     <asp:HiddenField ID="hdfIdUsuario" runat="server" />
 
     <div class="container">
-        <%--<div class="page-header">            
-            <h3><%= devuelveEfector() %><span class="pull-left label label-default"></span></h3>
-        </div>--%>
         <div class="row">
-
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-primary">
                     <div class="panel-heading">
@@ -27,7 +23,7 @@
                             <div class="tab-pane fade in active" id="tab1primary">
                                 <div class="col-md-12">
                                     <%--<input type="button" class="btn btn-primary launch-modal" value="Crear Perfil" />--%>
-                                    <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true" >
+                                    <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead class="table">
                                             <tr>
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
@@ -41,7 +37,7 @@
                             </div>
                             <div class="tab-pane fade" id="tab2primary">
                                 <div class="col-md-12">
-                                    <table id="tblAplicaciones" data-toggle="table" data-pagination="true" data-search="true" >
+                                    <table id="tblAplicaciones" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead>
                                             <tr>
                                                 <th data-field="Id" data-align="center" data-sortable="true">ID</th>
@@ -288,7 +284,7 @@
                             $('.progress .progress-bar').progressbar().hide();
                         },
                         error: function (e) {
-                            alert("Mal");
+                            alert("Error");
 
                         }
                     });
@@ -362,7 +358,7 @@
         $table = $('#tblRoles').bootstrapTable({
             data: <%= devuelveRolesJson() %>,
             btnCrearPerfil: true
-            });
+        });
 
         <%--Se comenta para un desarrollo futuro.
         $table = $('#tblAplicaciones').bootstrapTable({
@@ -371,10 +367,11 @@
         $table = $('#tblEfectores').bootstrapTable({
             data: <%= devuelveEfectoresJson() %>
             });--%>
+
         $table = $('#tblUsuarios').bootstrapTable({
             data: <%= devuelveUsuariosJson() %>,
             btnCrearPerfil: false
-            });
+        });
     </script>
 
     <script type="text/javascript">

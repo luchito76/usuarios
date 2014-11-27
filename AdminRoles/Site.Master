@@ -19,7 +19,7 @@
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
     <link href="Content/select2.css" rel="stylesheet" />
     <link href="Content/Site.css" rel="stylesheet" />
-    
+
 
 </head>
 <body>
@@ -41,7 +41,6 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <%--<a class="navbar-brand" runat="server" href="~/">Administración Permisos de Usuarios</a>--%>
                     <span class="navbar-brand">Administración Permisos de Usuarios</span>
                 </div>
                 <div class="navbar-collapse collapse">
@@ -57,7 +56,6 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <%--<li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>--%>
                                 <li><a></a></li>
                                 <li><a>Bienvenido/a,
                                     <asp:Label ID="lblNombre" runat="server"><%= Salud.Security.SSO.SSOHelper.CurrentIdentity.FirstName  %></asp:Label></a></li>
@@ -73,9 +71,9 @@
         </div>
 
         <div class="container body-content">
-        <div class="page-header">            
-            <h3><%= devuelveEfector() %><span class="pull-left label label-default"></span></h3>
-        </div>
+            <div class="page-header">
+                <h3><%= devuelveEfector() %><span class="pull-left label label-default"></span></h3>
+            </div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

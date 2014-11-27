@@ -100,9 +100,6 @@
                 </div>
             </div>
         </div>
-        <%--<div class="panel-footer">
-            Panel footer
-        </div>--%>
     </div>
 
     <!--Modal para vincular profesionales con usuarios  -->
@@ -136,8 +133,7 @@
 
 
     <script>
-        $('#<%= ddlProfesional.ClientID %>').select2();
-        //$(document).ready(function() { $("#ddlProfesional").select2(); });
+        $('#<%= ddlProfesional.ClientID %>').select2();        
     </script>
 
     <script type="text/javascript">

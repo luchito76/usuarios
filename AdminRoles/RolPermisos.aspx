@@ -108,8 +108,7 @@
             'click .eliminar': function (e, value, row, index) {                 
                 $(document).ready(function () {
 
-                    var idPerfil = '<%= IdPerfil %>'; <%--'<%= devuelveIdRol() %>';--%>
-                    //var idEfector = document.getElementById('<%= hdnIdEfector.ClientID %>').value;
+                    var idPerfil = '<%= IdPerfil %>'; <%--'<%= devuelveIdRol() %>';--%>                   
                     
                     $.ajax({
                         type: "POST",
@@ -144,7 +143,7 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
 
-                var idPerfil = '<%= IdPerfil %>'; <%--'<%= devuelveIdRol() %>';--%>
+                var idPerfil = '<%= IdPerfil %>'; 
                 
                 window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idRol=" + idPerfil,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
@@ -167,7 +166,7 @@
                 var left = Number((screen.width/2)-(w/2));
                 var tops = Number((screen.height/2)-(h/2));
 
-                var idUsuario = '<%= IdUsuario %>'; <%--'<%= devuelveIdUsuario() %>'--%>
+                var idUsuario = '<%= IdUsuario %>';
                 
                 window.open("Modulos.aspx?llamada=usuario&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }

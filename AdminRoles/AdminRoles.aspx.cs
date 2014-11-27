@@ -58,7 +58,6 @@ namespace AdminRoles
             if (IsPostBack) return;
 
             llenarListas();
-            //devuelveEfector();
         }
 
 
@@ -68,13 +67,6 @@ namespace AdminRoles
             ddlAsignarPerfil.DataBind();
             ddlAsignarPerfil.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
-
-        //Devuelve el efector donde está instalada el AdminSSO. Sacar el efector de la tabla config.
-        //*******************Refactorizar*******************
-        //public string devuelveEfector()
-        //{
-        //    return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol);
-        //}
 
         public string devuelveRolesJson()
         {
