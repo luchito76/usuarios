@@ -577,6 +577,75 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser)
+		{
+			int returnValue;
+			return SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId, idUser, out returnValue);
+		}
+		
+		public Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdPerfil = new OAParameter();
+			parameterIdPerfil.ParameterName = "idPerfil";
+			if(idPerfil.HasValue)
+			{
+				parameterIdPerfil.Value = idPerfil.Value;
+			}
+			else
+			{
+				parameterIdPerfil.DbType = DbType.Int32;
+				parameterIdPerfil.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdAplicacion = new OAParameter();
+			parameterIdAplicacion.ParameterName = "idAplicacion";
+			if(idAplicacion.HasValue)
+			{
+				parameterIdAplicacion.Value = idAplicacion.Value;
+			}
+			else
+			{
+				parameterIdAplicacion.DbType = DbType.Int32;
+				parameterIdAplicacion.Value = DBNull.Value;
+			}
+
+			OAParameter parameterGroupId = new OAParameter();
+			parameterGroupId.ParameterName = "groupId";
+			if(groupId.HasValue)
+			{
+				parameterGroupId.Value = groupId.Value;
+			}
+			else
+			{
+				parameterGroupId.DbType = DbType.Int32;
+				parameterGroupId.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdUser = new OAParameter();
+			parameterIdUser.ParameterName = "idUser";
+			if(idUser.HasValue)
+			{
+				parameterIdUser.Value = idUser.Value;
+			}
+			else
+			{
+				parameterIdUser.DbType = DbType.Int32;
+				parameterIdUser.Value = DBNull.Value;
+			}
+
+			Int16 queryResult = this.ExecuteScalar<Int16>("[dbo].[SSO_Set_PermissionCache]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdAplicacion, parameterGroupId, parameterIdUser, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -675,6 +744,8 @@ namespace Dominio
 		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
+		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser);
+		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser, out int returnValue);
 	}
 }
 #pragma warning restore 1591

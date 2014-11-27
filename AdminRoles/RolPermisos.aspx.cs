@@ -189,10 +189,6 @@ namespace AdminRoles
                 IdUsuario = int.Parse(Session["idUsuario"].ToString());
 
                 ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
-                //string jquery = "MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');";
-
-                //ClientScript.RegisterStartupScript(typeof(Page), "a key", "<script type=\"text/javascript\">" + jquery + "</script>" );
-
             }
             catch (Exception ex)
             {
@@ -251,37 +247,44 @@ namespace AdminRoles
 
         private void guardaSSOPermisosCache(int idAplicacion)
         {
-            IList<SSO_Users_Role> listaUsuarios = null;
-
-            if (Request["llamada"] == "aplicacion")
-                listaUsuarios = usuarioNego.listaUsuariosXIdPerfil(IdPerfil).ToList();
-            else
-                listaUsuarios = usuarioNego.listaPerfilXIdUsuario(IdUsuario).ToList();
-
-            List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
-
             int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
 
-            foreach (SSO_Users_Role data in listaUsuarios)
-            {
-                if (permisoNego.esUsuarioEnPermisoCache(data.UserId, idAplicacion))
-                {
-                    foreach (SSO_Module data1 in listaModulosXAplicacion)
-                    {
-                        SSO_Permissions_Cache ssoPermisoCache = new SSO_Permissions_Cache();
+            if (Request["llamada"] == "aplicacion")
+                permisoNego.guardaPermisosCache(IdPerfil, idAplicacion, ultimoIdRolGroupInsertado, 0);
+            else
+                permisoNego.guardaPermisosCache(IdPerfil, idAplicacion, ultimoIdRolGroupInsertado, IdUsuario);
 
-                        ssoPermisoCache.UserId = data.UserId;
-                        ssoPermisoCache.ApplicationId = idAplicacion;
-                        ssoPermisoCache.TargetType = 2;
-                        ssoPermisoCache.Target = data1.Id;
-                        ssoPermisoCache.GroupId = ultimoIdRolGroupInsertado;
-                        ssoPermisoCache.Allow = true;
-                        ssoPermisoCache.Readonly = false;
+            //IList<SSO_Users_Role> listaUsuarios = null;
 
-                        permisoNego.guardaPermisosCache(ssoPermisoCache);
-                    }
-                }
-            }
+            //if (Request["llamada"] == "aplicacion")
+            //    listaUsuarios = usuarioNego.listaUsuariosXIdPerfil(IdPerfil).ToList();
+            //else
+            //    listaUsuarios = usuarioNego.listaPerfilXIdUsuario(IdUsuario).ToList();
+
+            //List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
+
+            //int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
+
+            //foreach (SSO_Users_Role data in listaUsuarios)
+            //{
+            //    if (permisoNego.esUsuarioEnPermisoCache(data.UserId, idAplicacion))
+            //    {
+            //        foreach (SSO_Module data1 in listaModulosXAplicacion)
+            //        {
+            //            SSO_Permissions_Cache ssoPermisoCache = new SSO_Permissions_Cache();
+
+            //            ssoPermisoCache.UserId = data.UserId;
+            //            ssoPermisoCache.ApplicationId = idAplicacion;
+            //            ssoPermisoCache.TargetType = 2;
+            //            ssoPermisoCache.Target = data1.Id;
+            //            ssoPermisoCache.GroupId = ultimoIdRolGroupInsertado;
+            //            ssoPermisoCache.Allow = true;
+            //            ssoPermisoCache.Readonly = false;
+
+            //            permisoNego.guardaPermisosCache(ssoPermisoCache);
+            //        }
+            //    }
+            //}
         }
 
         [WebMethod()]

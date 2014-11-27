@@ -877,6 +877,13 @@
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_Set_PermissionCache">
+        <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="groupId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idUser" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -886,7 +893,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO_8;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO_Admin;user id=sa;password=ssecure</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1274,6 +1281,15 @@
         <domainMethodReturnShape>
           <domainMethodReferencesDomainMethodReturnShape Id="15fe7bfe-2e92-465a-9cc0-9fca7739d17b">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetAppByRolResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="462fe34f-37d7-4821-95c3-1fbe7975ce42">
+      <domainMethod name="SSO_Set_PermissionCache" storedProcedureName="'SSO_Set_PermissionCache'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="b5257721-1e7a-495f-bbaa-36123e5181b1">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/Int16" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>

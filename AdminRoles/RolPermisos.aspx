@@ -9,7 +9,7 @@
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />
     <asp:HiddenField ID="hdnNombreRol" runat="server" />
 
-    <h2><%= devuelveNombreDeRol() %></h2>
+    <h3><%= devuelveNombreDeRol() %></h3>
 
     <div class="panel panel-primary" id="form">
         <div class="panel-heading">
@@ -17,7 +17,7 @@
         </div>
         <br />
         <div class="col-md-12">
-            <asp:DropDownList ID="ddlAplicaciones" DataTextField="name" DataValueField="id" runat="server" Width="300px" CssClass="col-sm-4 form-control"></asp:DropDownList>
+            <asp:DropDownList ID="ddlAplicaciones" DataTextField="description" DataValueField="id" runat="server" Width="300px" CssClass="col-sm-4 form-control"></asp:DropDownList>
             <div class="form-group">
                 <div class="col-sm-4">
                     <asp:Button ID="btnGuardar" runat="server" Text="Agregar" CausesValidation="true" class="btn btn-primary" OnClick="btnGuardar_Click" />
