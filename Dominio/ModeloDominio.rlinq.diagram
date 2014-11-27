@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDiagrams>
-  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11.25, 9.625" name="ModeloDominio" isDefault="true">
+  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11.25, 11.125" name="ModeloDominio" isDefault="true">
     <DomainModelMoniker name="/ModeloDominio" />
     <nestedChildShapes>
       <classShape Id="b2535b2b-aff2-4a30-90b8-b2e6612dac40" absoluteBounds="2.5, 0.5, 1.5, 2.3396761067708334">
@@ -137,6 +137,14 @@
           <elementListCompartment Id="d12b504a-3b32-473a-9775-fd5bd2f279b0" absoluteBounds="9.265, 6.51, 1.4700000000000002, 0.63399251302083326" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
           <elementListCompartment Id="d4e54114-930d-4f16-9adb-04d618de9a95" absoluteBounds="9.265, 7.1539925130208335, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           <elementListCompartment Id="24b0af42-0b9f-42d8-8528-7cf12719fdf1" absoluteBounds="9.265, 7.4133821614583333, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <classShape Id="f2d66ffc-46b6-41aa-8463-e9aa7a00033a" absoluteBounds="6.5, 8.875, 1.5, 1.955073242187499">
+        <DomainClassMoniker name="/ModeloDominio/SSO_Config" />
+        <nestedChildShapes>
+          <elementListCompartment Id="20133199-a574-403d-b423-613a8fcb998e" absoluteBounds="6.515, 9.385, 1.4700000000000002, 0.8262939453125" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="f8e05461-ead1-423b-89ca-08b02a461652" absoluteBounds="6.515, 10.2212939453125, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="e5a76d65-1fe6-40da-a909-aba196e4d770" absoluteBounds="6.515, 10.48068359375, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
     </nestedChildShapes>

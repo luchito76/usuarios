@@ -59,6 +59,9 @@
     <Compile Include="SSO_Application.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="SSO_Config.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SSO_GetAppByRolResultSet0.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>

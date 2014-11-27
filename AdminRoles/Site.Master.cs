@@ -76,7 +76,7 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            devuelveEfector();
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -84,7 +84,10 @@ namespace AdminRoles
             Context.GetOwinContext().Authentication.SignOut();
         }
 
-
+        public string devuelveEfector()
+        {
+            return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol);
+        }
     }
 
 }

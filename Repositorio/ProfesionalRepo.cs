@@ -58,7 +58,7 @@ namespace Repositorio
             SqlParameter param1;
             DataSet ds = new DataSet();
 
-            connetionString = "Data Source=10.1.232.23;Initial Catalog=SSO_Admin;User ID=sa;Password=ssecure";
+            connetionString = "Data Source=10.1.232.23;Initial Catalog=SSO_8;User ID=sa;Password=ssecure";
             connection = new SqlConnection(connetionString);
 
             connection.Open();

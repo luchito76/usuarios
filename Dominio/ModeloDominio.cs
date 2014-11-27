@@ -146,6 +146,14 @@ namespace Dominio
 			}
 		}
 		
+		public IQueryable<SSO_Config> SSO_Configs 
+		{
+			get
+			{
+				return this.GetAll<SSO_Config>();
+			}
+		}
+		
 		public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion)
 		{
 			int returnValue;
@@ -638,6 +646,10 @@ namespace Dominio
 			get;
 		}
 		IQueryable<Guardia_Medicos_Funcione> Guardia_Medicos_Funciones
+		{
+			get;
+		}
+		IQueryable<SSO_Config> SSO_Configs
 		{
 			get;
 		}

@@ -73,6 +73,9 @@
         </div>
 
         <div class="container body-content">
+        <div class="page-header">            
+            <h3><%= devuelveEfector() %><span class="pull-left label label-default"></span></h3>
+        </div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

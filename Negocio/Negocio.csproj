@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AplicacionesNego.cs" />
+    <Compile Include="ConfigNego.cs" />
     <Compile Include="ModulosNego.cs" />
     <Compile Include="PermisosNego.cs" />
     <Compile Include="ProfesionaNego.cs" />

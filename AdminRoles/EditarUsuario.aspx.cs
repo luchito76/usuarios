@@ -79,7 +79,7 @@ namespace AdminRoles
 
         private int devuelveIdProfesional()
         {
-            int idUsuario = int.Parse(Session["idUsuario"].ToString());  //int.Parse(Request["idUsuario"].ToString());
+            int idUsuario = int.Parse(Session["idUsuario"].ToString()); 
             int idProfesional = 0;
 
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();

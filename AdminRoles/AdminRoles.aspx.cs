@@ -58,7 +58,7 @@ namespace AdminRoles
             if (IsPostBack) return;
 
             llenarListas();
-            devuelveEfector();
+            //devuelveEfector();
         }
 
 
@@ -71,15 +71,10 @@ namespace AdminRoles
 
         //Devuelve el efector donde está instalada el AdminSSO. Sacar el efector de la tabla config.
         //*******************Refactorizar*******************
-        public string devuelveEfector()
-        {
-            //Session["efector"] = SSOHelper.CurrentIdentity.Name; //"Chos Malal";
-            //Session["idEfector"] = IdEfector;//  //IdEfector de Chos Malal
-
-            //string efector = Session["efector"].ToString();
-
-            return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol);
-        }
+        //public string devuelveEfector()
+        //{
+        //    return SSOHelper.GetNombreEfectorRol(SSOHelper.CurrentIdentity.IdEfectorRol);
+        //}
 
         public string devuelveRolesJson()
         {

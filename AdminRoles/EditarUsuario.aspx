@@ -2,10 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="page-header">
-        <h1>Administración de Perfiles<span class="pull-right label label-default"></span></h1>
-    </div>
-
     <div class="panel panel-primary">
         <div class="panel-heading">
             <span class="panel-title">Editar Datos de Usuario
@@ -123,7 +119,7 @@
                             <asp:Label ID="lbProfesionales" runat="server" Text="Profesionales" for="ddlProfesional" class="col-sm-4 control-label">
                             </asp:Label></b>
                         <div class="col-sm-7">
-                            <asp:DropDownList ID="ddlProfesional" runat="server"  DataTextField="Nombre" DataValueField="Codigo"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlProfesional" runat="server" DataTextField="Nombre" DataValueField="Codigo"></asp:DropDownList>
                         </div>
                     </div>
                 </div>

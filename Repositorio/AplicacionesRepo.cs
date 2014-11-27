@@ -11,9 +11,16 @@ namespace Repositorio
     {
         ModeloDominio dominio = new ModeloDominio();
 
-        public IEnumerable<SSO_Application> listaAplicaciones()
+        public IEnumerable<SSO_Application> listaAplicacionesHospital()
         {
             IEnumerable<SSO_Application> result = dominio.SSO_Applications.Where(c => c.Hospital == true).ToList();
+
+            return result;
+        }
+
+        public IEnumerable<SSO_Application> listaAplicacionesNivelCentral()
+        {
+            IEnumerable<SSO_Application> result = dominio.SSO_Applications.Where(c => c.Sips == true).ToList();
 
             return result;
         }

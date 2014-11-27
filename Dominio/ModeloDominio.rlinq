@@ -553,6 +553,22 @@
           <orm:column name="idFuncion" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
         </orm:field>
       </orm:class>
+      <orm:class name="SSO_Config" uniqueId="64e64c3f-0d74-40e1-bbff-3ca71aec4437">
+        <orm:table name="SSO_Config" />
+        <orm:identity>
+          <orm:single-field field-name="Name1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="Name1" property="Name" behavior="readwrite" uniqueId="5296dd5c-220c-4a84-9a77-e417a2d2b42f" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="ValueInt1" property="ValueInt" behavior="readwrite" uniqueId="61462114-2afe-4190-9b53-7c13fe0d6479" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="valueInt" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="ValueStr1" property="ValueStr" behavior="readwrite" uniqueId="83c144e1-a061-4427-a8cb-7eb3e73cc87f" type="System.String">
+          <orm:column name="valueStr" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="SSO_Users_Roles">
@@ -802,6 +818,11 @@
         <orm:column name="idMedico" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         <orm:column name="idFuncion" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
       </orm:table>
+      <orm:table name="SSO_Config">
+        <orm:column name="name" sql-type="varchar" nullable="false" length="50" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="valueInt" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="valueStr" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+      </orm:table>
       <orm:procedure name="SSO_GetUsuariosXAplicacion">
         <orm:procedure-parameter name="idAplicacion" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
@@ -865,7 +886,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.15;initial catalog=SSO_Admin;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO_8;user id=sa;password=ssecure</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1132,6 +1153,11 @@
       <Property Id="1fdd9f0a-76a7-43f2-8b47-85aa16a2541d" name="IdMedico" type="Int32" label="IdMedico : Int32" kind="Persistent" identity="true" fieldName="IdMedico1" />
       <Property Id="84999ffb-0c58-4fc9-94d1-e5c51cbd4555" name="IdFuncion" label="IdFuncion : String" kind="Persistent" fieldName="IdFuncion1" />
     </DomainClass>
+    <DomainClass Id="64e64c3f-0d74-40e1-bbff-3ca71aec4437" name="SSO_Config" namespace="Dominio" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="5296dd5c-220c-4a84-9a77-e417a2d2b42f" name="Name" label="Name : String" kind="Persistent" identity="true" fieldName="Name1" />
+      <Property Id="61462114-2afe-4190-9b53-7c13fe0d6479" name="ValueInt" type="Int32" label="ValueInt : Int32" nullable="true" kind="Persistent" fieldName="ValueInt1" />
+      <Property Id="83c144e1-a061-4427-a8cb-7eb3e73cc87f" name="ValueStr" label="ValueStr : String" kind="Persistent" fieldName="ValueStr1" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
@@ -1148,6 +1174,7 @@
         <entitySetProperty name="SSO_StoredVariables" namespace="Dominio" type="SSO_StoredVariable" label="SSO_StoredVariables : IQueryable&lt;Dominio.SSO_StoredVariable&gt;" />
         <entitySetProperty name="Sys_Profesionals" namespace="Dominio" type="Sys_Profesional" label="Sys_Profesionals : IQueryable&lt;Dominio.Sys_Profesional&gt;" />
         <entitySetProperty name="Guardia_Medicos_Funciones" namespace="Dominio" type="Guardia_Medicos_Funcione" label="Guardia_Medicos_Funciones : IQueryable&lt;Dominio.Guardia_Medicos_Funcione&gt;" />
+        <entitySetProperty name="SSO_Configs" namespace="Dominio" type="SSO_Config" label="SSO_Configs : IQueryable&lt;Dominio.SSO_Config&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
