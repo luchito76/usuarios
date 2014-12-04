@@ -192,8 +192,7 @@ namespace AdminRoles
                 llenarListas();
 
                 IdUsuario = int.Parse(Session["idUsuario"].ToString());
-
-
+                               
 
                 ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
             }

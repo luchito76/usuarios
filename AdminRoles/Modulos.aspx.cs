@@ -111,6 +111,8 @@ namespace AdminRoles
         {
             SSOHelper.Authenticate();
 
+            ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'></script>", false);
+
             if (IsPostBack) return;
 
             Session["idPerfil"] = IdPerfil;
