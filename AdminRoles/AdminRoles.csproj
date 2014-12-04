@@ -189,6 +189,8 @@
     <Content Include="Content\style.css" />
     <Content Include="EditarUsuario.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\gif.GIF" />
+    <Content Include="img\load_modulos.GIF" />
     <Content Include="img\select2-spinner.gif" />
     <Content Include="img\select2.png" />
     <Content Include="img\select2x2.png" />
@@ -460,7 +462,7 @@
           <IISAppRootUrl>http://localhost:1074/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://www.desa.saludnqn.gob.ar/AdminRoles</CustomServerUrl>
+          <CustomServerUrl>http://www.test.saludnqn.gob.ar/AdminRoles</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

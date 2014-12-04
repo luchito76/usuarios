@@ -4,12 +4,16 @@
     <asp:ScriptManager ID="myScriptManager" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
 
+
+
     <asp:HiddenField ID="hdnIdEfector" runat="server" />
     <asp:HiddenField ID="hdIdAplicacion" runat="server" />
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />
     <asp:HiddenField ID="hdnNombreRol" runat="server" />
 
     <h3><%= devuelveNombreDeRol() %></h3>
+
+
 
     <div class="panel panel-primary" id="form">
         <div class="panel-heading">
@@ -20,7 +24,7 @@
             <asp:DropDownList ID="ddlAplicaciones" DataTextField="description" DataValueField="id" runat="server" Width="300px" CssClass="col-sm-4 form-control"></asp:DropDownList>
             <div class="form-group">
                 <div class="col-sm-4">
-                    <asp:Button ID="btnGuardar" runat="server" Text="Agregar" CausesValidation="true" class="btn btn-primary" OnClick="btnGuardar_Click" />
+                    <asp:Button ID="btnGuardar" runat="server" Text="Agregar" CausesValidation="true" class="btn btn-primary" OnClick="btnGuardar_Click" OnClientClick="modal();" />
                 </div>
             </div>
             <div id="divAppXRoles" runat="server" visible="false">
@@ -51,10 +55,49 @@
         </div>
     </div>
 
+    <div id="progressBarModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Eliminando Perfil...</h4>
+                </div>
+                <div class="modal-body center-block">
+                    <div id="progressBarEliminarPerfil" class="progress progress-striped active">
+                        <div id="progressEliminarPerfil" class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Static Modal -->
+    <div class="modal fade processing-modal" id="processing-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="img/gif.GIF" class="icon" />
+                        <h4>
+                        Creando permisos...</h4>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function modal() {
+            $('#processing-modal').modal('show');
+        }
+    </script>
+
     <script>
         function MostrarModulos(idAplicacion, idRol)
-        {
-            
+        {           
             var w = 800;
             var h = 700;
             var left = Number((screen.width/2)-(w/2));
@@ -108,7 +151,7 @@
             'click .eliminar': function (e, value, row, index) {                 
                 $(document).ready(function () {
 
-                    var idPerfil = '<%= IdPerfil %>'; <%--'<%= devuelveIdRol() %>';--%>                   
+                    var idPerfil = '<%= IdPerfil %>';
                     
                     $.ajax({
                         type: "POST",

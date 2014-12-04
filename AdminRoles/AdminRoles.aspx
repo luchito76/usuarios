@@ -303,6 +303,7 @@
         window.operateEvents = {
             'click .editar': function (e, value, row, index) {
                 $('#myModal').modal('show');
+
                 document.getElementById('<%= txtRol.ClientID %>').value = row.Name;
                 document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;
             }
@@ -378,7 +379,7 @@
         $(document).ready(function () {
             $('.launch-modal').click(function () {
                 $('#myModal').modal({
-                    keyboard: true
+                    keyboard: true                    
                 });
             });
         });

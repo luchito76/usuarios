@@ -106,12 +106,13 @@ namespace Repositorio
         public void guardaPermisosCache(SSO_Permissions_Cache permisosCache)
         {
             dominio.Add(permisosCache);
-            dominio.SaveChanges();
+            dominio.SaveChanges();            
         }
 
-        public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId, int idUser)
+        public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId)
         {
-            dominio.SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId, idUser);
+            //dominio.SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId);            
+            
         }
     }
 }

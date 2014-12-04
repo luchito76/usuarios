@@ -577,13 +577,13 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser)
+		public Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId)
 		{
 			int returnValue;
-			return SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId, idUser, out returnValue);
+			return SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId, out returnValue);
 		}
 		
-		public Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser, out int returnValue)
+		public Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
@@ -625,19 +625,7 @@ namespace Dominio
 				parameterGroupId.Value = DBNull.Value;
 			}
 
-			OAParameter parameterIdUser = new OAParameter();
-			parameterIdUser.ParameterName = "idUser";
-			if(idUser.HasValue)
-			{
-				parameterIdUser.Value = idUser.Value;
-			}
-			else
-			{
-				parameterIdUser.DbType = DbType.Int32;
-				parameterIdUser.Value = DBNull.Value;
-			}
-
-			Int16 queryResult = this.ExecuteScalar<Int16>("[dbo].[SSO_Set_PermissionCache]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdAplicacion, parameterGroupId, parameterIdUser, parameterReturnValue);
+			Int16 queryResult = this.ExecuteScalar<Int16>("[dbo].[SSO_Set_PermissionCache]", CommandType.StoredProcedure, parameterIdPerfil, parameterIdAplicacion, parameterGroupId, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -744,8 +732,8 @@ namespace Dominio
 		IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> Sp_SSO_AllowedAppsByEfector(int? userId, int? roleId, out int returnValue);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
-		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser);
-		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, int? idUser, out int returnValue);
+		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId);
+		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, out int returnValue);
 	}
 }
 #pragma warning restore 1591

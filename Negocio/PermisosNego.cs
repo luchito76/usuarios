@@ -79,9 +79,9 @@ namespace Negocio
             permisosRepo.guardaPermisosCache(permisosCache);
         }
 
-        public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId, int idUser)
+        public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId)
         {
-            permisosRepo.guardaPermisosCache(idPerfil, idAplicacion, groupId, idUser);
+            permisosRepo.guardaPermisosCache(idPerfil, idAplicacion, groupId);
         }
     }
 }
