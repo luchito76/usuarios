@@ -187,6 +187,7 @@
     <Content Include="Content\select2.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\sweet-alert.css" />
     <Content Include="EditarUsuario.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\gif.GIF" />
@@ -224,6 +225,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2_locale_es.js" />
+    <Content Include="Scripts\sweet-alert.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />

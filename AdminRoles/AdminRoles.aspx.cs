@@ -166,6 +166,8 @@ namespace AdminRoles
             borrarPermisosCache(idUsuario);
 
             guardarPermisosCache(idUsuario);
+
+            habilitaUsuario(idUsuario);
         }
 
         private void borrarUserRol(int idUsuario)
@@ -218,6 +220,17 @@ namespace AdminRoles
 
                 permisoNego.guardaPermisosCache(permisosCache);
             }
+        }
+
+        private void habilitaUsuario(int idUsuario)
+        {
+            SSO_User ssoUser = new SSO_User();
+            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+
+            ssoUser.Id = idUsuario;
+            ssoUser.Enabled = true;
+
+            usuarioNego.actualizarUsuario(ssoUser);
         }
 
         [WebMethod(), ScriptMethod(ResponseFormat = ResponseFormat.Json)]

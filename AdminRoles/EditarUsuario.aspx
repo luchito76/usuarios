@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" class="btn btn-primary" OnClick="btnGuardar_Click" />
-                            <asp:Button ID="btnResetClave" runat="server" Text="Reset Clave" class="btn btn-primary" OnClick="btnResetClave_Click" />
+                            <asp:Button ID="btnResetClave" runat="server" Text="Reset Clave" class="btn btn-primary" OnClick="btnResetClave_Click" OnClientClick="return aler();" />
                         </div>
 
                         <div id="alerta" runat="server" class="col-lg-4">
@@ -130,7 +130,16 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
+    <link href="Content/sweet-alert.css" rel="stylesheet" />
+    <script src="Scripts/sweet-alert.js"></script>
+    <script>        
+        function aler(){            
+            swal({
+                title: "Clave reseteada!",
+                text: "La nueva clave es: 12345"                
+            });
+        };       
+    </script>
 
     <script>
         $('#<%= ddlProfesional.ClientID %>').select2();        

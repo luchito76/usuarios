@@ -26,11 +26,11 @@
                                         <thead>
                                             <tr>
                                                 <th data-field="IdUsuario" data-align="center" data-sortable="true">ID</th>
-                                                <th data-field="DNI" data-align="center" data-sortable="true">DNI</th>
+                                                <th data-field="DNI" data-align="center" data-sortable="true" data--visible="false">DNI</th>
                                                 <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
-                                                <th data-field="RolId" data-align="left" data-sortable="true" data-visible="true">Perfil</th>
+                                                <th data-field="RolId" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
@@ -342,7 +342,7 @@
 
         function formatoEditarUsuario(value, row, index) {
             return [
-            '<a class="editarUsuario ml10" href="javascript:void(0)" title="Aplicaciones">',
+            '<a class="editarUsuario ml10" href="javascript:void(0)" title="Editar Usuario">',
                 '<i class="fa fa-pencil-square-o"></i>',
             '</a>'
             ].join('');

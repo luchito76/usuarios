@@ -4,16 +4,12 @@
     <asp:ScriptManager ID="myScriptManager" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
 
-
-
     <asp:HiddenField ID="hdnIdEfector" runat="server" />
     <asp:HiddenField ID="hdIdAplicacion" runat="server" />
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />
     <asp:HiddenField ID="hdnNombreRol" runat="server" />
 
     <h3><%= devuelveNombreDeRol() %></h3>
-
-
 
     <div class="panel panel-primary" id="form">
         <div class="panel-heading">
@@ -81,8 +77,7 @@
                 <div class="modal-body">
                     <div class="text-center">
                         <img src="img/gif.GIF" class="icon" />
-                        <h4>
-                        Creando permisos...</h4>                            
+                        <h4>Creando permisos...</h4>
                     </div>
                 </div>
             </div>
@@ -112,7 +107,7 @@
                 llamada = "aplicacion";
             else
                 llamada = "usuario";
-                            
+                    
             window.open("Modulos.aspx?llamada=" + llamada + "&nombreAplicacion=" + nombreAplicacion +  "&idAplicacion=" + idAplicacion + "&idRol=" + idRol + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
         }
     </script>

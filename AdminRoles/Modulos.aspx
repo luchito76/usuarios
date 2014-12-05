@@ -9,7 +9,7 @@
     <link href="Content/bootstrap-table.css" rel="stylesheet" />
     <link href="Content/bootstrap-switch.css" rel="stylesheet" />
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.css">
+    <link href="Content/sweet-alert.css" rel="stylesheet" />
 
     <script type="text/javascript">        
         window.onload = function(){
@@ -22,11 +22,9 @@
                 confirmButtonText: 'OK!'
             });
         };
-
     </script>
 </head>
 <body>
-
     <form id="form1" class="form-horizontal" runat="server">
         <div class="panel panel-primary" id="form">
             <div class="panel-heading">
@@ -58,10 +56,7 @@
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/bootstrap-table.js"></script>
     <script src="Scripts/bootstrap-switch.js"></script>
-    <script src="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
-
-
-
+    <script src="Scripts/sweet-alert.js"></script>
 
     <script>
         function cerrarVentana() {

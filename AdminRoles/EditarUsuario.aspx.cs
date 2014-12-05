@@ -79,7 +79,7 @@ namespace AdminRoles
 
         private int devuelveIdProfesional()
         {
-            int idUsuario = int.Parse(Session["idUsuario"].ToString()); 
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());
             int idProfesional = 0;
 
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
@@ -117,9 +117,12 @@ namespace AdminRoles
 
         private void actualizarUsuario()
         {
-            SSO_User ssousuario = new SSO_User();
+            int idUsuario = int.Parse(Request["idUsuario"].ToString());
 
-            ssousuario.Id = int.Parse(Request["idUsuario"].ToString());
+            SSO_User ssousuario = new SSO_User();
+            ssousuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+
+            ssousuario.Id = idUsuario;
             ssousuario.Name = txtNombre.Text.ToUpper();
             ssousuario.Surname = txtApellido.Text.ToUpper();
             ssousuario.Username = txtUsuario.Text;
@@ -150,14 +153,23 @@ namespace AdminRoles
 
         protected void btnResetClave_Click(object sender, EventArgs e)
         {
-            int idUsuario = int.Parse(Session["idUsuario"].ToString());
+            try
+            {
+                int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
-            SSO_User ssoUsuario = new SSO_User();
-            ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+                SSO_User ssoUsuario = new SSO_User();
+                ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
 
-            ssoUsuario.Password = HashSHA1("12345");
+                ssoUsuario.Password = HashSHA1("12345");
 
-            usuarioNego.actualizarUsuario(ssoUsuario);
+                usuarioNego.actualizarUsuario(ssoUsuario);
+
+                System.Threading.Thread.Sleep(5000);                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private static string HashSHA1(string value)
