@@ -10,60 +10,17 @@
                 <div class="panel with-nav-tabs panel-primary">
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1primary" data-toggle="tab">Perfiles</a></li>
-                            <li><a href="#tab2primary" data-toggle="tab" runat="server" visible="false">Sistemas</a></li>
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">Usuarios</a></li>
+                            <li><a href="#tab2primary" data-toggle="tab">Perfiles</a></li>
                             <!-- Se oculta para desarrollarlo en una versión posterior -->
-                            <li><a href="#tab3primary" data-toggle="tab" runat="server" visible="false">Efectores</a></li>
+                            <li><a href="#tab3primary" data-toggle="tab" runat="server" visible="false">Sistemas</a></li>
                             <!-- Se oculta para desarrollarlo en una versión posterior -->
-                            <li><a href="#tab4primary" data-toggle="tab">Usuarios</a></li>
+                            <li><a href="#tab4primary" data-toggle="tab" runat="server" visible="false">Efectores</a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1primary">
-                                <div class="col-md-12">
-                                    <%--<input type="button" class="btn btn-primary launch-modal" value="Crear Perfil" />--%>
-                                    <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true">
-                                        <thead class="table">
-                                            <tr>
-                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
-                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
-                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
-                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab2primary">
-                                <div class="col-md-12">
-                                    <table id="tblAplicaciones" data-toggle="table" data-pagination="true" data-search="true">
-                                        <thead>
-                                            <tr>
-                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
-                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
-                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
-                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab3primary">
-                                <div class="col-md-12">
-                                    <table id="tblEfectores" data-toggle="table" data-pagination="true" data-search="true">
-                                        <thead>
-                                            <tr>
-                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
-                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
-                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
-                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab4primary">
                                 <div class="col-md-12">
                                     <table id="tblUsuarios" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead>
@@ -78,6 +35,49 @@
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
                                                 <th data-field="operate" data-formatter="formatoEditarUsuario" data-events="eventosEditarUsuario" data-align="center">Editar</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2primary">
+                                <div class="col-md-12">
+                                    <%--<input type="button" class="btn btn-primary launch-modal" value="Crear Perfil" />--%>
+                                    <table id="tblRoles" data-toggle="table" data-pagination="true" data-search="true">
+                                        <thead class="table">
+                                            <tr>
+                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
+                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
+                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab3primary">
+                                <div class="col-md-12">
+                                    <table id="tblAplicaciones" data-toggle="table" data-pagination="true" data-search="true">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
+                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
+                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab4primary">
+                                <div class="col-md-12">
+                                    <table id="tblEfectores" data-toggle="table" data-pagination="true" data-search="true">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="Id" data-align="center" data-sortable="true">ID</th>
+                                                <th data-field="Name" data-align="left" data-sortable="true">Nombre</th>
+                                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">App</th>
                                             </tr>
                                         </thead>
                                     </table>

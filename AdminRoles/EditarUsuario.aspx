@@ -78,7 +78,7 @@
                             <asp:Label ID="Label1" runat="server" Text="Trabaja En Guardia" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <label for="LIbretaSanitaria" class="checkbox inline">
+                            <label for="trabajaEnGuardia" class="checkbox inline">
                                 <input name="trabajaEnGuardia" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
                             </label>
                         </div>
@@ -136,9 +136,7 @@
         $('#<%= ddlProfesional.ClientID %>').select2();        
     </script>
 
-    <script type="text/javascript">
-
-        
+    <script type="text/javascript">       
 
         $(document).ready(function () {
             $('.launch-modal').click(function () {
@@ -160,12 +158,9 @@
                     //alert("Bien");
                 },
                 error: function (e) {
-                    alert("Mal");
+                    alert("Error");
                 }
             });
-
-
         });
-
     </script>
 </asp:Content>

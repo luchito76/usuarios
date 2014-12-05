@@ -11,24 +11,19 @@
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.css">
 
-    <script type="text/javascript">
+    <script type="text/javascript">        
+        window.onload = function(){
+            swal({
+                title: "Los permisos se crearon correctamente!",
+                text: "Todo OK!",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: 'btn-success',
+                confirmButtonText: 'OK!'
+            });
+        };
 
-        
-
-        
-          window.onload = function(){
-                swal({
-                    title: "Los permisos se crearon correctamente!",
-                    text: "Todo OK!",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: 'btn-success',
-                    confirmButtonText: 'OK!'
-                });
-            };
-
-
-</script>
+    </script>
 </head>
 <body>
 
@@ -56,7 +51,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </form>
 
     <script src="Scripts/jquery-1.10.2.js"></script>
@@ -66,7 +61,7 @@
     <script src="http://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
 
 
-    
+
 
     <script>
         function cerrarVentana() {

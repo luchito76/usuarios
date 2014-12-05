@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dominio;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace Repositorio
 {
@@ -16,7 +17,7 @@ namespace Repositorio
         public IEnumerable<SSO_GetProfesionalesResultSet0> listaProfesionales()
         {
             IEnumerable<SSO_GetProfesionalesResultSet0> result = dominio.SSO_GetProfesionales().ToList();
-
+            
             return result;
         }
 
@@ -58,7 +59,7 @@ namespace Repositorio
             SqlParameter param1;
             DataSet ds = new DataSet();
 
-            connetionString = "Data Source=10.1.232.23;Initial Catalog=SSO_8;User ID=sa;Password=ssecure";
+            connetionString =  System.Configuration.ConfigurationManager.ConnectionStrings["SSO_HOSPITALConnection"].ConnectionString;// "Data Source=10.1.232.15;Initial Catalog=SSO;User ID=sa;Password=ssecure";
             connection = new SqlConnection(connetionString);
 
             connection.Open();
