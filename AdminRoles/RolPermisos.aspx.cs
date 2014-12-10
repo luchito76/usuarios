@@ -77,10 +77,8 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-
             int idUsuario = SSOHelper.CurrentIdentity.Id;
+
             if (IsPostBack) return;
 
             llenarListas();
@@ -171,9 +169,9 @@ namespace AdminRoles
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
-            {            
+            {
                 int idAplicacion = int.Parse(ddlAplicaciones.SelectedValue);
-                nomApp = ddlAplicaciones.SelectedItem.ToString();                
+                nomApp = ddlAplicaciones.SelectedItem.ToString();
 
                 guardaRoleGroups(idAplicacion);
 
@@ -192,7 +190,7 @@ namespace AdminRoles
                 llenarListas();
 
                 IdUsuario = int.Parse(Session["idUsuario"].ToString());
-                               
+
 
                 ScriptManager.RegisterStartupScript(Page, typeof(System.Web.UI.Page), "MostrarModulos", @"<script type='text/javascript'>MostrarModulos('" + idAplicacion + "','" + IdPerfil + "');</script>", false);
             }

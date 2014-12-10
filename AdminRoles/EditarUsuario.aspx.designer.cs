@@ -175,6 +175,24 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// lblhabilitado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblhabilitado;
+        
+        /// <summary>
+        /// lblBloqueado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBloqueado;
+        
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>

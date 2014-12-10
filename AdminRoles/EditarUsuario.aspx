@@ -84,6 +84,31 @@
                         </div>
                     </div>
 
+
+                    <div class="form-group">
+
+                        <b>
+                            <asp:Label ID="lblhabilitado" runat="server" Text="Habilitado" for="option1" class="col-sm-2 control-label">      
+                            </asp:Label></b>
+                        <div class="col-sm-3">
+                            <label for="habilitado" class="checkbox inline">
+                                <input name="chkHabilitado" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
+                            </label>
+                        </div>
+
+                        <b>
+                            <asp:Label ID="lblBloqueado" runat="server" Text="Bloqueado" for="option1" class="col-sm-2 control-label">      
+                            </asp:Label></b>
+                        <div class="col-sm-3">
+                            <label for="bloqueado" class="checkbox inline">
+                                <input name="chkBloqueado" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
+                            </label>
+                        </div>
+
+                    </div>
+
+
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" class="btn btn-primary" OnClick="btnGuardar_Click" />
@@ -155,6 +180,42 @@
             });
         });
 
+        
+        $("[name='chkHabilitado']").bootstrapSwitch('state', <%= esusuarioHabilitado(IdUsuario) %>, <%= esusuarioHabilitado(IdUsuario) %>).on('switchChange.bootstrapSwitch', function (event, state) { 
+            
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("EditarUsuario.aspx/habilitarUsuario")%>',
+                <%--data: "{'idUsuario':'" + <%= IdUsuario %>  + "'}",--%>
+                data: "{'estado':'" + state + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //alert("Bien");
+                },
+                error: function (e) {
+                    alert("Error");
+                }
+            });
+        
+        });
+
+        $("[name='chkBloqueado']").bootstrapSwitch('state', <%= esusuarioBloqueado(IdUsuario) %>, <%= esusuarioBloqueado(IdUsuario) %>).on('switchChange.bootstrapSwitch', function (event, state) { 
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("EditarUsuario.aspx/desbloquearUsuario")%>',
+                data: "{'estado':'" + state  + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //alert("Bien");
+                },
+                error: function (e) {
+                    alert("Error");
+                }
+            });
+        });
+
         $("[name='trabajaEnGuardia']").bootstrapSwitch('state', <%= trabajaEnGuardia() %>, <%= trabajaEnGuardia() %>).on('switchChange.bootstrapSwitch', function (event, state) {
 
             $.ajax({
@@ -171,5 +232,9 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        
     </script>
 </asp:Content>

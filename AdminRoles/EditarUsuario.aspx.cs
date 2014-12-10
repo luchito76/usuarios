@@ -17,6 +17,19 @@ namespace AdminRoles
         UsuariosNego usuarioNego = new UsuariosNego();
         ProfesionaNego profesionalNego = new ProfesionaNego();
 
+        private int idUsuario;
+        public int IdUsuario
+        {
+            get
+            {
+                if (Request["idUsuario"] != null)
+                    idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+                return idUsuario;
+            }
+            set { idUsuario = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["idUsuario"] = Request["idUsuario"].ToString();
@@ -60,21 +73,6 @@ namespace AdminRoles
 
             if (devuelveIdProfesional() != 0)
                 ddlProfesional.Text = devuelveIdProfesional().ToString();
-        }
-
-        public string trabajaEnGuardia()
-        {
-            string esGuardia = string.Empty;
-            int idProfesional = devuelveIdProfesional();
-
-            IList<SSO_GetProfesionalesXGuardiaResultSet0> lista = profesionalNego.listaProfesionalesEnGuardiaXIdProfesional(idProfesional).ToList();
-
-            if (lista.Count == 0)
-                esGuardia = "false";
-            else
-                esGuardia = "true";
-
-            return esGuardia.ToString().ToLower();
         }
 
         private int devuelveIdProfesional()
@@ -164,7 +162,7 @@ namespace AdminRoles
 
                 usuarioNego.actualizarUsuario(ssoUsuario);
 
-                System.Threading.Thread.Sleep(5000);                
+                System.Threading.Thread.Sleep(5000);
             }
             catch (Exception ex)
             {
@@ -214,9 +212,71 @@ namespace AdminRoles
             EditarUsuario editarUsuario = new EditarUsuario();
 
             bool trabajaEnGuardia = estado;
-            int idProfesional = editarUsuario.devuelveIdProfesional();//  int.Parse(HttpContext.Current.Session["idProfesional"].ToString());
+            int idProfesional = editarUsuario.devuelveIdProfesional();
 
             profesionalNego.guardaProfesionalEnGuardia(idProfesional, estado);
+        }
+
+        public string trabajaEnGuardia()
+        {
+            string esGuardia = string.Empty;
+            int idProfesional = devuelveIdProfesional();
+
+            IList<SSO_GetProfesionalesXGuardiaResultSet0> lista = profesionalNego.listaProfesionalesEnGuardiaXIdProfesional(idProfesional).ToList();
+
+            if (lista.Count == 0)
+                esGuardia = "false";
+            else
+                esGuardia = "true";
+
+            return esGuardia.ToString().ToLower();
+        }
+
+        [ScriptMethod(), WebMethod()]
+        public static void habilitarUsuario(bool estado)
+        {
+            UsuariosNego usuarioNego = new UsuariosNego();
+
+            SSO_User usuario = new SSO_User();
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString())).FirstOrDefault();
+
+            usuario.Enabled = estado;
+
+            usuarioNego.actualizarUsuario(usuario);
+        }
+
+        public string esusuarioHabilitado(int idUsuario)
+        {
+            SSO_User usuario = new SSO_User();
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+
+            string estado = usuario.Enabled.ToString().ToLower();
+
+            return estado;
+        }
+
+        [ScriptMethod(), WebMethod()]
+        public static void desbloquearUsuario(bool estado)
+        {
+            EditarUsuario editarUsuario = new EditarUsuario();
+            UsuariosNego usuarioNego = new UsuariosNego();
+
+            SSO_User usuario = new SSO_User();
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString())).FirstOrDefault();
+
+            usuario.Locked = estado;
+
+            usuarioNego.actualizarUsuario(usuario);
+        }
+
+        public string esusuarioBloqueado(int idUsuario)
+        {
+            SSO_User usuario = new SSO_User();
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+
+            string estado = usuario.Locked.ToString().ToLower();
+
+            return estado.ToString().ToLower();
         }
     }
 }

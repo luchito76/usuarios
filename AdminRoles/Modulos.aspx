@@ -11,17 +11,21 @@
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
     <link href="Content/sweet-alert.css" rel="stylesheet" />
 
-    <script type="text/javascript">        
-        window.onload = function(){
-            swal({
-                title: "Los permisos se crearon correctamente!",
-                text: "Todo OK!",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonClass: 'btn-success',
-                confirmButtonText: 'OK!'
-            });
-        };
+    <script type="text/javascript">   
+        var nuevoModulo =  '<%= moduloNuevo %>'; 
+
+        if (nuevoModulo != '') {
+            window.onload = function(){
+                swal({
+                    title: "Los permisos se crearon correctamente!",
+                    text: "Todo OK!",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: 'btn-success',
+                    confirmButtonText: 'OK!'
+                });
+            };
+        }
     </script>
 </head>
 <body>

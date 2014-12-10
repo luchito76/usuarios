@@ -107,6 +107,13 @@ namespace AdminRoles
 
         #endregion
 
+        public string moduloNuevo;
+        protected void Page_PreLoad(object sender, EventArgs e)
+        {
+            if (Request["moduloNuevo"] != null)
+                moduloNuevo = Request["moduloNuevo"].ToString();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SSOHelper.Authenticate();
