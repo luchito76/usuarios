@@ -64,6 +64,11 @@ namespace Negocio
             permisosRepo.borrarPermisosCacheXIdRolGroup(idRolGroup);
         }
 
+        public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idusuario)
+        {
+            permisosRepo.borrarPermisosCacheXIdUsuario(idusuario);
+        }
+
         public void borrarPermisosCacheXIdUsuario(int idusuario)
         {
             permisosRepo.borrarPermisosCacheXIdUsuario(idusuario);

@@ -43,7 +43,7 @@
                     <thead>
                         <tr>
                             <th data-field="id" data-align="center" data-sortable="true">ID</th>
-                            <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
+                            <th data-field="description" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
                             <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
                         </tr>
@@ -152,7 +152,7 @@
                     
                     $.ajax({
                         type: "POST",
-                        url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacionXRol")%>' ,
+                        url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacion")%>' ,
                         data: "{'idPerfil':'" + idPerfil + "', 'idAplicacion':'" + row.id + "'}",                        
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",

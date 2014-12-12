@@ -324,6 +324,17 @@ namespace AdminRoles
         }
 
         [WebMethod()]
+        public static void eliminarAplicacion(int idPerfil, int idAplicacion)
+        {
+            string llamadaDesde = HttpContext.Current.Session["llamada"].ToString();
+
+            if (llamadaDesde == "aplicacion")
+
+                eliminarAplicacionXRol(idPerfil, idAplicacion);
+            else
+                eliminarAplicacionXUsuario(idPerfil, idAplicacion);
+        }
+
         public static void eliminarAplicacionXRol(int idPerfil, int idAplicacion)
         {
             RolesNego rol = new RolesNego();
@@ -332,21 +343,34 @@ namespace AdminRoles
             IList<SSO_RoleGroup> lista = rol.eliminarAplicacionXRol(rolPermiso.IdEfector, idPerfil, idAplicacion).ToList();
 
             int idRoleGroup = 0;
-            string pepe = HttpContext.Current.Request.QueryString["llamada"];
 
             foreach (SSO_RoleGroup data in lista)
             {
                 idRoleGroup = data.Id;
 
-                string llamadaDesde = HttpContext.Current.Session["llamada"].ToString();
+                borrarPermisos(idRoleGroup);
 
-                if (llamadaDesde == "aplicacion")
-                {
-                    borrarPermisos(idRoleGroup);
-                    borrarRoleGroups(idRoleGroup);
-                }
+                borrarRoleGroups(idRoleGroup);
 
                 borrarPermisosCache(idRoleGroup);
+            }
+        }
+
+        public static void eliminarAplicacionXUsuario(int idPerfil, int idAplicacion)
+        {
+            RolesNego rol = new RolesNego();
+            RolPermisos rolPermiso = new RolPermisos();
+
+            IList<SSO_RoleGroup> lista = rol.eliminarAplicacionXRol(rolPermiso.IdEfector, idPerfil, idAplicacion).ToList();
+
+            int idRoleGroup = 0;
+            int idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+
+            foreach (SSO_RoleGroup data in lista)
+            {
+                idRoleGroup = data.Id;
+
+                borrarPermisosCache(idRoleGroup, idUsuario);
             }
         }
 
@@ -355,6 +379,13 @@ namespace AdminRoles
             PermisosNego permisoNego = new PermisosNego();
 
             permisoNego.borrarPermisosCacheXIdRolGroup(idRolGroup);
+        }
+
+        private static void borrarPermisosCache(int idRolGroup, int idUsuario)
+        {
+            PermisosNego permisoNego = new PermisosNego();
+
+            permisoNego.borrarPermisosCacheXIdUsuario(idRolGroup, idUsuario);
         }
 
         private static void borrarPermisos(int idPermiso)
