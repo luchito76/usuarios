@@ -264,6 +264,11 @@ namespace AdminRoles
             SSO_User usuario = new SSO_User();
             usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString())).FirstOrDefault();
 
+            if (estado == true)
+                estado = false;
+            else if (estado == false)
+                estado = true;
+
             usuario.Locked = estado;
 
             usuarioNego.actualizarUsuario(usuario);
@@ -271,10 +276,15 @@ namespace AdminRoles
 
         public string esusuarioBloqueado(int idUsuario)
         {
+            string estado = string.Empty;
+
             SSO_User usuario = new SSO_User();
             usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
 
-            string estado = usuario.Locked.ToString().ToLower();
+            if (usuario.Locked == true)
+                estado = "false";
+            else
+                estado = "true";
 
             return estado.ToString().ToLower();
         }

@@ -83,35 +83,30 @@
             });  
             return [
             
-                '<a class="habilitar" href="javascript:void(0)" title="Habilitar">',
+                '<a name="habilitar" class="habilitar" href="javascript:void(0)" title="Habilitar">',
                     '<input name="' + row.IdModulo + '" checked="' + row.Estado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini"  > ',
                 '</a>'               
             ].join('');
         }
 
         window.eventosCheck = {            
-            'click .habilitar': function (e, value, row, index) {  
-            
-                var estado = row.Estado;
+            'click .habilitar': function (e, value, row, index) {                
 
-                if (estado == true)
-                    estado = false;
-                else
-                    estado = true;
-
+                var estado = $("[name='" + row.IdModulo + "']").bootstrapSwitch('state');
+                
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                    data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + estado + "'}",                    
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (msg) {                            
-                        //window.location = window.location.href;                        
-                    },
-                    error: function (e) {                        
+                        data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + estado + "'}",                    
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (msg) {                            
+                            //window.location = window.location.href;                        
+                        },
+                        error: function (e) {                        
                         
-                    }
-                });                  
+                        }
+                    });                                  
             }
         };       
     </script>

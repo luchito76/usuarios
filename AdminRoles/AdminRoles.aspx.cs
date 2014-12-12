@@ -49,7 +49,7 @@ namespace AdminRoles
             get { return SSOHelper.CurrentIdentity.IdEfectorRol; }
             set
             { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
-        }
+        }       
 
         #endregion
 

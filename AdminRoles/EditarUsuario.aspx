@@ -84,9 +84,7 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
-
                         <b>
                             <asp:Label ID="lblhabilitado" runat="server" Text="Habilitado" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>
@@ -97,17 +95,14 @@
                         </div>
 
                         <b>
-                            <asp:Label ID="lblBloqueado" runat="server" Text="Bloqueado" for="option1" class="col-sm-2 control-label">      
+                            <asp:Label ID="lblBloqueado" runat="server" Text="Desbloqueado" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
                             <label for="bloqueado" class="checkbox inline">
                                 <input name="chkBloqueado" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
                             </label>
                         </div>
-
                     </div>
-
-
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
@@ -185,8 +180,7 @@
             
             $.ajax({
                 type: "POST",
-                url: '<%= ResolveUrl("EditarUsuario.aspx/habilitarUsuario")%>',
-                <%--data: "{'idUsuario':'" + <%= IdUsuario %>  + "'}",--%>
+                url: '<%= ResolveUrl("EditarUsuario.aspx/habilitarUsuario")%>',                
                 data: "{'estado':'" + state + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

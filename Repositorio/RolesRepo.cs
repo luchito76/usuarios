@@ -13,7 +13,7 @@ namespace Repositorio
 
         public IEnumerable<SSO_Role> listaRoles()
         {
-            IEnumerable<SSO_Role> result = dominio.SSO_Roles.ToList();
+            IEnumerable<SSO_Role> result = dominio.SSO_Roles.OrderBy(c => c.Name).ToList();
 
             return result;
         }

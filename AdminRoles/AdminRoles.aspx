@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:HiddenField ID="hdfIdUsuario" runat="server" />
+    <asp:HiddenField ID="hdfIdUsuario" runat="server" />    
 
     <div class="container">
         <div class="row">
@@ -228,7 +228,7 @@
             } else if (row.RolId == null){
                 btn = "btn btn-danger btn-circle btn-xs";
                 check = "fa fa-times";
-            }
+            }            
 
             return [
                 '<a class="asignarPerfil launch-modal1 ' + btn + '" href="javascript:void(0)" title="Asignar Perfil">',
@@ -241,7 +241,7 @@
             'click .asignarPerfil': function (e, value, row, index) {
                 $('#asignarPerfilModal').modal('show');
 
-                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;
+                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;                
             }
         };
 
@@ -335,8 +335,8 @@
             'click .app': function (e, value, row, index) {
                 if (row.RolId == null)
                     $('#errorModal').modal('show');
-                else                   
-                    window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario;                
+                else                    
+                    window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario + "&perfil=" + row.NombreRol;                                
             }
         };
 

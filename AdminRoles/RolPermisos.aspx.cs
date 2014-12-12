@@ -57,6 +57,20 @@ namespace AdminRoles
             set { idPerfil = value; }
         }
 
+        private string nombreDePerfil;
+
+        public string NombreDePerfil
+        {
+            get
+            {
+                if (Request["perfil"] != null)
+                    nombreDePerfil = Request["perfil"].ToString();
+
+                return nombreDePerfil;
+            }
+            set { nombreDePerfil = value; }
+        }
+
         private string llamada;
 
         public string Llamada
@@ -90,7 +104,6 @@ namespace AdminRoles
             Session["llamada"] = Llamada;
             Session["idUsuario"] = IdUsuario;
         }
-
 
 
         private void llenarListas()
@@ -129,7 +142,6 @@ namespace AdminRoles
             }
             else
             {
-
                 List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
                 listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.id));
             }
@@ -321,6 +333,7 @@ namespace AdminRoles
 
             int idRoleGroup = 0;
             string pepe = HttpContext.Current.Request.QueryString["llamada"];
+
             foreach (SSO_RoleGroup data in lista)
             {
                 idRoleGroup = data.Id;
@@ -357,7 +370,5 @@ namespace AdminRoles
 
             roleNego.borrarRoleGroups(idRoleGroup);
         }
-
-
     }
 }

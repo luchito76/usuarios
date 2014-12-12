@@ -9,7 +9,9 @@
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />
     <asp:HiddenField ID="hdnNombreRol" runat="server" />
 
-    <h3><%= devuelveNombreDeRol() %></h3>
+    <h3 style="display:inline"><%= devuelveNombreDeRol() %>  </h3>
+    <h2 style="display:inline"> - </h2>
+    <h3 style="display:inline"><%= NombreDePerfil %></h3>
 
     <div class="panel panel-primary" id="form">
         <div class="panel-heading">
