@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:HiddenField ID="hdfIdUsuario" runat="server" />    
+    <asp:HiddenField ID="hdfIdUsuario" runat="server" />
 
     <div class="container">
         <div class="row">
@@ -35,6 +35,7 @@
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
                                                 <th data-field="operate" data-formatter="formatoEditarUsuario" data-events="eventosEditarUsuario" data-align="center">Editar</th>
+                                                <th data-field="operate" data-formatter="formatoStatus" data-events="eventosStatus" data-align="center">Status</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -351,6 +352,28 @@
         window.eventosEditarUsuario = {
             'click .editarUsuario': function (e, value, row, index) {
                 window.location = 'EditarUsuario.aspx?idUsuario=' + row.IdUsuario;
+            }
+        };
+
+        function formatoStatus(value, row, index) {
+
+            var status = '<%= estadoUsuario() %>';
+            var btn = "";
+
+            if (status == true)
+                btn = "btn btn-info btn-status";
+            else
+                btn = "btn btn-danger btn-status";
+
+            return [            
+           "<button type='button' class='btn btn-info btn-status'>",
+           "<i class='glyphicon glyphicon-ok'></i></button>"
+            ].join('');
+        }
+
+        window.eventosStatus = {
+            'click .statusUsuario': function (e, value, row, index) {
+                
             }
         };
     </script>

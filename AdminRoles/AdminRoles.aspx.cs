@@ -49,7 +49,7 @@ namespace AdminRoles
             get { return SSOHelper.CurrentIdentity.IdEfectorRol; }
             set
             { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
-        }       
+        }
 
         #endregion
 
@@ -248,6 +248,23 @@ namespace AdminRoles
             borrarUserRol(idUsuario);
 
             borrarPermisosCache(idUsuario);
+        }
+
+        public string estadoUsuario()
+        {
+            string estado = string.Empty;
+
+            int idUsuario = 9739;// int.Parse(hdfIdUsuario.Value);
+
+            SSO_User ssoUser = new SSO_User();
+            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+
+            if (ssoUser.Locked == true)
+                estado = "true";
+            else
+                estado = "false";
+
+            return estado;
         }
     }
 }

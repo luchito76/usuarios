@@ -36,7 +36,7 @@ namespace Repositorio
 
         public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
         {
-            IEnumerable<SSO_StoredVariable> result = dominio.SSO_StoredVariables.Where(c => c.Target == idUsuario).ToList();
+            IEnumerable<SSO_StoredVariable> result = dominio.SSO_StoredVariables.Where(c => c.Target == idUsuario && c.Name == "Common_Medicos").ToList();
 
             return result;
         }
