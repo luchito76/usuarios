@@ -17,6 +17,11 @@ namespace Negocio
             return usuarioRepo.devuelveUsuarioXIdUsuario(idUsuario);
         }
 
+        public SSO_User traeUsuario(int id)
+        {
+            return usuarioRepo.traeUsuario(id);
+        }
+
         public void actualizarUsuario(SSO_User ssoUsuario)
         {
             usuarioRepo.actualizarUsuario(ssoUsuario);

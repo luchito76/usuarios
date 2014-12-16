@@ -228,8 +228,8 @@ namespace AdminRoles
             ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
 
             ssoUser.Id = idUsuario;
-            ssoUser.Enabled = true;
-
+            ssoUser.Enabled = true;            
+            
             usuarioNego.actualizarUsuario(ssoUser);
         }
 
@@ -254,7 +254,7 @@ namespace AdminRoles
         {
             string estado = string.Empty;
 
-            int idUsuario = 9739;// int.Parse(hdfIdUsuario.Value);
+            int idUsuario = 9739;//int.Parse(hdfIdUsuario.Value);
 
             SSO_User ssoUser = new SSO_User();
             ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
