@@ -60,7 +60,7 @@ namespace AdminRoles
             int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
             SSO_User ssoUsuario = new SSO_User();
-            ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+            ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
             txtNombre.Text = ssoUsuario.Name;
             txtApellido.Text = ssoUsuario.Surname;
@@ -118,7 +118,7 @@ namespace AdminRoles
             int idUsuario = int.Parse(Request["idUsuario"].ToString());
 
             SSO_User ssousuario = new SSO_User();
-            ssousuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+            ssousuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
             ssousuario.Id = idUsuario;
             ssousuario.Name = txtNombre.Text.ToUpper();
@@ -156,7 +156,7 @@ namespace AdminRoles
                 int idUsuario = int.Parse(Session["idUsuario"].ToString());
 
                 SSO_User ssoUsuario = new SSO_User();
-                ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+                ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
                 ssoUsuario.Password = HashSHA1("12345");
 
@@ -238,10 +238,8 @@ namespace AdminRoles
             UsuariosNego usuarioNego = new UsuariosNego();
 
             SSO_User usuario = new SSO_User();
-            //usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString())).FirstOrDefault();
-            usuario = usuarioNego.traeUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString()));
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString()));
 
-            //usuario.Id = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             usuario.Enabled = estado;
 
             usuarioNego.actualizarUsuario(usuario);
@@ -250,8 +248,7 @@ namespace AdminRoles
         public string esusuarioHabilitado(int idUsuario)
         {
             SSO_User usuario = new SSO_User();
-            //usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
-            usuario = usuarioNego.traeUsuario(idUsuario);
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
             string estado = usuario.Enabled.ToString().ToLower();
 
@@ -265,7 +262,7 @@ namespace AdminRoles
             UsuariosNego usuarioNego = new UsuariosNego();
 
             SSO_User usuario = new SSO_User();
-            usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString())).FirstOrDefault();
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(HttpContext.Current.Session["idUsuario"].ToString()));
 
             if (estado == true)
                 estado = false;
@@ -283,7 +280,7 @@ namespace AdminRoles
             string estado = string.Empty;
 
             SSO_User usuario = new SSO_User();
-            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
             if (usuario.Locked == true)
                 estado = "false";

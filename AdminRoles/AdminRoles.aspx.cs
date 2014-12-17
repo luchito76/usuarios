@@ -225,11 +225,11 @@ namespace AdminRoles
         private void habilitaUsuario(int idUsuario)
         {
             SSO_User ssoUser = new SSO_User();
-            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
             ssoUser.Id = idUsuario;
-            ssoUser.Enabled = true;            
-            
+            ssoUser.Enabled = true;
+
             usuarioNego.actualizarUsuario(ssoUser);
         }
 
@@ -257,7 +257,7 @@ namespace AdminRoles
             int idUsuario = 9739;//int.Parse(hdfIdUsuario.Value);
 
             SSO_User ssoUser = new SSO_User();
-            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario).FirstOrDefault();
+            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
             if (ssoUser.Locked == true)
                 estado = "true";

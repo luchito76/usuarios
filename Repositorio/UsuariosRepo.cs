@@ -9,22 +9,13 @@ namespace Repositorio
 {
     public class UsuariosRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-
-        public IEnumerable<SSO_User> devuelveUsuarioXIdUsuario(int idUsuario)
+        public SSO_User devuelveUsuarioXIdUsuario(int idUsuario)
         {
-            IEnumerable<SSO_User> result = dominio.SSO_Users.Where(c => c.Id == idUsuario).ToList();
-            // SSO_User user = dominio.SSO_Users.Where(c => c.Id == idUsuario).FirstOrDefault();
-
-            return result;
-        }
-
-        public SSO_User traeUsuario(int id)
-        {
-            using (ModeloDominio dbContext = new ModeloDominio())
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                SSO_User car = dbContext.SSO_Users.FirstOrDefault(c => c.Id == id);
-                return dbContext.CreateDetachedCopy(car);
+                SSO_User ssoUser = dominio.SSO_Users.FirstOrDefault(c => c.Id == idUsuario);
+
+                return dominio.CreateDetachedCopy(ssoUser);
             }
         }
 
@@ -39,57 +30,51 @@ namespace Repositorio
 
         public void guardaSSOUserRol(SSO_Users_Role userRol)
         {
-            dominio.Add(userRol);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.Add(userRol);
+                dominio.SaveChanges();
+            }
         }
 
         public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> listaUsuariosXPerfil()
         {
-            IEnumerable<SSO_GetUsuariosXPerfilResultSet01> result;
-
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                result = dominio.SSO_GetUsuariosXPerfil().ToList();
-            }
+                IEnumerable<SSO_GetUsuariosXPerfilResultSet01> result = dominio.SSO_GetUsuariosXPerfil().ToList();
 
-            return result;
+                return result;
+            }            
         }
 
         public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector)
         {
-            IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> result;
-
             using (ModeloDominio dominio = new ModeloDominio())
             {
+                IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> result = dominio.Sp_SSO_AllowedAppsByEfector(idUsuario, idEfector).ToList();
 
-                result = dominio.Sp_SSO_AllowedAppsByEfector(idUsuario, idEfector).ToList();
-            }
-
-            return result;
+                return result;
+            }            
         }
 
         public IEnumerable<SSO_Users_Role> listaUsuariosXIdPerfil(int idPerfil)
         {
-            IEnumerable<SSO_Users_Role> result;
-
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                result = dominio.SSO_Users_Roles.Where(c => c.RoleId == idPerfil).ToList();
-            }
+                IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.RoleId == idPerfil).ToList();
 
-            return result;
+                return result;
+            }            
         }
 
         public IEnumerable<SSO_Users_Role> listaPerfilXIdUsuario(int idUsuario)
         {
-            IEnumerable<SSO_Users_Role> result;
-
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
-            }
+                IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
 
-            return result;
+                return result;
+            }
         }
     }
 }

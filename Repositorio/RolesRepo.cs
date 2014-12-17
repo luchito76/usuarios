@@ -13,106 +13,142 @@ namespace Repositorio
 
         public IEnumerable<SSO_Role> listaRoles()
         {
-            IEnumerable<SSO_Role> result = dominio.SSO_Roles.OrderBy(c => c.Name).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_Role> result = dominio.SSO_Roles.OrderBy(c => c.Name).ToList();
 
-            return result;
+                return dominio.CreateDetachedCopy(result);
+            }
         }
 
-        public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
+        public SSO_Users_Role listaUserRolXIdUsuario(int idUsuario)
         {
-            IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_Users_Role result = dominio.SSO_Users_Roles.FirstOrDefault(c => c.UserId == idUsuario);
 
-            return result;
+                return dominio.CreateDetachedCopy(result);
+            }
         }
 
         public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(int rol, int efector)
         {
-            IEnumerable<SSO_GetAppByRolResultSet0> result = dominio.SSO_GetAppByRol(rol, efector).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetAppByRolResultSet0> result = dominio.SSO_GetAppByRol(rol, efector).ToList();
 
-            return result;
+                return result;
+            }
         }
 
         public void guardarRol(SSO_Role rol)
         {
-            dominio.Add(rol);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.Add(rol);
+                dominio.SaveChanges();
+            }
         }
 
         public void actualizarRol(SSO_Role rol)
         {
-            dominio.AttachCopy(rol);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.AttachCopy(rol);
+                dominio.SaveChanges();
+            }
         }
 
         public void guardaRoleGroup(SSO_RoleGroup rolGroup)
         {
-            dominio.Add(rolGroup);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.Add(rolGroup);
+                dominio.SaveChanges();
+            }
         }
 
         public SSO_RoleGroup obtieneUltimoIdRolGroup()
         {
-            IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups;
-            SSO_RoleGroup rolGroup = result.Last();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups;
+                SSO_RoleGroup rolGroup = result.Last();
 
-            return rolGroup;
+                return rolGroup;
+            }
         }
 
         public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-            IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion);
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_RoleGroup> result = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion).ToList();
 
-            return result;
+                return dominio.CreateDetachedCopy(result);
+            }
         }
 
         public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
         {
-            int idRolGroup = 0;
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                int idRolGroup = 0;
 
-            SSO_RoleGroup rolGroup = new SSO_RoleGroup();
-            rolGroup = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion).FirstOrDefault();
+                SSO_RoleGroup rolGroup = new SSO_RoleGroup();
+                rolGroup = dominio.SSO_RoleGroups.Where(c => c.IdEfector == idEfector && c.IdPerfil == idPerfil && c.IdAplicacion == idAplicacion).FirstOrDefault();
 
-            if (rolGroup != null)
-                idRolGroup = rolGroup.Id;
+                if (rolGroup != null)
+                    idRolGroup = rolGroup.Id;
 
-            return idRolGroup;
+                return idRolGroup;
+            }
         }
 
         public int devuelveIdRolGroupXPermisos(int idEfector, int idPerfil, int idAplicacion)
         {
-            var rolGroup = (from roleGroups in dominio.SSO_RoleGroups
-                            join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
-                            where (roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
-                            select new { source = permisos.Source }).FirstOrDefault();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                var rolGroup = (from roleGroups in dominio.SSO_RoleGroups
+                                join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
+                                where (roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
+                                select new { source = permisos.Source }).FirstOrDefault();
 
-            int idRolGroup = rolGroup.source;
+                int idRolGroup = rolGroup.source;
 
-            return idRolGroup;
+                return idRolGroup;
+            }
         }
 
 
         public void borrarRoleGroups(int idRoleGroup)
         {
-            IList<SSO_RoleGroup> listaRolGroup = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).ToList();
-
-            if (listaRolGroup != null)
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                foreach (SSO_RoleGroup data in listaRolGroup)
-                    dominio.Delete(data);
-            }
+                IList<SSO_RoleGroup> listaRolGroup = dominio.SSO_RoleGroups.Where(c => c.Id == idRoleGroup).ToList();
 
-            dominio.SaveChanges();
+                if (listaRolGroup != null)
+                {
+                    foreach (SSO_RoleGroup data in listaRolGroup)
+                        dominio.Delete(data);
+                }
+
+                dominio.SaveChanges();
+            }
         }
 
         public void borrarUserRol(int idUsuario)
         {
-            IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
-
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                foreach (SSO_Users_Role data in borrarUserRole)
+                IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
+
                 {
-                    dominio.Delete(data);
-                    dominio.SaveChanges();
+                    foreach (SSO_Users_Role data in borrarUserRole)
+                    {
+                        dominio.Delete(data);
+                        dominio.SaveChanges();
+                    }
                 }
             }
         }

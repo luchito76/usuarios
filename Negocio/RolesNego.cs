@@ -38,7 +38,7 @@ namespace Negocio
             return rolesRepo.listaRolesXAplicacion(rol, efector);
         }
 
-        public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
+        public SSO_Users_Role listaUserRolXIdUsuario(int idUsuario)
         {
             return rolesRepo.listaUserRolXIdUsuario(idUsuario);
         }
@@ -64,7 +64,7 @@ namespace Negocio
         }
         public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
         {
-            return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion);
+            return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion).ToList();
         }
 
         public int devuelveIdRolGroupXPermisos(int idEfector, int idPerfil, int idAplicacion)

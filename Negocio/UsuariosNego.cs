@@ -12,15 +12,15 @@ namespace Negocio
     {
         UsuariosRepo usuarioRepo = new UsuariosRepo();
 
-        public IEnumerable<SSO_User> devuelveUsuarioXIdUsuario(int idUsuario)
+        public SSO_User devuelveUsuarioXIdUsuario(int idUsuario)
         {
             return usuarioRepo.devuelveUsuarioXIdUsuario(idUsuario);
         }
 
-        public SSO_User traeUsuario(int id)
-        {
-            return usuarioRepo.traeUsuario(id);
-        }
+        //public SSO_User traeUsuario(int id)
+        //{
+        //    return usuarioRepo.traeUsuario(id);
+        //}
 
         public void actualizarUsuario(SSO_User ssoUsuario)
         {
@@ -29,20 +29,6 @@ namespace Negocio
 
         public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> listaUsuariosXPerfil()
         {
-            //int filtro = 0;
-            //IList<SSO_GetUsuariosXPerfilResultSet01> listaFiltrada = usuarioRepo.listaUsuariosXPerfil().ToList();
-
-            //List<SSO_GetUsuariosXPerfilResultSet01> lista = new List<SSO_GetUsuariosXPerfilResultSet01>();
-
-            //foreach (SSO_GetUsuariosXPerfilResultSet01 data in listaFiltrada)
-            //{
-            //    if (data.RolId == 647)
-            //    {
-            //        lista.Add(data);
-            //    }
-            //}
-
-            //return lista;
             return usuarioRepo.listaUsuariosXPerfil();
         }
 
