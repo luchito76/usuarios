@@ -18,7 +18,7 @@ namespace Negocio
             string idHospital = string.Empty;
 
             //List<SSO_Config> listaConfig = configRepo.listaConfig().ToList();
-            idHospital = configRepo.listaConfig().ValueStr;
+            idHospital = configRepo.idHospiatlConfig().ValueStr;
 
             //foreach (SSO_Config data in listaConfig)
             //{
