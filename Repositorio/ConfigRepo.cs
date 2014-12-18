@@ -9,12 +9,14 @@ namespace Repositorio
 {
     public class ConfigRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-        public IEnumerable<SSO_Config> listaConfig()
+        public SSO_Config listaConfig()
         {
-            IEnumerable<SSO_Config> result = dominio.SSO_Configs.ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_Config result = dominio.SSO_Configs.FirstOrDefault();
 
-            return result;
+                return result;
+            }
         }
     }
 }

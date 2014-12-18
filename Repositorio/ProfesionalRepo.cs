@@ -12,40 +12,53 @@ namespace Repositorio
 {
     public class ProfesionalRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-
         public IEnumerable<SSO_GetProfesionalesResultSet0> listaProfesionales()
         {
-            IEnumerable<SSO_GetProfesionalesResultSet0> result = dominio.SSO_GetProfesionales().ToList();
-            
-            return result;
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetProfesionalesResultSet0> result = dominio.SSO_GetProfesionales().ToList();
+
+                return result;
+            }
         }
 
         public void vincularProfesional(SSO_StoredVariable vincularProfesional)
         {
-            borrarStoredVariable(vincularProfesional.Target);
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                borrarStoredVariable(vincularProfesional.Target);
 
-            dominio.Add(vincularProfesional);
-            dominio.SaveChanges();
+                dominio.Add(vincularProfesional);
+                dominio.SaveChanges();
+            }
         }
 
         private void borrarStoredVariable(int idUsuario)
         {
-            dominio.SSO_BorrarStoredVariable(idUsuario);
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.SSO_BorrarStoredVariable(idUsuario);
+            }
         }
 
-        public IEnumerable<SSO_StoredVariable> devuelveProfesionalXUsuario(int idUsuario)
+        public SSO_StoredVariable devuelveProfesionalXUsuario(int idUsuario)
         {
-            IEnumerable<SSO_StoredVariable> result = dominio.SSO_StoredVariables.Where(c => c.Target == idUsuario && c.Name == "Common_Medicos").ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_StoredVariable result = dominio.SSO_StoredVariables.FirstOrDefault(c => c.Target == idUsuario && c.Name == "Common_Medicos");
 
-            return result;
+                return result;
+            }
         }
 
         public IEnumerable<SSO_GetProfesionalXIdResultSet0> listaProfesionalXIdProfesional(int idProfesional)
         {
-            IEnumerable<SSO_GetProfesionalXIdResultSet0> result = dominio.SSO_GetProfesionalXId(idProfesional).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetProfesionalXIdResultSet0> result = dominio.SSO_GetProfesionalXId(idProfesional).ToList();
 
-            return result;
+                return result;
+            }
         }
 
         public void guardaProfesionalEnGuardia(int idProfesional, bool estado)
@@ -59,7 +72,7 @@ namespace Repositorio
             SqlParameter param1;
             DataSet ds = new DataSet();
 
-            connetionString =  System.Configuration.ConfigurationManager.ConnectionStrings["SSO_HOSPITALConnection"].ConnectionString;// "Data Source=10.1.232.15;Initial Catalog=SSO;User ID=sa;Password=ssecure";
+            connetionString = System.Configuration.ConfigurationManager.ConnectionStrings["SSO_HOSPITALConnection"].ConnectionString;// "Data Source=10.1.232.15;Initial Catalog=SSO;User ID=sa;Password=ssecure";
             connection = new SqlConnection(connetionString);
 
             connection.Open();
@@ -83,9 +96,12 @@ namespace Repositorio
 
         public IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> listaProfesionalesEnGuardiaXIdProfesional(int idProfesional)
         {
-            IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> result = dominio.SSO_GetProfesionalesXGuardia(idProfesional).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> result = dominio.SSO_GetProfesionalesXGuardia(idProfesional).ToList();
 
-            return result;
+                return result;
+            }
         }
     }
 }

@@ -161,7 +161,7 @@ namespace AdminRoles
             int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(rolPermiso.IdEfector, idPerfil, idAplicacion);
 
             SSO_Permission ssoPermisos = new SSO_Permission();
-            ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo).FirstOrDefault();
+            ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo);
 
             ssoPermisos.Allow = estadoModulo;
             ssoPermisos.Readonly = false;
@@ -195,7 +195,7 @@ namespace AdminRoles
             PermisosNego permisoNego = new PermisosNego();
 
             SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
-            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo).FirstOrDefault();
+            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo);
 
             ssoPermisosCache.Allow = estadoModulo;
             ssoPermisosCache.Readonly = false;

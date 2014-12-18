@@ -81,7 +81,7 @@ namespace AdminRoles
             int idProfesional = 0;
 
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
-            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario).FirstOrDefault();
+            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario);
 
             SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
 
@@ -100,7 +100,7 @@ namespace AdminRoles
             int idUsuario = int.Parse(Request["idUsuario"].ToString());
 
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
-            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario).FirstOrDefault();
+            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario);
 
             SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
 

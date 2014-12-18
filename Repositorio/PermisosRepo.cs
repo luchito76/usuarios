@@ -9,12 +9,13 @@ namespace Repositorio
 {
     public class PermisosRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-
         public void guardarPermisos(SSO_Permission permisos)
         {
-            dominio.Add(permisos);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.Add(permisos);
+                dominio.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -22,8 +23,11 @@ namespace Repositorio
         /// </summary>
         public void permisoModulo(SSO_Permission permisoModulo)
         {
-            dominio.AttachCopy(permisoModulo);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.AttachCopy(permisoModulo);
+                dominio.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -31,101 +35,131 @@ namespace Repositorio
         /// </summary>
         public void permisoModuloUsuario(SSO_Permissions_Cache ssoPermisoCache)
         {
-            dominio.AttachCopy(ssoPermisoCache);
-            dominio.SaveChanges();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.AttachCopy(ssoPermisoCache);
+                dominio.SaveChanges();
+            }
         }
 
-        public IEnumerable<SSO_Permission> listaPermisosXId(int source, int idPermiso)
+        public SSO_Permission listaPermisosXId(int source, int idPermiso)
         {
-            IEnumerable<SSO_Permission> result = dominio.SSO_Permissions.Where(c => c.Target == idPermiso && c.Source == source).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_Permission result = dominio.SSO_Permissions.FirstOrDefault(c => c.Target == idPermiso && c.Source == source);
 
-            return result;
+                return result;
+            }
         }
 
-        public IEnumerable<SSO_Permissions_Cache> listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
+        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
         {
-            IEnumerable<SSO_Permissions_Cache> result = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.Target == idModulo).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.Target == idModulo);
 
-            return result;
+                return result;
+            }
         }
 
-        public IEnumerable<SSO_Permissions_Cache> listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion)
+        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion)
         {
-            IEnumerable<SSO_Permissions_Cache> result = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion);
 
-            return result;
+                return result;
+            }
         }
 
         public void borrarPermisos(int idPermiso)
         {
-            IList<SSO_Permission> ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idPermiso).ToList();
-
-            if (ssoPermiso != null)
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                foreach (SSO_Permission data in ssoPermiso)
-                    dominio.Delete(data);
-            }
+                IList<SSO_Permission> ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idPermiso).ToList();
 
-            dominio.SaveChanges();
+                if (ssoPermiso != null)
+                {
+                    foreach (SSO_Permission data in ssoPermiso)
+                        dominio.Delete(data);
+                }
+
+                dominio.SaveChanges();
+            }
         }
 
         public void borrarPermisosCacheXIdRolGroup(int idRolGroup)
         {
-            IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup).ToList();
-
-            if (ssoPermisoCache != null)
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                foreach (SSO_Permissions_Cache data in ssoPermisoCache)
-                    dominio.Delete(data);
-            }
+                IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup).ToList();
 
-            dominio.SaveChanges();
+                if (ssoPermisoCache != null)
+                {
+                    foreach (SSO_Permissions_Cache data in ssoPermisoCache)
+                        dominio.Delete(data);
+                }
+
+                dominio.SaveChanges();
+            }
         }
 
         public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idUsuario)
         {
-            IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup && c.UserId == idUsuario).ToList();
-
-            if (ssoPermisoCache != null)
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                foreach (SSO_Permissions_Cache data in ssoPermisoCache)
-                    dominio.Delete(data);
-            }
+                IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup && c.UserId == idUsuario).ToList();
 
-            dominio.SaveChanges();
+                if (ssoPermisoCache != null)
+                {
+                    foreach (SSO_Permissions_Cache data in ssoPermisoCache)
+                        dominio.Delete(data);
+                }
+
+                dominio.SaveChanges();
+            }
         }
 
         public void borrarPermisosCacheXIdUsuario(int idusuario)
         {
-            IList<SSO_Permissions_Cache> ssoPermisosCache = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idusuario).ToList();
-
-            if (ssoPermisosCache != null)
+            using (ModeloDominio dominio = new ModeloDominio())
             {
-                foreach (SSO_Permissions_Cache data in ssoPermisosCache)
-                    dominio.Delete(data);
+                IList<SSO_Permissions_Cache> ssoPermisosCache = dominio.SSO_Permissions_Caches.Where(c => c.UserId == idusuario).ToList();
 
+                if (ssoPermisosCache != null)
+                {
+                    foreach (SSO_Permissions_Cache data in ssoPermisosCache)
+                        dominio.Delete(data);
+
+                }
+
+                dominio.SaveChanges();
             }
-
-            dominio.SaveChanges();
         }
 
         public IEnumerable<SSO_GetPermisosXUsuarioResultSet0> listaPermisosXUsuario(int idPerfil, int idEfector)
         {
-            IEnumerable<SSO_GetPermisosXUsuarioResultSet0> result = dominio.SSO_GetPermisosXUsuario(idPerfil, idEfector).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetPermisosXUsuarioResultSet0> result = dominio.SSO_GetPermisosXUsuario(idPerfil, idEfector).ToList();
 
-            return result;
+                return result;
+            }
         }
 
         public void guardaPermisosCache(SSO_Permissions_Cache permisosCache)
         {
-            dominio.Add(permisosCache);
-            dominio.SaveChanges();            
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.Add(permisosCache);
+                dominio.SaveChanges();
+            }
         }
 
         public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId)
         {
             //dominio.SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId);            
-            
+
         }
     }
 }

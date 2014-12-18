@@ -9,8 +9,6 @@ namespace Repositorio
 {
     public class RolesRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-
         public IEnumerable<SSO_Role> listaRoles()
         {
             using (ModeloDominio dominio = new ModeloDominio())

@@ -31,12 +31,12 @@ namespace Negocio
             permisosRepo.permisoModuloUsuario(ssoPermisoCache);
         }
 
-        public IEnumerable<SSO_Permission> listaPermisosXId(int source, int idPermiso)
+        public SSO_Permission listaPermisosXId(int source, int idPermiso)
         {
             return permisosRepo.listaPermisosXId(source, idPermiso);
         }
 
-        public IEnumerable<SSO_Permissions_Cache> listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
+        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
         {
             return permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo);
         }
@@ -51,9 +51,10 @@ namespace Negocio
         {
             bool compruebaUsuario = false;
 
-            IList<SSO_Permissions_Cache> listaPermisoCache = permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion).ToList();
+            SSO_Permissions_Cache listaPermisoCache = new SSO_Permissions_Cache();
+            listaPermisoCache = permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion);
 
-            if (listaPermisoCache.Count == 0)
+            if (listaPermisoCache == null)
                 compruebaUsuario = true;
 
             return compruebaUsuario;

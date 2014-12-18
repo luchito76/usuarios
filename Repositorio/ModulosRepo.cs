@@ -9,13 +9,14 @@ namespace Repositorio
 {
     public class ModulosRepo
     {
-        ModeloDominio dominio = new ModeloDominio();
-
         public IEnumerable<SSO_Module> listaModulosXIdAplicacion(int idAplicacion)
         {
-            IEnumerable<SSO_Module> result = dominio.SSO_Modules.Where(c => c.ApplicationId == idAplicacion).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_Module> result = dominio.SSO_Modules.Where(c => c.ApplicationId == idAplicacion).ToList();
 
-            return result;
+                return result;
+            }
         }
 
         /// <summary>
@@ -25,9 +26,12 @@ namespace Repositorio
         /// <returns></returns>
         public IEnumerable<SSO_GetModulosXAplicacionResultSet0> listaModulosXPermisos(int idEfector, int idPerfil, int idAplicacion)
         {
-            IEnumerable<SSO_GetModulosXAplicacionResultSet0> result = dominio.SSO_GetModulosXAplicacion(idEfector, idPerfil, idAplicacion).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetModulosXAplicacionResultSet0> result = dominio.SSO_GetModulosXAplicacion(idEfector, idPerfil, idAplicacion).ToList();
 
-            return result;
+                return result;
+            }
         }
 
         /// <summary>
@@ -37,9 +41,12 @@ namespace Repositorio
         /// <returns></returns>
         public IEnumerable<SSO_GetModulosXUsuarioResultSet0> listaModulosXUsuario(int idEfector, int idUsuario, int idAplicacion)
         {
-            IEnumerable<SSO_GetModulosXUsuarioResultSet0> result = dominio.SSO_GetModulosXUsuario(idEfector, idUsuario, idAplicacion).ToList();
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetModulosXUsuarioResultSet0> result = dominio.SSO_GetModulosXUsuario(idEfector, idUsuario, idAplicacion).ToList();
 
-            return result;
+                return result;
+            }
         }
     }
 }
