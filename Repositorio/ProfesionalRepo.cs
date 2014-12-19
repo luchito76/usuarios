@@ -26,18 +26,10 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                borrarStoredVariable(vincularProfesional.Target);
+                dominio.SSO_BorrarStoredVariable(vincularProfesional.Target);
 
                 dominio.Add(vincularProfesional);
                 dominio.SaveChanges();
-            }
-        }
-
-        private void borrarStoredVariable(int idUsuario)
-        {
-            using (ModeloDominio dominio = new ModeloDominio())
-            {
-                dominio.SSO_BorrarStoredVariable(idUsuario);
             }
         }
 

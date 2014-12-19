@@ -107,14 +107,21 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                var rolGroup = (from roleGroups in dominio.SSO_RoleGroups
+                //SSO_RoleGroup rolGroup = (from roleGroups in dominio.SSO_RoleGroups
+                //                join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
+                //                where (roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
+                //                select new { source = permisos.Source }).FirstOrDefault();
+
+                //SSO_RoleGroup idRolGroup = rolGroup.;
+
+                //return idRolGroup;
+
+                SSO_RoleGroup rol = (from roleGroups in dominio.SSO_RoleGroups
                                 join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
-                                where (roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
-                                select new { source = permisos.Source }).FirstOrDefault();
+                                where roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion
+                                select roleGroups).FirstOrDefault();
 
-                int idRolGroup = rolGroup.source;
-
-                return idRolGroup;
+                int idRolGroup = rol.
             }
         }
 
@@ -140,7 +147,6 @@ namespace Repositorio
             using (ModeloDominio dominio = new ModeloDominio())
             {
                 IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
-
                 {
                     foreach (SSO_Users_Role data in borrarUserRole)
                     {
