@@ -11,6 +11,10 @@ namespace Negocio
     public class ConfigNego
     {
         ConfigRepo configRepo = new ConfigRepo();
-        
+
+        public SSO_Config idHospiatlConfig()
+        {
+            return configRepo.idHospiatlConfig();
+        }
     }
 }

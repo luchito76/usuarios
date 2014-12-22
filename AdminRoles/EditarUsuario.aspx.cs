@@ -16,6 +16,7 @@ namespace AdminRoles
     {
         UsuariosNego usuarioNego = new UsuariosNego();
         ProfesionaNego profesionalNego = new ProfesionaNego();
+        ConfigNego configNego = new ConfigNego();
 
         private int idUsuario;
         public int IdUsuario

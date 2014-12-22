@@ -166,13 +166,22 @@ namespace AdminRoles {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtProfesional;
         
         /// <summary>
-        /// Label1 control.
+        /// lblTrabajaENGuardia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblTrabajaENGuardia;
+        
+        /// <summary>
+        /// capaGuardia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl capaGuardia;
         
         /// <summary>
         /// lblhabilitado control.

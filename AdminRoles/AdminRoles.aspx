@@ -18,6 +18,10 @@
                             <li><a href="#tab4primary" data-toggle="tab" runat="server" visible="false">Efectores</a></li>
                         </ul>
                     </div>
+                    <%--<div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">Option 1</label>
+                    </div>--%>
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1primary">
