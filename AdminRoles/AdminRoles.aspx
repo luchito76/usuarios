@@ -35,7 +35,9 @@
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
                                                 <th data-field="operate" data-formatter="formatoEditarUsuario" data-events="eventosEditarUsuario" data-align="center">Editar</th>
-                                                <th data-field="operate" data-formatter="formatoStatus" data-events="eventosStatus" data-align="center">Status</th>
+                                                <th data-field="operate" data-formatter="formatoStatus" data-events="eventosStatus" data-align="center">Hab/Bloq</th>
+                                                <th data-field="Habilitado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
+                                                <th data-field="Bloqueado" data-align="left" data-sortable="true" data-visible="false">Bloqueado</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -357,17 +359,45 @@
 
         function formatoStatus(value, row, index) {
 
-            var status = '<%= estadoUsuario() %>';
-            var btn = "";
+            var habilitado = row.Habilitado; <%--'<%= estadoUsuario() %>';--%>;
+            var bloqueado = row.Bloqueado;
 
-            if (status == true)
-                btn = "btn btn-info btn-status";
-            else
-                btn = "btn btn-danger btn-status";
+            var btnHabilitado = "";
+            var iconoHabilitado = "";
+            var tooltipHabilitado = "";
+            
+            if (habilitado === true) {
+                btnHabilitado = "btn btn-info btn-status";
+                iconoHabilitado = "fa fa-thumbs-o-up";
+                tooltipHabilitado = "Habilitado";
+            }
+            else {
+                btnHabilitado = "btn btn-danger btn-status";
+                iconoHabilitado = "fa fa-thumbs-o-down";                
+                tooltipHabilitado = "Deshabilitado";
+            }
+
+            var btnBloqueado = "";
+            var iconoBloqueado = "";
+            var tooltipBloqueado = "";
+
+            if (bloqueado === true) {
+                btnBloqueado = "btn btn-danger btn-status";
+                iconoBloqueado = "fa fa-thumbs-o-down";   
+                tooltipBloqueado = "Bloqueado";
+            }
+            else {
+                btnBloqueado = "btn btn-info btn-status";
+                iconoBloqueado = "fa fa-thumbs-o-up";                
+                tooltipBloqueado = "Desbloqueado";
+            }
 
             return [            
-           "<button type='button' class='btn btn-info btn-status'>",
-           "<i class='glyphicon glyphicon-ok'></i></button>"
+          "<button type='button' class='" + btnHabilitado + "' data-toggle='tooltip' data-placement='left' Title='" + tooltipHabilitado + "'>",
+           "<i class='" + iconoHabilitado + "'></i></button>&nbsp",
+
+           "<button type='button' class='" + btnBloqueado + "' data-toggle='tooltip' data-placement='right' Title='" + tooltipBloqueado + "'>",
+           "<i class='" + iconoBloqueado + "'></i></button>"
             ].join('');
         }
 
@@ -376,6 +406,12 @@
                 
             }
         };
+    </script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 
     <script>
