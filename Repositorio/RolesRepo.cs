@@ -116,12 +116,14 @@ namespace Repositorio
 
                 //return idRolGroup;
 
-                SSO_RoleGroup rol = (from roleGroups in dominio.SSO_RoleGroups
-                                join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
-                                where roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion
-                                select roleGroups).FirstOrDefault();
+                SSO_Permission rol = (from permiso in dominio.SSO_Permissions
+                                      join rolGroup in dominio.SSO_RoleGroups on permiso.Source equals rolGroup.Id //roleGroups.Id equals permisos.Source
+                                      where rolGroup.IdEfector == idEfector && rolGroup.IdPerfil == idPerfil && rolGroup.IdAplicacion == idAplicacion
+                                      select permiso).FirstOrDefault();
 
-                int idRolGroup = rol.
+                int idRolGroup = rol.Source;
+
+                return idRolGroup;
             }
         }
 

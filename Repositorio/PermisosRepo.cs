@@ -48,7 +48,7 @@ namespace Repositorio
             {
                 SSO_Permission result = dominio.SSO_Permissions.FirstOrDefault(c => c.Target == idPermiso && c.Source == source);
 
-                return result;
+                return dominio.CreateDetachedCopy(result);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Repositorio
             {
                 SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.Target == idModulo);
 
-                return result;
+                return dominio.CreateDetachedCopy(result);
             }
         }
 
@@ -68,7 +68,7 @@ namespace Repositorio
             {
                 SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion);
 
-                return result;
+                return dominio.CreateDetachedCopy(result); 
             }
         }
 

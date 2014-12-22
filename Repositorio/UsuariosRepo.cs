@@ -44,7 +44,7 @@ namespace Repositorio
                 IEnumerable<SSO_GetUsuariosXPerfilResultSet01> result = dominio.SSO_GetUsuariosXPerfil().ToList();
 
                 return result;
-            }            
+            }
         }
 
         public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector)
@@ -54,7 +54,7 @@ namespace Repositorio
                 IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> result = dominio.Sp_SSO_AllowedAppsByEfector(idUsuario, idEfector).ToList();
 
                 return result;
-            }            
+            }
         }
 
         public IEnumerable<SSO_Users_Role> listaUsuariosXIdPerfil(int idPerfil)
@@ -64,7 +64,7 @@ namespace Repositorio
                 IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.RoleId == idPerfil).ToList();
 
                 return result;
-            }            
+            }
         }
 
         public IEnumerable<SSO_Users_Role> listaPerfilXIdUsuario(int idUsuario)
@@ -73,7 +73,7 @@ namespace Repositorio
             {
                 IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
 
-                return result;
+                return dominio.CreateDetachedCopy(result);
             }
         }
     }
