@@ -615,6 +615,7 @@
         } else {
             this.initBody();
         }
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {
@@ -624,26 +625,31 @@
         this.options.pageSize = +$this.text();
         this.$toolbar.find('.page-size').text(this.options.pageSize);
         this.updatePagination();
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     BootstrapTable.prototype.onPageFirst = function () {
         this.options.pageNumber = 1;
         this.updatePagination();
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     BootstrapTable.prototype.onPagePre = function () {
         this.options.pageNumber--;
         this.updatePagination();
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     BootstrapTable.prototype.onPageNext = function () {
         this.options.pageNumber++;
         this.updatePagination();
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     BootstrapTable.prototype.onPageLast = function () {
         this.options.pageNumber = this.totalPages;
         this.updatePagination();
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {

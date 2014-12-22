@@ -27,7 +27,7 @@ namespace Negocio
             usuarioRepo.actualizarUsuario(ssoUsuario);
         }
 
-        public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> listaUsuariosXPerfil()
+        public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> listaUsuariosXPerfil()
         {
             return usuarioRepo.listaUsuariosXPerfil();
         }

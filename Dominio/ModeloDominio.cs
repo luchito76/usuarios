@@ -289,27 +289,6 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil()
-		{
-			int returnValue;
-			return SSO_GetUsuariosXPerfil(out returnValue);
-		}
-		
-		public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue)
-		{
-			OAParameter parameterReturnValue = new OAParameter();
-		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
-		    parameterReturnValue.ParameterName = "parameterReturnValue";
-		
-			IEnumerable<SSO_GetUsuariosXPerfilResultSet01> queryResult = this.ExecuteQuery<SSO_GetUsuariosXPerfilResultSet01>("[dbo].[SSO_GetUsuariosXPerfil]", CommandType.StoredProcedure, parameterReturnValue);
-		
-			returnValue = parameterReturnValue.Value == DBNull.Value 
-				? -1
-				: (int)parameterReturnValue.Value;
-		
-			return queryResult;
-		}
-		
 		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion)
 		{
 			int returnValue;
@@ -634,6 +613,27 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil()
+		{
+			int returnValue;
+			return SSO_GetUsuariosXPerfil(out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil(out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			IEnumerable<SSO_GetUsuariosXPerfilResultSet02> queryResult = this.ExecuteQuery<SSO_GetUsuariosXPerfilResultSet02>("[dbo].[SSO_GetUsuariosXPerfil]", CommandType.StoredProcedure, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -716,8 +716,6 @@ namespace Dominio
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue);
-		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil();
-		IEnumerable<SSO_GetUsuariosXPerfilResultSet01> SSO_GetUsuariosXPerfil(out int returnValue);
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion);
 		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales();
@@ -734,6 +732,8 @@ namespace Dominio
 		IEnumerable<SSO_GetAppByRolResultSet0> SSO_GetAppByRol(int? idPerfil, int? idEfector, out int returnValue);
 		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId);
 		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, out int returnValue);
+		IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil();
+		IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil(out int returnValue);
 	}
 }
 #pragma warning restore 1591

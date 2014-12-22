@@ -838,9 +838,6 @@
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
-      <orm:procedure name="SSO_GetUsuariosXPerfil">
-        <orm:result-sets />
-      </orm:procedure>
       <orm:procedure name="SSO_GetModulosXUsuario">
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:procedure-parameter name="idUsuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
@@ -883,6 +880,9 @@
         <orm:procedure-parameter name="groupId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_GetUsuariosXPerfil">
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -892,7 +892,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.15;initial catalog=SSO;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO;user id=sa;password=ssecure</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1212,15 +1212,6 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
-    <domainModelHasDomainMethods Id="d739d543-df36-4231-abf0-0fce5b328284">
-      <domainMethod name="SSO_GetUsuariosXPerfil" storedProcedureName="'SSO_GetUsuariosXPerfil'" generateReturnValueOverload="true">
-        <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="9f887df5-04a4-4e21-9c76-e02db2dab566">
-            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetUsuariosXPerfilResultSet01" />
-          </domainMethodReferencesDomainMethodReturnShape>
-        </domainMethodReturnShape>
-      </domainMethod>
-    </domainModelHasDomainMethods>
     <domainModelHasDomainMethods Id="dff0050b-aec8-4150-bd0a-0507fb63916a">
       <domainMethod name="SSO_GetModulosXUsuario" storedProcedureName="'SSO_GetModulosXUsuario'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
@@ -1289,6 +1280,15 @@
         <domainMethodReturnShape>
           <domainMethodReferencesDomainMethodReturnShape Id="1464ba35-47e3-427a-b763-6ea09a6f5e8a">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/Int16" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="53e74fd5-23f6-43ec-8a6a-3b48ee4e059f">
+      <domainMethod name="SSO_GetUsuariosXPerfil" storedProcedureName="'SSO_GetUsuariosXPerfil'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="46650f40-653c-4e9b-946e-3329def289b6">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetUsuariosXPerfilResultSet02" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
       </domainMethod>
@@ -1435,6 +1435,21 @@
     </domainModelHasDomainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="f7a2c973-a0b7-4514-8c97-130dc11e2bbb">
       <domainMethodReturnShape name="SSO_Permissions_Cache" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="PersistentType" />
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="41751543-469c-418f-a914-c9901546cb4f">
+      <domainMethodReturnShape name="SSO_GetUsuariosXPerfilResultSet02" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="ccb0c4c6-e6a6-4a9a-9da2-aaf71ea264f7" name="IdUsuario" type="System.Int32" label="IdUsuario : System.Int32" fieldName="_idUsuario" />
+        <Property Id="345442ba-d576-458a-8e57-ff2699481355" name="DNI" type="System.Int32" label="DNI : System.Int32" nullable="true" fieldName="_dNI" />
+        <Property Id="96f64708-9886-44d0-9e1e-1662b2910bdd" name="Nombre" type="System.String" label="Nombre : System.String" fieldName="_nombre" />
+        <Property Id="725dd8d2-deb8-4cda-aa7a-96129d700905" name="Apellido" type="System.String" label="Apellido : System.String" fieldName="_apellido" />
+        <Property Id="043f1b6d-66c7-4319-8300-adfbbd774094" name="Usuario" type="System.String" label="Usuario : System.String" fieldName="_usuario" />
+        <Property Id="66fbc834-ea24-4b4f-8b66-d8be4ca25f8e" name="Habilitado" type="System.Boolean" label="Habilitado : System.Boolean" fieldName="_habilitado" />
+        <Property Id="1dd3c25a-15cf-426e-84b0-fc94415579fe" name="Bloqueado" type="System.Boolean" label="Bloqueado : System.Boolean" fieldName="_bloqueado" />
+        <Property Id="61a87bf7-0e0e-4d6c-b878-0863e32481f4" name="RolId" type="System.Int32" label="RolId : System.Int32" nullable="true" fieldName="_rolId" />
+        <Property Id="08b56056-c977-4dcd-9eff-059a3c925d29" name="UserId" type="System.Int32" label="UserId : System.Int32" nullable="true" fieldName="_userId" />
+        <Property Id="28f435e0-ac1e-425a-aec6-c62aa6166c8b" name="NombreRol" type="System.String" label="NombreRol : System.String" nullable="true" fieldName="_nombreRol" />
+        <Property Id="0ff31e94-3cf0-4792-b327-74181fc92e67" name="Parent" type="System.Int32" label="Parent : System.Int32" nullable="true" fieldName="_parent" />
+      </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>
 </DomainModel>

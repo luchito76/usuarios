@@ -99,7 +99,7 @@ namespace AdminRoles
         {
             string json = string.Empty;
 
-            List<SSO_GetUsuariosXPerfilResultSet01> listaUsuario = usuarioNego.listaUsuariosXPerfil().ToList();
+            List<SSO_GetUsuariosXPerfilResultSet02> listaUsuario = usuarioNego.listaUsuariosXPerfil().ToList();
 
             return json = JsonConvert.SerializeObject(listaUsuario, Formatting.Indented);
         }

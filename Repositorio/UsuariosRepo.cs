@@ -37,11 +37,11 @@ namespace Repositorio
             }
         }
 
-        public IEnumerable<SSO_GetUsuariosXPerfilResultSet01> listaUsuariosXPerfil()
+        public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> listaUsuariosXPerfil()
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IEnumerable<SSO_GetUsuariosXPerfilResultSet01> result = dominio.SSO_GetUsuariosXPerfil().ToList();
+                IEnumerable<SSO_GetUsuariosXPerfilResultSet02> result = dominio.SSO_GetUsuariosXPerfil().ToList();
 
                 return result;
             }

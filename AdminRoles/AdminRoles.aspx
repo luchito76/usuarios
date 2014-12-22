@@ -234,7 +234,7 @@
             }            
 
             return [
-                '<a class="asignarPerfil launch-modal1 ' + btn + '" href="javascript:void(0)" title="Asignar Perfil">',
+                '<a class="asignarPerfil launch-modal1 ' + btn + '" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Asignar Perfil">',
                     '<i class="' + check + '"></i><asp:Label ID="lblNombreRol" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',
                 '</a>' ,
             ].join('');
@@ -250,7 +250,7 @@
 
         function formatoEliminarPerfil(value, row, index) {
             return [
-                '<a class="eliminarPerfil" href="javascript:void(0)" title="Eliminar Perfil">',
+                '<a class="eliminarPerfil" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Eliminar Perfil">',
                     '<i class="fa fa-trash fa-lg"></i>',
                 '</a>'
             ].join('');
@@ -297,7 +297,7 @@
 
         function operateFormatter(value, row, index) {
             return [
-                '<a class="editar" href="javascript:void(0)" title="Editar">',
+                '<a class="editar" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Editar">',
                     '<i class="fa fa-pencil-square-o"></i>',
                 '</a>'
             ].join('');
@@ -314,7 +314,7 @@
 
         function operateFormatter1(value, row, index) {
             return [
-                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones">',
+                '<a class="app ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones">',
                     '<i class="fa fa-desktop"></i>',
                 '</a>'
             ].join('');
@@ -328,7 +328,7 @@
 
         function formatoAplicaciones(value, row, index) {            
             return [
-                '<a class="app ml10" href="javascript:void(0)" title="Aplicaciones" >',
+                '<a class="app ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones" >',
                     '<i class="fa fa-desktop"></i>',
                 '</a>'
             ].join('');
@@ -345,7 +345,7 @@
 
         function formatoEditarUsuario(value, row, index) {
             return [
-            '<a class="editarUsuario ml10" href="javascript:void(0)" title="Editar Usuario">',
+            '<a class="editarUsuario ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Editar Usuario">',
                 '<i class="fa fa-pencil-square-o"></i>',
             '</a>'
             ].join('');
