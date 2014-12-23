@@ -79,6 +79,7 @@
         pageList: [10, 25, 50, 100],
         search: false,
         btnCrearPerfil: false,
+        filtro: true,
         selectItemName: 'btSelectItem',
         showHeader: true,
         showColumns: false,
@@ -374,7 +375,8 @@
             timeoutId = 0,
             $keepOpen,
             $btnCrearPerfil,
-            $search;
+            filtro,
+            $search;        
 
 
         this.$toolbar = this.$container.find('.fixed-table-toolbar').html('');
@@ -454,6 +456,18 @@
             );
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.btn-crear-perfil input');
+        }
+
+        if (this.options.filtro) {
+            html = [];
+            html.push(
+            '<div class="pull-left search">',
+                    sprintf('<label><input class="filtro" type="checkbox" checked="checked" value=""> Filtro</label>',
+                        this.options.formatSearch()),
+            '</div>'
+            );
+            this.$toolbar.append(html.join(''));
+            $search = this.$toolbar.find('.filtro input');
         }
     };
 
@@ -990,7 +1004,7 @@
         this.initPagination();
         this.initBody();
     };
-
+     
     BootstrapTable.prototype.append = function (data) {
         this.initData(data, true);
         this.initBody();
@@ -1108,7 +1122,7 @@
     // =======================
 
     $(function () {
-        $('[data-toggle="table"]').bootstrapTable();
+        $('[data-toggle="table"]').bootstrapTable();        
     });
 
 }(jQuery);

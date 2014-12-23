@@ -29,6 +29,16 @@ namespace Negocio
 
         public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> listaUsuariosXPerfil()
         {
+            //IList<SSO_GetUsuariosXPerfilResultSet02> listaXUsuarios = usuarioRepo.listaUsuariosXPerfil().ToList();
+            //List<SSO_GetUsuariosXPerfilResultSet02> lista = new List<SSO_GetUsuariosXPerfilResultSet02>();
+
+            //foreach (SSO_GetUsuariosXPerfilResultSet02 data in listaXUsuarios)
+            //{
+            //    if (data.RolId != null)
+            //        lista.Add(data);
+            //}
+
+            //return lista;
             return usuarioRepo.listaUsuariosXPerfil();
         }
 
