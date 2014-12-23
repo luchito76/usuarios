@@ -78,7 +78,8 @@
         pageSize: 10,
         pageList: [10, 25, 50, 100],
         search: false,
-        btnCrearPerfil: false,        
+        btnCrearPerfil: false,
+        filtro: true,
         selectItemName: 'btSelectItem',
         showHeader: true,
         showColumns: false,
@@ -373,7 +374,8 @@
             html = [],
             timeoutId = 0,
             $keepOpen,
-            $btnCrearPerfil,            
+            $btnCrearPerfil,
+            filtro,
             $search;        
 
 
@@ -455,7 +457,18 @@
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.btn-crear-perfil input');
         }
-               
+
+        if (this.options.filtro) {
+            html = [];
+            html.push(
+            '<div class="pull-left search">',
+                    sprintf('<label><input id="filtro" class="filtro" type="checkbox" value=""> Filtro</label>',
+                        this.options.formatSearch()),
+            '</div>'
+            );
+            this.$toolbar.append(html.join(''));
+            $search = this.$toolbar.find('.filtro input label');
+        }
     };
 
     BootstrapTable.prototype.onSearch = function (event) {
