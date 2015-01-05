@@ -68,7 +68,10 @@ namespace Repositorio
             {
                 SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion);
 
-                return dominio.CreateDetachedCopy(result); 
+                if (result != null)
+                    return dominio.CreateDetachedCopy(result);
+                else
+                    return null;
             }
         }
 

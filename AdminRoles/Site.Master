@@ -19,6 +19,7 @@
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
     <link href="Content/select2.css" rel="stylesheet" />
     <link href="Content/sweet-alert.css" rel="stylesheet" />
+    <link href="Content/awesome-bootstrap-checkbox.css" rel="stylesheet" />
     <link href="Content/Site.css" rel="stylesheet" />
 
 </head>

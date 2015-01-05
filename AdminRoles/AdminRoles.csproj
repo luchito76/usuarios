@@ -178,6 +178,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="AdminRoles.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\bootstrap-progressbar-3.2.0.css" />
     <Content Include="Content\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-table.css" />

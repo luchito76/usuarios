@@ -78,7 +78,7 @@
                             <asp:Label ID="lblTrabajaENGuardia" runat="server" Text="Trabaja En Guardia" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div id="capaGuardia" class="col-sm-3" runat="server">
-                            <label for="trabajaEnGuardia" class="checkbox inline">
+                            <label for="trabajaEnGuardia" class="chkbox">
                                 <input name="trabajaEnGuardia" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
                             </label>
                         </div>
@@ -90,7 +90,7 @@
                             <asp:Label ID="lblhabilitado" runat="server" Text="Habilitado" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <label for="habilitado" class="checkbox inline">
+                            <label for="habilitado" class="chkbox">
                                 <input name="chkHabilitado" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
                             </label>
                         </div>
@@ -99,7 +99,7 @@
                             <asp:Label ID="lblBloqueado" runat="server" Text="Desbloqueado" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">
-                            <label for="bloqueado" class="checkbox inline">
+                            <label for="bloqueado" class="chkbox">
                                 <input name="chkBloqueado" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
                             </label>
                         </div>

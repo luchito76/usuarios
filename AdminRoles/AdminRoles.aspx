@@ -200,56 +200,18 @@
     </div>
     <!-- /.modal -->
 
-   <script>
-       $(function() {
-          
+    <script>
+        $(function() {
+            $('#filtro').click(function() {
+                if (document.getElementById('filtro').checked) {
+                    alert("chequeado");
+                } else {
+                    alert("Deschequeste");
+                }                
+            });
+        });           
+    </script>
 
-           $('#tblUsuarios').bootstrapTable({
-               
-               onAll: function(name, args) {
-                   alert("capo");
-               },
-               onClickRow: function(row) {
-                   alert("capo");
-               },
-               onDblClickRow: function(row) {
-                   alert("capo");
-               },
-               onSort: function(name, order) {
-                   alert("capo");
-               },
-               onCheck: function(row) {
-                   alert("capo");
-               },
-               onUncheck: function(row) {
-                   alert("capo");
-               },
-               onCheckAll: function() {
-                   alert("capo");
-               },
-               onUncheckAll: function() {
-                   alert("capo");
-               }
-               
-           }).on('all.bs.table', function(e, name, args) {
-               alert("capo");
-           }).on('click-row.bs.table', function(e, row, $element) {
-               alert("capo");
-           }).on('dbl-click-row.bs.table', function(e, row, $element) {
-               alert("capo");
-           }).on('sort.bs.table', function(e, name, order) {
-               alert("capo");
-           }).on('check.bs.table', function(e, row) {
-               alert("capo");
-           }).on('uncheck.bs.table', function(e, row) {
-               alert("capo");
-           }).on('check-all.bs.table', function(e) {
-               alert("capo");
-           }).on('uncheck-all.bs.table', function(e) {
-               alert("capo");
-           });
-       });
-</script>
     <script>
         function barraProgresoAsignarPerfil() {
             $(document).ready(function() {
@@ -480,7 +442,8 @@
 
         $table = $('#tblUsuarios').bootstrapTable({
             data: <%= devuelveUsuariosJson() %>,
-            btnCrearPerfil: false
+            btnCrearPerfil: false,
+            filtro: true
         });
     </script>
 

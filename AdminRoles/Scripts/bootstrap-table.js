@@ -79,7 +79,7 @@
         pageList: [10, 25, 50, 100],
         search: false,
         btnCrearPerfil: false,
-        filtro: true,
+        filtro: false,
         selectItemName: 'btSelectItem',
         showHeader: true,
         showColumns: false,
@@ -460,11 +460,13 @@
 
         if (this.options.filtro) {
             html = [];
-            html.push(
-            '<div class="pull-left search">',
-                    sprintf('<label><input id="filtro" class="filtro" type="checkbox" value=""> Filtro</label>',
-                        this.options.formatSearch()),
-            '</div>'
+            html.push(            
+            ' <div class="checkbox checkbox-info">',
+                '<input type="checkbox" id="filtro">',
+                sprintf('<label for="filtro">Filtro',                
+                '</label>',
+                this.options.formatSearch()),
+              '</div>'
             );
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.filtro input label');
