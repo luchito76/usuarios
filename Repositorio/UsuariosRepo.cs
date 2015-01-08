@@ -37,6 +37,16 @@ namespace Repositorio
             }
         }
 
+        public IEnumerable<SSO_User> listaUsuarios()
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_User> result = dominio.SSO_Users.Select(x => new SSO_User { Id = x.Id, Surname = String.Format("{0} {1}", x.Surname, x.Name) }).OrderBy(c => c.Surname).Distinct().ToList();
+
+                return result;
+            }
+        }
+
         public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> listaUsuariosXPerfil()
         {
             using (ModeloDominio dominio = new ModeloDominio())

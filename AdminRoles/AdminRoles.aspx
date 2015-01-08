@@ -4,6 +4,17 @@
 
     <asp:HiddenField ID="hdfIdUsuario" runat="server" />
 
+    <script>
+        window.onload = function(){
+            var fil = '<%= filtros() %>';           
+            
+            if (fil == 'false' || fil == '')                 
+                document.getElementById('filtro').checked = false;            
+            else               
+                document.getElementById('filtro').checked = true;            
+        };
+    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -18,6 +29,7 @@
                             <li><a href="#tab4primary" data-toggle="tab" runat="server" visible="false">Efectores</a></li>
                         </ul>
                     </div>
+
 
                     <div class="panel-body">
                         <div class="tab-content">
@@ -204,9 +216,39 @@
         $(function() {
             $('#filtro').click(function() {
                 if (document.getElementById('filtro').checked) {
-                    alert("chequeado");
+                    
+                    var filtro = true;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '<%= ResolveUrl("AdminRoles.aspx/filtroUsuarios")%>' ,
+                        data: "{'filtro':'" + filtro + "'}",                        
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (msg) {                            
+                            window.location = window.location.href;
+                        },
+                        error: function (e) {
+                            alert("Error");                            
+                        }
+                    });  
+                    
                 } else {
-                    alert("Deschequeste");
+                    var filtro = false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '<%= ResolveUrl("AdminRoles.aspx/filtroUsuarios")%>' ,
+                        data: "{'filtro':'" + filtro + "'}",                        
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (msg) {                            
+                            window.location = window.location.href;
+                        },
+                        error: function (e) {
+                            alert("Error");                            
+                        }
+                    });  
                 }                
             });
         });           

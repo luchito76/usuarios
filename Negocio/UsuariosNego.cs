@@ -27,19 +27,27 @@ namespace Negocio
             usuarioRepo.actualizarUsuario(ssoUsuario);
         }
 
-        public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> listaUsuariosXPerfil()
+        public IEnumerable<SSO_User> listaUsuarios()
         {
-            //IList<SSO_GetUsuariosXPerfilResultSet02> listaXUsuarios = usuarioRepo.listaUsuariosXPerfil().ToList();
-            //List<SSO_GetUsuariosXPerfilResultSet02> lista = new List<SSO_GetUsuariosXPerfilResultSet02>();
+            return usuarioRepo.listaUsuarios();
+        }
 
-            //foreach (SSO_GetUsuariosXPerfilResultSet02 data in listaXUsuarios)
-            //{
-            //    if (data.RolId != null)
-            //        lista.Add(data);
-            //}
+        public IEnumerable<SSO_GetUsuariosXPerfilResultSet02> listaUsuariosXPerfil(string filtro)
+        {
+            IList<SSO_GetUsuariosXPerfilResultSet02> listaXUsuarios = usuarioRepo.listaUsuariosXPerfil().ToList();
+            List<SSO_GetUsuariosXPerfilResultSet02> lista = new List<SSO_GetUsuariosXPerfilResultSet02>();
 
-            //return lista;
-            return usuarioRepo.listaUsuariosXPerfil();
+            if (filtro == "true")
+            {
+                foreach (SSO_GetUsuariosXPerfilResultSet02 data in listaXUsuarios)
+                {
+                    if (data.RolId != null)
+                        lista.Add(data);
+                }
+                return lista;
+            }
+            else
+                return usuarioRepo.listaUsuariosXPerfil();
         }
 
         public void guardaSSOUserRol(SSO_Users_Role userRol)

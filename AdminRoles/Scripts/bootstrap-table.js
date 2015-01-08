@@ -462,7 +462,7 @@
             html = [];
             html.push(            
             ' <div class="checkbox checkbox-info">',
-                '<input type="checkbox" id="filtro">',
+                '<input type="checkbox" runat="server" id="filtro" name="fil">',
                 sprintf('<label for="filtro">Filtro',                
                 '</label>',
                 this.options.formatSearch()),

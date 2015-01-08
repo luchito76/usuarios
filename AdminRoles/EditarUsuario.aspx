@@ -2,6 +2,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <div class="container">
+        <div class="row clearfix">
+            <div id="selectUsuarios" runat="server" visible="false" class="col-md-8 column">
+                <div class="form-group">
+                    <b>
+                        <asp:Label ID="lblUsuarios" runat="server" Text="Usuarios" for="ddlUsuarios" class="col-md-3 control-label">
+                        </asp:Label></b>
+                    <div class="col-md-3">
+                        <asp:DropDownList ID="ddlUsuarios" runat="server" DataTextField="Surname" DataValueField="Id" AutoPostBack="true" OnSelectedIndexChanged="ddlUsuarios_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-primary">
         <div class="panel-heading">
             <span class="panel-title">Editar Datos de Usuario
@@ -10,7 +25,6 @@
         <div class="panel-body">
             <div class="container">
                 <div class="row clearfix">
-
                     <div class="form-group">
                         <b>
                             <asp:Label ID="lblNombre" runat="server" Text="Nombre" for="txtNombre" class="col-sm-2 control-label">      
@@ -74,13 +88,15 @@
                             </div>
                         </div>
 
-                        <b>
-                            <asp:Label ID="lblTrabajaENGuardia" runat="server" Text="Trabaja En Guardia" for="option1" class="col-sm-2 control-label">      
-                            </asp:Label></b>
-                        <div id="capaGuardia" class="col-sm-3" runat="server">
-                            <label for="trabajaEnGuardia" class="chkbox">
-                                <input name="trabajaEnGuardia" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
-                            </label>
+                        <div id="capaTrabajaEnGuardia" runat="server">
+                            <b>
+                                <asp:Label ID="lblTrabajaENGuardia" runat="server" Text="Trabaja En Guardia" for="option1" class="col-sm-2 control-label">      
+                                </asp:Label></b>
+                            <div id="capaGuardia" class="col-sm-3" runat="server">
+                                <label for="trabajaEnGuardia" class="chkbox">
+                                    <input name="trabajaEnGuardia" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini" data-on-text="SI" data-off-text="NO">
+                                </label>
+                            </div>
                         </div>
 
                     </div>
@@ -151,8 +167,12 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+
+
     <link href="Content/sweet-alert.css" rel="stylesheet" />
     <script src="Scripts/sweet-alert.js"></script>
+
     <script>        
         function aler(){            
             swal({
@@ -163,7 +183,8 @@
     </script>
 
     <script>
-        $('#<%= ddlProfesional.ClientID %>').select2();        
+        $('#<%= ddlProfesional.ClientID %>').select2();  
+        $('#<%= ddlUsuarios.ClientID %>').select2();  
     </script>
 
     <script type="text/javascript">       

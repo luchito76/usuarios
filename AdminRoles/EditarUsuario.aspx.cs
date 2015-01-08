@@ -33,14 +33,23 @@ namespace AdminRoles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["idUsuario"] = Request["idUsuario"].ToString();
-
             if (IsPostBack) return;
 
+            if (Request["idUsuario"] != null)
+            {
+                Session["idUsuario"] = Request["idUsuario"].ToString();
+                mostrarUsuario();
+            }
+            else
+            {
+                selectUsuarios.Visible = true;
+                capaTrabajaEnGuardia.Visible = false;
+            }
+
+            llenarListas();
             validaSoloNumeros();
             alerta.Visible = false;
-            mostrarUsuario();
-            llenarListas();
+
         }
 
         private void validaSoloNumeros()
@@ -54,14 +63,16 @@ namespace AdminRoles
             ddlProfesional.DataSource = profesionalNego.listaProfesionales().ToList();
             ddlProfesional.DataBind();
             ddlProfesional.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+
+            ddlUsuarios.DataSource = usuarioNego.listaUsuarios().ToList();
+            ddlUsuarios.DataBind();
+            ddlUsuarios.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
         private void mostrarUsuario()
         {
-            int idUsuario = int.Parse(Session["idUsuario"].ToString());
-
             SSO_User ssoUsuario = new SSO_User();
-            ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+            ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(IdUsuario);
 
             txtNombre.Text = ssoUsuario.Name;
             txtApellido.Text = ssoUsuario.Surname;
@@ -78,18 +89,20 @@ namespace AdminRoles
 
         private int devuelveIdProfesional()
         {
-            int idUsuario = int.Parse(Session["idUsuario"].ToString());
             int idProfesional = 0;
 
-            SSO_StoredVariable storedVariable = new SSO_StoredVariable();
-            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario);
-
-            SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
-
-            if (storedVariable != null)
+            if (Session["idUsuario"] != null)
             {
-                nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
-                idProfesional = nombreProfesional.Codigo;
+                SSO_StoredVariable storedVariable = new SSO_StoredVariable();
+                storedVariable = profesionalNego.devuelveProfesionalXUsuario(int.Parse(Session["idUsuario"].ToString()));
+
+                SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
+
+                if (storedVariable != null)
+                {
+                    nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
+                    idProfesional = nombreProfesional.Codigo;
+                }
             }
 
             return idProfesional;
@@ -98,10 +111,9 @@ namespace AdminRoles
         private string devuelveProfesionalVinculado()
         {
             string profesional = string.Empty;
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
 
             SSO_StoredVariable storedVariable = new SSO_StoredVariable();
-            storedVariable = profesionalNego.devuelveProfesionalXUsuario(idUsuario);
+            storedVariable = profesionalNego.devuelveProfesionalXUsuario(IdUsuario);
 
             SSO_GetProfesionalXIdResultSet0 nombreProfesional = new SSO_GetProfesionalXIdResultSet0();
 
@@ -116,12 +128,10 @@ namespace AdminRoles
 
         private void actualizarUsuario()
         {
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
-
             SSO_User ssousuario = new SSO_User();
-            ssousuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+            ssousuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(Session["idUsuario"].ToString()));
 
-            ssousuario.Id = idUsuario;
+            ssousuario.Id = ssousuario.Id; 
             ssousuario.Name = txtNombre.Text.ToUpper();
             ssousuario.Surname = txtApellido.Text.ToUpper();
             ssousuario.Username = txtUsuario.Text;
@@ -141,8 +151,18 @@ namespace AdminRoles
 
                 alerta.Visible = true;
 
-                string script = @"<script type='text/javascript'>function r() { location.href='AdminRoles.aspx' } setTimeout ('r()', 2000);</script>";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "r()", script, false);
+                if (Request["idUsuario"] != null)
+                {
+                    string script = @"<script type='text/javascript'>function r() { location.href='AdminRoles.aspx' } setTimeout ('r()', 2000);</script>";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "r()", script, false);
+                }
+                else
+                {
+                    Session.Clear();
+
+                    string script = @"<script type='text/javascript'>function r() { location.href='EditarUsuario.aspx' } setTimeout ('r()', 2000);</script>";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "r()", script, false);
+                }
             }
             catch (Exception ex)
             {
@@ -154,10 +174,8 @@ namespace AdminRoles
         {
             try
             {
-                int idUsuario = int.Parse(Session["idUsuario"].ToString());
-
                 SSO_User ssoUsuario = new SSO_User();
-                ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+                ssoUsuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(Session["idUsuario"].ToString()));
 
                 ssoUsuario.Password = HashSHA1("12345");
 
@@ -248,10 +266,15 @@ namespace AdminRoles
 
         public string esusuarioHabilitado(int idUsuario)
         {
-            SSO_User usuario = new SSO_User();
-            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+            string estado = string.Empty;
 
-            string estado = usuario.Enabled.ToString().ToLower();
+            if (idUsuario != 0)
+            {
+                SSO_User usuario = new SSO_User();
+                usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+
+                estado = usuario.Enabled.ToString().ToLower();
+            }
 
             return estado;
         }
@@ -280,15 +303,26 @@ namespace AdminRoles
         {
             string estado = string.Empty;
 
-            SSO_User usuario = new SSO_User();
-            usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+            if (idUsuario != 0)
+            {
+                SSO_User usuario = new SSO_User();
+                usuario = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
 
-            if (usuario.Locked == true)
-                estado = "false";
-            else
-                estado = "true";
+                if (usuario.Locked == true)
+                    estado = "false";
+                else
+                    estado = "true";
+            }
 
             return estado.ToString().ToLower();
+        }
+
+        protected void ddlUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IdUsuario = int.Parse(ddlUsuarios.SelectedValue.ToString());
+
+            Session["idUsuario"] = IdUsuario;
+            mostrarUsuario();
         }
     }
 }

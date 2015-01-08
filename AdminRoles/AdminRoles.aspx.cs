@@ -98,10 +98,36 @@ namespace AdminRoles
         public string devuelveUsuariosJson()
         {
             string json = string.Empty;
+            string filtro = string.Empty;
 
-            List<SSO_GetUsuariosXPerfilResultSet02> listaUsuario = usuarioNego.listaUsuariosXPerfil().ToList();
+            if (Session["filtro"] != null)
+                filtro = Session["filtro"].ToString();
+
+            List<SSO_GetUsuariosXPerfilResultSet02> listaUsuario = usuarioNego.listaUsuariosXPerfil(filtro).ToList();
 
             return json = JsonConvert.SerializeObject(listaUsuario, Formatting.Indented);
+
+        }
+
+        [WebMethod()]
+        public static void filtroUsuarios(string filtro)
+        {
+            AdminRoles adminRoles = new AdminRoles();
+            
+            HttpContext.Current.Session["filtro"] = filtro;
+
+            adminRoles.devuelveUsuariosJson();
+        }
+
+        public string filtros()
+        {
+            string pepe = string.Empty;
+
+            if (Session["filtro"] != null)
+                pepe = Session["filtro"].ToString();
+
+            return pepe;
+
         }
 
         protected void crearRol_Click(object sender, EventArgs e)
