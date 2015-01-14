@@ -101,7 +101,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div id="capaHabilitado" runat="server" visible="false" class="form-group">
                         <b>
                             <asp:Label ID="lblhabilitado" runat="server" Text="Habilitado" for="option1" class="col-sm-2 control-label">      
                             </asp:Label></b>

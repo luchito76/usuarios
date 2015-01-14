@@ -323,6 +323,8 @@ namespace AdminRoles
 
             Session["idUsuario"] = IdUsuario;
             mostrarUsuario();
+
+            capaHabilitado.Visible = true;
         }
     }
 }
