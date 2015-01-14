@@ -80,7 +80,6 @@ namespace AdminRoles
             txtDocumento.Text = ssoUsuario.Documento.ToString();
             txtEmail.Text = ssoUsuario.Email;
             txtObservaciones.Text = ssoUsuario.Observacion;
-            ViewState["Password"] = ssoUsuario.Password;
             txtProfesional.Value = devuelveProfesionalVinculado();
 
             if (devuelveIdProfesional() != 0)
@@ -131,11 +130,11 @@ namespace AdminRoles
             SSO_User ssousuario = new SSO_User();
             ssousuario = usuarioNego.devuelveUsuarioXIdUsuario(int.Parse(Session["idUsuario"].ToString()));
 
-            ssousuario.Id = ssousuario.Id; 
+            ssousuario.Id = ssousuario.Id;
             ssousuario.Name = txtNombre.Text.ToUpper();
             ssousuario.Surname = txtApellido.Text.ToUpper();
             ssousuario.Username = txtUsuario.Text;
-            ssousuario.Password = ViewState["Password"].ToString();
+            ssousuario.Password = ssousuario.Password;
             ssousuario.Documento = int.Parse(txtDocumento.Text);
             ssousuario.Email = txtEmail.Text.ToUpper();
             ssousuario.Observacion = txtObservaciones.Text.ToUpper();
