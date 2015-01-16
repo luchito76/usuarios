@@ -41,7 +41,7 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IEnumerable<SSO_User> result = dominio.SSO_Users.Select(x => new SSO_User { Id = x.Id, Surname = String.Format("{0} {1}", x.Surname, x.Name) }).OrderBy(c => c.Surname).Distinct().ToList();
+                IEnumerable<SSO_User> result = dominio.SSO_Users.Select(x => new SSO_User { Id = x.Id, Surname = String.Format("{0}, {1} - {2}", x.Surname, x.Name, x.Documento) }).OrderBy(c => c.Surname).Distinct().ToList();
 
                 return result;
             }

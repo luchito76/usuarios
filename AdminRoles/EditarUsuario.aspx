@@ -9,7 +9,7 @@
                     <b>
                         <asp:Label ID="lblUsuarios" runat="server" Text="Usuarios" for="ddlUsuarios" class="col-md-3 control-label">
                         </asp:Label></b>
-                    <div class="col-md-3">
+                    <div class="col-md-6" style="width: 300px;">
                         <asp:DropDownList ID="ddlUsuarios" runat="server" DataTextField="Surname" DataValueField="Id" AutoPostBack="true" OnSelectedIndexChanged="ddlUsuarios_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                 </div>
@@ -169,7 +169,6 @@
     <!-- /.modal -->
 
 
-
     <link href="Content/sweet-alert.css" rel="stylesheet" />
     <script src="Scripts/sweet-alert.js"></script>
 
@@ -184,7 +183,14 @@
 
     <script>
         $('#<%= ddlProfesional.ClientID %>').select2();  
-        $('#<%= ddlUsuarios.ClientID %>').select2();  
+        $('#<%= ddlUsuarios.ClientID %>').select2();        
+    </script>
+
+    <script>
+        var idHospital = '<%= IdHospital %>';
+
+        if (idHospital == 0)
+            document.getElementById("ctl00_lnkInicio").style.visibility = "hidden";
     </script>
 
     <script type="text/javascript">       
@@ -230,27 +236,30 @@
                     alert("Error");
                 }
             });
-        });
-
-        $("[name='trabajaEnGuardia']").bootstrapSwitch('state', <%= trabajaEnGuardia() %>, <%= trabajaEnGuardia() %>).on('switchChange.bootstrapSwitch', function (event, state) {
-
-            $.ajax({
-                type: "POST",
-                url: '<%= ResolveUrl("EditarUsuario.aspx/trabajaEnGuardia")%>',
-                data: "{'estado':'" + state + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    //alert("Bien");
-                },
-                error: function (e) {
-                    alert("Error");
-                }
-            });
-        });
+        });        
     </script>
 
     <script>
+        var idHospital = '<%= IdHospital %>';
         
+        if (idHospital != 0) {
+            $("[name='trabajaEnGuardia']").bootstrapSwitch('state', <%= trabajaEnGuardia() %>, <%= trabajaEnGuardia() %>).on('switchChange.bootstrapSwitch', function (event, state) {
+                
+                $.ajax({
+                    type: "POST",
+                    url: '<%= ResolveUrl("EditarUsuario.aspx/trabajaEnGuardia")%>',
+                    data: "{'estado':'" + state + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg) {
+                        //alert("Bien");
+                    },
+                    error: function (e) {
+                        alert("Error");
+                    }
+                });
+            });
+        }
     </script>
+
 </asp:Content>

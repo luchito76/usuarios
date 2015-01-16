@@ -31,6 +31,19 @@ namespace AdminRoles
             set { idUsuario = value; }
         }
 
+        private string idHospital;
+
+        public string IdHospital
+        {
+            get
+            {
+                idHospital = configNego.idHospiatlConfig().ValueStr;
+
+                return idHospital;
+            }
+            set { idHospital = value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
@@ -39,6 +52,7 @@ namespace AdminRoles
             {
                 Session["idUsuario"] = Request["idUsuario"].ToString();
                 mostrarUsuario();
+                capaHabilitado.Visible = true;
             }
             else
             {
@@ -226,26 +240,36 @@ namespace AdminRoles
         [ScriptMethod(), WebMethod()]
         public static void trabajaEnGuardia(bool estado)
         {
-            ProfesionaNego profesionalNego = new ProfesionaNego();
             EditarUsuario editarUsuario = new EditarUsuario();
 
-            bool trabajaEnGuardia = estado;
-            int idProfesional = editarUsuario.devuelveIdProfesional();
+            if (editarUsuario.IdHospital != "0")
+            {
+                ProfesionaNego profesionalNego = new ProfesionaNego();
+                //EditarUsuario editarUsuario = new EditarUsuario();
 
-            profesionalNego.guardaProfesionalEnGuardia(idProfesional, estado);
+                bool trabajaEnGuardia = estado;
+                int idProfesional = editarUsuario.devuelveIdProfesional();
+
+                profesionalNego.guardaProfesionalEnGuardia(idProfesional, estado);
+            }
         }
 
         public string trabajaEnGuardia()
         {
+            //string idHospital = configNego.idHospiatlConfig().ValueStr;
             string esGuardia = string.Empty;
-            int idProfesional = devuelveIdProfesional();
 
-            IList<SSO_GetProfesionalesXGuardiaResultSet0> lista = profesionalNego.listaProfesionalesEnGuardiaXIdProfesional(idProfesional).ToList();
+            if (IdHospital != "0")
+            {
+                int idProfesional = devuelveIdProfesional();
 
-            if (lista.Count == 0)
-                esGuardia = "false";
-            else
-                esGuardia = "true";
+                IList<SSO_GetProfesionalesXGuardiaResultSet0> lista = profesionalNego.listaProfesionalesEnGuardiaXIdProfesional(idProfesional).ToList();
+
+                if (lista.Count == 0)
+                    esGuardia = "false";
+                else
+                    esGuardia = "true";
+            }
 
             return esGuardia.ToString().ToLower();
         }

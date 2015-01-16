@@ -48,7 +48,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="/Sips/default.aspx"><i class="fa fa-home"></i> Menú SIPS</a></li>
-                        <li><a runat="server" href="~/AdminRoles.aspx">Inicio</a></li>
+                        <li><a id="lnkInicio" runat="server" href="~/AdminRoles.aspx">Inicio</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
