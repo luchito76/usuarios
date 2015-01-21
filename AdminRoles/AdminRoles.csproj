@@ -190,6 +190,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\sweet-alert.css" />
     <Content Include="EditarUsuario.aspx" />
+    <Content Include="EfectoresXPerfil.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\favicon.ico" />
     <Content Include="img\gif.GIF" />
@@ -373,6 +374,13 @@
     </Compile>
     <Compile Include="EditarUsuario.aspx.designer.cs">
       <DependentUpon>EditarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EfectoresXPerfil.aspx.cs">
+      <DependentUpon>EfectoresXPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EfectoresXPerfil.aspx.designer.cs">
+      <DependentUpon>EfectoresXPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

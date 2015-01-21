@@ -44,8 +44,9 @@
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
                                                 <th data-field="RolId" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
-                                                <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" data-align="center">Asignar Perfil</th>
-                                                <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" data-align="center">Eliminar Perfil</th>
+                                                <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" id="columnaPerfil" runat="server" data-align="center">Asignar Perfil</th>
+                                                <th data-field="operate" data-formatter="formatoEfectores" data-events="eventoEfectores" id="columnaEfectores" runat="server" data-align="center">Efectores</th>
+                                                <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" id="columnaEliminarPerfil" runat="server" data-align="center">Eliminar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
                                                 <th data-field="operate" data-formatter="formatoEditarUsuario" data-events="eventosEditarUsuario" data-align="center">Editar</th>
                                                 <th data-field="operate" data-formatter="formatoStatus" data-events="eventosStatus" data-align="center">Hab/Bloq</th>
@@ -299,6 +300,27 @@
                 $('#asignarPerfilModal').modal('show');
 
                 document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;                
+            }
+        };
+
+        function formatoEfectores(value, row, index) {
+            return [
+                    '<a class="efectores" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Efectores">',
+                        '<i class="fa fa-h-square fa-lg"></i>',
+                    '</a>' ,
+            ].join('');
+        }
+
+        window.eventoEfectores = {
+            'click .efectores': function (e, value, row, index) {
+                var w = 1000;
+                var h = 700;
+                var left = Number((screen.width/2)-(w/2));
+                var tops = Number((screen.height/2)-(h/2));  
+
+                var nombreUsuario = row.Nombre + ' ' + row.Apellido;
+
+                window.open("EfectoresXPerfil.aspx?nombreUsuario=" + nombreUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         };
 

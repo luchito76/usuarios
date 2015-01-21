@@ -22,6 +22,33 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.HiddenField hdfIdUsuario;
         
         /// <summary>
+        /// columnaPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell columnaPerfil;
+        
+        /// <summary>
+        /// columnaEfectores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell columnaEfectores;
+        
+        /// <summary>
+        /// columnaEliminarPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell columnaEliminarPerfil;
+        
+        /// <summary>
         /// lbRoles control.
         /// </summary>
         /// <remarks>

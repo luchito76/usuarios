@@ -20,6 +20,7 @@ namespace AdminRoles
         RolesNego rolesNego = new RolesNego();
         UsuariosNego usuarioNego = new UsuariosNego();
         PermisosNego permisoNego = new PermisosNego();
+        ConfigNego configNego = new ConfigNego();
 
         #region Roles
         public static class Roles
@@ -51,6 +52,18 @@ namespace AdminRoles
             { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
         }
 
+        private string idHospital;
+        public string IdHospital
+        {
+            get
+            {
+                idHospital = configNego.idHospiatlConfig().ValueStr;
+
+                return idHospital;
+            }
+            set { idHospital = value; }
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -58,14 +71,27 @@ namespace AdminRoles
             if (IsPostBack) return;
 
             llenarListas();
+            validaIdHospital();
         }
-
 
         private void llenarListas()
         {
             ddlAsignarPerfil.DataSource = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
             ddlAsignarPerfil.DataBind();
             ddlAsignarPerfil.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+        }
+
+        //Si el usuario ingresa a un hospital, en la tabla de usuarios se muestra la columna perfil, 
+        //si ingresa a nivel central se muestra la columna Efectores.
+        private void validaIdHospital()
+        {
+            if (IdHospital == "0")
+            {
+                columnaPerfil.Visible = false;
+                columnaEliminarPerfil.Visible = false;
+            }
+            else
+                columnaEfectores.Visible = false;
         }
 
         public string devuelveRolesJson()
@@ -113,7 +139,7 @@ namespace AdminRoles
         public static void filtroUsuarios(string filtro)
         {
             AdminRoles adminRoles = new AdminRoles();
-            
+
             HttpContext.Current.Session["filtro"] = filtro;
 
             adminRoles.devuelveUsuariosJson();
