@@ -320,7 +320,7 @@
 
                 var nombreUsuario = row.Nombre + ' ' + row.Apellido;
 
-                window.open("EfectoresXPerfil.aspx?nombreUsuario=" + nombreUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                window.open("EfectoresXPerfil.aspx?idUsuario=" + row.IdUsuario + "&nombreUsuario=" + nombreUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         };
 
@@ -435,7 +435,7 @@
 
         function formatoStatus(value, row, index) {
 
-            var habilitado = row.Habilitado; <%--'<%= estadoUsuario() %>';--%>;
+            var habilitado = row.Habilitado; 
             var bloqueado = row.Bloqueado;
 
             var btnHabilitado = "";

@@ -85,6 +85,11 @@ namespace Negocio
             permisosRepo.guardaPermisosCache(permisosCache);
         }
 
+        public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> listaPerfilesXEfector(int idUsuario)
+        {
+            return permisosRepo.listaPerfilesXEfector(idUsuario);
+        }
+
         public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId)
         {
             permisosRepo.guardaPermisosCache(idPerfil, idAplicacion, groupId);

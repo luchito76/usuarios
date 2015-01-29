@@ -218,7 +218,7 @@ namespace AdminRoles
             {
                 SSO_RoleGroup rolGroup = new SSO_RoleGroup();
 
-                rolGroup.IdAplicacion = idAplicacion;
+                //rolGroup.IdAplicacion = idAplicacion;
                 rolGroup.IdEfector = IdEfector;
                 rolGroup.IdPerfil = IdPerfil;
                 rolGroup.AutomaticName = true;

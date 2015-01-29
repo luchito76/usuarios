@@ -20,7 +20,8 @@
                 <table id="tblEfectores" data-toggle="table" data-pagination="true" data-search="true" data-page-size="10" data-page-list="[10, 20, 30]">
                     <thead>
                         <tr>
-                            <th data-field="IdModulo" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="Efector" data-align="center" data-sortable="true">Efector</th>
+                            <th data-field="Perfil" data-align="center" data-sortable="true">Perfil</th>
                         </tr>
                     </thead>
                 </table>
@@ -45,7 +46,7 @@
 
     <script>
         $table = $('#tblEfectores').bootstrapTable({            
-            data: <%= devuelveEfectores() %>           
+            data: <%= devuelveEfectores() %>,          
             });               
     </script>
 

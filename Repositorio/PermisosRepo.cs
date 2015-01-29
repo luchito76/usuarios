@@ -159,6 +159,20 @@ namespace Repositorio
             }
         }
 
+        /// <summary>
+        /// Devuelve un listado de los Perfiles que tiene un usuario un cada efector.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> listaPerfilesXEfector(int idUsuario)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> result = dominio.SSO_AllowedAppsByEfectorCentral(idUsuario).ToList();
+
+                return result;
+            }
+        }
+
         public void guardaPermisosCache(int idPerfil, int idAplicacion, int groupId)
         {
             //dominio.SSO_Set_PermissionCache(idPerfil, idAplicacion, groupId);            

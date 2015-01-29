@@ -883,6 +883,10 @@
       <orm:procedure name="SSO_GetUsuariosXPerfil">
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_AllowedAppsByEfectorCentral">
+        <orm:procedure-parameter name="idusuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -892,7 +896,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSOCentral;user id=sa;password=ssecure</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1293,6 +1297,15 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="1fe49055-cdab-4f53-93f9-3876c8e9efe1">
+      <domainMethod name="SSO_AllowedAppsByEfectorCentral" storedProcedureName="'SSO_AllowedAppsByEfectorCentral'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="75eac7d1-8212-4f5d-b746-c01dcb07fe18">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_AllowedAppsByEfectorCentralResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
   </domainMethods>
   <domainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="9e64974a-ff27-4a95-afda-cc96d5214a11">
@@ -1449,6 +1462,12 @@
         <Property Id="08b56056-c977-4dcd-9eff-059a3c925d29" name="UserId" type="System.Int32" label="UserId : System.Int32" nullable="true" fieldName="_userId" />
         <Property Id="28f435e0-ac1e-425a-aec6-c62aa6166c8b" name="NombreRol" type="System.String" label="NombreRol : System.String" nullable="true" fieldName="_nombreRol" />
         <Property Id="0ff31e94-3cf0-4792-b327-74181fc92e67" name="Parent" type="System.Int32" label="Parent : System.Int32" nullable="true" fieldName="_parent" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="fda75899-230c-4551-a4c5-7c45ff0c6560">
+      <domainMethodReturnShape name="SSO_AllowedAppsByEfectorCentralResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="37fdbb9d-8952-47eb-8833-d5ccd67ed789" name="Efector" type="System.String" label="Efector : System.String" nullable="true" fieldName="_efector" />
+        <Property Id="feab16a6-2ab5-4be5-ba5c-d6edfe06b205" name="Perfil" type="System.String" label="Perfil : System.String" nullable="true" fieldName="_perfil" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

@@ -634,6 +634,39 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario)
+		{
+			int returnValue;
+			return SSO_AllowedAppsByEfectorCentral(idusuario, out returnValue);
+		}
+		
+		public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdusuario = new OAParameter();
+			parameterIdusuario.ParameterName = "idusuario";
+			if(idusuario.HasValue)
+			{
+				parameterIdusuario.Value = idusuario.Value;
+			}
+			else
+			{
+				parameterIdusuario.DbType = DbType.Int32;
+				parameterIdusuario.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> queryResult = this.ExecuteQuery<SSO_AllowedAppsByEfectorCentralResultSet0>("[dbo].[SSO_AllowedAppsByEfectorCentral]", CommandType.StoredProcedure, parameterIdusuario, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -734,6 +767,8 @@ namespace Dominio
 		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil();
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil(out int returnValue);
+		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario);
+		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, out int returnValue);
 	}
 }
 #pragma warning restore 1591
