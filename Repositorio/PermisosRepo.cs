@@ -75,15 +75,25 @@ namespace Repositorio
             }
         }
 
-        public void borrarPermisos(int idPermiso)
+        public void borraPermisos(int idRolGroup, int idAplicacion)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IList<SSO_Permission> ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idPermiso).ToList();
+                IList<SSO_Module> listaModulos = dominio.SSO_Modules.Where(c => c.ApplicationId == idAplicacion).ToList();
 
-                if (ssoPermiso != null)
+                List<SSO_Permission> listaPermisos = new List<SSO_Permission>();
+
+                foreach (SSO_Module data in listaModulos)
                 {
-                    foreach (SSO_Permission data in ssoPermiso)
+                    SSO_Permission ssoPermiso = new SSO_Permission();
+                    ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idRolGroup && c.Target == data.Id).FirstOrDefault();
+
+                    listaPermisos.Add(ssoPermiso);
+                }
+
+                if (listaPermisos.Count != 0)
+                {
+                    foreach (SSO_Permission data in listaPermisos)
                         dominio.Delete(data);
                 }
 
@@ -107,11 +117,11 @@ namespace Repositorio
             }
         }
 
-        public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idUsuario)
+        public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idUsuario, int idAplicacion)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup && c.UserId == idUsuario).ToList();
+                IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup && c.UserId == idUsuario && c.ApplicationId == idAplicacion).ToList();
 
                 if (ssoPermisoCache != null)
                 {

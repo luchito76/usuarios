@@ -154,11 +154,10 @@ namespace AdminRoles
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
             RolPermisos rolPermiso = new RolPermisos();
-
-            int idAplicacion = int.Parse(HttpContext.Current.Session["idAplicacion"].ToString());
+            
             int idPerfil = int.Parse(HttpContext.Current.Session["idPerfil"].ToString());
 
-            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(rolPermiso.IdEfector, idPerfil, idAplicacion);
+            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(rolPermiso.IdEfector, idPerfil);
 
             SSO_Permission ssoPermisos = new SSO_Permission();
             ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo);

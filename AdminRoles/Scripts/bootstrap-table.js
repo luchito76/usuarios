@@ -632,6 +632,7 @@
             this.initBody();
         }
         $('[data-toggle="tooltip"]').tooltip();
+        $("[id='switch']").bootstrapSwitch();
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {
@@ -642,30 +643,35 @@
         this.$toolbar.find('.page-size').text(this.options.pageSize);
         this.updatePagination();
         $('[data-toggle="tooltip"]').tooltip();
+        $("['id='switch'']").bootstrapSwitch();
     };
 
     BootstrapTable.prototype.onPageFirst = function () {
         this.options.pageNumber = 1;
         this.updatePagination();
         $('[data-toggle="tooltip"]').tooltip();
+        $("[id='switch']").bootstrapSwitch();
     };
 
     BootstrapTable.prototype.onPagePre = function () {
         this.options.pageNumber--;
         this.updatePagination();
         $('[data-toggle="tooltip"]').tooltip();
+        $("[id='switch']").bootstrapSwitch();
     };
 
     BootstrapTable.prototype.onPageNext = function () {
         this.options.pageNumber++;
         this.updatePagination();
         $('[data-toggle="tooltip"]').tooltip();
+        $("[id='switch']").bootstrapSwitch();
     };
 
     BootstrapTable.prototype.onPageLast = function () {
         this.options.pageNumber = this.totalPages;
         this.updatePagination();
         $('[data-toggle="tooltip"]').tooltip();
+        $("[id='switch']").bootstrapSwitch();
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {

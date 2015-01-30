@@ -265,7 +265,7 @@ namespace AdminRoles
                 permisosCache.Target = data.target;
                 permisosCache.Inherited = true;
                 permisosCache.RoleId = 0;
-                permisosCache.GroupId = data.source;
+                permisosCache.GroupId = data.id;
                 permisosCache.RoleDepthFromUser = 0;
                 permisosCache.Allow = data.allow;
                 permisosCache.Readonly = false;

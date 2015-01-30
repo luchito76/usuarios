@@ -17,10 +17,11 @@ namespace Negocio
             permisosRepo.guardarPermisos(permisos);
         }
 
-        public void borrarPermisos(int idPermiso)
+        public void borrarPermisos(int idRolGroup, int idAplicacion)
         {
-            permisosRepo.borrarPermisos(idPermiso);
+            permisosRepo.borraPermisos(idRolGroup, idAplicacion);
         }
+
         public void permisoModulo(SSO_Permission permisoModulo)
         {
             permisosRepo.permisoModulo(permisoModulo);
@@ -65,9 +66,9 @@ namespace Negocio
             permisosRepo.borrarPermisosCacheXIdRolGroup(idRolGroup);
         }
 
-        public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idusuario)
+        public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idusuario, int idAplicacion)
         {
-            permisosRepo.borrarPermisosCacheXIdUsuario(idRolGroup, idusuario);
+            permisosRepo.borrarPermisosCacheXIdUsuario(idRolGroup, idusuario, idAplicacion);
         }
 
         public void borrarPermisosCacheXIdUsuario(int idusuario)

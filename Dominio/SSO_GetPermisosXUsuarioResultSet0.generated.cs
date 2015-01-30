@@ -23,42 +23,16 @@ namespace Dominio
 {
 	public partial class SSO_GetPermisosXUsuarioResultSet0
 	{
-		private int _sourceType;
-		public virtual int sourceType
+		private int _idAplicacion;
+		public virtual int idAplicacion
 		{
 			get
 			{
-				return this._sourceType;
+				return this._idAplicacion;
 			}
 			set
 			{
-				this._sourceType = value;
-			}
-		}
-		
-		private int _source;
-		public virtual int source
-		{
-			get
-			{
-				return this._source;
-			}
-			set
-			{
-				this._source = value;
-			}
-		}
-		
-		private int _targetType;
-		public virtual int targetType
-		{
-			get
-			{
-				return this._targetType;
-			}
-			set
-			{
-				this._targetType = value;
+				this._idAplicacion = value;
 			}
 		}
 		
@@ -75,45 +49,6 @@ namespace Dominio
 			}
 		}
 		
-		private bool _allow;
-		public virtual bool allow
-		{
-			get
-			{
-				return this._allow;
-			}
-			set
-			{
-				this._allow = value;
-			}
-		}
-		
-		private bool __readonly;
-		public virtual bool _readonly
-		{
-			get
-			{
-				return this.__readonly;
-			}
-			set
-			{
-				this.__readonly = value;
-			}
-		}
-		
-		private DateTime? _endDate;
-		public virtual DateTime? endDate
-		{
-			get
-			{
-				return this._endDate;
-			}
-			set
-			{
-				this._endDate = value;
-			}
-		}
-		
 		private int _id;
 		public virtual int id
 		{
@@ -127,68 +62,16 @@ namespace Dominio
 			}
 		}
 		
-		private string _name;
-		public virtual string name
+		private bool _allow;
+		public virtual bool allow
 		{
 			get
 			{
-				return this._name;
+				return this._allow;
 			}
 			set
 			{
-				this._name = value;
-			}
-		}
-		
-		private bool _automaticName;
-		public virtual bool automaticName
-		{
-			get
-			{
-				return this._automaticName;
-			}
-			set
-			{
-				this._automaticName = value;
-			}
-		}
-		
-		private int? _idEfector;
-		public virtual int? idEfector
-		{
-			get
-			{
-				return this._idEfector;
-			}
-			set
-			{
-				this._idEfector = value;
-			}
-		}
-		
-		private int? _idPerfil;
-		public virtual int? idPerfil
-		{
-			get
-			{
-				return this._idPerfil;
-			}
-			set
-			{
-				this._idPerfil = value;
-			}
-		}
-		
-		private int? _idAplicacion;
-		public virtual int? idAplicacion
-		{
-			get
-			{
-				return this._idAplicacion;
-			}
-			set
-			{
-				this._idAplicacion = value;
+				this._allow = value;
 			}
 		}
 		

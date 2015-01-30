@@ -204,7 +204,7 @@
         });
 
         
-        $("[name='chkHabilitado']").bootstrapSwitch('state', <%= esusuarioHabilitado(IdUsuario) %>, <%= esusuarioHabilitado(IdUsuario) %>).on('switchChange.bootstrapSwitch', function (event, state) { 
+        $("[name='habilitar']").bootstrapSwitch('state', <%= esusuarioHabilitado(IdUsuario) %>, <%= esusuarioHabilitado(IdUsuario) %>).on('switchChange.bootstrapSwitch', function (event, state) { 
             
             $.ajax({
                 type: "POST",

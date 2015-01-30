@@ -1210,7 +1210,7 @@
     <domainModelHasDomainMethods Id="a0ed954d-36b8-48f4-8e0f-139badc3ca78">
       <domainMethod name="SSO_GetPermisosXUsuario" storedProcedureName="'SSO_GetPermisosXUsuario'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="928888b4-1e3e-4adb-95e9-838f490bc2bd">
+          <domainMethodReferencesDomainMethodReturnShape Id="44ecba1e-e6ff-44e1-a647-1ca979c812fb">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetPermisosXUsuarioResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1324,23 +1324,6 @@
     </domainModelHasDomainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="54ab489c-6f06-42cb-ba0c-22a115509cc0">
       <domainMethodReturnShape name="Int16" namespace="System" showPropertiesCompartment="true" domainMethodType="PrimitiveType" />
-    </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="b50f9db2-d76d-49cd-82b0-e222122086d8">
-      <domainMethodReturnShape name="SSO_GetPermisosXUsuarioResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="b9b60e77-1d10-4735-8dde-e079bc675ff0" name="sourceType" type="System.Int32" label="sourceType : System.Int32" fieldName="_sourceType" />
-        <Property Id="462cb1f9-192d-4ebc-b475-b8dd54cf4920" name="source" type="System.Int32" label="source : System.Int32" fieldName="_source" />
-        <Property Id="c9aa8a6b-5b25-4a35-8558-5192d78801bb" name="targetType" type="System.Int32" label="targetType : System.Int32" fieldName="_targetType" />
-        <Property Id="ec9467a1-e51a-4941-bdc8-91683f814616" name="target" type="System.Int32" label="target : System.Int32" fieldName="_target" />
-        <Property Id="9ef621ee-fddb-42a3-b54b-543d02f021de" name="allow" type="System.Boolean" label="allow : System.Boolean" fieldName="_allow" />
-        <Property Id="f84b240c-1e30-4691-9c96-1ed50c121a2b" name="_readonly" type="System.Boolean" label="_readonly : System.Boolean" fieldName="__readonly" />
-        <Property Id="c4deb250-beea-4542-ae07-54ae0fcd76d2" name="endDate" type="System.DateTime" label="endDate : System.DateTime" nullable="true" fieldName="_endDate" />
-        <Property Id="465e529a-7909-48ce-bce0-f7f9e0d82270" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
-        <Property Id="c611bf69-70b0-49f5-a0b2-e374cf16b7c8" name="name" type="System.String" label="name : System.String" nullable="true" fieldName="_name" />
-        <Property Id="22b8650d-2d78-44be-a591-81bfe3b26306" name="automaticName" type="System.Boolean" label="automaticName : System.Boolean" fieldName="_automaticName" />
-        <Property Id="7342a5c7-5995-4c7f-b67e-a60f6261a771" name="idEfector" type="System.Int32" label="idEfector : System.Int32" nullable="true" fieldName="_idEfector" />
-        <Property Id="cef59add-c076-40f0-ab02-ee3a7b21a5dd" name="idPerfil" type="System.Int32" label="idPerfil : System.Int32" nullable="true" fieldName="_idPerfil" />
-        <Property Id="1648df53-8245-4275-bb7e-e4fe2ff759b0" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" nullable="true" fieldName="_idAplicacion" />
-      </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="3963d8e2-c175-4441-ae33-2d0a7185f837">
       <domainMethodReturnShape name="SSO_GetUsuariosXPerfilResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
@@ -1468,6 +1451,14 @@
       <domainMethodReturnShape name="SSO_AllowedAppsByEfectorCentralResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
         <Property Id="37fdbb9d-8952-47eb-8833-d5ccd67ed789" name="Efector" type="System.String" label="Efector : System.String" nullable="true" fieldName="_efector" />
         <Property Id="feab16a6-2ab5-4be5-ba5c-d6edfe06b205" name="Perfil" type="System.String" label="Perfil : System.String" nullable="true" fieldName="_perfil" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="2b98f635-583a-4240-adcf-954083ef6ae9">
+      <domainMethodReturnShape name="SSO_GetPermisosXUsuarioResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="b3b3035e-b36b-4ce5-a402-620117544d74" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" fieldName="_idAplicacion" />
+        <Property Id="ed8c699b-14e7-4aa9-b568-954d5e9f9af1" name="target" type="System.Int32" label="target : System.Int32" fieldName="_target" />
+        <Property Id="e4908a87-0f8a-4afc-b685-633e0d80491a" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="27600963-093d-461c-bcc1-c7b8094f1cbc" name="allow" type="System.Boolean" label="allow : System.Boolean" fieldName="_allow" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

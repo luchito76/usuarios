@@ -62,19 +62,19 @@ namespace Negocio
         {
             return rolesRepo.obtieneUltimoIdRolGroup();
         }
-        public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil, int idAplicacion)
+        public IEnumerable<SSO_RoleGroup> eliminarAplicacionXRol(int idEfector, int idPerfil)
         {
-            return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil, idAplicacion).ToList();
+            return rolesRepo.eliminarAplicacionXRol(idEfector, idPerfil).ToList();
         }
 
-        public int devuelveIdRolGroupXPermisos(int idEfector, int idPerfil, int idAplicacion)
+        public int devuelveIdRolGroupXPermisos(int idEfector, int idPerfil)
         {
-            return rolesRepo.devuelveIdRolGroupXPermisos(idEfector, idPerfil, idAplicacion);
+            return rolesRepo.devuelveIdRolGroupXPermisos(idEfector, idPerfil);
         }
 
-        public int devuelveIdRolGroup(int idEfector, int idPerfil, int idAplicacion)
+        public int devuelveIdRolGroup(int idEfector, int idPerfil)
         {
-            int idRolGroup = rolesRepo.devuelveIdRolGroup(idEfector, idPerfil, idAplicacion);
+            int idRolGroup = rolesRepo.devuelveIdRolGroup(idEfector, idPerfil);
 
             return idRolGroup;
         }
@@ -86,11 +86,11 @@ namespace Negocio
         /// <param name="idPerfil"></param>
         /// <param name="idAplicacion"></param>
         /// <returns></returns>
-        public bool esAplicacionEnRoleGroup(int idEfector, int idPerfil, int idAplicacion)
+        public bool esAplicacionEnRoleGroup(int idEfector, int idPerfil)
         {
             bool compruebaAplicacionEnRoleGroup = true;
 
-            int? idRolGroup = rolesRepo.devuelveIdRolGroup(idEfector, idPerfil, idAplicacion);
+            int? idRolGroup = rolesRepo.devuelveIdRolGroup(idEfector, idPerfil);
 
             if (idRolGroup != 0)
                 compruebaAplicacionEnRoleGroup = false;

@@ -36,11 +36,11 @@
             </div>
             <br />
             <div class="col-md-12">
-                <table id="tblModulos" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id" data-page-size="30" data-page-list="[30, 40, 50]">
+                <table id="tblModulos" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id" data-page-size="10" data-page-list="[10, 20, 30]">
                     <thead>
                         <tr>
                             <th data-field="operate" data-formatter="formatoCheck" data-events="eventosCheck" data-align="center">App</th>
-                            <th data-field="IdModulo" data-align="center" data-sortable="true">ID</th>
+                            <th data-field="IdModulo" data-align="center" data-sortable="true" >ID</th>
                             <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="Descripcion" data-align="left" data-sortable="true">Descripcion</th>
                             <th data-field="Estado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
@@ -84,7 +84,7 @@
             return [
             
                 '<a name="habilitar" class="habilitar" href="javascript:void(0)" title="Habilitar">',
-                    '<input name="' + row.IdModulo + '" checked="' + row.Estado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini"  > ',
+                    '<input Id="switch" name="' + row.IdModulo + '" checked="' + row.Estado +'" type="checkbox" data-on-color="info" data-off-color="danger" data-size="mini"  > ',
                 '</a>'               
             ].join('');
         }
