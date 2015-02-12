@@ -38,5 +38,15 @@ namespace Repositorio
                 return result;
             }
         }
+
+        public IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> listaAplicacionesXPerfil(int idRolGroup)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> result = dominio.SSO_GetAplicacionesXPerfil(idRolGroup).ToList();
+
+                return result;
+            }
+        }
     }
 }

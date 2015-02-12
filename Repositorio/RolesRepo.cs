@@ -19,6 +19,26 @@ namespace Repositorio
             }
         }
 
+        public IEnumerable<SSO_Role> listaEfectores()
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IEnumerable<SSO_Role> result = dominio.SSO_Roles.Where(c => c.Parent == 494).OrderBy(c => c.Name).ToList();
+
+                return dominio.CreateDetachedCopy(result);
+            }
+        }
+
+        public SSO_Role listaRolesXId(int idRol)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_Role result = dominio.SSO_Roles.Where(c => c.Id == idRol).FirstOrDefault();
+
+                return dominio.CreateDetachedCopy(result);
+            }
+        }
+
         public SSO_Users_Role listaUserRolXIdUsuario(int idUsuario)
         {
             using (ModeloDominio dominio = new ModeloDominio())

@@ -21,6 +21,7 @@ namespace AdminRoles
         UsuariosNego usuarioNego = new UsuariosNego();
         PermisosNego permisoNego = new PermisosNego();
         ConfigNego configNego = new ConfigNego();
+        AplicacionesNego aplicacionesNego = new AplicacionesNego();
 
         #region Roles
         public static class Roles
@@ -79,6 +80,14 @@ namespace AdminRoles
             ddlAsignarPerfil.DataSource = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
             ddlAsignarPerfil.DataBind();
             ddlAsignarPerfil.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+
+            ddlEfector.DataSource = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
+            ddlEfector.DataBind();
+            ddlEfector.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+
+            ddlPerfil.DataSource = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
+            ddlPerfil.DataBind();
+            ddlPerfil.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
         //Si el usuario ingresa a un hospital, en la tabla de usuarios se muestra la columna perfil, 
@@ -88,10 +97,15 @@ namespace AdminRoles
             if (IdHospital == "0")
             {
                 columnaPerfil.Visible = false;
+                columnaAsignarPerfilXEfector.Visible = true;
                 columnaEliminarPerfil.Visible = false;
             }
             else
+            {
+                columnaAsignarPerfilXEfector.Visible = false;
                 columnaEfectores.Visible = false;
+                columnaPerfil.Visible = true;
+            }
         }
 
         public string devuelveRolesJson()
@@ -147,12 +161,12 @@ namespace AdminRoles
 
         public string filtros()
         {
-            string pepe = string.Empty;
+            string filtro = string.Empty;
 
             if (Session["filtro"] != null)
-                pepe = Session["filtro"].ToString();
+                filtro = Session["filtro"].ToString();
 
-            return pepe;
+            return filtro;
 
         }
 
@@ -302,21 +316,78 @@ namespace AdminRoles
             borrarPermisosCache(idUsuario);
         }
 
-        public string estadoUsuario()
+        //public string estadoUsuario()
+        //{
+        //    string estado = string.Empty;
+
+        //    int idUsuario = int.Parse(hdfIdUsuario.Value);
+
+        //    SSO_User ssoUser = new SSO_User();
+        //    ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+
+        //    if (ssoUser.Locked == true)
+        //        estado = "true";
+        //    else
+        //        estado = "false";
+
+        //    return estado;
+        //}
+
+        protected void btnPerfilXEfector_ServerClick(object sender, EventArgs e)
         {
-            string estado = string.Empty;
+            asignarPerfilXEfector();
+        }
 
-            int idUsuario = 9739;//int.Parse(hdfIdUsuario.Value);
+        private void asignarPerfilXEfector()
+        {
+            guardaSSOUserRolCentral();
 
-            SSO_User ssoUser = new SSO_User();
-            ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
+            guardarPermisosCacheCentral();
+        }
 
-            if (ssoUser.Locked == true)
-                estado = "true";
-            else
-                estado = "false";
+        private void guardaSSOUserRolCentral()
+        {
+            List<int> lista = new List<int>();
+            lista.Add(int.Parse(ddlPerfil.SelectedValue));
+            lista.Add(int.Parse(ddlEfector.SelectedValue));
 
-            return estado;
+            foreach (int data in lista)
+            {
+                SSO_Users_Role userRol = new SSO_Users_Role();
+
+                userRol.UserId = int.Parse(hdfIdUsuario.Value);
+                userRol.RoleId = data;
+
+                usuarioNego.guardaSSOUserRol(userRol);
+            }
+        }
+
+        private void guardarPermisosCacheCentral()
+        {
+            int idEfector = int.Parse(ddlEfector.SelectedValue);
+            int idPerfil = int.Parse(ddlPerfil.SelectedValue);
+
+            int idRolGroup = rolesNego.devuelveIdRolGroup(idEfector, idPerfil);
+
+            IList<SSO_GetAplicacionesXPerfilResultSet0> listaPermisosXUsuario = aplicacionesNego.listaAplicacionesXPerfil(idRolGroup).ToList();
+
+            foreach (SSO_GetAplicacionesXPerfilResultSet0 data in listaPermisosXUsuario)
+            {
+                SSO_Permissions_Cache permisosCache = new SSO_Permissions_Cache();
+
+                permisosCache.UserId = int.Parse(hdfIdUsuario.Value);
+                permisosCache.ApplicationId = int.Parse(data.idAplicacion.ToString());
+                permisosCache.TargetType = 2;
+                permisosCache.Target = data.target;
+                permisosCache.Inherited = true;
+                permisosCache.RoleId = 0;
+                permisosCache.GroupId = idRolGroup;
+                permisosCache.RoleDepthFromUser = 0;
+                permisosCache.Allow = data.allow;
+                permisosCache.Readonly = false;
+
+                permisoNego.guardaPermisosCache(permisosCache);
+            }
         }
     }
 }

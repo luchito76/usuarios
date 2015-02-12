@@ -883,8 +883,18 @@
       <orm:procedure name="SSO_GetUsuariosXPerfil">
         <orm:result-sets />
       </orm:procedure>
+      <orm:procedure name="SSO_GetEfectoresXPerfil">
+        <orm:procedure-parameter name="idUsuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
+      <orm:procedure name="SSO_GetAplicacionesXPerfil">
+        <orm:procedure-parameter name="idRolGroup" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:result-sets />
+      </orm:procedure>
       <orm:procedure name="SSO_AllowedAppsByEfectorCentral">
         <orm:procedure-parameter name="idusuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idPerfil" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -1210,7 +1220,7 @@
     <domainModelHasDomainMethods Id="a0ed954d-36b8-48f4-8e0f-139badc3ca78">
       <domainMethod name="SSO_GetPermisosXUsuario" storedProcedureName="'SSO_GetPermisosXUsuario'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="44ecba1e-e6ff-44e1-a647-1ca979c812fb">
+          <domainMethodReferencesDomainMethodReturnShape Id="8d307adc-9501-4a5c-adbe-de34e5132b95">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetPermisosXUsuarioResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1273,7 +1283,7 @@
     <domainModelHasDomainMethods Id="89539f69-445e-4e34-922c-9554bb6881d3">
       <domainMethod name="SSO_GetAppByRol" storedProcedureName="'SSO_GetAppByRol'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="15fe7bfe-2e92-465a-9cc0-9fca7739d17b">
+          <domainMethodReferencesDomainMethodReturnShape Id="e4c95ff3-eb04-4a08-9c72-0ee346c8acf3">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetAppByRolResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1297,10 +1307,28 @@
         </domainMethodReturnShape>
       </domainMethod>
     </domainModelHasDomainMethods>
-    <domainModelHasDomainMethods Id="1fe49055-cdab-4f53-93f9-3876c8e9efe1">
+    <domainModelHasDomainMethods Id="bf3037d1-69ac-4465-87c9-5357e8c0546b">
+      <domainMethod name="SSO_GetEfectoresXPerfil" storedProcedureName="'SSO_GetEfectoresXPerfil'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="59f8f2e1-1520-4079-8a26-0fae472e830d">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetEfectoresXPerfilResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="dfeb2cba-f3be-404f-98b3-0df0f32ec30f">
+      <domainMethod name="SSO_GetAplicacionesXPerfil" storedProcedureName="'SSO_GetAplicacionesXPerfil'" generateReturnValueOverload="true">
+        <domainMethodReturnShape>
+          <domainMethodReferencesDomainMethodReturnShape Id="4b1c3930-01f3-4cd8-89c9-83a93d07e3da">
+            <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetAplicacionesXPerfilResultSet0" />
+          </domainMethodReferencesDomainMethodReturnShape>
+        </domainMethodReturnShape>
+      </domainMethod>
+    </domainModelHasDomainMethods>
+    <domainModelHasDomainMethods Id="b67b6105-bc30-4614-9d01-4aa8fcaf69df">
       <domainMethod name="SSO_AllowedAppsByEfectorCentral" storedProcedureName="'SSO_AllowedAppsByEfectorCentral'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="75eac7d1-8212-4f5d-b746-c01dcb07fe18">
+          <domainMethodReferencesDomainMethodReturnShape Id="3e167d29-c804-4666-a352-0e2ddaf00fc6">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_AllowedAppsByEfectorCentralResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1423,12 +1451,6 @@
         <Property Id="aed68105-e16b-4d0d-babb-3658fb4c95f0" name="version" type="System.String" label="version : System.String" nullable="true" fieldName="_version" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="f5a8a255-2341-4128-812a-26801a32aae4">
-      <domainMethodReturnShape name="SSO_GetAppByRolResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="1418426d-42da-491f-9c43-48362c77eba4" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
-        <Property Id="f68ce98d-516b-4768-bec9-56381a808ef2" name="nombreAplicacion" type="System.String" label="nombreAplicacion : System.String" fieldName="_nombreAplicacion" />
-      </domainMethodReturnShape>
-    </domainModelHasDomainMethodReturnShapes>
     <domainModelHasDomainMethodReturnShapes Id="f7a2c973-a0b7-4514-8c97-130dc11e2bbb">
       <domainMethodReturnShape name="SSO_Permissions_Cache" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="PersistentType" />
     </domainModelHasDomainMethodReturnShapes>
@@ -1447,18 +1469,38 @@
         <Property Id="0ff31e94-3cf0-4792-b327-74181fc92e67" name="Parent" type="System.Int32" label="Parent : System.Int32" nullable="true" fieldName="_parent" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="fda75899-230c-4551-a4c5-7c45ff0c6560">
-      <domainMethodReturnShape name="SSO_AllowedAppsByEfectorCentralResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="37fdbb9d-8952-47eb-8833-d5ccd67ed789" name="Efector" type="System.String" label="Efector : System.String" nullable="true" fieldName="_efector" />
-        <Property Id="feab16a6-2ab5-4be5-ba5c-d6edfe06b205" name="Perfil" type="System.String" label="Perfil : System.String" nullable="true" fieldName="_perfil" />
+    <domainModelHasDomainMethodReturnShapes Id="becad345-8ab0-4bec-95ab-56ef8494c431">
+      <domainMethodReturnShape name="SSO_GetEfectoresXPerfilResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="3980dbfa-2a80-489f-b3cd-600831deddb0" name="Efector" type="System.String" label="Efector : System.String" fieldName="_efector" />
+        <Property Id="864f8d20-f652-4881-bdb0-82643aaece90" name="ID" type="System.Int32" label="ID : System.Int32" fieldName="_iD" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="2b98f635-583a-4240-adcf-954083ef6ae9">
+    <domainModelHasDomainMethodReturnShapes Id="1e0b7809-42d4-4436-9843-0ad48cf0efd0">
+      <domainMethodReturnShape name="SSO_GetAppByRolResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="624adc1c-93ec-424b-9f2e-28c54d0b33b0" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="e4f0b820-ac2c-4f00-9416-2a6ece3dd3c7" name="nombreAplicacion" type="System.String" label="nombreAplicacion : System.String" nullable="true" fieldName="_nombreAplicacion" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="c7e4c52c-1f36-4eb0-9018-b78acd3d7e08">
       <domainMethodReturnShape name="SSO_GetPermisosXUsuarioResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="b3b3035e-b36b-4ce5-a402-620117544d74" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" fieldName="_idAplicacion" />
-        <Property Id="ed8c699b-14e7-4aa9-b568-954d5e9f9af1" name="target" type="System.Int32" label="target : System.Int32" fieldName="_target" />
-        <Property Id="e4908a87-0f8a-4afc-b685-633e0d80491a" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
-        <Property Id="27600963-093d-461c-bcc1-c7b8094f1cbc" name="allow" type="System.Boolean" label="allow : System.Boolean" fieldName="_allow" />
+        <Property Id="80357c3d-9cb2-44e6-8bbb-284d6341bac0" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" fieldName="_idAplicacion" />
+        <Property Id="746c0b07-584f-46f2-a83c-a57b4512347a" name="target" type="System.Int32" label="target : System.Int32" fieldName="_target" />
+        <Property Id="5e70e4fc-328f-4261-9d74-793703613f2b" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="86d14c25-0131-407d-aa84-612bf05ada2f" name="allow" type="System.Boolean" label="allow : System.Boolean" fieldName="_allow" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="3328fdbb-cdeb-40d8-acf4-e5cc54364c92">
+      <domainMethodReturnShape name="SSO_GetAplicacionesXPerfilResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="64480786-fc5e-40a1-9ac4-7092e740524f" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="cfe4e718-774e-4475-af43-81f47e8bc503" name="idAplicacion" type="System.Int32" label="idAplicacion : System.Int32" fieldName="_idAplicacion" />
+        <Property Id="9f7b23b7-9886-41cd-ba03-c6f39be545f1" name="target" type="System.Int32" label="target : System.Int32" fieldName="_target" />
+        <Property Id="e917eeb4-1ebd-4ed9-b11b-cdb7a4a035af" name="allow" type="System.Boolean" label="allow : System.Boolean" fieldName="_allow" />
+      </domainMethodReturnShape>
+    </domainModelHasDomainMethodReturnShapes>
+    <domainModelHasDomainMethodReturnShapes Id="df18d7bd-c105-4090-ac7f-1e0ff1ed8699">
+      <domainMethodReturnShape name="SSO_AllowedAppsByEfectorCentralResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
+        <Property Id="9ab41901-ceb5-4b60-989c-e9f2e82aca2b" name="id" type="System.Int32" label="id : System.Int32" nullable="true" fieldName="_id" />
+        <Property Id="8087ee51-7fd6-42d8-a45a-749853cbac6b" name="Efector" type="System.String" label="Efector : System.String" nullable="true" fieldName="_efector" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

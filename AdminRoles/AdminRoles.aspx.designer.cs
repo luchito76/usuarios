@@ -22,6 +22,24 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.HiddenField hdfIdUsuario;
         
         /// <summary>
+        /// columnaMostrarPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell columnaMostrarPerfil;
+        
+        /// <summary>
+        /// columnaAsignarPerfilXEfector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell columnaAsignarPerfilXEfector;
+        
+        /// <summary>
         /// columnaPerfil control.
         /// </summary>
         /// <remarks>
@@ -112,6 +130,51 @@ namespace AdminRoles {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAsignarPerfil;
         
         /// <summary>
+        /// lblPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPerfil;
+        
+        /// <summary>
+        /// ddlPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPerfil;
+        
+        /// <summary>
+        /// lblEfector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEfector;
+        
+        /// <summary>
+        /// ddlEfector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEfector;
+        
+        /// <summary>
+        /// btnPerfilXEfector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnPerfilXEfector;
+        
+        /// <summary>
         /// lblNombreRol control.
         /// </summary>
         /// <remarks>
@@ -119,5 +182,14 @@ namespace AdminRoles {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombreRol;
+        
+        /// <summary>
+        /// lblMostrarPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMostrarPerfil;
     }
 }

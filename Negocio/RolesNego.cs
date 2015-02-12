@@ -33,6 +33,16 @@ namespace Negocio
             return listaRoles;
         }
 
+        public IEnumerable<SSO_Role> listaEfectores()
+        {
+            return rolesRepo.listaEfectores();
+        }
+
+        public SSO_Role listaRolesXId(int idRol)
+        {
+            return rolesRepo.listaRolesXId(idRol);
+        }
+
         public IEnumerable<SSO_GetAppByRolResultSet0> listaRolesXAplicacion(int rol, int efector)
         {
             return rolesRepo.listaRolesXAplicacion(rol, efector);

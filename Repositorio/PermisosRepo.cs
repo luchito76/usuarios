@@ -170,14 +170,14 @@ namespace Repositorio
         }
 
         /// <summary>
-        /// Devuelve un listado de los Perfiles que tiene un usuario un cada efector.
+        /// Devuelve un listado de los Efectores asociados al perfil del usuario.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> listaPerfilesXEfector(int idUsuario)
+        public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> listaEfectoresXPerfil(int idUsuario, int idPerfil)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> result = dominio.SSO_AllowedAppsByEfectorCentral(idUsuario).ToList();
+                IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> result = dominio.SSO_AllowedAppsByEfectorCentral(idUsuario, idPerfil).ToList();
 
                 return result;
             }

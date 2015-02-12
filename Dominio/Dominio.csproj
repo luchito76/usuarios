@@ -65,7 +65,13 @@
     <Compile Include="SSO_Config.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="SSO_GetAplicacionesXPerfilResultSet0.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SSO_GetAppByRolResultSet0.generated.cs">
+      <DependentUpon>ModeloDominio.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="SSO_GetEfectoresXPerfilResultSet0.generated.cs">
       <DependentUpon>ModeloDominio.rlinq</DependentUpon>
     </Compile>
     <Compile Include="SSO_GetModulosXAplicacionResultSet0.generated.cs">

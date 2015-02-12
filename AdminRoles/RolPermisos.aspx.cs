@@ -20,6 +20,7 @@ namespace AdminRoles
         ModulosNego moduloNego = new ModulosNego();
         PermisosNego permisoNego = new PermisosNego();
         UsuariosNego usuarioNego = new UsuariosNego();
+        ConfigNego configNego = new ConfigNego();
 
         #region propiedades
 
@@ -83,6 +84,18 @@ namespace AdminRoles
                 return llamada;
             }
             set { llamada = value; }
+        }
+
+        private string idHospital;
+        public string IdHospital
+        {
+            get
+            {
+                idHospital = configNego.idHospiatlConfig().ValueStr;
+
+                return idHospital;
+            }
+            set { idHospital = value; }
         }
 
         #endregion
@@ -172,6 +185,17 @@ namespace AdminRoles
         public string devuelveAppXUsuario()
         {
             string json = string.Empty;
+
+            int idEfector = 0;
+
+            if (IdHospital == "0")
+            {
+                idEfector = 765;
+            }
+            else
+            {
+                idEfector = IdEfector;
+            }
 
             List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
 

@@ -40,5 +40,10 @@ namespace Negocio
         {
             return aplicacionesRepo.listaUsuariosXAplicacion(idAplicacion);
         }
+
+        public IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> listaAplicacionesXPerfil(int idRolGroup)
+        {
+            return aplicacionesRepo.listaAplicacionesXPerfil(idRolGroup);
+        }
     }
 }

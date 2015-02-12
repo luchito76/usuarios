@@ -44,6 +44,10 @@
                                                 <th data-field="Apellido" data-align="left" data-sortable="true">Apellido</th>
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
                                                 <th data-field="RolId" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
+                                                <th data-field="operate" data-formatter="formatoMostrarPerfil" data-events="eventoMostrarPerfil" id="columnaMostrarPerfil" runat="server" data-align="center">Perfil</th>
+
+                                                <th data-field="operate" data-formatter="formatoPerfilXEfector" data-events="eventoPerfilXEfector" id="columnaAsignarPerfilXEfector" runat="server" data-align="center">Asignar Perfil</th>
+
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" id="columnaPerfil" runat="server" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEfectores" data-events="eventoEfectores" id="columnaEfectores" runat="server" data-align="center">Efectores</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" id="columnaEliminarPerfil" runat="server" data-align="center">Eliminar Perfil</th>
@@ -213,6 +217,46 @@
     </div>
     <!-- /.modal -->
 
+    <!--Modal para asignar perfiles a un usuario en un determinado efector  -->
+    <div id="asignarPerfilXEfector" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Asignar Perfil</h4>
+                </div>
+                <div class="modal-body center-block">
+                    <div class="form-group">
+                        <b>
+                            <asp:Label ID="lblPerfil" runat="server" Text="Elegir Perfil" for="ddPerfil" class="col-sm-4 control-label">
+                            </asp:Label></b>
+                        <div class="col-sm-5">
+                            <asp:DropDownList ID="ddlPerfil" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <b>
+                            <asp:Label ID="lblEfector" runat="server" Text="Elegir Efector" for="ddEfector" class="col-sm-4 control-label">
+                            </asp:Label></b>
+                        <div class="col-sm-5">
+                            <asp:DropDownList ID="ddlEfector" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <%--<div id="progressBarAsignarPerfil" class="progress progress-striped active">
+                        <div id="progressAsignarPerfil" class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
+                    </div>--%>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnPerfilXEfector" onserverclick="btnPerfilXEfector_ServerClick" onclick="barraProgresoAsignarPerfil();" runat="server" type="button" class="btn btn-primary">Agregar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     <script>
         $(function() {
             $('#filtro').click(function() {
@@ -303,46 +347,77 @@
             }
         };
 
-        function formatoEfectores(value, row, index) {
+        function formatoPerfilXEfector(value, row, index) {
             return [
-                    '<a class="efectores" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Efectores">',
-                        '<i class="fa fa-h-square fa-lg"></i>',
+                    '<a class="perfilXEfector launch-modal1" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Asignar Perfil">',
+                        '<i class="fa fa-plus-circle fa-lg">',
                     '</a>' ,
             ].join('');
         }
 
-        window.eventoEfectores = {
-            'click .efectores': function (e, value, row, index) {
-                var w = 1000;
-                var h = 700;
-                var left = Number((screen.width/2)-(w/2));
-                var tops = Number((screen.height/2)-(h/2));  
+        window.eventoPerfilXEfector = {
+            'click .perfilXEfector': function (e, value, row, index) {
+            
+                document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;                
 
-                var nombreUsuario = row.Nombre + ' ' + row.Apellido;
-
-                window.open("EfectoresXPerfil.aspx?idUsuario=" + row.IdUsuario + "&nombreUsuario=" + nombreUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                $('#asignarPerfilXEfector').modal('show');
             }
         };
 
-        function formatoEliminarPerfil(value, row, index) {
-            return [
-                '<a class="eliminarPerfil" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Eliminar Perfil">',
-                    '<i class="fa fa-trash fa-lg"></i>',
-                '</a>'
-            ].join('');
-        }
+            function formatoMostrarPerfil(value, row, index) {
+                return [
+                        //'<a class="mostrarPerfil" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Perfil">',
+                            '<asp:Label ID="lblMostrarPerfil" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',
+                        //'</a>' ,
+                ].join('');
+            }
 
-        window.eventoEliminarPerfil = {
-            'click .eliminarPerfil': function (e, value, row, index) {
+            window.eventoMostrarPerfil = {
+                'click .asignarPerfil': function (e, value, row, index) {
+                
+                }
+            };
 
-                $('#progressBarModal').modal('show');
+            function formatoEfectores(value, row, index) {
+                return [
+                        '<a class="efectores" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Efectores">',
+                            '<i class="fa fa-h-square fa-lg"></i>',
+                        '</a>' ,
+                ].join('');
+            }
 
-                $(document).ready(function () {
-                    var idUser = row.IdUsuario;
+            window.eventoEfectores = {
+                'click .efectores': function (e, value, row, index) {
+                    var w = 780;
+                    var h = 700;
+                    var left = Number((screen.width/2)-(w/2));
+                    var tops = Number((screen.height/2)-(h/2));  
 
-                    $.ajax({
-                        type: "POST",
-                        url: '<%= ResolveUrl("AdminRoles.aspx/eliminarPerfil")%>' ,
+                    var nombreUsuario = row.Nombre + ' ' + row.Apellido;
+
+                    window.open("EfectoresXPerfil.aspx?idUsuario=" + row.IdUsuario + "&nombreUsuario=" + nombreUsuario + "&idPerfil=" + row.RolId,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                }
+            };
+
+            function formatoEliminarPerfil(value, row, index) {
+                return [
+                    '<a class="eliminarPerfil" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Eliminar Perfil">',
+                        '<i class="fa fa-trash fa-lg"></i>',
+                    '</a>'
+                ].join('');
+            }
+
+            window.eventoEliminarPerfil = {
+                'click .eliminarPerfil': function (e, value, row, index) {
+
+                    $('#progressBarModal').modal('show');
+
+                    $(document).ready(function () {
+                        var idUser = row.IdUsuario;
+
+                        $.ajax({
+                            type: "POST",
+                            url: '<%= ResolveUrl("AdminRoles.aspx/eliminarPerfil")%>' ,
                         data: "{ 'idUsuario' : '" + idUser + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",

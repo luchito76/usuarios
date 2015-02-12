@@ -80,6 +80,7 @@
         search: false,
         btnCrearPerfil: false,
         filtro: false,
+        nombrePerfil: false,
         selectItemName: 'btSelectItem',
         showHeader: true,
         showColumns: false,
@@ -376,7 +377,8 @@
             $keepOpen,
             $btnCrearPerfil,
             filtro,
-            $search;        
+            nombrePerfil,
+        $search;
 
 
         this.$toolbar = this.$container.find('.fixed-table-toolbar').html('');
@@ -460,16 +462,28 @@
 
         if (this.options.filtro) {
             html = [];
-            html.push(            
+            html.push(
             ' <div class="checkbox checkbox-info">',
                 '<input type="checkbox" runat="server" id="filtro" name="fil">',
-                sprintf('<label for="filtro">Filtro',                
+                sprintf('<label for="filtro">Filtro',
                 '</label>',
                 this.options.formatSearch()),
               '</div>'
             );
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.filtro input label');
+        }
+
+        if (this.options.nombrePerfil) {
+            html = [];
+            html.push(
+            '<div class="">',
+                sprintf('<h2><label for="male" id="nombrePerfil" class="nombrePerfil" ></label></h2>',
+                this.options.formatSearch()),
+              '</div>'
+            );
+            this.$toolbar.append(html.join(''));
+            $search = this.$toolbar.find('.nombrePerfil label');
         }
     };
 
@@ -1012,7 +1026,7 @@
         this.initPagination();
         this.initBody();
     };
-     
+
     BootstrapTable.prototype.append = function (data) {
         this.initData(data, true);
         this.initBody();
@@ -1130,7 +1144,7 @@
     // =======================
 
     $(function () {
-        $('[data-toggle="table"]').bootstrapTable();        
+        $('[data-toggle="table"]').bootstrapTable();
     });
 
 }(jQuery);

@@ -21,10 +21,10 @@ using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace Dominio	
 {
-	public partial class SSO_AllowedAppsByEfectorCentralResultSet0
+	public partial class SSO_GetAplicacionesXPerfilResultSet0
 	{
-		private int? _id;
-		public virtual int? id
+		private int _id;
+		public virtual int id
 		{
 			get
 			{
@@ -36,16 +36,42 @@ namespace Dominio
 			}
 		}
 		
-		private string _efector;
-		public virtual string Efector
+		private int _idAplicacion;
+		public virtual int idAplicacion
 		{
 			get
 			{
-				return this._efector;
+				return this._idAplicacion;
 			}
 			set
 			{
-				this._efector = value;
+				this._idAplicacion = value;
+			}
+		}
+		
+		private int _target;
+		public virtual int target
+		{
+			get
+			{
+				return this._target;
+			}
+			set
+			{
+				this._target = value;
+			}
+		}
+		
+		private bool _allow;
+		public virtual bool allow
+		{
+			get
+			{
+				return this._allow;
+			}
+			set
+			{
+				this._allow = value;
 			}
 		}
 		

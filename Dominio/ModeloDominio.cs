@@ -634,13 +634,91 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario)
+		public IEnumerable<SSO_GetEfectoresXPerfilResultSet0> SSO_GetEfectoresXPerfil(int? idUsuario, int? idPerfil)
 		{
 			int returnValue;
-			return SSO_AllowedAppsByEfectorCentral(idusuario, out returnValue);
+			return SSO_GetEfectoresXPerfil(idUsuario, idPerfil, out returnValue);
 		}
 		
-		public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, out int returnValue)
+		public IEnumerable<SSO_GetEfectoresXPerfilResultSet0> SSO_GetEfectoresXPerfil(int? idUsuario, int? idPerfil, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdUsuario = new OAParameter();
+			parameterIdUsuario.ParameterName = "idUsuario";
+			if(idUsuario.HasValue)
+			{
+				parameterIdUsuario.Value = idUsuario.Value;
+			}
+			else
+			{
+				parameterIdUsuario.DbType = DbType.Int32;
+				parameterIdUsuario.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdPerfil = new OAParameter();
+			parameterIdPerfil.ParameterName = "idPerfil";
+			if(idPerfil.HasValue)
+			{
+				parameterIdPerfil.Value = idPerfil.Value;
+			}
+			else
+			{
+				parameterIdPerfil.DbType = DbType.Int32;
+				parameterIdPerfil.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetEfectoresXPerfilResultSet0> queryResult = this.ExecuteQuery<SSO_GetEfectoresXPerfilResultSet0>("[dbo].[SSO_GetEfectoresXPerfil]", CommandType.StoredProcedure, parameterIdUsuario, parameterIdPerfil, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
+		public IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> SSO_GetAplicacionesXPerfil(int? idRolGroup)
+		{
+			int returnValue;
+			return SSO_GetAplicacionesXPerfil(idRolGroup, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> SSO_GetAplicacionesXPerfil(int? idRolGroup, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdRolGroup = new OAParameter();
+			parameterIdRolGroup.ParameterName = "idRolGroup";
+			if(idRolGroup.HasValue)
+			{
+				parameterIdRolGroup.Value = idRolGroup.Value;
+			}
+			else
+			{
+				parameterIdRolGroup.DbType = DbType.Int32;
+				parameterIdRolGroup.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> queryResult = this.ExecuteQuery<SSO_GetAplicacionesXPerfilResultSet0>("[dbo].[SSO_GetAplicacionesXPerfil]", CommandType.StoredProcedure, parameterIdRolGroup, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
+		public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil)
+		{
+			int returnValue;
+			return SSO_AllowedAppsByEfectorCentral(idusuario, idPerfil, out returnValue);
+		}
+		
+		public IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
@@ -658,7 +736,19 @@ namespace Dominio
 				parameterIdusuario.Value = DBNull.Value;
 			}
 
-			IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> queryResult = this.ExecuteQuery<SSO_AllowedAppsByEfectorCentralResultSet0>("[dbo].[SSO_AllowedAppsByEfectorCentral]", CommandType.StoredProcedure, parameterIdusuario, parameterReturnValue);
+			OAParameter parameterIdPerfil = new OAParameter();
+			parameterIdPerfil.ParameterName = "idPerfil";
+			if(idPerfil.HasValue)
+			{
+				parameterIdPerfil.Value = idPerfil.Value;
+			}
+			else
+			{
+				parameterIdPerfil.DbType = DbType.Int32;
+				parameterIdPerfil.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> queryResult = this.ExecuteQuery<SSO_AllowedAppsByEfectorCentralResultSet0>("[dbo].[SSO_AllowedAppsByEfectorCentral]", CommandType.StoredProcedure, parameterIdusuario, parameterIdPerfil, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -767,8 +857,12 @@ namespace Dominio
 		Int16 SSO_Set_PermissionCache(int? idPerfil, int? idAplicacion, int? groupId, out int returnValue);
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil();
 		IEnumerable<SSO_GetUsuariosXPerfilResultSet02> SSO_GetUsuariosXPerfil(out int returnValue);
-		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario);
-		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, out int returnValue);
+		IEnumerable<SSO_GetEfectoresXPerfilResultSet0> SSO_GetEfectoresXPerfil(int? idUsuario, int? idPerfil);
+		IEnumerable<SSO_GetEfectoresXPerfilResultSet0> SSO_GetEfectoresXPerfil(int? idUsuario, int? idPerfil, out int returnValue);
+		IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> SSO_GetAplicacionesXPerfil(int? idRolGroup);
+		IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> SSO_GetAplicacionesXPerfil(int? idRolGroup, out int returnValue);
+		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil);
+		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil, out int returnValue);
 	}
 }
 #pragma warning restore 1591
