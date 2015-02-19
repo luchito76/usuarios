@@ -195,6 +195,8 @@ namespace AdminRoles
 
             if (Request["rolName"] != null)
                 rol = Request["rolName"].ToString();
+            else
+                rol = NombreDePerfil;
 
             return rol;
         }
@@ -243,7 +245,7 @@ namespace AdminRoles
 
                 guardaRolGroupMember();
 
-                if (Request["llamada"] == "aplicacion")
+                if ((Request["llamada"] == "aplicacion") || (IdHospital == "0"))
                 {
                     guardaSSOPermissions(idAplicacion);
                 }
@@ -284,7 +286,14 @@ namespace AdminRoles
         {
             string nombre = string.Empty;
 
-            string nombreEfector = roleNego.listaRoles(494, true).Where(c => c.Id == SSOHelper.CurrentIdentity.IdEfectorRol).FirstOrDefault().Name;
+            int idEfector = 0;
+
+            if ((Request["llamada"] == "aplicacion") || (IdHospital == "0"))
+                idEfector = int.Parse(Request["idEfector"].ToString());
+            else
+                idEfector = SSOHelper.CurrentIdentity.IdEfectorRol;
+
+            string nombreEfector = roleNego.listaRoles(494, true).Where(c => c.Id == idEfector).FirstOrDefault().Name;
             string nombrePerfil = devuelveNombreDeRol();
 
             return nombre = nombreEfector + " + " + nombrePerfil;

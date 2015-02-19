@@ -421,14 +421,16 @@ namespace AdminRoles
         {
             int idEfector = int.Parse(ddlEfector.SelectedValue);
             int idPerfil = int.Parse(ddlPerfil.SelectedValue);
+            string nombrePerfil = ddlPerfil.SelectedItem.ToString();
 
             int idRolGroup = rolesNego.devuelveIdRolGroup(idEfector, idPerfil);
 
             if (idRolGroup == 0)
             {
-                guardaRoleGroups();
+                Response.Redirect("RolPermisos.aspx?idUsuario=" + int.Parse(hdfIdUsuario.Value) + "&idPerfil=" + idPerfil + "&idEfector=" + idEfector + "&perfil=" + nombrePerfil + "&llamada=usuario");
+                //guardaRoleGroups();
 
-                guardaRolGroupMember();
+                //guardaRolGroupMember();
             }
 
 
