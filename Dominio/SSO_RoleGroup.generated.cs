@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using Dominio;
 
 namespace Dominio	
 {
@@ -88,16 +89,38 @@ namespace Dominio
 			}
 		}
 		
-		private int? IdAplicacion1;
-		public virtual int? IdAplicacion
+		private SSO_Role SSO_Role1;
+		public virtual SSO_Role SSO_Role
 		{
 			get
 			{
-				return this.IdAplicacion1;
+				return this.SSO_Role1;
 			}
 			set
 			{
-				this.IdAplicacion1 = value;
+				this.SSO_Role1 = value;
+			}
+		}
+		
+		private SSO_Role SSO_Role21;
+		public virtual SSO_Role SSO_Role2
+		{
+			get
+			{
+				return this.SSO_Role21;
+			}
+			set
+			{
+				this.SSO_Role21 = value;
+			}
+		}
+		
+		private IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members1 = new List<SSO_RoleGroups_Member>();
+		public virtual IList<SSO_RoleGroups_Member> SSO_RoleGroups_Members
+		{
+			get
+			{
+				return this.SSO_RoleGroups_Members1;
 			}
 		}
 		

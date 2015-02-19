@@ -99,6 +99,7 @@ namespace AdminRoles
                 columnaPerfil.Visible = false;
                 columnaAsignarPerfilXEfector.Visible = true;
                 columnaEliminarPerfil.Visible = false;
+                columnaApp.Visible = false;
             }
             else
             {
@@ -343,6 +344,9 @@ namespace AdminRoles
             guardaSSOUserRolCentral();
 
             guardarPermisosCacheCentral();
+
+            ddlPerfil.ClearSelection();
+            ddlEfector.ClearSelection();
         }
 
         private void guardaSSOUserRolCentral()
@@ -351,15 +355,66 @@ namespace AdminRoles
             lista.Add(int.Parse(ddlPerfil.SelectedValue));
             lista.Add(int.Parse(ddlEfector.SelectedValue));
 
+            int idUsuario = int.Parse(hdfIdUsuario.Value);
+            int idEfector = int.Parse(ddlEfector.SelectedValue);
+            int idPerfil = int.Parse(ddlPerfil.SelectedValue);
+
+            int idEfectorSeleccionado = rolesNego.validaEfectorXUserRol(idUsuario, idEfector);
+            int idPerfilSeleccionado = rolesNego.validaPerfilXUserRol(idUsuario, idPerfil);
+
             foreach (int data in lista)
             {
-                SSO_Users_Role userRol = new SSO_Users_Role();
+                if ((data != idEfectorSeleccionado) && (data != idPerfilSeleccionado))
+                {
+                    SSO_Users_Role userRol = new SSO_Users_Role();
 
-                userRol.UserId = int.Parse(hdfIdUsuario.Value);
-                userRol.RoleId = data;
+                    userRol.UserId = int.Parse(hdfIdUsuario.Value);
+                    userRol.RoleId = data;
 
-                usuarioNego.guardaSSOUserRol(userRol);
+                    usuarioNego.guardaSSOUserRol(userRol);
+                }
             }
+        }
+
+        private void guardaRoleGroups()
+        {
+
+            int idPerfilSeleccionado = int.Parse(ddlPerfil.SelectedValue);
+            int idEfectorSeleccionado = int.Parse(ddlEfector.SelectedValue);
+
+            if (rolesNego.esAplicacionEnRoleGroup(idEfectorSeleccionado, idPerfilSeleccionado))
+            {
+                SSO_RoleGroup rolGroup = new SSO_RoleGroup();
+
+                rolGroup.Name = nombreRolGroup();
+                rolGroup.IdEfector = idEfectorSeleccionado;
+                rolGroup.IdPerfil = idPerfilSeleccionado;
+                rolGroup.AutomaticName = true;
+
+                rolesNego.guardaRoleGroup(rolGroup);
+            }
+        }
+
+        //public string devuelveNombreDeRol()
+        //{
+        //    string rol = string.Empty;
+
+        //    //if (Request["rolName"] != null)
+        //    //    rol = Request["rolName"].ToString();
+
+        //    return rol;
+        //}
+
+        private string nombreRolGroup()
+        {
+            string nombre = string.Empty;
+
+            int idEfectorSeleccionado = int.Parse(ddlEfector.SelectedValue);
+
+            string nombreEfector = rolesNego.listaRoles(494, true).Where(c => c.Id == idEfectorSeleccionado).FirstOrDefault().Name;
+            string nombrePerfil = ddlPerfil.SelectedItem.ToString(); //devuelveNombreDeRol();
+
+            return nombre = nombreEfector + " + " + nombrePerfil;
         }
 
         private void guardarPermisosCacheCentral()
@@ -368,6 +423,14 @@ namespace AdminRoles
             int idPerfil = int.Parse(ddlPerfil.SelectedValue);
 
             int idRolGroup = rolesNego.devuelveIdRolGroup(idEfector, idPerfil);
+
+            if (idRolGroup == 0)
+            {
+                guardaRoleGroups();
+
+                guardaRolGroupMember();
+            }
+
 
             IList<SSO_GetAplicacionesXPerfilResultSet0> listaPermisosXUsuario = aplicacionesNego.listaAplicacionesXPerfil(idRolGroup).ToList();
 
@@ -388,6 +451,47 @@ namespace AdminRoles
 
                 permisoNego.guardaPermisosCache(permisosCache);
             }
+        }
+
+        private void guardaRolGroupMember()
+        {
+            SSO_RoleGroups_Member rolGroupMember = new SSO_RoleGroups_Member();
+
+            int idEfectorSeleccionado = int.Parse(ddlEfector.SelectedValue);
+            int idPerfilSeleccionado = int.Parse(ddlPerfil.SelectedValue);
+
+            int idRolGroup = rolesNego.devuelveIdRolGroup(idEfectorSeleccionado, idPerfilSeleccionado);
+
+            if (validaRolGroupMember(idRolGroup))
+            {
+                List<int> lista = new List<int>();
+                lista.Add(idEfectorSeleccionado);
+                lista.Add(idPerfilSeleccionado);
+
+                foreach (int data in lista)
+                {
+                    SSO_RoleGroups_Member ssorolGroupMember = new SSO_RoleGroups_Member();
+
+                    ssorolGroupMember.GroupId = idRolGroup;
+                    ssorolGroupMember.RoleId = data;
+
+                    rolesNego.guardaRolGroupMember(ssorolGroupMember);
+                }
+            }
+        }
+
+        private bool validaRolGroupMember(int idRolGroup)
+        {
+            bool valida = false;
+
+            var rolGroupMember = rolesNego.validaRolGroupMember(idRolGroup);
+
+            if (rolGroupMember == null)
+                valida = true;
+            else
+                valida = false;
+
+            return valida;
         }
     }
 }

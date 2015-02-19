@@ -55,7 +55,7 @@ namespace Negocio
             usuarioRepo.guardaSSOUserRol(userRol);
         }
 
-        public IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector)
+        public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector)
         {
             return usuarioRepo.listaAppXUsuario(idUsuario, idEfector);
         }

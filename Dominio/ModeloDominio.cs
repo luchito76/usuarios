@@ -66,22 +66,6 @@ namespace Dominio
 			}
 		}
 		
-		public IQueryable<SSO_Role> SSO_Roles 
-		{
-			get
-			{
-				return this.GetAll<SSO_Role>();
-			}
-		}
-		
-		public IQueryable<SSO_RoleGroup> SSO_RoleGroups 
-		{
-			get
-			{
-				return this.GetAll<SSO_RoleGroup>();
-			}
-		}
-		
 		public IQueryable<SSO_Permissions_Cache> SSO_Permissions_Caches 
 		{
 			get
@@ -151,6 +135,30 @@ namespace Dominio
 			get
 			{
 				return this.GetAll<SSO_Config>();
+			}
+		}
+		
+		public IQueryable<SSO_Role> SSO_Roles 
+		{
+			get
+			{
+				return this.GetAll<SSO_Role>();
+			}
+		}
+		
+		public IQueryable<SSO_RoleGroup> SSO_RoleGroups 
+		{
+			get
+			{
+				return this.GetAll<SSO_RoleGroup>();
+			}
+		}
+		
+		public IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members 
+		{
+			get
+			{
+				return this.GetAll<SSO_RoleGroups_Member>();
 			}
 		}
 		
@@ -289,28 +297,28 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion)
+		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idRolGroup, int? idUsuario, int? idAplicacion)
 		{
 			int returnValue;
-			return SSO_GetModulosXUsuario(idEfector, idUsuario, idAplicacion, out returnValue);
+			return SSO_GetModulosXUsuario(idRolGroup, idUsuario, idAplicacion, out returnValue);
 		}
 		
-		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue)
+		public IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idRolGroup, int? idUsuario, int? idAplicacion, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
 		    parameterReturnValue.ParameterName = "parameterReturnValue";
 		
-			OAParameter parameterIdEfector = new OAParameter();
-			parameterIdEfector.ParameterName = "idEfector";
-			if(idEfector.HasValue)
+			OAParameter parameterIdRolGroup = new OAParameter();
+			parameterIdRolGroup.ParameterName = "idRolGroup";
+			if(idRolGroup.HasValue)
 			{
-				parameterIdEfector.Value = idEfector.Value;
+				parameterIdRolGroup.Value = idRolGroup.Value;
 			}
 			else
 			{
-				parameterIdEfector.DbType = DbType.Int32;
-				parameterIdEfector.Value = DBNull.Value;
+				parameterIdRolGroup.DbType = DbType.Int32;
+				parameterIdRolGroup.Value = DBNull.Value;
 			}
 
 			OAParameter parameterIdUsuario = new OAParameter();
@@ -337,7 +345,7 @@ namespace Dominio
 				parameterIdAplicacion.Value = DBNull.Value;
 			}
 
-			IEnumerable<SSO_GetModulosXUsuarioResultSet0> queryResult = this.ExecuteQuery<SSO_GetModulosXUsuarioResultSet0>("[dbo].[SSO_GetModulosXUsuario]", CommandType.StoredProcedure, parameterIdEfector, parameterIdUsuario, parameterIdAplicacion, parameterReturnValue);
+			IEnumerable<SSO_GetModulosXUsuarioResultSet0> queryResult = this.ExecuteQuery<SSO_GetModulosXUsuarioResultSet0>("[dbo].[SSO_GetModulosXUsuario]", CommandType.StoredProcedure, parameterIdRolGroup, parameterIdUsuario, parameterIdAplicacion, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -757,6 +765,51 @@ namespace Dominio
 			return queryResult;
 		}
 		
+		public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector)
+		{
+			int returnValue;
+			return SSO_GetAplicacionesXEfector(idUsuario, idEfector, out returnValue);
+		}
+		
+		public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, out int returnValue)
+		{
+			OAParameter parameterReturnValue = new OAParameter();
+		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
+		    parameterReturnValue.ParameterName = "parameterReturnValue";
+		
+			OAParameter parameterIdUsuario = new OAParameter();
+			parameterIdUsuario.ParameterName = "idUsuario";
+			if(idUsuario.HasValue)
+			{
+				parameterIdUsuario.Value = idUsuario.Value;
+			}
+			else
+			{
+				parameterIdUsuario.DbType = DbType.Int32;
+				parameterIdUsuario.Value = DBNull.Value;
+			}
+
+			OAParameter parameterIdEfector = new OAParameter();
+			parameterIdEfector.ParameterName = "idEfector";
+			if(idEfector.HasValue)
+			{
+				parameterIdEfector.Value = idEfector.Value;
+			}
+			else
+			{
+				parameterIdEfector.DbType = DbType.Int32;
+				parameterIdEfector.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> queryResult = this.ExecuteQuery<SSO_GetAplicacionesXEfectorResultSet0>("[dbo].[SSO_GetAplicacionesXEfector]", CommandType.StoredProcedure, parameterIdUsuario, parameterIdEfector, parameterReturnValue);
+		
+			returnValue = parameterReturnValue.Value == DBNull.Value 
+				? -1
+				: (int)parameterReturnValue.Value;
+		
+			return queryResult;
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -786,14 +839,6 @@ namespace Dominio
 			get;
 		}
 		IQueryable<SSO_User> SSO_Users
-		{
-			get;
-		}
-		IQueryable<SSO_Role> SSO_Roles
-		{
-			get;
-		}
-		IQueryable<SSO_RoleGroup> SSO_RoleGroups
 		{
 			get;
 		}
@@ -833,14 +878,26 @@ namespace Dominio
 		{
 			get;
 		}
+		IQueryable<SSO_Role> SSO_Roles
+		{
+			get;
+		}
+		IQueryable<SSO_RoleGroup> SSO_RoleGroups
+		{
+			get;
+		}
+		IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members
+		{
+			get;
+		}
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion);
 		IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion);
 		IEnumerable<SSO_GetModulosXAplicacionResultSet0> SSO_GetModulosXAplicacion(int? idEfector, int? idPerfil, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector);
 		IEnumerable<SSO_GetPermisosXUsuarioResultSet0> SSO_GetPermisosXUsuario(int? idPerfil, int? idEfector, out int returnValue);
-		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion);
-		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idEfector, int? idUsuario, int? idAplicacion, out int returnValue);
+		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idRolGroup, int? idUsuario, int? idAplicacion);
+		IEnumerable<SSO_GetModulosXUsuarioResultSet0> SSO_GetModulosXUsuario(int? idRolGroup, int? idUsuario, int? idAplicacion, out int returnValue);
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales();
 		IEnumerable<SSO_GetProfesionalesResultSet0> SSO_GetProfesionales(out int returnValue);
 		IEnumerable<SSO_GetProfesionalXIdResultSet0> SSO_GetProfesionalXId(int? idProfesional);
@@ -863,6 +920,8 @@ namespace Dominio
 		IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> SSO_GetAplicacionesXPerfil(int? idRolGroup, out int returnValue);
 		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil);
 		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil, out int returnValue);
+		IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector);
+		IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, out int returnValue);
 	}
 }
 #pragma warning restore 1591

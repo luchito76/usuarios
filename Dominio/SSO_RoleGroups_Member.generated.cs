@@ -22,18 +22,18 @@ using Dominio;
 
 namespace Dominio	
 {
-	public partial class SSO_Users_Role
+	public partial class SSO_RoleGroups_Member
 	{
-		private int UserId1;
-		public virtual int UserId
+		private int GroupId1;
+		public virtual int GroupId
 		{
 			get
 			{
-				return this.UserId1;
+				return this.GroupId1;
 			}
 			set
 			{
-				this.UserId1 = value;
+				this.GroupId1 = value;
 			}
 		}
 		
@@ -50,29 +50,42 @@ namespace Dominio
 			}
 		}
 		
-		private int IdUserRol1;
-		public virtual int IdUserRol
+		private int Id1;
+		public virtual int Id
 		{
 			get
 			{
-				return this.IdUserRol1;
+				return this.Id1;
 			}
 			set
 			{
-				this.IdUserRol1 = value;
+				this.Id1 = value;
 			}
 		}
 		
-		private SSO_User SSO_User1;
-		public virtual SSO_User SSO_User
+		private SSO_Role SSO_Role1;
+		public virtual SSO_Role SSO_Role
 		{
 			get
 			{
-				return this.SSO_User1;
+				return this.SSO_Role1;
 			}
 			set
 			{
-				this.SSO_User1 = value;
+				this.SSO_Role1 = value;
+			}
+		}
+		
+		private SSO_RoleGroup SSO_RoleGroup1;
+		public virtual SSO_RoleGroup SSO_RoleGroup
+		{
+			get
+			{
+				return this.SSO_RoleGroup1;
+			}
+			set
+			{
+				this.SSO_RoleGroup1 = value;
 			}
 		}
 		

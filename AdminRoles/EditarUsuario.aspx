@@ -186,12 +186,12 @@
         $('#<%= ddlUsuarios.ClientID %>').select2();        
     </script>
 
-    <script>
+    <%--<script>
         var idHospital = '<%= IdHospital %>';
 
         if (idHospital == 0)
             document.getElementById("ctl00_lnkInicio").style.visibility = "hidden";
-    </script>
+    </script>--%>
 
     <script type="text/javascript">       
 
@@ -204,7 +204,7 @@
         });
 
         
-        $("[name='habilitar']").bootstrapSwitch('state', <%= esusuarioHabilitado(IdUsuario) %>, <%= esusuarioHabilitado(IdUsuario) %>).on('switchChange.bootstrapSwitch', function (event, state) { 
+        $("[name='chkHabilitado']").bootstrapSwitch('state', <%= esusuarioHabilitado(IdUsuario) %>, <%= esusuarioHabilitado(IdUsuario) %>).on('switchChange.bootstrapSwitch', function (event, state) { 
             
             $.ajax({
                 type: "POST",

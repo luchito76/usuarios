@@ -52,21 +52,24 @@ namespace Repositorio
             }
         }
 
-        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
+        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo, int idRolGroup)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.Target == idModulo);
+                SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.Target == idModulo && c.GroupId == idRolGroup);
 
-                return dominio.CreateDetachedCopy(result);
+                if (result != null)
+                    return dominio.CreateDetachedCopy(result);
+                else
+                    return null;
             }
         }
 
-        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion)
+        public SSO_Permissions_Cache listaPermisoCacheXIdUsuario(int idUsuario, int idAplicacion, int idRolGroup)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion);
+                SSO_Permissions_Cache result = dominio.SSO_Permissions_Caches.FirstOrDefault(c => c.UserId == idUsuario && c.ApplicationId == idAplicacion && c.GroupId == idRolGroup);
 
                 if (result != null)
                     return dominio.CreateDetachedCopy(result);

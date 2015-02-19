@@ -9,9 +9,9 @@
     <asp:HiddenField ID="hdnIdPerfil" runat="server" />
     <asp:HiddenField ID="hdnNombreRol" runat="server" />
 
-    <h3 style="display:inline"><%= devuelveNombreDeRol() %>  </h3>
-    <h2 style="display:inline"> - </h2>
-    <h3 style="display:inline"><%= NombreDePerfil %></h3>
+    <h3 style="display: inline"><%= devuelveNombreDeRol() %>  </h3>
+    <h2 style="display: inline">- </h2>
+    <h3 style="display: inline"><%= NombreDePerfil %></h3>
 
     <div class="panel panel-primary" id="form">
         <div class="panel-heading">
@@ -43,7 +43,7 @@
                     <thead>
                         <tr>
                             <th data-field="id" data-align="center" data-sortable="true">ID</th>
-                            <th data-field="description" data-align="left" data-sortable="true">Nombre</th>
+                            <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
                             <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
                         </tr>
@@ -102,7 +102,7 @@
                 
             var nombreAplicacion = '<%= nomApp %>';
             var idUsuario = '<%= IdUsuario %>';
-            
+            var idEfector = '<%= IdEfector %>';
             var llamada = "";    
 
             if (idUsuario == 0)
@@ -110,7 +110,7 @@
             else
                 llamada = "usuario";
                     
-            window.open("Modulos.aspx?moduloNuevo=si&llamada=" + llamada + "&nombreAplicacion=" + nombreAplicacion +  "&idAplicacion=" + idAplicacion + "&idRol=" + idRol + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+            window.open("Modulos.aspx?moduloNuevo=si&llamada=" + llamada + "&nombreAplicacion=" + nombreAplicacion +  "&idAplicacion=" + idAplicacion + "&idRol=" + idRol + "&idUsuario=" + idUsuario + "&idEfector=" + idEfector ,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
         }
     </script>
 
@@ -130,8 +130,8 @@
                 var w = 700;
                 var h = 640;
                 var left = Number((screen.width/2)-(w/2));
-                var tops = Number((screen.height/2)-(h/2));
-                
+                var tops = Number((screen.height/2)-(h/2));               
+
                 window.open("UsuariosXAplicacion.aspx?idAplicacion=" + row.id, '', 'toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
             }
         };  
@@ -169,14 +169,14 @@
         
         function formatoModulos(value, row, index) {
             return [
-                '<a class="usuarios" href="javascript:void(0)" title="Usuarios">',
+                '<a class="modulos" href="javascript:void(0)" title="Módulos">',
                     '<i class="fa fa-puzzle-piece"></i>',                    
                 '</a>'
             ].join('');
         }
 
         window.eventoModulos = {
-            'click .usuarios': function (e, value, row, index) { 
+            'click .modulos': function (e, value, row, index) { 
                
                 var w = 800;
                 var h = 700;
@@ -184,8 +184,9 @@
                 var tops = Number((screen.height/2)-(h/2));
 
                 var idPerfil = '<%= IdPerfil %>'; 
-                
-                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idRol=" + idPerfil,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                var idEfector = '<%= IdEfector %>';
+
+                window.open("Modulos.aspx?llamada=aplicacion&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idRol=" + idPerfil + "&idEfector=" + idEfector,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
 
@@ -207,8 +208,10 @@
                 var tops = Number((screen.height/2)-(h/2));
 
                 var idUsuario = '<%= IdUsuario %>';
-                
-                window.open("Modulos.aspx?llamada=usuario&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idUsuario=" + idUsuario,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
+                var idEfector = '<%= IdEfector %>';
+                var idPerfil = '<%= IdPerfil %>';
+
+                window.open("Modulos.aspx?llamada=usuario&nombreAplicacion=" + row.nombreAplicacion +  "&idAplicacion=" + row.id + "&idUsuario=" + idUsuario + "&idEfector=" + idEfector + "&idRol=" + idPerfil,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                                
             }
         }; 
     </script>

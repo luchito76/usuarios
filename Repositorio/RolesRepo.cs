@@ -39,13 +39,42 @@ namespace Repositorio
             }
         }
 
-        public SSO_Users_Role listaUserRolXIdUsuario(int idUsuario)
+        public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                SSO_Users_Role result = dominio.SSO_Users_Roles.FirstOrDefault(c => c.UserId == idUsuario);
+                IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
 
                 return dominio.CreateDetachedCopy(result);
+            }
+        }
+
+        //public IEnumerable<SSO_Users_Role> listaUserRoles()
+        //{
+        //    using (ModeloDominio dominio = new ModeloDominio())
+        //    {
+        //        IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.ToList();
+
+        //        return result;
+        //        //SSO_Users_Role result = dominio.SSO_Users_Roles.FirstOrDefault(c => c.RoleId == idEfector && c.UserId == idUsuario);
+
+        //        //if (result != null)
+        //        //    return dominio.CreateDetachedCopy(result);
+        //        //else
+        //        //    return null;
+        //    }
+        //}
+
+        public SSO_RoleGroups_Member validaRolGroupMember(int idRolGroup)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                SSO_RoleGroups_Member result = dominio.SSO_RoleGroups_Members.FirstOrDefault(c => c.GroupId == idRolGroup);
+
+                if (result != null)
+                    return dominio.CreateDetachedCopy(result);
+                else
+                    return null;
             }
         }
 
@@ -82,6 +111,15 @@ namespace Repositorio
             using (ModeloDominio dominio = new ModeloDominio())
             {
                 dominio.Add(rolGroup);
+                dominio.SaveChanges();
+            }
+        }
+
+        public void guardaRolGroupMember(SSO_RoleGroups_Member ssoRolGroupMember)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                dominio.Add(ssoRolGroupMember);
                 dominio.SaveChanges();
             }
         }
@@ -127,15 +165,6 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                //SSO_RoleGroup rolGroup = (from roleGroups in dominio.SSO_RoleGroups
-                //                join permisos in dominio.SSO_Permissions on roleGroups.Id equals permisos.Source
-                //                where (roleGroups.IdEfector == idEfector && roleGroups.IdPerfil == idPerfil && roleGroups.IdAplicacion == idAplicacion)
-                //                select new { source = permisos.Source }).FirstOrDefault();
-
-                //SSO_RoleGroup idRolGroup = rolGroup.;
-
-                //return idRolGroup;
-
                 SSO_Permission rol = (from permiso in dominio.SSO_Permissions
                                       join rolGroup in dominio.SSO_RoleGroups on permiso.Source equals rolGroup.Id
                                       where rolGroup.IdEfector == idEfector && rolGroup.IdPerfil == idPerfil

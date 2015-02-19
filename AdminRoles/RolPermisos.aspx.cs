@@ -24,9 +24,21 @@ namespace AdminRoles
 
         #region propiedades
 
+        private int idEfector;
+
         public int IdEfector
         {
-            get { SSOHelper.Authenticate(); return SSOHelper.CurrentIdentity.IdEfectorRol; }
+            get
+            {
+                SSOHelper.Authenticate();
+
+                if ((IdHospital == "0") && (Request["llamada"] == "usuario"))
+                    idEfector = int.Parse(Request["idEfector"].ToString());
+                else
+                    idEfector = SSOHelper.CurrentIdentity.IdEfectorRol;
+
+                return idEfector;
+            }
             set
             { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
         }
@@ -50,8 +62,16 @@ namespace AdminRoles
         {
             get
             {
-                if (Request["rolId"] != null)
-                    idPerfil = int.Parse(Request["rolId"].ToString());
+                if (IdHospital == "0")
+                {
+                    if (Request["idPerfil"] != null)
+                        idPerfil = int.Parse(Request["idPerfil"].ToString());
+                }
+                else
+                {
+                    if (Request["rolId"] != null)
+                        idPerfil = int.Parse(Request["rolId"].ToString());
+                }
 
                 return idPerfil;
             }
@@ -116,6 +136,9 @@ namespace AdminRoles
 
             Session["llamada"] = Llamada;
             Session["idUsuario"] = IdUsuario;
+
+            if (Request["idEfector"] != null)
+                Session["idEfectorSeleccionado"] = int.Parse(Request["idEfector"]);
         }
 
 
@@ -155,7 +178,7 @@ namespace AdminRoles
             }
             else
             {
-                List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
+                List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
                 listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.id));
             }
 
@@ -168,7 +191,10 @@ namespace AdminRoles
 
         public string devuelveNombreDeRol()
         {
-            string rol = Request["rolName"].ToString();
+            string rol = string.Empty;
+
+            if (Request["rolName"] != null)
+                rol = Request["rolName"].ToString();
 
             return rol;
         }
@@ -188,16 +214,20 @@ namespace AdminRoles
 
             int idEfector = 0;
 
-            if (IdHospital == "0")
-            {
-                idEfector = 765;
-            }
+            //if (IdHospital == "0")
+            //{
+            if (Request["idEfector"] != null)
+                idEfector = int.Parse(Request["idEfector"].ToString());
             else
-            {
                 idEfector = IdEfector;
-            }
 
-            List<sp_SSO_AllowedAppsByEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
+            //}
+            //else
+            //{
+            //    idEfector = IdEfector;
+            //}
+
+            List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, idEfector).ToList();
 
             return json = JsonConvert.SerializeObject(listaAppXUsuario, Formatting.Indented);
         }
@@ -211,8 +241,8 @@ namespace AdminRoles
 
                 guardaRoleGroups(idAplicacion);
 
-                //* Si rolId tiene un valor la aplicación seleccionada es agregada al Perfil.
-                //* Si rolId no tiene valor la aplicación seleccionada es agregada al Usuario.                
+                guardaRolGroupMember();
+
                 if (Request["llamada"] == "aplicacion")
                 {
                     guardaSSOPermissions(idAplicacion);
@@ -268,6 +298,45 @@ namespace AdminRoles
             return idRolGroup;
         }
 
+        private void guardaRolGroupMember()
+        {
+            SSO_RoleGroups_Member rolGroupMember = new SSO_RoleGroups_Member();
+
+            int idEfectorSeleccionado = IdEfector;
+            int idRolGroup = roleNego.devuelveIdRolGroup(idEfectorSeleccionado, IdPerfil);
+
+            if (validaRolGroupMember(idRolGroup))
+            {
+                List<int> lista = new List<int>();
+                lista.Add(idEfectorSeleccionado);
+                lista.Add(IdPerfil);
+
+                foreach (int data in lista)
+                {
+                    SSO_RoleGroups_Member ssorolGroupMember = new SSO_RoleGroups_Member();
+
+                    ssorolGroupMember.GroupId = idRolGroup;
+                    ssorolGroupMember.RoleId = data;
+
+                    roleNego.guardaRolGroupMember(ssorolGroupMember);
+                }
+            }
+        }
+
+        private bool validaRolGroupMember(int idRolGroup)
+        {
+            bool valida = false;
+
+            var rolGroupMember = roleNego.validaRolGroupMember(idRolGroup);
+
+            if (rolGroupMember == null)
+                valida = true;
+            else
+                valida = false;
+
+            return valida;
+        }
+
         private void guardaSSOPermissions(int idAplicacion)
         {
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
@@ -305,11 +374,16 @@ namespace AdminRoles
 
             List<SSO_Module> listaModulosXAplicacion = moduloNego.listaModulosXIdAplicacion(idAplicacion).ToList();
 
-            int ultimoIdRolGroupInsertado = ultimoIdRolGroup();
+            int idRolGroup = 0;
+
+            if (IdHospital == "0")
+                idRolGroup = roleNego.devuelveIdRolGroup(IdEfector, IdPerfil);
+            else
+                idRolGroup = ultimoIdRolGroup();
 
             foreach (SSO_Users_Role data in listaUsuarios)
             {
-                if (permisoNego.esUsuarioEnPermisoCache(data.UserId, idAplicacion))
+                if (permisoNego.esUsuarioEnPermisoCache(IdUsuario, idAplicacion, idRolGroup))
                 {
                     foreach (SSO_Module data1 in listaModulosXAplicacion)
                     {
@@ -319,7 +393,7 @@ namespace AdminRoles
                         ssoPermisoCache.ApplicationId = idAplicacion;
                         ssoPermisoCache.TargetType = 2;
                         ssoPermisoCache.Target = data1.Id;
-                        ssoPermisoCache.GroupId = ultimoIdRolGroupInsertado;
+                        ssoPermisoCache.GroupId = idRolGroup;
                         ssoPermisoCache.Allow = true;
                         ssoPermisoCache.Readonly = false;
 
@@ -357,17 +431,24 @@ namespace AdminRoles
             RolesNego rolNego = new RolesNego();
             RolPermisos rolPermiso = new RolPermisos();
 
-            //IList<SSO_RoleGroup> lista = rol.eliminarAplicacionXRol(rolPermiso.IdEfector, idPerfil).ToList();
+            int idRolGroup = 0;
+            int idEfectorSeleccionado = 0;
 
-            int idRolGroup = rolNego.devuelveIdRolGroup(rolPermiso.IdEfector, idPerfil);
+            if (rolPermiso.IdHospital == "0")
+            {
+                if (HttpContext.Current.Session["idEfectorSeleccionado"] != null)
+                {
+                    idEfectorSeleccionado = int.Parse(HttpContext.Current.Session["idEfectorSeleccionado"].ToString());
+                }
+
+                idRolGroup = rolNego.devuelveIdRolGroup(idEfectorSeleccionado, idPerfil);
+            }
+            else
+                idRolGroup = rolNego.devuelveIdRolGroup(rolPermiso.IdEfector, idPerfil);
+
             int idUsuario = int.Parse(HttpContext.Current.Session["idUsuario"].ToString());
 
-            //foreach (SSO_RoleGroup data in lista)
-            //{
-            //    idRoleGroup = data.Id;
-
             borrarPermisosCache(idRolGroup, idUsuario, idAplicacion);
-            //}
         }
 
         private static void borrarPermisosCache(int idRolGroup)

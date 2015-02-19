@@ -51,7 +51,7 @@
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" id="columnaPerfil" runat="server" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEfectores" data-events="eventoEfectores" id="columnaEfectores" runat="server" data-align="center">Efectores</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" id="columnaEliminarPerfil" runat="server" data-align="center">Eliminar Perfil</th>
-                                                <th data-field="operate" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
+                                                <th data-field="operate" data-formatter="formatoAplicaciones" id="columnaApp" runat="server" data-events="eventosAplicaciones" data-align="center">App</th>
                                                 <th data-field="operate" data-formatter="formatoEditarUsuario" data-events="eventosEditarUsuario" data-align="center">Editar</th>
                                                 <th data-field="operate" data-formatter="formatoStatus" data-events="eventosStatus" data-align="center">Hab/Bloq</th>
                                                 <th data-field="Habilitado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
@@ -473,7 +473,7 @@
 
         window.operateEvents1 = {
             'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?llamada=aplicacion&rolName=' + row.Name + "&rolId=" + row.Id;
+                window.location = 'RolPermisos.aspx?llamada=aplicacion&rolName=' + row.Name + "&idPerfil=" + row.Id;
             }
         };
 

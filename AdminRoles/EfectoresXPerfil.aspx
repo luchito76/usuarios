@@ -22,8 +22,9 @@
                 <table id="tblEfectores" data-toggle="table" data-pagination="true" data-search="true" data-page-size="10" data-page-list="[10, 20, 30]">
                     <thead>
                         <tr>
+                            <th data-field="id" data-align="left" data-sortable="true">ID</th>
                             <th data-field="Efector" data-align="left" data-sortable="true">Efector</th>
-                            <%--<th data-field="operate" data-formatter="agregarEfectorFormato" data-events="agregarEfectorEvento" data-align="center">Agregar Efector</th>--%>
+                            <th data-field="operate" id="columnaApp" runat="server" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
                         </tr>
                     </thead>
                 </table>
@@ -60,7 +61,7 @@
                     </div>
                     <div class="modal-footer">
                         <%--<button id="btnAgregarEfector" onserverclick="btnAgregarEfector_ServerClick1"  onclick="barraProgresoAgregarEfector();" runat="server" type="button" class="btn btn-primary">Agregar</button>--%>
-                        <asp:Button ID="btnAgregar" OnClick="btnAgregar_Click" runat="server" Text="Agregar" class="btn btn-primary"/>
+                        <asp:Button ID="btnAgregar" OnClick="btnAgregar_Click" runat="server" Text="Agregar" class="btn btn-primary" />
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -93,6 +94,27 @@
         }
 
         $('#<%= ddlAgregarEfector.ClientID %>').select2();  
+    </script>
+
+    <script>
+        function formatoAplicaciones(value, row, index) {            
+            return [
+                '<a class="app" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones" >',
+                    '<i class="fa fa-desktop"></i>',
+                '</a>'
+            ].join('');
+        }
+
+        window.eventosAplicaciones = {
+            'click .app': function (e, value, row, index) {
+                var idUsuario = '<%= IdUsuario %>';
+                var idPerfil = '<%= IdPerfil %>';
+                //if (row.RolId == null)
+                //    $('#errorModal').modal('show');
+                //else                    
+                window.location = 'RolPermisos.aspx?llamada=usuario&idPerfil=' + idPerfil + "&idUsuario=" + idUsuario + "&idEfector=" + row.id;                                
+            }
+        };
     </script>
 
     <script>

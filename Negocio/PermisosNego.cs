@@ -37,9 +37,9 @@ namespace Negocio
             return permisosRepo.listaPermisosXId(source, idPermiso);
         }
 
-        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo)
+        public SSO_Permissions_Cache listaPermisosCacheXIdUsuario(int idUsuario, int idAplicacion, int idModulo, int idRolGroup)
         {
-            return permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo);
+            return permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo, idRolGroup);
         }
 
         /// <summary>
@@ -48,12 +48,12 @@ namespace Negocio
         /// <param name="idUsuario"></param>
         /// <param name="idAplicacion"></param>
         /// <returns></returns>
-        public bool esUsuarioEnPermisoCache(int idUsuario, int idAplicacion)
+        public bool esUsuarioEnPermisoCache(int idUsuario, int idAplicacion, int idRolGroup)
         {
             bool compruebaUsuario = false;
 
             SSO_Permissions_Cache listaPermisoCache = new SSO_Permissions_Cache();
-            listaPermisoCache = permisosRepo.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion);
+            listaPermisoCache = permisosRepo.listaPermisoCacheXIdUsuario(idUsuario, idAplicacion, idRolGroup);
 
             if (listaPermisoCache == null)
                 compruebaUsuario = true;

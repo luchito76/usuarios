@@ -54,12 +54,25 @@ namespace AdminRoles
         ModulosNego moduloNego = new ModulosNego();
         PermisosNego permisoNego = new PermisosNego();
         RolesNego rolNego = new RolesNego();
+        ConfigNego configNego = new ConfigNego();
 
         #region propiedades
 
+        private int idEfector;
+
         public int IdEfector
         {
-            get { return SSOHelper.CurrentIdentity.IdEfectorRol; }
+            get
+            {
+                SSOHelper.Authenticate();
+
+                if (IdHospital == "0")
+                    idEfector = int.Parse(Request["idEfector"].ToString());
+                else
+                    idEfector = SSOHelper.CurrentIdentity.IdEfectorRol;
+
+                return idEfector;
+            }
             set
             { dynamic IdEfector = SSOHelper.CurrentIdentity.IdEfectorRol; }
         }
@@ -105,6 +118,18 @@ namespace AdminRoles
             set { idUsuario = value; }
         }
 
+        private string idHospital;
+        public string IdHospital
+        {
+            get
+            {
+                idHospital = configNego.idHospiatlConfig().ValueStr;
+
+                return idHospital;
+            }
+            set { idHospital = value; }
+        }
+
         #endregion
 
         public string moduloNuevo;
@@ -125,6 +150,7 @@ namespace AdminRoles
             Session["idPerfil"] = IdPerfil;
             Session["idUsuario"] = IdUsuario;
             Session["idAplicacion"] = IdAplicacion;
+            Session["idEfector"] = IdEfector;
             Session["llamada"] = Request.QueryString["llamada"];
         }
 
@@ -154,10 +180,11 @@ namespace AdminRoles
             RolesNego rolNego = new RolesNego();
             PermisosNego permisoNego = new PermisosNego();
             RolPermisos rolPermiso = new RolPermisos();
-            
-            int idPerfil = int.Parse(HttpContext.Current.Session["idPerfil"].ToString());
 
-            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(rolPermiso.IdEfector, idPerfil);
+            int idPerfil = int.Parse(HttpContext.Current.Session["idPerfil"].ToString());
+            int idEfectorSeleccionado = int.Parse(HttpContext.Current.Session["idEfector"].ToString());
+
+            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(idEfectorSeleccionado, idPerfil);
 
             SSO_Permission ssoPermisos = new SSO_Permission();
             ssoPermisos = permisoNego.listaPermisosXId(idRolGroup, idModulo);
@@ -192,14 +219,26 @@ namespace AdminRoles
         private static void guardaEnPermisosCache(int idUsuario, int idAplicacion, int idModulo, bool estadoModulo)
         {
             PermisosNego permisoNego = new PermisosNego();
+            RolesNego rolNego = new RolesNego();
+            Modulo modulo = new Modulo();
+
+            RolPermisos rolPermiso = new RolPermisos();
+
+            int idPerfil = int.Parse(HttpContext.Current.Session["idPerfil"].ToString());
+            int idEfector = int.Parse(HttpContext.Current.Session["idEfector"].ToString());
+
+            int idRolGroup = rolNego.devuelveIdRolGroupXPermisos(idEfector, idPerfil);
 
             SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
-            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo);
+            ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo, idRolGroup);
 
-            ssoPermisosCache.Allow = estadoModulo;
-            ssoPermisosCache.Readonly = false;
+            //if (ssoPermisosCache != null)
+            //{
+                ssoPermisosCache.Allow = estadoModulo;
+                ssoPermisosCache.Readonly = false;
 
-            permisoNego.permisoModuloUsuario(ssoPermisosCache);
+                permisoNego.permisoModuloUsuario(ssoPermisosCache);
+            //}
         }
 
         #endregion
@@ -237,7 +276,9 @@ namespace AdminRoles
 
             moduloHelper mod = new moduloHelper();
 
-            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(IdEfector, IdUsuario, IdAplicacion).ToList();
+            int idRolGroup = rolNego.devuelveIdRolGroup(IdEfector, IdPerfil);
+
+            List<SSO_GetModulosXUsuarioResultSet0> listaModulosXAplicacion = moduloNego.listaModulosXUsuario(idRolGroup, IdUsuario, IdAplicacion).ToList();
 
             List<moduloHelper> lista = new List<moduloHelper>();
 

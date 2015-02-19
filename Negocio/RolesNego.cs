@@ -48,9 +48,73 @@ namespace Negocio
             return rolesRepo.listaRolesXAplicacion(rol, efector);
         }
 
-        public SSO_Users_Role listaUserRolXIdUsuario(int idUsuario)
+        public IEnumerable<SSO_Users_Role> listaUserRolXIdUsuario(int idUsuario)
         {
             return rolesRepo.listaUserRolXIdUsuario(idUsuario);
+        }
+
+        public int validaEfectorXUserRol(int idUsuario, int idEfector)
+        {
+            int idEfectorSeleccionado = 0;
+
+            IList<SSO_Users_Role> listaUserRole = rolesRepo.listaUserRolXIdUsuario(idUsuario).ToList();
+
+            foreach (SSO_Users_Role data in listaUserRole)
+            {
+                if (data.RoleId == idEfector)
+                    idEfectorSeleccionado = idEfector;
+            }
+
+            return idEfectorSeleccionado;
+        }
+
+        public int validaPerfilXUserRol(int idUsuario, int idPerfil)
+        {
+            int idPerfilSeleccionado = 0;
+
+            IList<SSO_Users_Role> listaUserRole = rolesRepo.listaUserRolXIdUsuario(idUsuario).ToList();
+
+            foreach (SSO_Users_Role data in listaUserRole)
+            {
+                if (data.RoleId == idPerfil)
+                    idPerfilSeleccionado = idPerfil;
+            }
+
+            return idPerfilSeleccionado;
+        }
+
+        //public int[] validaPerfilXEfector(int idUsuario, int idEfector, int idPerfil)
+        //{
+        //    //bool valida = false;
+        //    int[] datos = new int[2];
+        //    int x = 0;
+
+        //    IList<SSO_Users_Role> listaUserRole = rolesRepo.listaUserRolXIdUsuario(idUsuario).ToList();
+
+        //    foreach (SSO_Users_Role data in listaUserRole)
+        //    {
+        //        if (data.RoleId == idEfector)
+        //        {
+        //            //valida = true;
+        //            datos[x] = idEfector;
+
+        //        }
+        //        else if (data.RoleId == idPerfil)
+        //        {
+        //            //valida = true;
+        //            datos[x] = idPerfil;
+        //        }
+
+        //    }
+
+        //    return datos;
+
+        //    //return rolesRepo.validaPerfilXEfector(idUsuario, idEfector);
+        //}
+
+        public SSO_RoleGroups_Member validaRolGroupMember(int idRolGroup)
+        {
+            return rolesRepo.validaRolGroupMember(idRolGroup);
         }
 
         public void guardarRol(SSO_Role rol)
@@ -66,6 +130,11 @@ namespace Negocio
         public void guardaRoleGroup(SSO_RoleGroup rolGroup)
         {
             rolesRepo.guardaRoleGroup(rolGroup);
+        }
+
+        public void guardaRolGroupMember(SSO_RoleGroups_Member ssoRolGroupMember)
+        {
+            rolesRepo.guardaRolGroupMember(ssoRolGroupMember);
         }
 
         public SSO_RoleGroup obtieneUltimoIdRolGroup()

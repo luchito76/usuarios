@@ -18,61 +18,34 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using Dominio;
 
 namespace Dominio	
 {
-	public partial class SSO_Users_Role
+	public partial class SSO_GetAplicacionesXEfectorResultSet0
 	{
-		private int UserId1;
-		public virtual int UserId
+		private int _id;
+		public virtual int id
 		{
 			get
 			{
-				return this.UserId1;
+				return this._id;
 			}
 			set
 			{
-				this.UserId1 = value;
+				this._id = value;
 			}
 		}
 		
-		private int RoleId1;
-		public virtual int RoleId
+		private string _name;
+		public virtual string name
 		{
 			get
 			{
-				return this.RoleId1;
+				return this._name;
 			}
 			set
 			{
-				this.RoleId1 = value;
-			}
-		}
-		
-		private int IdUserRol1;
-		public virtual int IdUserRol
-		{
-			get
-			{
-				return this.IdUserRol1;
-			}
-			set
-			{
-				this.IdUserRol1 = value;
-			}
-		}
-		
-		private SSO_User SSO_User1;
-		public virtual SSO_User SSO_User
-		{
-			get
-			{
-				return this.SSO_User1;
-			}
-			set
-			{
-				this.SSO_User1 = value;
+				this._name = value;
 			}
 		}
 		

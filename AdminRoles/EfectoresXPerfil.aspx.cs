@@ -19,6 +19,7 @@ namespace AdminRoles
         RolesNego rolesNego = new RolesNego();
         UsuariosNego usuarioNego = new UsuariosNego();
         AplicacionesNego aplicacionesNego = new AplicacionesNego();
+        ConfigNego configNego = new ConfigNego();
 
         #region propiedades
 
@@ -47,6 +48,18 @@ namespace AdminRoles
             set { idPerfil = value; }
         }
 
+        private string idHospital;
+        public string IdHospital
+        {
+            get
+            {
+                idHospital = configNego.idHospiatlConfig().ValueStr;
+
+                return idHospital;
+            }
+            set { idHospital = value; }
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -64,19 +77,28 @@ namespace AdminRoles
 
             ddlAgregarEfector.DataSource = results;
             ddlAgregarEfector.DataBind();
-            ddlAgregarEfector.Items.Insert(0, new ListItem("--Seleccione--", "0"));            
+            ddlAgregarEfector.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
 
         private List<SSO_Role> quitarEfectoresDuplicados()
         {
-            HashSet<int> listaResultado;
+            HashSet<string> listaResultado;
 
             List<SSO_AllowedAppsByEfectorCentralResultSet0> listaEfectoresXPerfil = permisoNego.listaEfectoresXPerfil(IdUsuario, IdPerfil).ToList();
-            listaResultado = new HashSet<int>(listaEfectoresXPerfil.Select(s => int.Parse(s.id.ToString())));
 
-            List<SSO_Role> listaEfectores = rolesNego.listaEfectores().ToList();
+            var result = (List<SSO_Role>)null;
 
-            var result = listaEfectores.Where(s => !listaResultado.Contains(s.Id)).ToList();
+            foreach (SSO_AllowedAppsByEfectorCentralResultSet0 data in listaEfectoresXPerfil)
+            {
+                if (data.id != null)
+                {
+                    listaResultado = new HashSet<string>(listaEfectoresXPerfil.Select(s => s.id.ToString()));
+
+                    List<SSO_Role> listaEfectores = rolesNego.listaEfectores().ToList();
+
+                    result = listaEfectores.Where(s => !listaResultado.Contains(s.Id.ToString())).ToList();
+                }
+            }
 
             return result;
         }
@@ -113,19 +135,103 @@ namespace AdminRoles
 
         private void asignarPerfilAUsuario()
         {
+            guardaRoleGroups();
+
+            guardaRolGroupMember();
+
             guardaSSOUserRol();
 
             guardarPermisosCache();
+        }
+
+
+        private void guardaRoleGroups()
+        {
+            int idEfectorSeleccionado = int.Parse(ddlAgregarEfector.SelectedValue);
+
+            if (rolesNego.esAplicacionEnRoleGroup(idEfectorSeleccionado, IdPerfil))
+            {
+                SSO_RoleGroup rolGroup = new SSO_RoleGroup();
+
+                rolGroup.Name = nombreRolGroup();
+                rolGroup.IdEfector = idEfectorSeleccionado;
+                rolGroup.IdPerfil = IdPerfil;
+                rolGroup.AutomaticName = true;
+
+                rolesNego.guardaRoleGroup(rolGroup);
+            }
+        }
+
+        private void guardaRolGroupMember()
+        {
+            SSO_RoleGroups_Member rolGroupMember = new SSO_RoleGroups_Member();
+
+            int idEfectorSeleccionado = int.Parse(ddlAgregarEfector.SelectedValue);
+            int idRolGroup = rolesNego.devuelveIdRolGroup(idEfectorSeleccionado, IdPerfil);
+
+            if (validaRolGroupMember(idRolGroup))
+            {
+                List<int> lista = new List<int>();
+                lista.Add(idEfectorSeleccionado);
+                lista.Add(IdPerfil);
+
+                foreach (int data in lista)
+                {
+                    SSO_RoleGroups_Member ssorolGroupMember = new SSO_RoleGroups_Member();
+
+                    ssorolGroupMember.GroupId = idRolGroup;
+                    ssorolGroupMember.RoleId = data;
+
+                    rolesNego.guardaRolGroupMember(ssorolGroupMember);
+                }
+            }
+        }
+
+        private bool validaRolGroupMember(int idRolGroup)
+        {
+            bool valida = false;
+
+            var rolGroupMember = rolesNego.validaRolGroupMember(idRolGroup);
+
+            if (rolGroupMember == null)
+                valida = true;
+            else
+                valida = false;
+
+            return valida;
+        }
+        private string nombreRolGroup()
+        {
+            string nombre = string.Empty;
+            int idEfectorSeleccionado = 0;
+
+            if (IdHospital == "0")
+                idEfectorSeleccionado = int.Parse(ddlAgregarEfector.SelectedValue);
+            else
+                idEfectorSeleccionado = SSOHelper.CurrentIdentity.IdEfectorRol;
+
+            string nombreEfector = rolesNego.listaRoles(494, true).Where(c => c.Id == idEfectorSeleccionado).FirstOrDefault().Name;
+            string nombrePerfil = devuelveNombrePerfil();
+
+            return nombre = nombreEfector + " + " + nombrePerfil;
         }
 
         private void guardaSSOUserRol()
         {
             SSO_Users_Role userRol = new SSO_Users_Role();
 
-            userRol.UserId = IdUsuario;
-            userRol.RoleId = int.Parse(ddlAgregarEfector.SelectedValue);
+            int idEfector = int.Parse(ddlAgregarEfector.SelectedValue);
 
-            usuarioNego.guardaSSOUserRol(userRol);
+            //int idEfectorSeleccionado = rolesNego.validaEfectorXUserRol(IdUsuario, idEfector);
+            int idPerfilSeleccionado = rolesNego.validaPerfilXUserRol(IdUsuario, IdPerfil);
+
+            if (idPerfilSeleccionado == 0)
+            {
+                userRol.UserId = IdUsuario;
+                userRol.RoleId = int.Parse(ddlAgregarEfector.SelectedValue);
+
+                usuarioNego.guardaSSOUserRol(userRol);
+            }
         }
 
         private void guardarPermisosCache()

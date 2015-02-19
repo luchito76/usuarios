@@ -13,7 +13,7 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IEnumerable<SSO_Application> result = dominio.SSO_Applications.Where(c => c.Hospital == true).OrderBy(c => c.Description).ToList();
+                IEnumerable<SSO_Application> result = dominio.SSO_Applications.Where(c => c.Hospital == true && c.Intefase_visible == true).OrderBy(c => c.Description).ToList();
 
                 return result;
             }
@@ -23,7 +23,7 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IEnumerable<SSO_Application> result = dominio.SSO_Applications.Where(c => c.Sips == true).OrderBy(c => c.Description).ToList();
+                IEnumerable<SSO_Application> result = dominio.SSO_Applications.Where(c => c.Sips == true && c.Intefase_visible == true).OrderBy(c => c.Description).ToList();
 
                 return result;
             }
