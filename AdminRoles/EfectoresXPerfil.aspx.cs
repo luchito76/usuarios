@@ -100,6 +100,9 @@ namespace AdminRoles
                 }
             }
 
+            if (result == null)
+                result = rolesNego.listaEfectores().ToList();
+
             return result;
         }
 
@@ -130,7 +133,6 @@ namespace AdminRoles
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             asignarPerfilAUsuario();
-
         }
 
         private void asignarPerfilAUsuario()
@@ -221,7 +223,7 @@ namespace AdminRoles
             SSO_Users_Role userRol = new SSO_Users_Role();
 
             int idEfector = int.Parse(ddlAgregarEfector.SelectedValue);
-                        
+
             int idPerfilSeleccionado = rolesNego.validaPerfilXUserRol(IdUsuario, IdPerfil);
             int idEfectorSeleccionado = rolesNego.validaPerfilXUserRol(IdUsuario, idEfector);
 
@@ -249,6 +251,14 @@ namespace AdminRoles
             int idRolGroup = rolesNego.devuelveIdRolGroup(idEfector, IdPerfil);
 
             IList<SSO_GetAplicacionesXPerfilResultSet0> listaPermisosXUsuario = aplicacionesNego.listaAplicacionesXPerfil(idRolGroup).ToList();
+
+            if (listaPermisosXUsuario.Count == 0)
+            {
+                Response.Redirect("RolPermisos.aspx?idUsuario=" + IdUsuario + "&idPerfil=" + idPerfil + "&idEfector=" + idEfector + "&perfil=" + devuelveNombrePerfil() + "&llamada=usuario");
+                //guardaRoleGroups();
+
+                //guardaRolGroupMember();
+            }
 
             foreach (SSO_GetAplicacionesXPerfilResultSet0 data in listaPermisosXUsuario)
             {

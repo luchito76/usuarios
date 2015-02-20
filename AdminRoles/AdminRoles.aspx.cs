@@ -428,9 +428,6 @@ namespace AdminRoles
             if (idRolGroup == 0)
             {
                 Response.Redirect("RolPermisos.aspx?idUsuario=" + int.Parse(hdfIdUsuario.Value) + "&idPerfil=" + idPerfil + "&idEfector=" + idEfector + "&perfil=" + nombrePerfil + "&llamada=usuario");
-                //guardaRoleGroups();
-
-                //guardaRolGroupMember();
             }
 
 
