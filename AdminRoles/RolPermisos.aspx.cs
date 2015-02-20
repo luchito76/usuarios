@@ -289,7 +289,10 @@ namespace AdminRoles
             int idEfector = 0;
 
             if ((Request["llamada"] == "aplicacion") || (IdHospital == "0"))
-                idEfector = int.Parse(Request["idEfector"].ToString());
+                if (Request["idEfector"] != null)
+                    idEfector = int.Parse(Request["idEfector"].ToString());
+                else
+                    idEfector = SSOHelper.CurrentIdentity.IdEfectorRol;
             else
                 idEfector = SSOHelper.CurrentIdentity.IdEfectorRol;
 
