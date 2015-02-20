@@ -221,11 +221,19 @@ namespace AdminRoles
             SSO_Users_Role userRol = new SSO_Users_Role();
 
             int idEfector = int.Parse(ddlAgregarEfector.SelectedValue);
-
-            //int idEfectorSeleccionado = rolesNego.validaEfectorXUserRol(IdUsuario, idEfector);
+                        
             int idPerfilSeleccionado = rolesNego.validaPerfilXUserRol(IdUsuario, IdPerfil);
+            int idEfectorSeleccionado = rolesNego.validaPerfilXUserRol(IdUsuario, idEfector);
 
             if (idPerfilSeleccionado == 0)
+            {
+                userRol.UserId = IdUsuario;
+                userRol.RoleId = int.Parse(ddlAgregarEfector.SelectedValue);
+
+                usuarioNego.guardaSSOUserRol(userRol);
+            }
+
+            if (idEfectorSeleccionado == 0)
             {
                 userRol.UserId = IdUsuario;
                 userRol.RoleId = int.Parse(ddlAgregarEfector.SelectedValue);
