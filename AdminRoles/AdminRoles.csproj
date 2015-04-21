@@ -474,7 +474,7 @@
           <IISAppRootUrl>http://localhost:1074/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://www.test.saludnqn.gob.ar/AdminRoles</CustomServerUrl>
+          <CustomServerUrl>http://www.desa.saludnqn.gob.ar/AdminRoles</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
