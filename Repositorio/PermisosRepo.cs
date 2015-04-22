@@ -136,6 +136,22 @@ namespace Repositorio
             }
         }
 
+        public void borrarPermisosCacheXIdUsuario(int idRolGroup, int idUsuario)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IList<SSO_Permissions_Cache> ssoPermisoCache = dominio.SSO_Permissions_Caches.Where(c => c.GroupId == idRolGroup && c.UserId == idUsuario).ToList();
+
+                if (ssoPermisoCache != null)
+                {
+                    foreach (SSO_Permissions_Cache data in ssoPermisoCache)
+                        dominio.Delete(data);
+                }
+
+                dominio.SaveChanges();
+            }
+        }
+
         public void borrarPermisosCacheXIdUsuario(int idusuario)
         {
             using (ModeloDominio dominio = new ModeloDominio())

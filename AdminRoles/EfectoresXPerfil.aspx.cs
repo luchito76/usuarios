@@ -125,7 +125,6 @@ namespace AdminRoles
         public string devuelveNombrePerfil()
         {
             string nombrePerfil = rolesNego.listaRolesXId(IdPerfil).Name;
-            // nombrePerfil.InnerText = rolesNego.listaRolesXId(IdPerfil).Name;
 
             return nombrePerfil.ToString();
         }
@@ -255,9 +254,6 @@ namespace AdminRoles
             if (listaPermisosXUsuario.Count == 0)
             {
                 Response.Redirect("RolPermisos.aspx?idUsuario=" + IdUsuario + "&idPerfil=" + idPerfil + "&idEfector=" + idEfector + "&perfil=" + devuelveNombrePerfil() + "&llamada=usuario");
-                //guardaRoleGroups();
-
-                //guardaRolGroupMember();
             }
 
             foreach (SSO_GetAplicacionesXPerfilResultSet0 data in listaPermisosXUsuario)
@@ -277,6 +273,20 @@ namespace AdminRoles
 
                 permisoNego.guardaPermisosCache(permisosCache);
             }
+        }
+
+        [WebMethod(), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static void eliminarEfector(int idEfector, int idPerfil, int idUsuario)
+        {
+            RolesNego rolesNego = new RolesNego();
+
+            int idRolGroup = rolesNego.devuelveIdRolGroup(idEfector, idPerfil);
+
+            PermisosNego permisoNego = new PermisosNego();
+
+            permisoNego.borrarPermisosCacheXIdUsuario(idRolGroup, idUsuario);
+
+            rolesNego.borrarUserRol(idUsuario, idEfector);
         }
     }
 }

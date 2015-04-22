@@ -186,5 +186,10 @@ namespace Negocio
         {
             rolesRepo.borrarUserRol(idUsuario);
         }
+
+        public void borrarUserRol(int idUsuario, int idEfector)
+        {
+            rolesRepo.borrarUserRol(idUsuario, idEfector);
+        }
     }
 }

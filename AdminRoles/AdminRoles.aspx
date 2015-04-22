@@ -569,15 +569,7 @@
         $table = $('#tblRoles').bootstrapTable({
             data: <%= devuelveRolesJson() %>,
             btnCrearPerfil: true
-        });
-
-        <%--Se comenta para un desarrollo futuro.
-        $table = $('#tblAplicaciones').bootstrapTable({
-            data: <%= devuelveAplicacionesJson() %>
-            });
-        $table = $('#tblEfectores').bootstrapTable({
-            data: <%= devuelveEfectoresJson() %>
-            });--%>
+        });        
 
         $table = $('#tblUsuarios').bootstrapTable({
             data: <%= devuelveUsuariosJson() %>,

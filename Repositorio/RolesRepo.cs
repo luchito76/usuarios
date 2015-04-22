@@ -49,22 +49,6 @@ namespace Repositorio
             }
         }
 
-        //public IEnumerable<SSO_Users_Role> listaUserRoles()
-        //{
-        //    using (ModeloDominio dominio = new ModeloDominio())
-        //    {
-        //        IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.ToList();
-
-        //        return result;
-        //        //SSO_Users_Role result = dominio.SSO_Users_Roles.FirstOrDefault(c => c.RoleId == idEfector && c.UserId == idUsuario);
-
-        //        //if (result != null)
-        //        //    return dominio.CreateDetachedCopy(result);
-        //        //else
-        //        //    return null;
-        //    }
-        //}
-
         public SSO_RoleGroups_Member validaRolGroupMember(int idRolGroup)
         {
             using (ModeloDominio dominio = new ModeloDominio())
@@ -198,6 +182,21 @@ namespace Repositorio
             using (ModeloDominio dominio = new ModeloDominio())
             {
                 IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
+                {
+                    foreach (SSO_Users_Role data in borrarUserRole)
+                    {
+                        dominio.Delete(data);
+                        dominio.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public void borrarUserRol(int idUsuario, int idEfector)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario && c.RoleId == idEfector).ToList();
                 {
                     foreach (SSO_Users_Role data in borrarUserRole)
                     {

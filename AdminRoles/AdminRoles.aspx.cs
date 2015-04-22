@@ -116,25 +116,7 @@ namespace AdminRoles
             List<SSO_Role> listaRoles = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaRoles);
-        }
-
-        //public string devuelveAplicacionesJson()
-        //{
-        //    string json = string.Empty;
-
-        //    List<SSO_Role> listaAplicaciones = rolesNego.listaRoles(Applicacion.parent, Applicacion.enable).ToList();
-
-        //    return json = JsonConvert.SerializeObject(listaAplicaciones);
-        //}
-
-        //public string devuelveEfectoresJson()
-        //{
-        //    string json = string.Empty;
-
-        //    List<SSO_Role> listaEfectores = rolesNego.listaRoles(Efectores.parent, Efectores.enable).ToList();
-
-        //    return json = JsonConvert.SerializeObject(listaEfectores);
-        //}
+        }       
 
         public string devuelveUsuariosJson()
         {
@@ -316,23 +298,6 @@ namespace AdminRoles
 
             borrarPermisosCache(idUsuario);
         }
-
-        //public string estadoUsuario()
-        //{
-        //    string estado = string.Empty;
-
-        //    int idUsuario = int.Parse(hdfIdUsuario.Value);
-
-        //    SSO_User ssoUser = new SSO_User();
-        //    ssoUser = usuarioNego.devuelveUsuarioXIdUsuario(idUsuario);
-
-        //    if (ssoUser.Locked == true)
-        //        estado = "true";
-        //    else
-        //        estado = "false";
-
-        //    return estado;
-        //}
 
         protected void btnPerfilXEfector_ServerClick(object sender, EventArgs e)
         {

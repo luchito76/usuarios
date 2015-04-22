@@ -216,18 +216,10 @@ namespace AdminRoles
 
             int idEfector = 0;
 
-            //if (IdHospital == "0")
-            //{
             if (Request["idEfector"] != null)
                 idEfector = int.Parse(Request["idEfector"].ToString());
             else
                 idEfector = IdEfector;
-
-            //}
-            //else
-            //{
-            //    idEfector = IdEfector;
-            //}
 
             List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, idEfector).ToList();
 
@@ -483,12 +475,5 @@ namespace AdminRoles
 
             permisoNego.borrarPermisos(idRolGroup, idAplicacion);
         }
-
-        //private static void borrarRoleGroups(int idRoleGroup)
-        //{
-        //    RolesNego roleNego = new RolesNego();
-
-        //    roleNego.borrarRoleGroups(idRoleGroup);
-        //}
     }
 }

@@ -24,7 +24,8 @@
                         <tr>
                             <th data-field="id" data-align="left" data-sortable="true">ID</th>
                             <th data-field="Efector" data-align="left" data-sortable="true">Efector</th>
-                            <th data-field="operate" id="columnaApp" runat="server" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center">App</th>
+                            <th data-field="operate" id="columnaApp" runat="server" data-formatter="formatoAplicaciones" data-events="eventosAplicaciones" data-align="center" data-width="60px;">App</th>
+                            <th data-field="operate" runat="server" data-formatter="formatoBorrarEfector" data-events="eventosBorrarEfector" data-align="center" data-width="60px;">Borrar</th>
                         </tr>
                     </thead>
                 </table>
@@ -109,10 +110,41 @@
             'click .app': function (e, value, row, index) {
                 var idUsuario = '<%= IdUsuario %>';
                 var idPerfil = '<%= IdPerfil %>';
-                //if (row.RolId == null)
-                //    $('#errorModal').modal('show');
-                //else                    
+                                 
                 window.location = 'RolPermisos.aspx?llamada=usuario&idPerfil=' + idPerfil + "&idUsuario=" + idUsuario + "&idEfector=" + row.id;                                
+            }
+        };
+
+        function formatoBorrarEfector(value, row, index) {            
+            return [
+                '<a class="borrarEfector" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Borrar Efector" >',
+                    '<i class="fa fa-trash fa-lg"></i>',
+                '</a>'
+            ].join('');
+        }
+
+        window.eventosBorrarEfector = {
+            'click .borrarEfector': function (e, value, row, index) {
+               
+                var idEfector = row.id;
+                var idPerfil = '<%= IdPerfil %>';
+                var idUsuario = '<%= IdUsuario %>';
+
+                $.ajax({
+                    type: "POST",
+                    url: '<%= ResolveUrl("EfectoresXPerfil.aspx/eliminarEfector")%>' ,
+                    data: "{'idEfector':'" + idEfector + "','idPerfil':'" + idPerfil + "','idUsuario':'" + idUsuario + "'}",                          
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg) {                            
+                        window.location = window.location.href;
+                        //alert("OK"); 
+                    },
+                    error: function (e) {
+                        alert("Error");                            
+                    }
+                });  
+
             }
         };
     </script>
