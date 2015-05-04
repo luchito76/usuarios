@@ -149,11 +149,12 @@
                 $(document).ready(function () {
 
                     var idPerfil = '<%= IdPerfil %>';
-                    
+                    var idEfector = '<%= IdEfector %>';
+
                     $.ajax({
                         type: "POST",
                         url: '<%= ResolveUrl("RolPermisos.aspx/eliminarAplicacion")%>' ,
-                        data: "{'idPerfil':'" + idPerfil + "', 'idAplicacion':'" + row.id + "'}",                        
+                        data: "{'idPerfil':'" + idPerfil + "', 'idAplicacion':'" + row.id + "', 'idEfector':'" + idEfector + "'}",                        
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (msg) {                            

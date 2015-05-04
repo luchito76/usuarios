@@ -118,9 +118,11 @@ namespace AdminRoles
             set { idHospital = value; }
         }
 
+
+
         #endregion
 
-        public string nomApp = string.Empty;
+        public string nomApp = string.Empty;        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -133,6 +135,7 @@ namespace AdminRoles
             mostrarTablas();
 
             hdnIdEfector.Value = IdEfector.ToString();
+            
 
             Session["llamada"] = Llamada;
             Session["idUsuario"] = IdUsuario;
@@ -408,22 +411,21 @@ namespace AdminRoles
         }
 
         [WebMethod()]
-        public static void eliminarAplicacion(int idPerfil, int idAplicacion)
+        public static void eliminarAplicacion(int idPerfil, int idAplicacion, int idEfector)
         {
             string llamadaDesde = HttpContext.Current.Session["llamada"].ToString();
 
             if (llamadaDesde == "aplicacion")
-                eliminarAplicacionXRol(idPerfil, idAplicacion);
+                eliminarAplicacionXRol(idPerfil, idAplicacion, idEfector);
             else
                 eliminarAplicacionXUsuario(idPerfil, idAplicacion);
         }
 
-        public static void eliminarAplicacionXRol(int idPerfil, int idAplicacion)
+        public static void eliminarAplicacionXRol(int idPerfil, int idAplicacion, int idEfector)
         {
-            RolesNego rolNego = new RolesNego();
-            RolPermisos rolPermiso = new RolPermisos();
+            RolesNego rolNego = new RolesNego();                        
 
-            int idRolGroup = rolNego.devuelveIdRolGroup(rolPermiso.IdEfector, idPerfil);
+            int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idPerfil);
 
             borrarPermisos(idRolGroup, idAplicacion);
 
