@@ -90,9 +90,16 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> result = dominio.SSO_GetProfesionalesXGuardia(idProfesional).ToList();
+                try
+                {
+                    IEnumerable<SSO_GetProfesionalesXGuardiaResultSet0> result = dominio.SSO_GetProfesionalesXGuardia(idProfesional).ToList();
 
-                return result;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
     }

@@ -63,7 +63,17 @@ namespace AdminRoles
             llenarListas();
             validaSoloNumeros();
             alerta.Visible = false;
+            muestraTrabajaEnGuardia();
 
+        }
+
+        //Si se ingresa por el Nivel Central se oculta el checkbox de "Trabaja en Guardia". 
+        private void muestraTrabajaEnGuardia()
+        {
+            if (IdHospital == "0")
+                capaTrabajaEnGuardia.Visible = false;
+            else
+                capaTrabajaEnGuardia.Visible = true;
         }
 
         private void validaSoloNumeros()
