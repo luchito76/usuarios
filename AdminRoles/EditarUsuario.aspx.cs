@@ -245,7 +245,6 @@ namespace AdminRoles
             if (editarUsuario.IdHospital != "0")
             {
                 ProfesionaNego profesionalNego = new ProfesionaNego();
-                //EditarUsuario editarUsuario = new EditarUsuario();
 
                 bool trabajaEnGuardia = estado;
                 int idProfesional = editarUsuario.devuelveIdProfesional();
@@ -256,7 +255,6 @@ namespace AdminRoles
 
         public string trabajaEnGuardia()
         {
-            //string idHospital = configNego.idHospiatlConfig().ValueStr;
             string esGuardia = string.Empty;
 
             if (IdHospital != "0")
