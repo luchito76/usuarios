@@ -124,7 +124,9 @@ namespace AdminRoles
                 if (storedVariable != null)
                 {
                     nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
-                    idProfesional = nombreProfesional.Codigo;
+
+                    if (nombreProfesional != null)
+                        idProfesional = nombreProfesional.Codigo;
                 }
             }
 
@@ -143,7 +145,9 @@ namespace AdminRoles
             if (storedVariable != null)
             {
                 nombreProfesional = profesionalNego.listaProfesionalXIdProfesional(int.Parse(storedVariable.Value.ToString())).FirstOrDefault();
-                profesional = nombreProfesional.Nombre + " " + nombreProfesional.Nombre;
+
+                if (nombreProfesional != null)
+                    profesional = nombreProfesional.Nombre;
             }
 
             return profesional;
