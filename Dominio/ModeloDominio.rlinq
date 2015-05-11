@@ -967,6 +967,7 @@
       <orm:procedure name="SSO_GetAplicacionesXEfector">
         <orm:procedure-parameter name="idUsuario" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:procedure-parameter name="idEfector" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
+        <orm:procedure-parameter name="idRolGroup" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" mode="in" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -978,7 +979,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>SSO_HOSPITALConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>data source=10.1.232.15;initial catalog=SSOCentral;user id=sa;password=ssecure</AppConfigConnectionString>
+    <AppConfigConnectionString>data source=10.1.232.23;initial catalog=SSO;user id=sa;password=ssecure</AppConfigConnectionString>
     <InitialCatalog>SSO_HOSPITAL</InitialCatalog>
     <NamingSettings>
       <ClassRules>
@@ -1479,7 +1480,7 @@
     <domainModelHasDomainMethods Id="92c6113d-40b4-4926-9031-dce08a43f84d">
       <domainMethod name="SSO_GetAplicacionesXEfector" storedProcedureName="'SSO_GetAplicacionesXEfector'" generateReturnValueOverload="true">
         <domainMethodReturnShape>
-          <domainMethodReferencesDomainMethodReturnShape Id="b89f669f-75fe-4d52-afe9-dd72e39c6058">
+          <domainMethodReferencesDomainMethodReturnShape Id="1b6ef8c5-4416-42cc-9e52-45c62fc0a27c">
             <domainMethodReturnShapeMoniker name="/ModeloDominio/SSO_GetAplicacionesXEfectorResultSet0" />
           </domainMethodReferencesDomainMethodReturnShape>
         </domainMethodReturnShape>
@@ -1654,10 +1655,10 @@
         <Property Id="3489a9e3-329e-4554-b0a1-222189a8365d" name="Estado" type="System.Boolean" label="Estado : System.Boolean" fieldName="_estado" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
-    <domainModelHasDomainMethodReturnShapes Id="f2928741-fd8d-4ada-a67d-a81da140fa82">
+    <domainModelHasDomainMethodReturnShapes Id="1f179014-faf5-4fe8-acdc-2cef426134ad">
       <domainMethodReturnShape name="SSO_GetAplicacionesXEfectorResultSet0" namespace="Dominio" showPropertiesCompartment="true" domainMethodType="CustomShape">
-        <Property Id="2fe5e315-f7ed-4fe0-afc6-e9c1eaf1b5aa" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
-        <Property Id="e27590e5-f583-4da6-8f3a-ce9f025a86d3" name="name" type="System.String" label="name : System.String" fieldName="_name" />
+        <Property Id="c318c416-c32e-42f4-86c6-d90e351ab157" name="id" type="System.Int32" label="id : System.Int32" fieldName="_id" />
+        <Property Id="60be82d4-9058-4f87-b5ea-98309a24ab9e" name="name" type="System.String" label="name : System.String" fieldName="_name" />
       </domainMethodReturnShape>
     </domainModelHasDomainMethodReturnShapes>
   </domainMethodReturnShapes>

@@ -57,12 +57,12 @@ namespace Repositorio
             }
         }
 
-        public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector)
+        public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector, int idRolGroup)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
                 //IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> result = dominio.Sp_SSO_AllowedAppsByEfector(idUsuario, idEfector).ToList();
-                IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> result = dominio.SSO_GetAplicacionesXEfector(idUsuario, idEfector).ToList();
+                IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> result = dominio.SSO_GetAplicacionesXEfector(idUsuario, idEfector, idRolGroup).ToList();
 
                 return result;
             }

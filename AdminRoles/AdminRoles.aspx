@@ -35,7 +35,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1primary">
                                 <div class="col-md-12">
-                                    <table id="tblUsuarios" data-toggle="table" data-pagination="true" data-search="true">
+                                    <table id="tblUsuarios" class="table-responsive" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead>
                                             <tr>
                                                 <th data-field="IdUsuario" data-align="center" data-sortable="true">ID</th>
@@ -45,9 +45,7 @@
                                                 <th data-field="Usuario" data-align="left" data-sortable="true">Usuario</th>
                                                 <th data-field="RolId" data-align="left" data-sortable="true" data-visible="false">Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoMostrarPerfil" data-events="eventoMostrarPerfil" id="columnaMostrarPerfil" runat="server" data-align="center">Perfil</th>
-
                                                 <th data-field="operate" data-formatter="formatoPerfilXEfector" data-events="eventoPerfilXEfector" id="columnaAsignarPerfilXEfector" runat="server" data-align="center">Asignar Perfil</th>
-
                                                 <th data-field="operate" data-formatter="formatoAsignarPerfil" data-events="eventoAsignarPerfil" id="columnaPerfil" runat="server" data-align="center">Asignar Perfil</th>
                                                 <th data-field="operate" data-formatter="formatoEfectores" data-events="eventoEfectores" id="columnaEfectores" runat="server" data-align="center">Efectores</th>
                                                 <th data-field="operate" data-formatter="formatoEliminarPerfil" data-events="eventoEliminarPerfil" id="columnaEliminarPerfil" runat="server" data-align="center">Eliminar Perfil</th>
@@ -365,10 +363,8 @@
         };
 
             function formatoMostrarPerfil(value, row, index) {
-                return [
-                        //'<a class="mostrarPerfil" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Perfil">',
-                            '<asp:Label ID="lblMostrarPerfil" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',
-                        //'</a>' ,
+                return [                        
+                            '<asp:Label ID="lblMostrarPerfil" Text=" ' + row.NombreRol + '" runat="server" ></asp:Label>',                        
                 ].join('');
             }
 
@@ -418,145 +414,145 @@
                         $.ajax({
                             type: "POST",
                             url: '<%= ResolveUrl("AdminRoles.aspx/eliminarPerfil")%>' ,
-                        data: "{ 'idUsuario' : '" + idUser + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        beforeSend:function(x){
-                            $(document).ready(function() {
-                                $('#progressBarEliminarPerfil #progressEliminarPerfil').progressbar({
-                                    display_text: 'fill',
-                                    use_percentage: true,
-                                    refresh_speed: 500});
-                            });
-                        },
-                        success: function (msg) {
+                            data: "{ 'idUsuario' : '" + idUser + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            beforeSend:function(x){
+                                $(document).ready(function() {
+                                    $('#progressBarEliminarPerfil #progressEliminarPerfil').progressbar({
+                                        display_text: 'fill',
+                                        use_percentage: true,
+                                        refresh_speed: 500});
+                                });
+                            },
+                            success: function (msg) {
 
-                            window.location = window.location.href;
-                        },
-                        complete:function(){
-                            $('.progressBarModal').modal('hide');
-                            $('.progress .progress-bar').progressbar().hide();
-                        },
-                        error: function (e) {
-                            alert("Error");
+                                window.location = window.location.href;
+                            },
+                            complete:function(){
+                                $('.progressBarModal').modal('hide');
+                                $('.progress .progress-bar').progressbar().hide();
+                            },
+                            error: function (e) {
+                                alert("Error");
 
-                        }
-                    });
-                })
+                            }
+                        });
+                    })
+                }
             }
-        }
 
-        function operateFormatter(value, row, index) {
-            return [
-                '<a class="editar" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Editar">',
+            function operateFormatter(value, row, index) {
+                return [
+                    '<a class="editar" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Editar">',
+                        '<i class="fa fa-pencil-square-o"></i>',
+                    '</a>'
+                ].join('');
+            }
+
+            window.operateEvents = {
+                'click .editar': function (e, value, row, index) {
+                    $('#myModal').modal('show');
+
+                    document.getElementById('<%= txtRol.ClientID %>').value = row.Name;
+                    document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;
+                }
+            };
+
+            function operateFormatter1(value, row, index) {
+                return [
+                    '<a class="app ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones">',
+                        '<i class="fa fa-desktop"></i>',
+                    '</a>'
+                ].join('');
+            }
+
+            window.operateEvents1 = {
+                'click .app': function (e, value, row, index) {
+                    window.location = 'RolPermisos.aspx?llamada=aplicacion&rolName=' + row.Name + "&idPerfil=" + row.Id;
+                }
+            };
+
+            function formatoAplicaciones(value, row, index) {            
+                return [
+                    '<a class="app ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones" >',
+                        '<i class="fa fa-desktop"></i>',
+                    '</a>'
+                ].join('');
+            }
+
+            window.eventosAplicaciones = {
+                'click .app': function (e, value, row, index) {
+                    if (row.RolId == null)
+                        $('#errorModal').modal('show');
+                    else                    
+                        window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario + "&perfil=" + row.NombreRol;                                
+                }
+            };
+
+            function formatoEditarUsuario(value, row, index) {
+                return [
+                '<a class="editarUsuario ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Editar Usuario">',
                     '<i class="fa fa-pencil-square-o"></i>',
                 '</a>'
-            ].join('');
-        }
-
-        window.operateEvents = {
-            'click .editar': function (e, value, row, index) {
-                $('#myModal').modal('show');
-
-                document.getElementById('<%= txtRol.ClientID %>').value = row.Name;
-                document.getElementById('<%= hdnIdRol.ClientID %>').value = row.Id;
+                ].join('');
             }
-        };
 
-        function operateFormatter1(value, row, index) {
-            return [
-                '<a class="app ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones">',
-                    '<i class="fa fa-desktop"></i>',
-                '</a>'
-            ].join('');
-        }
+            window.eventosEditarUsuario = {
+                'click .editarUsuario': function (e, value, row, index) {
+                    window.location = 'EditarUsuario.aspx?idUsuario=' + row.IdUsuario;
+                }
+            };
 
-        window.operateEvents1 = {
-            'click .app': function (e, value, row, index) {
-                window.location = 'RolPermisos.aspx?llamada=aplicacion&rolName=' + row.Name + "&idPerfil=" + row.Id;
-            }
-        };
+            function formatoStatus(value, row, index) {
 
-        function formatoAplicaciones(value, row, index) {            
-            return [
-                '<a class="app ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Aplicaciones" >',
-                    '<i class="fa fa-desktop"></i>',
-                '</a>'
-            ].join('');
-        }
+                var habilitado = row.Habilitado; 
+                var bloqueado = row.Bloqueado;
 
-        window.eventosAplicaciones = {
-            'click .app': function (e, value, row, index) {
-                if (row.RolId == null)
-                    $('#errorModal').modal('show');
-                else                    
-                    window.location = 'RolPermisos.aspx?llamada=usuario&rolId=' + row.RolId + '&rolName=' + row.Nombre + " " + row.Apellido + "&idUsuario=" + row.IdUsuario + "&perfil=" + row.NombreRol;                                
-            }
-        };
-
-        function formatoEditarUsuario(value, row, index) {
-            return [
-            '<a class="editarUsuario ml10" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Editar Usuario">',
-                '<i class="fa fa-pencil-square-o"></i>',
-            '</a>'
-            ].join('');
-        }
-
-        window.eventosEditarUsuario = {
-            'click .editarUsuario': function (e, value, row, index) {
-                window.location = 'EditarUsuario.aspx?idUsuario=' + row.IdUsuario;
-            }
-        };
-
-        function formatoStatus(value, row, index) {
-
-            var habilitado = row.Habilitado; 
-            var bloqueado = row.Bloqueado;
-
-            var btnHabilitado = "";
-            var iconoHabilitado = "";
-            var tooltipHabilitado = "";
+                var btnHabilitado = "";
+                var iconoHabilitado = "";
+                var tooltipHabilitado = "";
             
-            if (habilitado === true) {
-                btnHabilitado = "btn btn-info btn-status";
-                iconoHabilitado = "fa fa-thumbs-o-up";
-                tooltipHabilitado = "Habilitado";
+                if (habilitado === true) {
+                    btnHabilitado = "btn btn-info btn-status";
+                    iconoHabilitado = "fa fa-thumbs-o-up";
+                    tooltipHabilitado = "Habilitado";
+                }
+                else {
+                    btnHabilitado = "btn btn-danger btn-status";
+                    iconoHabilitado = "fa fa-thumbs-o-down";                
+                    tooltipHabilitado = "Deshabilitado";
+                }
+
+                var btnBloqueado = "";
+                var iconoBloqueado = "";
+                var tooltipBloqueado = "";
+
+                if (bloqueado === true) {
+                    btnBloqueado = "btn btn-danger btn-status";
+                    iconoBloqueado = "fa fa-thumbs-o-down";   
+                    tooltipBloqueado = "Bloqueado";
+                }
+                else {
+                    btnBloqueado = "btn btn-info btn-status";
+                    iconoBloqueado = "fa fa-thumbs-o-up";                
+                    tooltipBloqueado = "Desbloqueado";
+                }
+
+                return [            
+              "<button type='button' class='" + btnHabilitado + "' data-toggle='tooltip' data-placement='left' Title='" + tooltipHabilitado + "'>",
+               "<i class='" + iconoHabilitado + "'></i></button>&nbsp",
+
+               "<button type='button' class='" + btnBloqueado + "' data-toggle='tooltip' data-placement='right' Title='" + tooltipBloqueado + "'>",
+               "<i class='" + iconoBloqueado + "'></i></button>"
+                ].join('');
             }
-            else {
-                btnHabilitado = "btn btn-danger btn-status";
-                iconoHabilitado = "fa fa-thumbs-o-down";                
-                tooltipHabilitado = "Deshabilitado";
-            }
 
-            var btnBloqueado = "";
-            var iconoBloqueado = "";
-            var tooltipBloqueado = "";
-
-            if (bloqueado === true) {
-                btnBloqueado = "btn btn-danger btn-status";
-                iconoBloqueado = "fa fa-thumbs-o-down";   
-                tooltipBloqueado = "Bloqueado";
-            }
-            else {
-                btnBloqueado = "btn btn-info btn-status";
-                iconoBloqueado = "fa fa-thumbs-o-up";                
-                tooltipBloqueado = "Desbloqueado";
-            }
-
-            return [            
-          "<button type='button' class='" + btnHabilitado + "' data-toggle='tooltip' data-placement='left' Title='" + tooltipHabilitado + "'>",
-           "<i class='" + iconoHabilitado + "'></i></button>&nbsp",
-
-           "<button type='button' class='" + btnBloqueado + "' data-toggle='tooltip' data-placement='right' Title='" + tooltipBloqueado + "'>",
-           "<i class='" + iconoBloqueado + "'></i></button>"
-            ].join('');
-        }
-
-        window.eventosStatus = {
-            'click .statusUsuario': function (e, value, row, index) {
+            window.eventosStatus = {
+                'click .statusUsuario': function (e, value, row, index) {
                 
-            }
-        };
+                }
+            };
     </script>
 
     <script>

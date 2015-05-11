@@ -122,7 +122,7 @@ namespace AdminRoles
 
         #endregion
 
-        public string nomApp = string.Empty;        
+        public string nomApp = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -135,7 +135,7 @@ namespace AdminRoles
             mostrarTablas();
 
             hdnIdEfector.Value = IdEfector.ToString();
-            
+
 
             Session["llamada"] = Llamada;
             Session["idUsuario"] = IdUsuario;
@@ -172,6 +172,7 @@ namespace AdminRoles
         /// <returns></returns>
         private List<SSO_Application> quitarAplicacionesDuplicadas()
         {
+            int idRolGroup = roleNego.devuelveIdRolGroup(IdEfector, IdPerfil);
             HashSet<int> listaResultado;
 
             if (IdUsuario == 0)
@@ -181,7 +182,7 @@ namespace AdminRoles
             }
             else
             {
-                List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector).ToList();
+                List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, IdEfector, idRolGroup).ToList();
                 listaResultado = new HashSet<int>(listaAppXUsuario.Select(s => s.id));
             }
 
@@ -218,13 +219,14 @@ namespace AdminRoles
             string json = string.Empty;
 
             int idEfector = 0;
+            int idRolGroup = roleNego.devuelveIdRolGroup(IdEfector, IdPerfil);
 
             if (Request["idEfector"] != null)
                 idEfector = int.Parse(Request["idEfector"].ToString());
             else
                 idEfector = IdEfector;
 
-            List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, idEfector).ToList();
+            List<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario = usuarioNego.listaAppXUsuario(IdUsuario, idEfector, idRolGroup).ToList();
 
             return json = JsonConvert.SerializeObject(listaAppXUsuario, Formatting.Indented);
         }
@@ -240,7 +242,7 @@ namespace AdminRoles
 
                 guardaRolGroupMember();
 
-                if ((Request["llamada"] == "aplicacion") || (IdHospital == "0"))
+                if ((Request["llamada"] == "aplicacion") && (IdHospital == "0"))
                 {
                     guardaSSOPermissions(idAplicacion);
                 }
@@ -423,7 +425,7 @@ namespace AdminRoles
 
         public static void eliminarAplicacionXRol(int idPerfil, int idAplicacion, int idEfector)
         {
-            RolesNego rolNego = new RolesNego();                        
+            RolesNego rolNego = new RolesNego();
 
             int idRolGroup = rolNego.devuelveIdRolGroup(idEfector, idPerfil);
 

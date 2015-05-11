@@ -32,7 +32,7 @@
                             <th data-field="id" data-align="center" data-sortable="true">ID</th>
                             <th data-field="nombreAplicacion" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="operate" data-formatter="formatoUsuario" data-events="eventoUsuario" data-align="center">Usuarios</th>
-                            <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
+                            <th data-field="operate" data-formatter="formatoEliminar" data-events="eventoEliminar" data-align="center">Eliminar</th>
                             <th data-field="operate" data-formatter="formatoModulos" data-events="eventoModulos" data-align="center">Módulos</th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@
                         <tr>
                             <th data-field="id" data-align="center" data-sortable="true">ID</th>
                             <th data-field="name" data-align="left" data-sortable="true">Nombre</th>
-                            <th data-field="operate" data-formatter="operateFormatter1" data-events="operateEvents1" data-align="center">Eliminar</th>
+                            <th data-field="operate" data-formatter="formatoEliminar" data-events="eventoEliminar" data-align="center">Eliminar</th>
                             <th data-field="operate" data-formatter="formatoModulosXUsuario" data-events="eventoModulosXUsuario" data-align="center">Módulos</th>
                         </tr>
                     </thead>
@@ -136,7 +136,7 @@
             }
         };  
 
-        function operateFormatter1(value, row, index) {
+        function formatoEliminar(value, row, index) {
             return [
                 '<a class="eliminar" href="javascript:void(0)" title="Borrar">',
                     '<i class="fa fa-trash"></i>',                        
@@ -144,7 +144,7 @@
             ].join('');
         }        
 
-        window.operateEvents1 = {
+        window.eventoEliminar = {
             'click .eliminar': function (e, value, row, index) {                 
                 $(document).ready(function () {
 

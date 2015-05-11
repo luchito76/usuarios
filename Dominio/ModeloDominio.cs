@@ -765,13 +765,13 @@ namespace Dominio
 			return queryResult;
 		}
 		
-		public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector)
+		public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, int? idRolGroup)
 		{
 			int returnValue;
-			return SSO_GetAplicacionesXEfector(idUsuario, idEfector, out returnValue);
+			return SSO_GetAplicacionesXEfector(idUsuario, idEfector, idRolGroup, out returnValue);
 		}
 		
-		public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, out int returnValue)
+		public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, int? idRolGroup, out int returnValue)
 		{
 			OAParameter parameterReturnValue = new OAParameter();
 		    parameterReturnValue.Direction = ParameterDirection.ReturnValue;
@@ -801,7 +801,19 @@ namespace Dominio
 				parameterIdEfector.Value = DBNull.Value;
 			}
 
-			IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> queryResult = this.ExecuteQuery<SSO_GetAplicacionesXEfectorResultSet0>("[dbo].[SSO_GetAplicacionesXEfector]", CommandType.StoredProcedure, parameterIdUsuario, parameterIdEfector, parameterReturnValue);
+			OAParameter parameterIdRolGroup = new OAParameter();
+			parameterIdRolGroup.ParameterName = "idRolGroup";
+			if(idRolGroup.HasValue)
+			{
+				parameterIdRolGroup.Value = idRolGroup.Value;
+			}
+			else
+			{
+				parameterIdRolGroup.DbType = DbType.Int32;
+				parameterIdRolGroup.Value = DBNull.Value;
+			}
+
+			IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> queryResult = this.ExecuteQuery<SSO_GetAplicacionesXEfectorResultSet0>("[dbo].[SSO_GetAplicacionesXEfector]", CommandType.StoredProcedure, parameterIdUsuario, parameterIdEfector, parameterIdRolGroup, parameterReturnValue);
 		
 			returnValue = parameterReturnValue.Value == DBNull.Value 
 				? -1
@@ -920,8 +932,8 @@ namespace Dominio
 		IEnumerable<SSO_GetAplicacionesXPerfilResultSet0> SSO_GetAplicacionesXPerfil(int? idRolGroup, out int returnValue);
 		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil);
 		IEnumerable<SSO_AllowedAppsByEfectorCentralResultSet0> SSO_AllowedAppsByEfectorCentral(int? idusuario, int? idPerfil, out int returnValue);
-		IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector);
-		IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, out int returnValue);
+		IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, int? idRolGroup);
+		IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> SSO_GetAplicacionesXEfector(int? idUsuario, int? idEfector, int? idRolGroup, out int returnValue);
 	}
 }
 #pragma warning restore 1591

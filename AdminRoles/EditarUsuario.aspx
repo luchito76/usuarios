@@ -186,13 +186,6 @@
         $('#<%= ddlUsuarios.ClientID %>').select2();        
     </script>
 
-    <%--<script>
-        var idHospital = '<%= IdHospital %>';
-
-        if (idHospital == 0)
-            document.getElementById("ctl00_lnkInicio").style.visibility = "hidden";
-    </script>--%>
-
     <script type="text/javascript">       
 
         $(document).ready(function () {

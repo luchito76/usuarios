@@ -57,7 +57,7 @@
     };
 
     BootstrapTable.DEFAULTS = {
-        classes: 'table table-hover',
+        classes: 'table table-hover table-responsive',
         height: undefined,
         undefinedText: '-',
         sortName: undefined,
@@ -119,7 +119,7 @@
         onCheckAll: function () { return false; },
         onUncheckAll: function () { return false; },
         onLoadSuccess: function (data) { return false; },
-        onLoadError: function (status) { return false; }
+        onLoadError: function (status) { return false; }        
     };
 
     BootstrapTable.COLUMN_DEFAULTS = {
@@ -150,7 +150,7 @@
         'check-all.bs.table': 'onCheckAll',
         'uncheck-all.bs.table': 'onUncheckAll',
         'load-success.bs.table': 'onLoadSuccess',
-        'load-error.bs.table': 'onLoadError'
+        'load-error.bs.table': 'onLoadError'        
     };
 
     BootstrapTable.prototype.init = function () {
@@ -638,7 +638,7 @@
     };
 
     BootstrapTable.prototype.updatePagination = function () {
-        this.resetRows();
+        //this.resetRows();
         this.initPagination();
         if (this.options.sidePagination === 'server') {
             this.initServer();
@@ -646,7 +646,9 @@
             this.initBody();
         }
         $('[data-toggle="tooltip"]').tooltip();
-        $("[id='switch']").bootstrapSwitch();
+        $("[id='switch']").bootstrapSwitch('onText', '<i class="fa fa-power-off"></i>');
+        $("[id='switch']").bootstrapSwitch('offText', '<i class="fa fa-power-off"></i>');
+        
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {
@@ -655,37 +657,27 @@
         $this.parent().addClass('active').siblings().removeClass('active');
         this.options.pageSize = +$this.text();
         this.$toolbar.find('.page-size').text(this.options.pageSize);
-        this.updatePagination();
-        $('[data-toggle="tooltip"]').tooltip();
-        $("['id='switch'']").bootstrapSwitch();
+        this.updatePagination();        
     };
 
     BootstrapTable.prototype.onPageFirst = function () {
         this.options.pageNumber = 1;
-        this.updatePagination();
-        $('[data-toggle="tooltip"]').tooltip();
-        $("[id='switch']").bootstrapSwitch();
+        this.updatePagination();        
     };
 
     BootstrapTable.prototype.onPagePre = function () {
         this.options.pageNumber--;
-        this.updatePagination();
-        $('[data-toggle="tooltip"]').tooltip();
-        $("[id='switch']").bootstrapSwitch();
+        this.updatePagination();       
     };
 
     BootstrapTable.prototype.onPageNext = function () {
         this.options.pageNumber++;
-        this.updatePagination();
-        $('[data-toggle="tooltip"]').tooltip();
-        $("[id='switch']").bootstrapSwitch();
+        this.updatePagination();       
     };
 
     BootstrapTable.prototype.onPageLast = function () {
         this.options.pageNumber = this.totalPages;
-        this.updatePagination();
-        $('[data-toggle="tooltip"]').tooltip();
-        $("[id='switch']").bootstrapSwitch();
+        this.updatePagination();        
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {

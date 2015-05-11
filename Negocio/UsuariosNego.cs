@@ -55,9 +55,9 @@ namespace Negocio
             usuarioRepo.guardaSSOUserRol(userRol);
         }
 
-        public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector)
+        public IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> listaAppXUsuario(int idUsuario, int idEfector, int idRolGroup)
         {
-            return usuarioRepo.listaAppXUsuario(idUsuario, idEfector);
+            return usuarioRepo.listaAppXUsuario(idUsuario, idEfector, idRolGroup);
         }
 
         public IEnumerable<SSO_Users_Role> listaUsuariosXIdPerfil(int idPerfil)

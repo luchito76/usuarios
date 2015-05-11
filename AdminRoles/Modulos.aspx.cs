@@ -232,13 +232,22 @@ namespace AdminRoles
             SSO_Permissions_Cache ssoPermisosCache = new SSO_Permissions_Cache();
             ssoPermisosCache = permisoNego.listaPermisosCacheXIdUsuario(idUsuario, idAplicacion, idModulo, idRolGroup);
 
-            //if (ssoPermisosCache != null)
-            //{
-                ssoPermisosCache.Allow = estadoModulo;
-                ssoPermisosCache.Readonly = false;
+            ssoPermisosCache.AutoId = ssoPermisosCache.AutoId;
 
-                permisoNego.permisoModuloUsuario(ssoPermisosCache);
-            //}
+            ssoPermisosCache.UserId = ssoPermisosCache.UserId;
+            ssoPermisosCache.ApplicationId = ssoPermisosCache.ApplicationId;
+            ssoPermisosCache.TargetType = ssoPermisosCache.TargetType;
+            ssoPermisosCache.Target = ssoPermisosCache.Target;
+            ssoPermisosCache.Inherited = ssoPermisosCache.Inherited;
+            ssoPermisosCache.RoleId = ssoPermisosCache.RoleId;
+            ssoPermisosCache.GroupId = ssoPermisosCache.GroupId;
+            ssoPermisosCache.RoleDepthFromUser = ssoPermisosCache.RoleDepthFromUser;
+            ssoPermisosCache.Allow = estadoModulo;
+            ssoPermisosCache.Readonly = false;
+            ssoPermisosCache.EndDate = ssoPermisosCache.EndDate;
+
+            permisoNego.permisoModuloUsuario(ssoPermisosCache);
+
         }
 
         #endregion
@@ -297,6 +306,8 @@ namespace AdminRoles
             return lista;
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string devuelveModulos()
         {
             string json = string.Empty;

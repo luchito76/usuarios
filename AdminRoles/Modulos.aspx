@@ -36,11 +36,11 @@
             </div>
             <br />
             <div class="col-md-12">
-                <table id="tblModulos" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id" data-page-size="10" data-page-list="[10, 20, 30]">
+                <table id="tblModulos" data-toggle="table" data-pagination="true" data-search="true" data-id-field="id" data-page-size="100" data-page-list="[10, 20, 30]">
                     <thead>
                         <tr>
                             <th data-field="operate" data-formatter="formatoCheck" data-events="eventosCheck" data-align="center">App</th>
-                            <th data-field="IdModulo" data-align="center" data-sortable="true" >ID</th>
+                            <th data-field="IdModulo" data-align="center" data-sortable="true">ID</th>
                             <th data-field="Nombre" data-align="left" data-sortable="true">Nombre</th>
                             <th data-field="Descripcion" data-align="left" data-sortable="true">Descripcion</th>
                             <th data-field="Estado" data-align="left" data-sortable="true" data-visible="false">Habilitado</th>
@@ -65,7 +65,7 @@
     <script>
         function cerrarVentana() {
             window.close();            
-        }
+        }       
 
         function formatoCheck(value, row, index) {
 
@@ -97,24 +97,24 @@
                 $.ajax({
                     type: "POST",
                     url: '<%= ResolveUrl("Modulos.aspx/guardarModulos")%>' ,
-                        data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + estado + "'}",                    
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (msg) {                            
-                            //window.location = window.location.href;                        
-                        },
-                        error: function (e) {                        
+                    data: "{'idModulo':'" + row.IdModulo + "','estadoModulo':'" + estado + "'}",                    
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg) {                                                    
+                        //window.location = window.location.href;                                                
+                    },
+                    error: function (e) {                        
                         
-                        }
-                    });                                  
+                    }
+                });                                  
             }
         };       
     </script>
 
     <script>
         $table = $('#tblModulos').bootstrapTable({            
-            data: <%= devuelveModulos() %>           
-            });               
+            data: <%= devuelveModulos() %>,                       
+        });               
     </script>
 
 </body>
