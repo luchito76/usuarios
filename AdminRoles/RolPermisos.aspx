@@ -72,7 +72,7 @@
     </div>
     <!-- /.modal -->
 
-    <!-- Static Modal -->
+    <!-- Modal para crear permisos -->
     <div class="modal fade processing-modal" id="processing-modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -80,6 +80,20 @@
                     <div class="text-center">
                         <img src="img/gif.GIF" class="icon" />
                         <h4>Creando permisos...</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para eliminar aplicación del perfil -->
+    <div class="modal fade processing-modal" id="modalEliminarAplicacion">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="img/gif.GIF" class="icon" />
+                        <h4>Eliminando Aplicación...</h4>
                     </div>
                 </div>
             </div>
@@ -157,7 +171,8 @@
                         data: "{'idPerfil':'" + idPerfil + "', 'idAplicacion':'" + row.id + "', 'idEfector':'" + idEfector + "'}",                        
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (msg) {                            
+                        success: function (msg) {        
+                            $('#modalEliminarAplicacion').modal('show');
                             window.location = window.location.href;
                         },
                         error: function (e) {

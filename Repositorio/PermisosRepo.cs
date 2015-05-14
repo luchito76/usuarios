@@ -91,7 +91,8 @@ namespace Repositorio
                     SSO_Permission ssoPermiso = new SSO_Permission();
                     ssoPermiso = dominio.SSO_Permissions.Where(c => c.Source == idRolGroup && c.Target == data.Id).FirstOrDefault();
 
-                    listaPermisos.Add(ssoPermiso);
+                    if (ssoPermiso != null)
+                        listaPermisos.Add(ssoPermiso);
                 }
 
                 if (listaPermisos.Count != 0)
