@@ -409,12 +409,13 @@
                     $('#progressBarModal').modal('show');
 
                     $(document).ready(function () {
-                        var idUser = row.IdUsuario;
+                        var idUsuario = row.IdUsuario;
+                        var idPerfil = row.RolId;
 
                         $.ajax({
                             type: "POST",
                             url: '<%= ResolveUrl("AdminRoles.aspx/eliminarPerfil")%>' ,
-                            data: "{ 'idUsuario' : '" + idUser + "'}",
+                            data: "{ 'idUsuario' : '" + idUsuario + "','idPerfil' : '" + idPerfil + "'}",
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             beforeSend:function(x){
@@ -426,7 +427,6 @@
                                 });
                             },
                             success: function (msg) {
-
                                 window.location = window.location.href;
                             },
                             complete:function(){
@@ -435,7 +435,6 @@
                             },
                             error: function (e) {
                                 alert("Error");
-
                             }
                         });
                     })

@@ -177,6 +177,10 @@ namespace Repositorio
             }
         }
 
+        /// <summary>
+        /// Elimina el perfil y el efector de un usuario en la tabla SSO_Users_Roles. Se usa para los hospitales.
+        /// </summary>
+        /// <param name="idUsuario"></param>
         public void borrarUserRol(int idUsuario)
         {
             using (ModeloDominio dominio = new ModeloDominio())
@@ -190,13 +194,19 @@ namespace Repositorio
                     }
                 }
             }
-        }
+        }       
 
-        public void borrarUserRol(int idUsuario, int idEfector)
+        /// <summary>
+        /// Elimina los efectores o perfiles relacionados a un Usuario de la tabla SSO_Users_Roles dependiendo si el parámetro RolId
+        /// es un Perfil o un Efector. Se usa para Nivel Central.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="RolId"></param>
+        public void borrarUserRol(int idUsuario, int RolId)
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario && c.RoleId == idEfector).ToList();
+                IList<SSO_Users_Role> borrarUserRole = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario && c.RoleId == RolId).ToList();
                 {
                     foreach (SSO_Users_Role data in borrarUserRole)
                     {

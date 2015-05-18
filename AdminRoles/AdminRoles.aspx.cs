@@ -98,7 +98,6 @@ namespace AdminRoles
             {
                 columnaPerfil.Visible = false;
                 columnaAsignarPerfilXEfector.Visible = true;
-                columnaEliminarPerfil.Visible = false;
                 columnaApp.Visible = false;
             }
             else
@@ -116,7 +115,7 @@ namespace AdminRoles
             List<SSO_Role> listaRoles = rolesNego.listaRoles(Roles.parent, Roles.enable).ToList();
 
             return json = JsonConvert.SerializeObject(listaRoles);
-        }       
+        }
 
         public string devuelveUsuariosJson()
         {
@@ -283,13 +282,59 @@ namespace AdminRoles
         }
 
         [WebMethod(), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static void eliminarPerfil(int idUsuario)
+        public static void eliminarPerfil(int idUsuario, int idPerfil)
         {
             Thread.Sleep(3000);
 
             AdminRoles ad = new AdminRoles();
 
-            ad.borrarPerfil(idUsuario);
+            if (ad.IdHospital == "0")
+                ad.borrarPerfilNivelCentral(idUsuario, idPerfil);
+            else
+                ad.borrarPerfil(idUsuario);
+        }
+
+        private void borrarPerfilNivelCentral(int idUsuario, int idPerfil)
+        {
+            borrarUserRolNivelCentral(idUsuario, idPerfil);
+
+            borrarPermisoCacheNivelCentral(idUsuario, idPerfil);
+        }
+
+        //Borra el perfil y los efectores asociados a dicho perfil en el Nivel Central.
+        private void borrarUserRolNivelCentral(int idUsuario, int idPerfil)
+        {
+            List<SSO_AllowedAppsByEfectorCentralResultSet0> listaEfectoresXPErfil = permisoNego.listaEfectoresXPerfil(idUsuario, idPerfil).ToList();
+
+            foreach (SSO_AllowedAppsByEfectorCentralResultSet0 data in listaEfectoresXPErfil)
+            {
+                rolesNego.borrarUserRol(idUsuario, int.Parse(data.id.ToString()));
+            }
+
+            rolesNego.borrarUserRol(idUsuario, idPerfil);
+        }
+
+        private void borrarPermisoCacheNivelCentral(int idUsuario, int idPerfil)
+        {
+            List<SSO_AllowedAppsByEfectorCentralResultSet0> listaEfectoresXPErfil = permisoNego.listaEfectoresXPerfil(idUsuario, idPerfil).ToList();
+
+            List<SSO_RoleGroup> listaRolGroup = new List<SSO_RoleGroup>();
+
+            foreach (SSO_AllowedAppsByEfectorCentralResultSet0 data in listaEfectoresXPErfil)
+            {
+                int idRolGroup = rolesNego.devuelveIdRolGroup(int.Parse(data.id.ToString()), idPerfil);
+
+                SSO_RoleGroup rolGroup = new SSO_RoleGroup();
+
+                rolGroup.Id = idRolGroup;
+
+                listaRolGroup.Add(rolGroup);
+            }
+
+            foreach (SSO_RoleGroup data in listaRolGroup)
+            {
+                permisoNego.borrarPermisosCacheXIdUsuario(data.Id, idUsuario);
+            }
         }
 
         private void borrarPerfil(int idUsuario)
@@ -329,7 +374,7 @@ namespace AdminRoles
 
             foreach (int data in lista)
             {
-                if ((data != idEfectorSeleccionado) && (data != idPerfilSeleccionado))
+                if ((idEfector != idEfectorSeleccionado) && (idPerfil != idPerfilSeleccionado))
                 {
                     SSO_Users_Role userRol = new SSO_Users_Role();
 
@@ -359,16 +404,6 @@ namespace AdminRoles
                 rolesNego.guardaRoleGroup(rolGroup);
             }
         }
-
-        //public string devuelveNombreDeRol()
-        //{
-        //    string rol = string.Empty;
-
-        //    //if (Request["rolName"] != null)
-        //    //    rol = Request["rolName"].ToString();
-
-        //    return rol;
-        //}
 
         private string nombreRolGroup()
         {
