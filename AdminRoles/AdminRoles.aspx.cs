@@ -374,7 +374,7 @@ namespace AdminRoles
 
             foreach (int data in lista)
             {
-                if ((idEfector != idEfectorSeleccionado) && (idPerfil != idPerfilSeleccionado))
+                if ((data != idEfectorSeleccionado) && (data != idPerfilSeleccionado))
                 {
                     SSO_Users_Role userRol = new SSO_Users_Role();
 
