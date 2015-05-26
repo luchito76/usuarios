@@ -412,7 +412,7 @@ namespace AdminRoles
             int idEfectorSeleccionado = int.Parse(ddlEfector.SelectedValue);
 
             string nombreEfector = rolesNego.listaRoles(494, true).Where(c => c.Id == idEfectorSeleccionado).FirstOrDefault().Name;
-            string nombrePerfil = ddlPerfil.SelectedItem.ToString(); //devuelveNombreDeRol();
+            string nombrePerfil = ddlPerfil.SelectedItem.ToString(); 
 
             return nombre = nombreEfector + " + " + nombrePerfil;
         }

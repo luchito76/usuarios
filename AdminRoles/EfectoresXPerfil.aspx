@@ -31,7 +31,6 @@
                 </table>
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <%--<asp:Button ID="btnAgregar" runat="server" Text="Agregar efector" class="btn btn-primary" />--%>
                         <input type="button" class="btn btn-primary" onclick="agregarEfector();" value="Agregar" />
                         <asp:Button ID="btnCerrar" runat="server" Text="Cerrar" OnClientClick="cerrarVentana();" class="btn btn-primary" />
                     </div>
@@ -61,7 +60,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <%--<button id="btnAgregarEfector" onserverclick="btnAgregarEfector_ServerClick1"  onclick="barraProgresoAgregarEfector();" runat="server" type="button" class="btn btn-primary">Agregar</button>--%>
                         <asp:Button ID="btnAgregar" OnClick="btnAgregar_Click" runat="server" Text="Agregar" class="btn btn-primary" />
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                     </div>
@@ -161,23 +159,6 @@
         }
 
     </script>
-
-    <%--<script>
-        function agregarEfectorFormato(value, row, index) {            
-            return [
-                    '<a class="agregarEfector" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Agregar Efectores">',
-                        '<i class="fa fa-plus-square fa-lg"></i>',
-                    '</a>' ,
-            ].join('');
-        }
-
-        window.agregarEfectorEvento = {
-            'click .agregarEfector': function (e, value, row, index) {
-                
-                $('#agregarEfectorAPerfil').modal('show');                             
-            }
-        };
-    </script>--%>
 
     <script>
         $table = $('#tblEfectores').bootstrapTable({            

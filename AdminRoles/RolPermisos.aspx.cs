@@ -136,7 +136,6 @@ namespace AdminRoles
 
             hdnIdEfector.Value = IdEfector.ToString();
 
-
             Session["llamada"] = Llamada;
             Session["idUsuario"] = IdUsuario;
 
