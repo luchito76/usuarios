@@ -229,7 +229,7 @@
                             <asp:Label ID="lblPerfil" runat="server" Text="Elegir Perfil" for="ddPerfil" class="col-sm-4 control-label">
                             </asp:Label></b>
                         <div class="col-sm-5">
-                            <asp:DropDownList ID="ddlPerfil" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlPerfil" DataValueField="id" DataTextField="name" runat="server"></asp:DropDownList>
                         </div>
                     </div>
 
@@ -238,12 +238,9 @@
                             <asp:Label ID="lblEfector" runat="server" Text="Elegir Efector" for="ddEfector" class="col-sm-4 control-label">
                             </asp:Label></b>
                         <div class="col-sm-5">
-                            <asp:DropDownList ID="ddlEfector" DataValueField="id" DataTextField="name" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlEfector" DataValueField="id" DataTextField="name" runat="server"></asp:DropDownList>
                         </div>
                     </div>
-                    <%--<div id="progressBarAsignarPerfil" class="progress progress-striped active">
-                        <div id="progressAsignarPerfil" class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" data-transitiongoal="100"></div>
-                    </div>--%>
                 </div>
                 <div class="modal-footer">
                     <button id="btnPerfilXEfector" onserverclick="btnPerfilXEfector_ServerClick" onclick="barraProgresoAsignarPerfil();" runat="server" type="button" class="btn btn-primary">Agregar</button>
@@ -308,6 +305,8 @@
             });
         }
 
+        $('#<%= ddlPerfil.ClientID %>').select2();  
+        $('#<%= ddlEfector.ClientID %>').select2();  
     </script>
 
     <script>
