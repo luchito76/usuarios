@@ -9,6 +9,7 @@
     <link href="Content/bootstrap-table.css" rel="stylesheet" />
     <link href="Content/font-awesome/font-awesome.css" rel="stylesheet" />
     <link href="Content/select2.css" rel="stylesheet" />
+    <link href="Content/sweet-alert.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -76,12 +77,13 @@
     <script src="Scripts/bootstrap-table.js"></script>
     <script src="Scripts/select2.js"></script>
     <script src="Scripts/select2_locale_es.js"></script>
+    <script src="Scripts/sweet-alert.js"></script>
 
     <script>
         window.onload = function(){          
             document.getElementById("nombrePerfil").innerHTML = '<%= devuelveNombrePerfil() %>';
         };
-    </script>
+    </script>    
 
     <script>
         function agregarEfector() {

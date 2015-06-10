@@ -42,7 +42,9 @@ namespace AdminRoles
         {
             get
             {
-                idPerfil = int.Parse(Request["idPerfil"]);
+
+                idPerfil = int.Parse(Request["idPerfil"].ToString());
+
                 return idPerfil;
             }
             set { idPerfil = value; }
@@ -126,7 +128,7 @@ namespace AdminRoles
         {
             string nombrePerfil = rolesNego.listaRolesXId(IdPerfil).Name;
 
-            return nombrePerfil.ToString();
+            return nombrePerfil.ToString();           
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)

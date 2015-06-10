@@ -390,7 +390,10 @@
 
                     var nombreUsuario = row.Nombre + ' ' + row.Apellido;
 
-                    window.open("EfectoresXPerfil.aspx?idUsuario=" + row.IdUsuario + "&nombreUsuario=" + nombreUsuario + "&idPerfil=" + row.RolId,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                    if (row.RolId != null)
+                        window.open("EfectoresXPerfil.aspx?idUsuario=" + row.IdUsuario + "&nombreUsuario=" + nombreUsuario + "&idPerfil=" + row.RolId,'', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);                
+                    else
+                        alerta();
                 }
             };
 
@@ -553,6 +556,17 @@
             };
     </script>
 
+    <script>
+        function alerta(){
+            swal({
+                title: "El usuario no tiene perfil!",               
+                type: "error",
+                showCancelButton: false,
+                confirmButtonClass: 'btn-success',
+                confirmButtonText: 'OK!'
+            });
+        };
+    </script>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
