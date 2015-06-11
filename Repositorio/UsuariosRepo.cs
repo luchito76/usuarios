@@ -61,7 +61,6 @@ namespace Repositorio
         {
             using (ModeloDominio dominio = new ModeloDominio())
             {
-                //IEnumerable<sp_SSO_AllowedAppsByEfectorResultSet0> result = dominio.Sp_SSO_AllowedAppsByEfector(idUsuario, idEfector).ToList();
                 IEnumerable<SSO_GetAplicacionesXEfectorResultSet0> result = dominio.SSO_GetAplicacionesXEfector(idUsuario, idEfector, idRolGroup).ToList();
 
                 return result;
@@ -85,6 +84,18 @@ namespace Repositorio
                 IEnumerable<SSO_Users_Role> result = dominio.SSO_Users_Roles.Where(c => c.UserId == idUsuario).ToList();
 
                 return dominio.CreateDetachedCopy(result);
+            }
+        }
+
+        public string devuelveUserRolesTempXUsuario(int idUsuario, int parent)
+        {
+            using (ModeloDominio dominio = new ModeloDominio())
+            {
+                string result = string.Empty;
+                
+                result = dominio.SSO_Users_Roles_Temps.Where(c => c.UserId == idUsuario && c.SSO_Role.Parent == parent).FirstOrDefault().SSO_Role.Name;
+
+                return result;
             }
         }
     }

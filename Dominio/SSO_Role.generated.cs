@@ -125,6 +125,15 @@ namespace Dominio
 			}
 		}
 		
+		private IList<SSO_Users_Roles_Temp> SSO_Users_Roles_Temps1 = new List<SSO_Users_Roles_Temp>();
+		public virtual IList<SSO_Users_Roles_Temp> SSO_Users_Roles_Temps
+		{
+			get
+			{
+				return this.SSO_Users_Roles_Temps1;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

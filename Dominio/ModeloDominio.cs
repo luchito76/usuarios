@@ -162,6 +162,14 @@ namespace Dominio
 			}
 		}
 		
+		public IQueryable<SSO_Users_Roles_Temp> SSO_Users_Roles_Temps 
+		{
+			get
+			{
+				return this.GetAll<SSO_Users_Roles_Temp>();
+			}
+		}
+		
 		public IEnumerable<SSO_GetUsuariosXAplicacionResultSet0> SSO_GetUsuariosXAplicacion(int? idAplicacion)
 		{
 			int returnValue;
@@ -899,6 +907,10 @@ namespace Dominio
 			get;
 		}
 		IQueryable<SSO_RoleGroups_Member> SSO_RoleGroups_Members
+		{
+			get;
+		}
+		IQueryable<SSO_Users_Roles_Temp> SSO_Users_Roles_Temps
 		{
 			get;
 		}

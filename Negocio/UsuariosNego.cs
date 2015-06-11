@@ -17,11 +17,6 @@ namespace Negocio
             return usuarioRepo.devuelveUsuarioXIdUsuario(idUsuario);
         }
 
-        //public SSO_User traeUsuario(int id)
-        //{
-        //    return usuarioRepo.traeUsuario(id);
-        //}
-
         public void actualizarUsuario(SSO_User ssoUsuario)
         {
             usuarioRepo.actualizarUsuario(ssoUsuario);
@@ -68,6 +63,20 @@ namespace Negocio
         public IEnumerable<SSO_Users_Role> listaPerfilXIdUsuario(int idUsuario)
         {
             return usuarioRepo.listaPerfilXIdUsuario(idUsuario);
+        }
+
+        public string devuelveEfectorSolicitadoXUsuario(int idUsuario)
+        {
+            string efectorSolicitado = usuarioRepo.devuelveUserRolesTempXUsuario(idUsuario, 494);
+
+            return efectorSolicitado;
+        }
+
+        public string devuelvePerfilSolicitadoXUsuario(int idUsuario)
+        {
+            string perfilSolicitado = usuarioRepo.devuelveUserRolesTempXUsuario(idUsuario, 12);
+
+            return perfilSolicitado;
         }
     }
 }

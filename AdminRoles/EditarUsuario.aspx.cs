@@ -64,7 +64,16 @@ namespace AdminRoles
             validaSoloNumeros();
             alerta.Visible = false;
             muestraTrabajaEnGuardia();
+            muestraDatosSolicitadoXUsuario();
+        }
 
+        //Muestra el Efector y el Perfil solicitado por el usuario.
+        private void muestraDatosSolicitadoXUsuario()
+        {
+            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+
+            txtEfectorSolicitado.Text = usuarioNego.devuelveEfectorSolicitadoXUsuario(idUsuario);
+            txtPerfilSolicitado.Text = usuarioNego.devuelvePerfilSolicitadoXUsuario(idUsuario);
         }
 
         //Si se ingresa por el Nivel Central se oculta el checkbox de "Trabaja en Guardia". 

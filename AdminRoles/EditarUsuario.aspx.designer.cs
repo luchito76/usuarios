@@ -175,6 +175,42 @@ namespace AdminRoles {
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
         
         /// <summary>
+        /// lblEfectorSolicitado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEfectorSolicitado;
+        
+        /// <summary>
+        /// txtEfectorSolicitado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEfectorSolicitado;
+        
+        /// <summary>
+        /// lblPerfilsolicitado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPerfilsolicitado;
+        
+        /// <summary>
+        /// txtPerfilSolicitado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPerfilSolicitado;
+        
+        /// <summary>
         /// lblProfesional control.
         /// </summary>
         /// <remarks>

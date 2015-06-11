@@ -77,6 +77,21 @@
 
                     <div class="form-group">
                         <b>
+                            <asp:Label ID="lblEfectorSolicitado" runat="server" Text="Efector Solicitado" for="txtEfectorSolicitado" class="col-sm-2 control-label">      
+                            </asp:Label></b>
+                        <div class="col-sm-3">
+                            <asp:TextBox runat="server" class="form-control" ID="txtEfectorSolicitado" placeholder="Efector Solicitado"></asp:TextBox>
+                        </div>
+                        <b>
+                            <asp:Label ID="lblPerfilsolicitado" runat="server" Text="Perfil Solicitado" for="txtEfectorSolicitado" class="col-sm-2 control-label">      
+                            </asp:Label></b>
+                        <div class="col-sm-3">
+                            <asp:TextBox ID="txtPerfilSolicitado" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <b>
                             <asp:Label ID="lblProfesional" runat="server" Text="Profesional" for="txtProfesionalVinculado" class="col-sm-2 control-label">      
                             </asp:Label></b>
                         <div class="col-sm-3">

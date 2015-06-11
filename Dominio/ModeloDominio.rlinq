@@ -535,6 +535,9 @@
         <orm:field name="SSO_RoleGroups_Members1" property="SSO_RoleGroups_Members" behavior="readwrite" uniqueId="63ef7033-5a0b-4d8d-9355-51674c3fa57a" type="Dominio.SSO_RoleGroups_Member">
           <orm:collection element-class="Dominio.SSO_RoleGroups_Member" inverse-field="SSO_Role1" order-by="" uniqueId="997a5dba-d4dd-4772-a2b3-c51ba63a61c3" />
         </orm:field>
+        <orm:field name="SSO_Users_Roles_Temps1" property="SSO_Users_Roles_Temps" behavior="readwrite" uniqueId="2ea5695f-c9bb-44f7-be24-a7718c7a9344" type="Dominio.SSO_Users_Roles_Temp">
+          <orm:collection element-class="Dominio.SSO_Users_Roles_Temp" inverse-field="SSO_Role1" order-by="" uniqueId="d1de82ee-3f22-4bff-85b8-53488b9d45ad" />
+        </orm:field>
         <orm:index name="IX_SSO_Roles">
           <orm:columnMapping>
             <orm:column name="parent" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
@@ -614,6 +617,37 @@
             <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
           </orm:columnMapping>
         </orm:index>
+      </orm:class>
+      <orm:class name="SSO_Users_Roles_Temp" uniqueId="95dcc65d-c62d-4440-825a-351e83ebfac4">
+        <orm:table name="SSO_Users_Roles_Temp" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="Id1" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="Id1" property="Id" behavior="readwrite" uniqueId="ab5626d3-7c5b-4b60-bf2b-3f0fe2c7fac8" type="System.Int32">
+          <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="UserId1" property="UserId" behavior="readwrite" uniqueId="b36174b7-dcd5-4a50-9e15-88b475709639" type="System.Int32">
+          <orm:column name="userId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="RoleId1" property="RoleId" behavior="readwrite" uniqueId="bb391542-6c78-4d51-b99c-64895a5dd4d4" type="System.Int32">
+          <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="Comentario1" property="Comentario" behavior="readwrite" uniqueId="c744bd4b-efc4-4204-b048-1b1a4ac1c353" type="System.String">
+          <orm:column name="comentario" sql-type="nvarchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="Procesado1" property="Procesado" behavior="readwrite" uniqueId="3f810932-508a-40b0-ac9e-ffb7b1c1f834" type="System.Boolean">
+          <orm:column name="procesado" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="SSO_Role1" property="SSO_Role" behavior="readwrite" uniqueId="d5bc717c-89e1-4bd1-b58d-84b0177c00cc" type="Dominio.SSO_Role">
+          <orm:reference uniqueId="d1de82ee-3f22-4bff-85b8-53488b9d45ad" association-name="SSO_Users_Roles_TempHasSSO_Role">
+            <orm:sharedfield name="RoleId1" target-class="Dominio.SSO_Role" target-field="Id1" />
+            <orm:constraint name="FK__SSO_Users__roleI__48B16D9B" delete-action="dbdefaultrule" destination-table="SSO_Roles" />
+          </orm:reference>
+        </orm:field>
       </orm:class>
     </orm:namespace>
     <orm:schema schema="">
@@ -888,6 +922,16 @@
         </orm:constraint>
         <orm:constraint name="FK_SSO_RoleGroups_Members_SSO_RoleGroups" delete-action="dbdefaultrule" destination-table="SSO_RoleGroups">
           <orm:column name="groupId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="SSO_Users_Roles_Temp">
+        <orm:column name="id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="userId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="comentario" sql-type="nvarchar" nullable="true" length="500" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="procesado" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:constraint name="FK__SSO_Users__roleI__48B16D9B" delete-action="dbdefaultrule" destination-table="SSO_Roles">
+          <orm:column name="roleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
         </orm:constraint>
       </orm:table>
       <orm:procedure name="SSO_GetUsuariosXAplicacion">
@@ -1231,6 +1275,9 @@
         <classHasNavigationalProperties Id="fd0686a7-4e3f-45f6-8c68-95d99f61e27b">
           <NavigationalProperty Id="63ef7033-5a0b-4d8d-9355-51674c3fa57a" name="SSO_RoleGroups_Members" type="IList&lt;SSO_RoleGroups_Member&gt;" label="SSO_RoleGroups_Members : IList&lt;SSO_RoleGroups_Member&gt;" nullable="true" kind="Persistent" fieldName="SSO_RoleGroups_Members1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="7b612270-15e4-4d30-99bc-a946388b70d7">
+          <NavigationalProperty Id="2ea5695f-c9bb-44f7-be24-a7718c7a9344" name="SSO_Users_Roles_Temps" type="IList&lt;SSO_Users_Roles_Temp&gt;" label="SSO_Users_Roles_Temps : IList&lt;SSO_Users_Roles_Temp&gt;" nullable="true" kind="Persistent" fieldName="SSO_Users_Roles_Temps1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
     <DomainClass Id="2bef2c03-b28f-42cb-b6d0-0d163eb8691b" name="SSO_RoleGroup" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
@@ -1320,6 +1367,33 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="95dcc65d-c62d-4440-825a-351e83ebfac4" name="SSO_Users_Roles_Temp" namespace="Dominio" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="ab5626d3-7c5b-4b60-bf2b-3f0fe2c7fac8" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="Id1" />
+      <Property Id="c744bd4b-efc4-4204-b048-1b1a4ac1c353" name="Comentario" label="Comentario : String" kind="Persistent" fieldName="Comentario1" />
+      <Property Id="3f810932-508a-40b0-ac9e-ffb7b1c1f834" name="Procesado" type="Boolean" label="Procesado : Boolean" kind="Persistent" fieldName="Procesado1" />
+      <Property Id="bb391542-6c78-4d51-b99c-64895a5dd4d4" name="RoleId" type="Int32" label="RoleId : Int32" kind="Persistent" fieldName="RoleId1" />
+      <Property Id="b36174b7-dcd5-4a50-9e15-88b475709639" name="UserId" type="Int32" label="UserId : Int32" kind="Persistent" fieldName="UserId1" />
+      <AssociationTargets>
+        <Association Id="d1de82ee-3f22-4bff-85b8-53488b9d45ad" SourceMultiplicity="One" name="SSO_Users_Roles_TempHasSSO_Role">
+          <DomainClassMoniker name="/ModeloDominio/SSO_Role" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="6979f4e6-7cd3-48ff-b949-f1edcf2920f6">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Role/SSO_Users_Roles_Temps" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="5be858c4-4fa5-470c-ad51-889b0f7251d8">
+              <NavigationalPropertyMoniker name="/ModeloDominio/SSO_Users_Roles_Temp/SSO_Role" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="d32e0284-2c70-4398-a318-925a01544008">
+          <NavigationalProperty Id="d5bc717c-89e1-4bd1-b58d-84b0177c00cc" name="SSO_Role" type="SSO_Role" label="SSO_Role : SSO_Role" nullable="true" kind="Persistent" fieldName="SSO_Role1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="1fd4656e-9da4-4b19-a685-7d370f1ebb89">
@@ -1338,6 +1412,7 @@
         <entitySetProperty name="SSO_Roles" namespace="Dominio" type="SSO_Role" label="SSO_Roles : IQueryable&lt;Dominio.SSO_Role&gt;" />
         <entitySetProperty name="SSO_RoleGroups" namespace="Dominio" type="SSO_RoleGroup" label="SSO_RoleGroups : IQueryable&lt;Dominio.SSO_RoleGroup&gt;" />
         <entitySetProperty name="SSO_RoleGroups_Members" namespace="Dominio" type="SSO_RoleGroups_Member" label="SSO_RoleGroups_Members : IQueryable&lt;Dominio.SSO_RoleGroups_Member&gt;" />
+        <entitySetProperty name="SSO_Users_Roles_Temps" namespace="Dominio" type="SSO_Users_Roles_Temp" label="SSO_Users_Roles_Temps : IQueryable&lt;Dominio.SSO_Users_Roles_Temp&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>
