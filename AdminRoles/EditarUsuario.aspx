@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="capaDatosSolicitados" runat="server">
                         <b>
                             <asp:Label ID="lblEfectorSolicitado" runat="server" Text="Efector Solicitado" for="txtEfectorSolicitado" class="col-sm-2 control-label">      
                             </asp:Label></b>

@@ -92,8 +92,12 @@ namespace Repositorio
             using (ModeloDominio dominio = new ModeloDominio())
             {
                 string result = string.Empty;
-                
-                result = dominio.SSO_Users_Roles_Temps.Where(c => c.UserId == idUsuario && c.SSO_Role.Parent == parent).FirstOrDefault().SSO_Role.Name;
+
+                SSO_Users_Roles_Temp userRolesTemp = new SSO_Users_Roles_Temp();
+                userRolesTemp = dominio.SSO_Users_Roles_Temps.Where(c => c.UserId == idUsuario).FirstOrDefault();
+
+                if (userRolesTemp != null)
+                    result = dominio.SSO_Users_Roles_Temps.Where(c => c.UserId == idUsuario && c.SSO_Role.Parent == parent).FirstOrDefault().SSO_Role.Name;
 
                 return result;
             }

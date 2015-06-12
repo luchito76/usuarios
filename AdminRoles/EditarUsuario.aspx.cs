@@ -70,10 +70,18 @@ namespace AdminRoles
         //Muestra el Efector y el Perfil solicitado por el usuario.
         private void muestraDatosSolicitadoXUsuario()
         {
-            int idUsuario = int.Parse(Request["idUsuario"].ToString());
+            int idUsuario = 0;
+
+            if (Request["idUsuario"] != null)
+                idUsuario = int.Parse(Request["idUsuario"].ToString());
 
             txtEfectorSolicitado.Text = usuarioNego.devuelveEfectorSolicitadoXUsuario(idUsuario);
             txtPerfilSolicitado.Text = usuarioNego.devuelvePerfilSolicitadoXUsuario(idUsuario);
+
+            if (txtEfectorSolicitado.Text == "" && txtPerfilSolicitado.Text == "")
+                capaDatosSolicitados.Visible = false;
+            else
+                capaDatosSolicitados.Visible = true;
         }
 
         //Si se ingresa por el Nivel Central se oculta el checkbox de "Trabaja en Guardia". 

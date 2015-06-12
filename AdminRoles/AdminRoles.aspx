@@ -311,7 +311,7 @@
 
     <script>
         function limpiarTextbox() {
-            document.getElementById('<%= txtRol.ClientID %>').value = '';            
+            document.getElementById('<%= txtRol.ClientID %>').value = '';              
         }
     </script>
 
@@ -356,7 +356,7 @@
             'click .perfilXEfector': function (e, value, row, index) {
             
                 document.getElementById('<%= hdfIdUsuario.ClientID %>').value = row.IdUsuario;                
-
+                
                 $('#asignarPerfilXEfector').modal('show');
             }
         };
